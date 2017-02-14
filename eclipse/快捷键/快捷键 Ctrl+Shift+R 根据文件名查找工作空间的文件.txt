@@ -1,0 +1,2 @@
+查找工作空间的文件：Ctrl+Shift+R
+Navigate->Open Resource

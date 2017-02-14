@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/ext/ext-all.css">
+<script type="text/javascript" src="js/ext/ext-all.js"></script>
+<script type="text/javascript">
+	Ext.application({
+		name : 'HelloExt',
+		launch : function() {
+			var navigate = function(panel, direction) {
+				var layout = panel.getLayout();
+				layout[direction]();
+				Ext.getCmp('move-prev').setDisabled(!layout.getPrev());
+				Ext.getCmp('move-next').setDisabled(!layout.getNext());
+			};
+			Ext.create('Ext.panel.Panel',{
+				title : 'Card布局示例',
+				width : 300,
+				height : 202,
+				layout : 'card',
+				activeItem : 0,
+				x : 30,
+				y : 60,
+				bodyStyle : 'padding:15px',
+				defaults : {
+					border : false
+				},
+				bbar:[
+					{
+						id : 'move-prev',
+						text : 'Back',
+						handler : function(btn) {
+							navigate(btn.up("panel"),"prev");
+						},
+						disabled : true
+					},
+					'->',
+					{
+						id : 'move-next',
+						text : 'Next',
+						handler : function(btn) {
+							navigate(btn.up("panel"),"next");
+						}
+					}
+				],
+				items:[
+					{
+						id : 'card-0',
+						html : '<h1>Welcome to the Wizard!</h1><p>Step 1 of 3</p>'
+					},
+					{
+						id : 'card-1',
+						html : '<p>Step 2 of 3</p>'
+					},
+					{
+						id : 'card-2',
+						html : '<h1>Congratulations!</h1><p>Step 3 of 3 - Complete</p>'
+					} 
+				],
+				renderTo : Ext.getBody()
+			});
+		}
+	});
+</script>
+</head>
+<body>
+<input type="button" value="提交" id="aaa">
+</body>
+</html>
+------------------------
+也就是我们所说的分布提交。Card布局可以使用
+
+Card布局：这种布局用来管理多个子组件，并且在任何时刻只能显示一个子组件。这种布局最常用的情况是向导模式，也就是我们所说的分布提交。Card布局可以使用layout:'card'来创建。注意：由于此布局本身不提供分步导航功能，所以需要用户自己开发该功能。由于只有一个面板处于显示状态，那么在初始时，我们可以使用setActiveItem功能来指定某一个面板的显示。当要显示下一个面板或者上一个面板的时候，我们可以使用getNext()或getPrev()来得到下一个或上一个面板。然后使用setDisabled方法来设置面板的显示。另外，如果面板中显示的是FORM布局，我们在点击下一个面板的时候，处理FORM中提交的元素，通过AJAX将表单中的内容保存到数据库中或者SESSION中。
+
+
+

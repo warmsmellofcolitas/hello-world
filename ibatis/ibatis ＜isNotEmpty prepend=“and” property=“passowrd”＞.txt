@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "sql-map-2.dtd">
+<sqlMap namespace="user">
+	<typeAlias alias="User" type="com.neusoft.gazelle.core.entity.account.User"/>
+	<select id="getMap" parameterClass="java.util.Map" resultClass="java.lang.Long">
+		select COUNT(1) FROM User_Management 
+		WHERE 1=1 
+		<isNotEmpty prepend="and" property="role">
+			role=#role#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="password">
+			password like '%$password$%'
+		</isNotEmpty>
+	</select>
+</sqlMap>
+-------------判断对象属性值是否为空（包括null），如果为空，则不加对应的查询条件
+package com.service.tree;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.neusoft.gazelle.core.service.BaseService;
+@Transactional
+@Service
+public class TreService extends BaseService{
+	public void add(){
+		Map map=new HashMap();    
+		map.put("role",new Integer(1));
+		map.put("password","s"); 
+		Long count=(Long)this.getDao().queryForObject("user.getMap", map);
+		System.out.println(count);
+	}
+}
+-------

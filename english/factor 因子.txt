@@ -1,0 +1,2 @@
+A factor of a whole number is a smaller whole number which can be multiplied with another whole number to produce the first whole number.
+一个整数的因子是能够整除它的整数.不过我们一般考虑的是正整数,比如8的因子有1,2,4和8.如果除去这个整数本身就是真因子了.

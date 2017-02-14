@@ -1,0 +1,184 @@
+package cn.com.leadfar.struts2.freemarker;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test1 {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setDirectoryForTemplateLoading(new File("E:/freemarker"));
+		// 加载模板,找到名为test01.ftl的文件
+		Template template = cfg.getTemplate("aaa.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		// 为数据模型添加值
+		root.put("aaa", "world");
+		// 通过template将模版文件输出到相应的流
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out); // 打印hello world
+		out.flush();
+		out.close();
+	}
+}
+E:/freemarker/aaa.ftl:
+hello ${aaa}
+------------------------------------------------------------------
+package cn.com.leadfar.struts2.freemarker;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test1 {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setDirectoryForTemplateLoading(new File("E:/freemarker"));
+		// 加载模板,找到名为test01.ftl的文件
+		Template template = cfg.getTemplate("test01.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		// 为数据模型添加值
+		root.put("aaa", "world");
+		// 通过template将模版文件输出到相应的流
+		Writer out = new FileWriter("E:/freemarker/aaa.html");
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+生成aaa.html:
+hello world
+------------------------------------------------------------------
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("aaa.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		User user = new User();
+		user.setId(1);
+		user.setName("jack");
+		user.setAge(19);
+		// 为数据模型添加值
+		root.put("user", user);
+		root.put("username", "管理员");
+		// 通过template将模版文件输出到相应的流
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+在类路径下src/ftl/aaa.ftl:
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <title>hello</title>
+  </head>
+  <body>
+    ${username}
+    <h1>${user.id}----${user.name}----${user.age}</h1>
+  </body>
+</html>
+
+------------------------------------------------------------------
+package cn.com.leadfar.struts2.freemarker;
+public class User {
+	private int id;
+	private String name;
+	private int age;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("aaa.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		User user = new User();
+		user.setId(1);
+		user.setName("jack");
+		user.setAge(19);
+		// 为数据模型添加值
+		root.put("user", user);
+		root.put("username", "管理员");
+		// 通过template将模版文件输出到相应的流
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+在类路径下src/ftl/aaa.ftl:
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <title>hello</title>
+  </head>
+  <body>
+    <#if user.age <= 6> <#--也可以用lt,gt等 -->
+      ${user.name}还是一个小孩
+    <#elseif user.age < 18>
+      ${user.name}快成年
+    <#else>
+      ${user.name}已成年
+    </#if>
+  </body>
+</html>
+------------------------------------------------------------------
+
+
+
+
+
+
+

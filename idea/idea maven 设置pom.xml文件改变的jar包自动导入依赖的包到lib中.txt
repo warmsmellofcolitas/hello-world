@@ -1,0 +1,1 @@
+File -> Settings -> Maven -> Importing -> Ñ¡ÖÐImport Maven projects automatically -> OK

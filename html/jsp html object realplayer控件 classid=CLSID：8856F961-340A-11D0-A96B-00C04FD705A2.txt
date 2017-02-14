@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<HEAD>
+<style media=print>
+.a {
+	display: none;
+}
+</style>
+</HEAD>
+<BODY>
+<OBJECT id=WebBrowser classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 height=0 width=0 VIEWASTEXT></OBJECT>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(6,6);">点击打印</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(45,1);">关闭窗体无提示</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(22,1);">刷新</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(17,1);">全选</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(6,1);">打印</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(4,1);">保存网页</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(2,1);">关闭现在所有的IE窗口，并打开一个新窗口</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(1,1);">打开</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(7,1);">打印预览</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(8,1);">打印页面设置</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(10,1);">查看页面属性</a><br>
+<a href="#" onclick="document.all.WebBrowser.ExecWB(15,1);">好像是撤销，有待确认</a><br>
+
+<span class="a">因为我的class=a 所以我将不被打印</span>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,989 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head id="Head"><title>
+	HttpClient  POST的中文编码问题 - 忆风 - BlogJava
+</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta id="metaKeywords" name="keywords" content="HttpClient  POST的中文编码问题" /><link type="text/css" rel="stylesheet" href="/css/common.css" /><link id="MainCss" type="text/css" rel="stylesheet" href="http://www.blogjava.net/Skins/sea/style.css" /><link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://www.blogjava.net/yifeng/rss.aspx" /></head>
+<body>
+    <form name="Form1" method="post" action="252281.html" onsubmit="javascript:return WebForm_OnSubmit();" id="Form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="
+__VIEWSTATE" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=hCqqcDq62xC48aLO1-oizzph91mftTcpBQYAMmX9y1_MEKckib0uai68YudFFqahbIRj8ZaZB19FpMr30&amp;t=634604713351482412" type="text/javascript"></script>
+
+<script language=JavaScript>
+									function ctlent(evt,id)
+											{
+												if(evt.ctrlKey && evt.keyCode == 13)
+												{	
+													try
+													{
+														TempSave(id);
+													}
+													catch(ex)
+													{
+													}
+													finally
+													{
+													    __doPostBack('AjaxHolder$PostComment$btnSubmit','')
+													}
+												}
+		
+												}</script>
+												<script language=JavaScript>function SetReplyAuhor(author){document.getElementById('AjaxHolder_PostComment_tbComment').value+="@"+author+"\n";document.getElementById('AjaxHolder_PostComment_tbComment').focus();return false}</script>
+<script src="/ScriptResource.axd?d=TB76SHHPXs0c-M9_tGhAxuTARlsiSpe5Dn70CMDyMu0Be8A_MPH2Z7oqJoDwyxmBxB28VcgK9C-XqFdMNI_DuigegyGH79krj7asDjvAKLqzs7DlCIm2xb4oSA4lM05RrYsRw4Ulp-jfriIG0&amp;t=634604713351482412" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=-BecoVNwDVCZ4TW3gB_ZzPWfgjCQ_C64O4hNc3pweA4UGq0B-lWFnUMMAtqURN0AZF_f7fxk9s5U1gsq0foUhwHdXezBbn_OgCN5EL300MOu7Jb-c7WU_a2OCK01&amp;t=634979389729873750" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=4npu1eCN6HUVuTPPO5YDuuBNC2hrBvTsGEVYQhhAo9CX_hfoT2Mz1UGnoo5C32pPXZvBizBLMnY0_szRgrGRkyv7-BsG0CvEejE8Vl3Xt8nd-D_58kXSDmaBFOFFj7w3EMKivQ2&amp;t=634979389729873750" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+        
+<!--done-->
+<div id="header">
+	
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.blogjava.net/yifeng/">忆风</a><br>
+		光是知道是不够的，必须要加以应用；光是希望是不够的，非去做不可。
+	</div>
+</div>
+
+</div>
+
+<div id="mytopmenu" >
+	
+		<div id="mylinks">
+<!--done-->
+<a id="MyLinks1_HomeLink" class="menu" href="http://www.blogjava.net/">BlogJava</a>&nbsp;&nbsp;
+<a id="MyLinks1_MyHomeLink" class="menu" href="http://www.blogjava.net/yifeng/">首页</a>&nbsp;&nbsp;
+<a id="MyLinks1_NewPostLink" class="menu" href="http://www.blogjava.net/yifeng/admin/EditPosts.aspx?opt=1">新随笔</a>
+<a id="MyLinks1_ContactLink" class="menu" href="http://www.blogjava.net/yifeng/contact.aspx?id=1">联系</a>&nbsp;&nbsp;
+<a id="MyLinks1_Syndication" class="menu" href="http://www.blogjava.net/yifeng/rss">聚合</a><a id="MyLinks1_XMLLink" href="http://www.blogjava.net/yifeng/rss"><img src="http://www.blogjava.net/images/xml.gif" style="border-width:0px;" /></a>&nbsp;&nbsp;
+<a id="MyLinks1_Admin" class="menu" href="http://www.blogjava.net/yifeng/admin/EditPosts.aspx">管理</a>
+</div>
+		<DIV id="mystats">
+<!--done-->
+随笔-81&nbsp;
+评论-52&nbsp;
+文章-0&nbsp;
+trackbacks-0
+</DIV>
+	
+</div>
+<div id="centercontent" >
+	
+					
+<!--done-->
+<div class = "post">
+	<div class = "postTitle">
+		<a id="viewpost1_TitleUrl" class="postTitle2" href="http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html">HttpClient  POST的中文编码问题</a>
+	</div>
+	<br />
+在用到HttpClient的基本请求和响应时候，发现默认的编码是&#8220;<tt>ISO-8859-1</tt>&#8221;，这样就存在中文乱码问题了，解决办法如下，记录一下：<br />
+<br />
+http://hc.apache.org/httpclient-3.x/charencodings.html#Request_Response_Body<br />
+<br />
+三种形式：<br />
+<div style="border-right: #cccccc 1px solid; padding-right: 5px; border-top: #cccccc 1px solid; padding-left: 4px; font-size: 13px; padding-bottom: 4px; border-left: #cccccc 1px solid; width: 98%; word-break: break-all; padding-top: 4px; border-bottom: #cccccc 1px solid; background-color: #eeeeee"><img alt="" src="/Images/OutliningIndicators/None.gif" align="top" /><span style="color: #000000">postMethod.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET,&nbsp;</span><span style="color: #000000">"</span><span style="color: #000000">UTF-8</span><span style="color: #000000">"</span><span style="color: #000000">);<br />
+<img alt="" src="/Images/OutliningIndicators/None.gif" align="top" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postMethod.addRequestHeader(</span><span style="color: #000000">"</span><span style="color: #000000">Content-Type</span><span style="color: #000000">"</span><span style="color: #000000">,</span><span style="color: #000000">"</span><span style="color: #000000">text/html;charset=UTF-8</span><span style="color: #000000">"</span><span style="color: #000000">);<br />
+<img alt="" src="/Images/OutliningIndicators/None.gif" align="top" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;postMethod.setRequestHeader(</span><span style="color: #000000">"</span><span style="color: #000000">Content-Type</span><span style="color: #000000">"</span><span style="color: #000000">,&nbsp;</span><span style="color: #000000">"</span><span style="color: #000000">text/html;charset=UTF-8</span><span style="color: #000000">"</span><span style="color: #000000">);</span></div>
+
+	<div class = "postDesc">posted on 2009-01-22 00:55 <a href='http://www.blogjava.net/yifeng/'>忆风</a> 阅读(14425) <a href='#Post'>评论(6)</a> &nbsp;<a href="http://www.blogjava.net/yifeng/admin/EditPosts.aspx?postid=252281">编辑</a> &nbsp;<a href="http://www.blogjava.net/yifeng/AddToFavorite.aspx?id=252281">收藏</a>  所属分类: <a href='http://www.blogjava.net/yifeng/category/34013.html'>Java EE</a> </div>
+</div>
+<img src ="http://www.blogjava.net/yifeng/aggbug/252281.html?webview=1" width = "1" height = "1" />
+
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+rdf:about="http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html"
+dc:identifier="http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html"
+dc:title="HttpClient  POST的中文编码问题"
+trackback:ping="http://www.blogjava.net/yifeng/services/trackbacks/252281.aspx" />
+</rdf:RDF>
+-->
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('AjaxHolder$scriptmanager1', document.getElementById('Form1'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tAjaxHolder$UpdatePanel1'], [], [], 90);
+//]]>
+</script>
+
+<div id="AjaxHolder_UpdatePanel1">
+	    
+    <a name="pagedcomment"></a>
+<!--done-->
+<br>
+<b>评论:</b>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class = "feedbackListSubtitle">
+			<a title="permalink: re: HttpClient  POST的中文编码问题" href="/yifeng/archive/2009/01/22/252281.html#280246">#</a>&nbsp;<a name="280246"></a>re: HttpClient  POST的中文编码问题
+				2009-06-05 17:35 | <a id="AjaxHolder_Comments_CommentList_ctl00_NameLink" href="http://www.blogjava.net/okhaoba/" target="_blank">okhaoba</a><br>
+				<div align=left>我的方法：<br><br>HttpClient client = new HttpClient();<br>//设置超时时间<br>client.getHttpConnectionManager().getParams().setSoTimeout(timeOut);<br>//使用post方式，参数长度不受限制<br>//postMethod = new PostMethod(url);<br>postMethod = new UTF8PostMethod(url);<br>//设置参数<br>NameValuePair[] nameValue = new NameValuePair[] { new NameValuePair(&quot;&#215;&#215;param&quot;, xmlParamStr) };<br>postMethod.setRequestBody(nameValue);<br>//发送请求<br>state = client.executeMethod(postMethod);<br><br><br>private static class UTF8PostMethod extends PostMethod {<br>	public UTF8PostMethod(String url) {<br>		super(url);<br>	}<br><br>	&#64;Override<br>	public String getRequestCharSet() {<br>		//return super.getRequestCharSet();<br>		return &quot;UTF-8&quot;;<br>	}<br>}&nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;okhaoba&quot;)" href="/yifeng/archive/2009/01/22/252281.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=okhaoba" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl00_DeleteLink" href="javascript:__doPostBack('AjaxHolder$Comments$CommentList$ctl00$DeleteLink','')"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl00_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+		<div class="feedbackItem">
+			<div class = "feedbackListSubtitle">
+			<a title="permalink: re: HttpClient  POST的中文编码问题" href="/yifeng/archive/2009/01/22/252281.html#289814">#</a>&nbsp;<a name="289814"></a>re: HttpClient  POST的中文编码问题
+				2009-08-04 17:27 | <a id="AjaxHolder_Comments_CommentList_ctl01_NameLink" target="_blank">dyj</a><br>
+				<div align=left>很不错! &nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;dyj&quot;)" href="/yifeng/archive/2009/01/22/252281.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=dyj" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl01_DeleteLink" href="javascript:__doPostBack('AjaxHolder$Comments$CommentList$ctl01$DeleteLink','')"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl01_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+		<div class="feedbackItem">
+			<div class = "feedbackListSubtitle">
+			<a title="permalink: re: HttpClient  POST的中文编码问题" href="/yifeng/archive/2009/01/22/252281.html#289918">#</a>&nbsp;<a name="289918"></a>re: HttpClient  POST的中文编码问题
+				2009-08-05 11:53 | <a id="AjaxHolder_Comments_CommentList_ctl02_NameLink" href="http://fangwei.javaeye.com" target="_blank">fangwei</a><br>
+				<div align=left>多谢&nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;fangwei&quot;)" href="/yifeng/archive/2009/01/22/252281.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=fangwei" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl02_DeleteLink" href="javascript:__doPostBack('AjaxHolder$Comments$CommentList$ctl02$DeleteLink','')"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl02_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+		<div class="feedbackItem">
+			<div class = "feedbackListSubtitle">
+			<a title="permalink: re: HttpClient  POST的中文编码问题" href="/yifeng/archive/2009/01/22/252281.html#395455">#</a>&nbsp;<a name="395455"></a>re: HttpClient  POST的中文编码问题
+				2013-02-20 14:03 | <a id="AjaxHolder_Comments_CommentList_ctl03_NameLink" href="http://www.ttbiji.com" target="_blank">网络记事本</a><br>
+				<div align=left>楼主好，我把这行添加上好使：<br>method.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, &quot;UTF-8&quot;);<br><br>下面的二个 RequestHeader 试了不行。&nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;网络记事本&quot;)" href="/yifeng/archive/2009/01/22/252281.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=%e7%bd%91%e7%bb%9c%e8%ae%b0%e4%ba%8b%e6%9c%ac" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl03_DeleteLink" href="javascript:__doPostBack('AjaxHolder$Comments$CommentList$ctl03$DeleteLink','')"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl03_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+		<div class="feedbackItem">
+			<div class = "feedbackListSubtitle">
+			<a title="permalink: re: HttpClient  POST的中文编码问题" href="/yifeng/archive/2009/01/22/252281.html#396320">#</a>&nbsp;<a name="396320"></a>re: HttpClient  POST的中文编码问题
+				2013-03-12 14:17 | <a id="AjaxHolder_Comments_CommentList_ctl04_NameLink" href="http://%e8%89%89sdfs" target="_blank">有乱码</a><br>
+				<div align=left>乱码&nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;有乱码&quot;)" href="/yifeng/archive/2009/01/22/252281.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=%e6%9c%89%e4%b9%b1%e7%a0%81" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl04_DeleteLink" href="javascript:__doPostBack('AjaxHolder$Comments$CommentList$ctl04$DeleteLink','')"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl04_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+		<div class="feedbackItem">
+			<div class = "feedbackListSubtitle">
+			<a title="permalink: re: HttpClient  POST的中文编码问题" href="/yifeng/archive/2009/01/22/252281.html#413280">#</a>&nbsp;<a name="413280"></a>re: HttpClient  POST的中文编码问题<a name="Post"></a>
+				2014-05-05 18:29 | <a id="AjaxHolder_Comments_CommentList_ctl05_NameLink" href="http://www.zuidaima.com/" target="_blank">zuidaima</a><br>
+				<div align=left>参考代码：java apache commons HttpClient发送get和post请求的学习整理,下载地址：<a href="http://www.zuidaima.com/share/1754065983409152.htm" target="_new" rel="nofollow">http://www.zuidaima.com/share/1754065983409152.htm</a>&nbsp;&nbsp;<a onclick="return SetReplyAuhor(&quot;zuidaima&quot;)" href="/yifeng/archive/2009/01/22/252281.html#post">回复</a>&nbsp;&nbsp;<a title="查看该作者发表过的评论" href="http://www.blogjava.net/comment?author=zuidaima" target="_blank">更多评论</a><br><a id="AjaxHolder_Comments_CommentList_ctl05_DeleteLink" href="javascript:__doPostBack('AjaxHolder$Comments$CommentList$ctl05$DeleteLink','')"></a>&nbsp;&nbsp;<a id="AjaxHolder_Comments_CommentList_ctl05_EditLink"></a></div>
+			</div>
+			
+			
+		</div>
+	
+
+
+
+
+<style>
+td { font-size: 12px }
+.commentTextBox 
+{ 
+    font-family : Verdana; 
+    font-size: 13px;
+ }
+</style>
+<!--Beging Temp Save-->
+<STYLE>.userData { BEHAVIOR: url(#default#userdata) }
+	</STYLE>
+<DIV class="userData" id="CommentsPersistDiv"></DIV>
+
+<script type="text/javascript">
+function pageLoad()
+{
+    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(handleInitializeRequest);
+    //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(handleEndRequest);
+}
+
+function handleInitializeRequest(sender, args)
+{
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    var eid = args.get_postBackElement().id;
+    if (eid.indexOf("DeleteLink")>0) 
+    {
+       args.get_postBackElement().innerHTML = "<font color='red'>正在删除...</font>";         
+    }    
+    else if (eid.indexOf("btnSubmit")>0) 
+    {
+       document.getElementById("AjaxHolder_PostComment_ltSubmitMsg").innerHTML="正在提交...";
+       document.getElementById("AjaxHolder_PostComment_btnSubmit").disabled = true;       
+    }   
+    else if(eid.indexOf("refreshList")>0)
+    {
+        document.getElementById("AjaxHolder_PostComment_refreshList").innerHTML="<font color='red'>正在刷新...</font>";
+    }
+   
+}	
+
+function TempSave(ElementID)
+{
+	try
+	{
+	CommentsPersistDiv.setAttribute("CommentContent",document.getElementById(ElementID).value);
+	CommentsPersistDiv.save("CommentXMLStore");
+	}
+	catch(ex)
+	{
+	}
+	
+}
+function Restore(ElementID)
+{
+	CommentsPersistDiv.load("CommentXMLStore");
+	document.getElementById(ElementID).value=CommentsPersistDiv.getAttribute("CommentContent");
+}	
+			
+			
+</script>
+<!--Ene TempSave-->
+<div id="divRefreshComments" style="text-align:right;margin-right:10px;margin-bottom:5px;font-size:12px"><a href="/RequireRegister.aspx">新用户注册</a>&nbsp;&nbsp;<a id="AjaxHolder_PostComment_refreshList" href="javascript:__doPostBack('AjaxHolder$PostComment$refreshList','')">刷新评论列表</a>&nbsp;&nbsp;</div>
+<div class="commentform">
+<span id="AjaxHolder_PostComment_ltSubmitMsg" style="color:Red;"></span>
+<br />
+<a name="Feedback"></a>
+	<TABLE cellSpacing="1" cellPadding="1" border="0">	
+		<tr>
+		<td id="AjaxHolder_PostComment_tdOnCommentForm" colspan="3" style="line-height:1.5">
+		<div id="blog_bottom_adtext"></script>
+		<script type="text/javascript">
+		var adHtml = '<a href="http://job.cnblogs.com/" target="_blank">程序员找工作，就在博客园招聘频道</a>';
+		var now = new Date();
+	    if (now < new Date('May 31,2014')) {
+	        adHtml = '<a href="http://www.lagou.com/?_channel_blogjava2" target="_blank">6000+互联网公司高薪职位，等你来投！</a>';
+	    }
+	    document.getElementById('blog_bottom_adtext').innerHTML = adHtml;
+		</script>
+		</td>
+	
+		</tr>
+		<div id="AjaxHolder_PostComment_divCommnentArea">
+		<TR>
+			<TD colSpan="3"></TD>
+		</TR>
+		<TR>
+			<TD width="75"></TD>
+			<TD></TD>
+			<TD></TD>
+		</TR>
+		<TR>
+			<TD></TD>
+			<TD colSpan="2">
+			<a href="http://www.cnblogs.com" target="_blank">博客园</a>&nbsp;  <a href="http://q.cnblogs.com/" target="_blank">博问</a>&nbsp; <a href="http://news.cnblogs.com" target="_blank">IT新闻</a>&nbsp; <a href="http://job.cnblogs.com/cate-java_programmer/" target="_blank">Java程序员招聘</a>
+			</TD>
+		</TR>
+		<TR>
+			<TD width="55">标题</TD>
+			<TD><input name="AjaxHolder$PostComment$tbTitle" type="text" value="re: HttpClient  POST的中文编码问题" id="AjaxHolder_PostComment_tbTitle" class="commenttb" style="width:320" /></TD>
+			<TD><span id="AjaxHolder_PostComment_RequiredFieldValidator1" style="color:Red;visibility:hidden;">请输入标题</span></TD>
+		</TR>
+		<TR>
+			<TD>姓名</TD>
+			<TD><input name="AjaxHolder$PostComment$tbName" type="text" id="AjaxHolder_PostComment_tbName" class="commenttb" style="width:320" /></TD>
+			<TD><span id="AjaxHolder_PostComment_RequiredFieldValidator2" style="color:Red;visibility:hidden;">请输入你的姓名</span></TD>
+		</TR>
+		<TR>
+			<TD>主页</TD>
+			<TD><input name="AjaxHolder$PostComment$tbUrl" type="text" id="AjaxHolder_PostComment_tbUrl" class="commenttb" style="width:320" /></TD>
+			<TD><FONT face="宋体"></FONT></TD>
+		</TR>
+		<tr>
+			<td align="left" colSpan="3">
+				<table id="AjaxHolder_PostComment_tbCaptchaImage" class="CommentForm" cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<td colspan="3">
+							<span id="AjaxHolder_PostComment_Requiredfieldvalidator4" style="color:Red;display:none;">请输入验证码</span>
+							<span id="AjaxHolder_PostComment_lblImage" style="color:Red;font-weight:bold;"></span>
+						</td>
+		</tr>
+		<tr>
+			<td width="78">验证码</td>
+			<td><input name="AjaxHolder$PostComment$CodeNumberTextBox" type="text" id="AjaxHolder_PostComment_CodeNumberTextBox" />*&nbsp;&nbsp;<img src="http://www.blogjava.net/Modules/CaptchaImage/JpegImage.aspx?cacheid=20140722150756"/></td>
+			<td align="left"></td>
+		</tr>
+	</table>
+	
+			</td>
+		</tr>
+		<TR>
+			<TD colSpan="3">内容(请不要发表任何与政治相关的内容)
+				<span id="AjaxHolder_PostComment_RequiredFieldValidator3" style="color:Red;visibility:hidden;">请输入评论内容</span><BR>
+				<textarea name="AjaxHolder$PostComment$tbComment" rows="10" cols="50" id="AjaxHolder_PostComment_tbComment" class="commentTextBox" onkeydown="ctlent(event,'AjaxHolder_PostComment_tbComment')" style="Width:480;Height:220"></textarea></TD>
+		</TR>
+		<TR>
+			<TD colSpan="3">
+		<span id="AjaxHolder_PostComment_Message" style="color:Red;"></span>
+		</td>
+		<TR>
+			<TD colSpan="3"><input id="AjaxHolder_PostComment_chkRemember" type="checkbox" name="AjaxHolder$PostComment$chkRemember" checked="checked" tabindex="-1" /><label for="AjaxHolder_PostComment_chkRemember">Remember Me?</label></TD>
+		</TR>
+		<TR>
+			<TD height="23"><input type="submit" name="AjaxHolder$PostComment$btnSubmit" value="提交" onclick="TempSave('AjaxHolder_PostComment_tbComment');WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;AjaxHolder$PostComment$btnSubmit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="AjaxHolder_PostComment_btnSubmit" class="commentButton" />
+				</TD>
+			<td colSpan="2" height="23">&nbsp;
+				<a id="AjaxHolder_PostComment_lnkLogin" href="http://www.blogjava.net/login.aspx?ReturnURL=http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html&amp;SourceURL=/yifeng/archive/2009/01/22/252281.html">登录</a>&nbsp;&nbsp;<!--<a id="AjaxHolder_PostComment_linkLoginComment" OnClick="if(document.getElementById('AjaxHolder_PostComment_tbComment').value != '') return confirm('未提交的评论内容将会丢失, 你真的要进入高级评论吗?');" href="http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html?login=1#Post">使用高级评论</a>&nbsp;&nbsp;<a href="http://www.blogjava.net/RequireRegister.aspx">新用户注册</a>&nbsp;&nbsp;<A href="#Top">返回页首</A>&nbsp;&nbsp;<a id="AjaxHolder_PostComment_lbRestore" OnClick="Restore('AjaxHolder_PostComment_tbComment'); return false;" href="/yifeng/archive/2009/01/22/252281.html#Post">恢复上次提交</a>&nbsp;&nbsp;-->&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+		</TR>
+		<TR>
+			<TD colSpan="3"><label class="CtrlEnter">[使用Ctrl+Enter键可以直接提交]</label></TD>
+		</TR>
+		</div>
+		
+		<TR>
+			<TD colSpan="3"><!----></TD>
+		</TR>
+		<!--
+		<TR>
+			<TD colSpan="3" height="5"></TD>
+		</TR>	
+		-->	
+		<TR>
+		<TD colSpan="3">
+		
+<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+googletag.defineSlot('/1090369/blogjava_blogpost_bottom', [300, 250], 'div-gpt-ad-1364133350381-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+<!-- blogjava_blogpost_bottom -->
+<div id='div-gpt-ad-1364133350381-0' style='width:300px; height:250px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1364133350381-0'); });
+</script>
+</div>
+<br/>
+
+		</TD>
+		</TR>
+		<tr>			
+		<td colspan="3">
+		
+		</td>
+		</tr>
+		<TR>
+		<TD colSpan="3"></TD>
+		</TR>
+		<TR>
+			<TD colSpan="3" height="1">网站导航:<div id="blogsite">
+			<a href="http://www.cnblogs.com" title="开发者的网上家园">博客园</a>&nbsp;&nbsp;
+			<a href="http://news.cnblogs.com">IT新闻</a>&nbsp;&nbsp;
+			<a href="http://kb.cnblogs.com">知识库</a>&nbsp;&nbsp;
+			<a href="http://www.cppblog.com">C++博客</a>&nbsp;&nbsp;
+			<a href="http://job.cnblogs.com">程序员招聘</a>&nbsp;&nbsp;
+			<a href="/yifeng/archive/2009/01/22/252281.html?opt=admin">管理</a>
+			</div>
+		</TD>
+		</TR>
+		<TR>
+			<TD colSpan="3" height="5">
+<div id="divRelativePosts">
+相关文章:
+	
+			<ul style="margin-top:0px;padding-left:0px;">
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl01_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2009/08/18/291655.html">RBAC模型（转载）</a>
+			</li>
+		
+			<li style='list-style:none;display:none'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl02_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html">HttpClient  POST的中文编码问题</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl03_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/12/16/246734.html">tomcat 的jvm 内存溢出问题的解决</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl04_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/12/11/245592.html">Struts 2 + Spring 2 + JPA + AJAX</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl05_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/11/21/241780.html">JSTL经常用法</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl06_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/11/20/241520.html">Web在线编辑器</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl07_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/10/24/236290.html">中材技术数字信息管理系统界面</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl08_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/10/12/233820.html">1亿动态pv/天的超级数据库缓存解决方案，开源了，还有测试代码。</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl09_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/09/21/230212.html">LDAP基础</a>
+			</li>
+		
+			<li style='list-style:none;'>
+				<a id="AjaxHolder_PostComment_ctl07_RelativePostsList_ctl10_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/09/21/230203.html">LDAP介绍（转）</a>
+			</li>
+		
+			</ul>
+		
+</div>
+</TD>
+		</TR>	
+		<TR>
+			<TD colSpan="3">&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD colSpan="3" height="5"></TD>
+		</TR>
+		<TR>
+			<TD colSpan="3">
+				</TD>
+		</TR>		
+	</TABLE>	
+</div>
+<div id="AjaxHolder_PostComment_ValidationSummary1" style="color:Red;display:none;">
+
+	</div>
+
+</div>
+
+				
+</div>
+<div id="leftcontent" style="display:none">
+	
+		<DIV id="leftcontentcontainer">
+			
+<!--done-->
+<div class="newsItem">
+	<p><strong>以无法为有法；以无限为有限<br />
+<img style="width: 135px; height: 180px" height="180" alt="" src="/images/blogjava_net/yifeng/MyPhoto/long.JPG" width="135" border="0" /><br />
+<a href="tencent://message/?uin=583305005&amp;Site=忆风&amp;Menu=yes" target="blank"><img alt="点击这里给我发消息" src="http://wpa.qq.com/pa?p=1:583305005:13" border="0" />&nbsp;</a><br />
+<img style="margin-top: 5px; margin-bottom: 5px" alt="zhdqCN&#64;GMail.com" src="http://services.nexodyne.com/email/icon/4HEwJ4Ly/D3IsEGY%3D/R01haWw%3D/0/image.png" /></strong>
+<p>&nbsp;</p>
+  
+</div>
+
+			<table id="Calendar1_entryCal" class="Cal" cellspacing="0" cellpadding="0" title="日历" border="0" style="border-width:1px;border-style:solid;border-collapse:collapse;">
+	<tr><td colspan="7" style="background-color:Silver;"><table class="CalTitle" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;">
+		<tr><td class="CalNextPrev" style="width:15%;"><a href="javascript:__doPostBack('Calendar1$entryCal','V3257')" style="color:Black" title="转到上一个月">&lt;</a></td><td align="center" style="width:70%;">2009年1月</td><td class="CalNextPrev" align="right" style="width:15%;"><a href="javascript:__doPostBack('Calendar1$entryCal','V3319')" style="color:Black" title="转到下一个月">&gt;</a></td></tr>
+	</table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center" style="width:14%;">28</td><td class="CalOtherMonthDay" align="center" style="width:14%;">29</td><td class="CalOtherMonthDay" align="center" style="width:14%;">30</td><td class="CalOtherMonthDay" align="center" style="width:14%;">31</td><td align="center" style="width:14%;">1</td><td align="center" style="width:14%;">2</td><td class="CalWeekendDay" align="center" style="width:14%;">3</td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">4</td><td align="center" style="width:14%;">5</td><td align="center" style="width:14%;">6</td><td align="center" style="width:14%;">7</td><td align="center" style="width:14%;">8</td><td align="center" style="width:14%;">9</td><td class="CalWeekendDay" align="center" style="width:14%;">10</td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">11</td><td align="center" style="width:14%;">12</td><td align="center" style="width:14%;">13</td><td align="center" style="width:14%;">14</td><td align="center" style="width:14%;">15</td><td align="center" style="width:14%;">16</td><td class="CalWeekendDay" align="center" style="width:14%;">17</td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">18</td><td align="center" style="width:14%;">19</td><td align="center" style="width:14%;">20</td><td align="center" style="width:14%;">21</td><td align="center" style="width:14%;"><a href="http://www.blogjava.net/yifeng/archive/2009/01/22.html"><u>22</u></a></td><td align="center" style="width:14%;">23</td><td class="CalWeekendDay" align="center" style="width:14%;"><a href="http://www.blogjava.net/yifeng/archive/2009/01/24.html"><u>24</u></a></td></tr><tr><td class="CalWeekendDay" align="center" style="width:14%;">25</td><td align="center" style="width:14%;">26</td><td align="center" style="width:14%;">27</td><td align="center" style="width:14%;">28</td><td align="center" style="width:14%;">29</td><td align="center" style="width:14%;">30</td><td class="CalWeekendDay" align="center" style="width:14%;">31</td></tr><tr><td class="CalOtherMonthDay" align="center" style="width:14%;">1</td><td class="CalOtherMonthDay" align="center" style="width:14%;">2</td><td class="CalOtherMonthDay" align="center" style="width:14%;">3</td><td class="CalOtherMonthDay" align="center" style="width:14%;">4</td><td class="CalOtherMonthDay" align="center" style="width:14%;">5</td><td class="CalOtherMonthDay" align="center" style="width:14%;">6</td><td class="CalOtherMonthDay" align="center" style="width:14%;">7</td></tr>
+</table>
+<br>
+			
+<h3>常用链接</h3>
+<ul>
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl01_lnkLinkItem" href="http://www.blogjava.net/yifeng/MyPosts.html">我的随笔</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl02_lnkLinkItem" href="http://www.blogjava.net/yifeng/MyComments.html">我的评论</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl03_lnkLinkItem" href="http://www.blogjava.net/yifeng/OtherPosts.html">我的参与</a></li>
+	
+		<li><a id="SingleColumn1_ctl00_repeaterLinks_ctl04_lnkLinkItem" href="http://www.blogjava.net/yifeng/RecentComments.html">最新评论</a></li>
+	</ul>
+<H3>留言簿<span style="font-size:11px;font-weight:normal;">(1)</span></H3>
+<ul>
+	<li>
+		<a id="SingleColumn1_ctl01_lnkMessages" href="http://www.blogjava.net/yifeng/Contact.aspx?id=1">给我留言</a>
+	<li>
+		<a id="SingleColumn1_ctl01_lnkPublicMsgView" href="http://www.blogjava.net/yifeng/default.aspx?opt=msg">查看公开留言</a>
+	<li>
+		<a id="SingleColumn1_ctl01_lnkPrivateMsgView" href="http://www.blogjava.net/yifeng/admin/MyMessages.aspx">查看私人留言</a>
+	</li>
+</ul>
+
+<!--done-->
+
+		<h1 class = "catListTitle">随笔分类</h1>
+		
+				<ul class = "catList">
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl01_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34011.html">Ajax(7)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl01_RssLink" title="Subscribe to Ajax(7)" class="listitem" href="http://www.blogjava.net/yifeng/category/34011.html/rss"><img title="Subscribe to Ajax(7)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl02_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34015.html">DataBase(1)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl02_RssLink" title="Subscribe to DataBase(1)" class="listitem" href="http://www.blogjava.net/yifeng/category/34015.html/rss"><img title="Subscribe to DataBase(1)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl03_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34314.html">Div & CSS(5)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl03_RssLink" title="Subscribe to Div &amp; CSS(5)" class="listitem" href="http://www.blogjava.net/yifeng/category/34314.html/rss"><img title="Subscribe to Div &amp; CSS(5)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl04_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34083.html">English</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl04_RssLink" title="Subscribe to English" class="listitem" href="http://www.blogjava.net/yifeng/category/34083.html/rss"><img title="Subscribe to English" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl05_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/35044.html">Flex(1)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl05_RssLink" title="Subscribe to Flex(1)" class="listitem" href="http://www.blogjava.net/yifeng/category/35044.html/rss"><img title="Subscribe to Flex(1)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl06_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34014.html">IDE(13)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl06_RssLink" title="Subscribe to IDE(13)" class="listitem" href="http://www.blogjava.net/yifeng/category/34014.html/rss"><img title="Subscribe to IDE(13)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl07_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34013.html">Java EE(18)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl07_RssLink" title="Subscribe to Java EE(18)" class="listitem" href="http://www.blogjava.net/yifeng/category/34013.html/rss"><img title="Subscribe to Java EE(18)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl08_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34012.html">Java SE(2)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl08_RssLink" title="Subscribe to Java SE(2)" class="listitem" href="http://www.blogjava.net/yifeng/category/34012.html/rss"><img title="Subscribe to Java SE(2)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl09_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34094.html">JavaScript(4)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl09_RssLink" title="Subscribe to JavaScript(4)" class="listitem" href="http://www.blogjava.net/yifeng/category/34094.html/rss"><img title="Subscribe to JavaScript(4)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl10_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34022.html">Rails&Ruby</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl10_RssLink" title="Subscribe to Rails&amp;Ruby" class="listitem" href="http://www.blogjava.net/yifeng/category/34022.html/rss"><img title="Subscribe to Rails&amp;Ruby" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl11_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/35043.html">WebService&SOA(2)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl11_RssLink" title="Subscribe to WebService&amp;SOA(2)" class="listitem" href="http://www.blogjava.net/yifeng/category/35043.html/rss"><img title="Subscribe to WebService&amp;SOA(2)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl12_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34010.html">数据结构与算法(3)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl12_RssLink" title="Subscribe to 数据结构与算法(3)" class="listitem" href="http://www.blogjava.net/yifeng/category/34010.html/rss"><img title="Subscribe to 数据结构与算法(3)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl13_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34095.html">武术(3)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl13_RssLink" title="Subscribe to 武术(3)" class="listitem" href="http://www.blogjava.net/yifeng/category/34095.html/rss"><img title="Subscribe to 武术(3)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl14_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34082.html">生活感悟(13)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl14_RssLink" title="Subscribe to 生活感悟(13)" class="listitem" href="http://www.blogjava.net/yifeng/category/34082.html/rss"><img title="Subscribe to 生活感悟(13)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl15_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34017.html">设计模式(2)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl15_RssLink" title="Subscribe to 设计模式(2)" class="listitem" href="http://www.blogjava.net/yifeng/category/34017.html/rss"><img title="Subscribe to 设计模式(2)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl16_Link" class="listitem" href="http://www.blogjava.net/yifeng/category/34021.html">软件工程(6)</a><a id="SingleColumn1_Categories_CatList_ctl00_LinkList_ctl16_RssLink" title="Subscribe to 软件工程(6)" class="listitem" href="http://www.blogjava.net/yifeng/category/34021.html/rss"><img title="Subscribe to 软件工程(6)" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				</ul>
+			
+	
+		<h1 class = "catListTitle">随笔档案</h1>
+		
+				<ul class = "catList">
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl01_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2010/05.html">2010年5月 (1)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl02_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2009/12.html">2009年12月 (1)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl03_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2009/11.html">2009年11月 (1)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl04_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2009/10.html">2009年10月 (2)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl05_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2009/08.html">2009年8月 (1)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl06_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2009/02.html">2009年2月 (1)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl07_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2009/01.html">2009年1月 (2)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl08_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2008/12.html">2008年12月 (12)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl09_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2008/11.html">2008年11月 (10)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl10_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2008/10.html">2008年10月 (11)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl11_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2008/09.html">2008年9月 (18)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl01_LinkList_ctl12_Link" class="listitem" href="http://www.blogjava.net/yifeng/archive/2008/08.html">2008年8月 (21)</a></li>
+			
+				</ul>
+			
+	
+		<h1 class = "catListTitle">相册</h1>
+		
+				<ul class = "catList">
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl01_Link" class="listitem" href="http://www.blogjava.net/yifeng/gallery/34019.html">MyPhoto</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl02_LinkList_ctl02_Link" class="listitem" href="http://www.blogjava.net/yifeng/gallery/35148.html">图片库</a></li>
+			
+				</ul>
+			
+	
+		<h1 class = "catListTitle">Blogroll</h1>
+		
+				<ul class = "catList">
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl01_Link" class="listitem" href="http://andersnoras.com/blogs/anoras/" target="_blank">Anders Norås' Blog</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl02_Link" class="listitem" href="http://anotherbug.blog.chinajavaworld.com/" target="_blank">anotherbug的博客</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl03_Link" class="listitem" href="http://www.bjug.org/" target="_blank">DBA notes</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl04_Link" class="listitem" href="http://www.esbzone.net/" target="_blank">ESB zone</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl05_Link" class="listitem" href="http://blogs.sun.com/jag/" target="_blank">James Gosling's</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl06_Link" class="listitem" href="http://www.javaye.com/blog/" target="_blank">Java夜未眠</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl07_Link" class="listitem" href="http://www.blogjava.net/wangxinsh55/" target="_blank">SIMONE</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl08_Link" class="listitem" href="http://www.jroller.com/wakaleo/" target="_blank">wakaleo</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl09_Link" class="listitem" href="http://www.blogjava.net/ranxiang/" target="_blank">冉翔的技术专栏</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl10_Link" class="listitem" href="http://blog.rexsong.com/" target="_blank">千鳥志</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl11_Link" class="listitem" href="http://superleo.javaeye.com/" target="_blank">哥哥的Blog</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl12_Link" class="listitem" href="http://www.blogjava.net/rosen" target="_blank">成都心情</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl13_Link" class="listitem" href="http://blog.sina.com.cn/shixuguang" target="_blank">截拳道行者</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl14_Link" class="listitem" href="http://blog.csdn.net/caterpillar_here/" target="_blank">林信良（良葛格）的专栏</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl15_Link" class="listitem" href="http://hxraid.javaeye.com/" target="_blank">爪哇人</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl16_Link" class="listitem" href="http://zangweiren.javaeye.com/" target="_blank">臧圩人</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl17_Link" class="listitem" href="http://blogger.org.cn/blog/blog.asp?name=hongrui" target="_blank">邢红瑞的blog</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl18_Link" class="listitem" href="http://blog.csdn.net/qjyong" target="_blank">邱老师的Blog</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl19_Link" class="listitem" href="http://xyz20003.javaeye.com/" target="_blank">镜花水月</a><a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl19_RssLink" title="Subscribe to 镜花水月" class="listitem" href="http://xyz20003.javaeye.com/"><img title="Subscribe to 镜花水月" src="/Skins/sea/Images/xml.gif" style="border-width:0px;" /></a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl03_LinkList_ctl20_Link" class="listitem" href="http://www.blogjava.net/amigoxie/" target="_blank">阿蜜果</a></li>
+			
+				</ul>
+			
+	
+		<h1 class = "catListTitle">参考手册</h1>
+		
+				<ul class = "catList">
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl04_LinkList_ctl01_Link" class="listitem" href="http://www.51chm.com/" target="_blank">51chm</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl04_LinkList_ctl02_Link" class="listitem" href="http://www.52css.com/css/" target="_blank">CSS手册</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl04_LinkList_ctl03_Link" class="listitem" href="http://www.phpx.com/man/dhtmlcn/" target="_blank">DHTML手册</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl04_LinkList_ctl04_Link" class="listitem" href="http://www.yesky.com/imagesnew/software/html/index.html" target="_blank">HTML手册</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl04_LinkList_ctl05_Link" class="listitem" href="http://www.yesky.com/imagesnew/software/javascript/index.html" target="_blank">JScript手册</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl04_LinkList_ctl06_Link" class="listitem" href="http://msdn.microsoft.com/zh-cn/library/default.aspx" target="_blank">MSDN</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl04_LinkList_ctl07_Link" class="listitem" href="http://www.yesky.com/imagesnew/software/sql/index.html" target="_blank">SQL手册</a></li>
+			
+				</ul>
+			
+	
+		<h1 class = "catListTitle">我的其他博客</h1>
+		
+				<ul class = "catList">
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl05_LinkList_ctl01_Link" class="listitem" href="http://yifengs.javaeye.com/" target="_blank">忆风 blog</a></li>
+			
+				</ul>
+			
+	
+		<h1 class = "catListTitle">我的学习链接</h1>
+		
+				<ul class = "catList">
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl01_Link" class="listitem" href="http://cwiki.apache.org/confluence/dashboard.action" target="_blank">Cwiki Apache Software Foundation</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl02_Link" class="listitem" href="http://www.ibm.com/developerworks/cn/" target="_blank">IBM开发者工作室</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl03_Link" class="listitem" href="http://www.javaworld.com.tw/" target="_blank">JavaWorld@TW</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl04_Link" class="listitem" href="http://www.chinajavaworld.com/index.jspa" target="_blank">JAVA中文世界社区</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl05_Link" class="listitem" href="http://www.javatang.com/" target="_blank">Java堂</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl06_Link" class="listitem" href="http://best-java-source.whyandhow.org/" target="_blank">JAVA开源</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl07_Link" class="listitem" href="http://www.open-open.com/" target="_blank">Java开源大全</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl08_Link" class="listitem" href="http://www.theserverside.com/" target="_blank">java最大交流社区 </a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl09_Link" class="listitem" href="http://people.apache.org/~jeffyu/articles/zh_CN/jbossesb/" target="_blank">JBoss ESB Introduction (written in chinese)</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl10_Link" class="listitem" href="http://wiki.jboss.org/wiki/JbpmWiki" target="_blank">jBPM3 Wiki</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl11_Link" class="listitem" href="http://www.jdon.com/" target="_blank">J道</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl12_Link" class="listitem" href="http://www.linuxsir.org/bbs/" target="_blank">LinuxSir</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl13_Link" class="listitem" href="http://www.sonatype.com/books/maven-book/reference_zh/public-book.html" target="_blank">Maven权威指南</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl14_Link" class="listitem" href="http://developers.sun.com.cn/" target="_blank">Sun 中国技术社区</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl15_Link" class="listitem" href="http://www.w3school.com.cn/" target="_blank">w3school</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl16_Link" class="listitem" href="http://www.vchome.net/dotnet/xml/xml4.htm" target="_blank">XML实用大全</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl17_Link" class="listitem" href="http://www.cnblogs.com/" target="_blank">博客园 - 程序员的网上家园</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl18_Link" class="listitem" href="http://unibetter.com/deerchao/zhengzhe-biaodashi-jiaocheng-se.htm" target="_blank">正则表达式</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl19_Link" class="listitem" href="http://www.redsaga.com/" target="_blank">满江红开源</a></li>
+			
+				<li class = "catListItem"> <a id="SingleColumn1_Categories_CatList_ctl06_LinkList_ctl20_Link" class="listitem" href="http://caterpillar.onlyfun.net/Gossip/" target="_blank">良葛格的學習筆記</a></li>
+			
+				</ul>
+			
+	
+
+
+<script language="JavaScript">
+function SearchGoogle(key,evt,site)
+		{
+			if(evt.keyCode==13 || evt.keyCode==0 || evt.type =='click')
+			{
+				key.focus();
+				var keystr = encodeURIComponent(key.value);
+				url = "http://www.google.com/search?q=";
+				url = url+keystr;
+				url += "&ie=UTF-8&oe=GB2312&hl=zh-CN&domains="+site+"&sitesearch="+site;
+				window.location=url;
+				return false;
+			}
+		}
+</script>
+<H3>搜索</H3>
+<ul>
+	<li>
+		<li><input style="WIDTH: 130px" type="text" name="q" id="q" onkeydown="return SearchGoogle(document.getElementById('q'),event,'www.blogjava.net/yifeng')">&nbsp;<input onclick="SearchGoogle(document.getElementById('q'),event,'www.blogjava.net/yifeng')" type="button" value="搜索" name="sa">
+	</li>
+</ul>
+
+<h3>最新评论
+	<a id="SingleColumn1__1f03e20_RSSHyperlink1" href="http://www.blogjava.net/yifeng/CommentsRSS.aspx"><img src="/images/xml.gif" style="border-width:0px;" /></a></h3>
+<div class="RecentComment">
+	
+			<ul>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__1f03e20_CommentList_ctl01_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2014/05/05/252281.html#413280">1. re: HttpClient  POST的中文编码问题</a>
+			</li>
+			<li style="word-break:break-all">
+				评论内容较长,点击标题查看
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--zuidaima</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__1f03e20_CommentList_ctl02_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2013/08/20/224903.html#403092">2. re: IntelliJ IDEA 目录技巧</a>
+			</li>
+			<li style="word-break:break-all">
+				受教了
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--Sai1253</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__1f03e20_CommentList_ctl03_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2013/03/12/252281.html#396320">3. re: HttpClient  POST的中文编码问题</a>
+			</li>
+			<li style="word-break:break-all">
+				乱码
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--有乱码</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__1f03e20_CommentList_ctl04_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2013/02/20/252281.html#395455">4. re: HttpClient  POST的中文编码问题</a>
+			</li>
+			<li style="word-break:break-all">
+				评论内容较长,点击标题查看
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--网络记事本</li>
+		
+			<li style="word-break:break-all">
+				<a id="SingleColumn1__1f03e20_CommentList_ctl05_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2012/11/19/236290.html#391611">5. re: 中材技术数字信息管理系统界面[未登录]</a>
+			</li>
+			<li style="word-break:break-all">
+				请问楼主这是PS做的吗？
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--lx</li>
+		
+			</ul>
+		
+</div>
+
+<h3>阅读排行榜</h3>
+<div class="RecentComment">
+	
+			<ul style="word-break:break-all">
+		
+			<li>
+				<a id="SingleColumn1__7bc473_TopList_ctl01_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html">1. HttpClient  POST的中文编码问题(14424)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7bc473_TopList_ctl02_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/08/27/224903.html">2. IntelliJ IDEA 目录技巧(12806)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7bc473_TopList_ctl03_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/10/12/233820.html">3. 1亿动态pv/天的超级数据库缓存解决方案，开源了，还有测试代码。(3737)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7bc473_TopList_ctl04_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/08/27/225110.html">4. Vibrant Ink Theme for IntelliJ IDEA(2054)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__7bc473_TopList_ctl05_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/08/27/225153.html">5. java面试题及答案（基础题122道，代码题19道） (1377)</a>
+			</li>
+		
+			</ul>
+		
+</div>
+
+<h3>评论排行榜</h3>
+<div class="RecentComment">
+	
+			<ul style="word-break:break-all">
+		
+			<li>
+				<a id="SingleColumn1__4a71e8_TopList_ctl01_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/11/02/238211.html">1. 《截拳道之道－李小龙》(Tao of Jeet Kune Do - Bruce Lee)英文原著[pdf] (10)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__4a71e8_TopList_ctl02_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/10/12/233820.html">2. 1亿动态pv/天的超级数据库缓存解决方案，开源了，还有测试代码。(8)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__4a71e8_TopList_ctl03_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2009/01/22/252281.html">3. HttpClient  POST的中文编码问题(6)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__4a71e8_TopList_ctl04_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/08/27/224903.html">4. IntelliJ IDEA 目录技巧(5)</a>
+			</li>
+		
+			<li>
+				<a id="SingleColumn1__4a71e8_TopList_ctl05_Hyperlink1" href="http://www.blogjava.net/yifeng/archive/2008/08/27/225153.html">5. java面试题及答案（基础题122道，代码题19道） (3)</a>
+			</li>
+		
+			</ul>
+		
+</div>
+</DIV>
+	
+</div>
+
+<!--done-->
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com">博客园</a>	模板提供：<a href="http://blog.hjenglish.com">沪江博客</a>
+	Copyright &copy;2014 忆风
+</div>
+
+
+
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("AjaxHolder_PostComment_ValidationSummary1"));
+var Page_Validators =  new Array(document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator1"), document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator2"), document.getElementById("AjaxHolder_PostComment_Requiredfieldvalidator4"), document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator3"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var AjaxHolder_PostComment_RequiredFieldValidator1 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator1"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator1");
+AjaxHolder_PostComment_RequiredFieldValidator1.controltovalidate = "AjaxHolder_PostComment_tbTitle";
+AjaxHolder_PostComment_RequiredFieldValidator1.errormessage = "请输入标题";
+AjaxHolder_PostComment_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator1.initialvalue = "";
+var AjaxHolder_PostComment_RequiredFieldValidator2 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator2"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator2");
+AjaxHolder_PostComment_RequiredFieldValidator2.controltovalidate = "AjaxHolder_PostComment_tbName";
+AjaxHolder_PostComment_RequiredFieldValidator2.errormessage = "请输入你的姓名";
+AjaxHolder_PostComment_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator2.initialvalue = "";
+var AjaxHolder_PostComment_Requiredfieldvalidator4 = document.all ? document.all["AjaxHolder_PostComment_Requiredfieldvalidator4"] : document.getElementById("AjaxHolder_PostComment_Requiredfieldvalidator4");
+AjaxHolder_PostComment_Requiredfieldvalidator4.controltovalidate = "AjaxHolder_PostComment_CodeNumberTextBox";
+AjaxHolder_PostComment_Requiredfieldvalidator4.errormessage = "请输入验证码";
+AjaxHolder_PostComment_Requiredfieldvalidator4.display = "Dynamic";
+AjaxHolder_PostComment_Requiredfieldvalidator4.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_Requiredfieldvalidator4.initialvalue = "";
+var AjaxHolder_PostComment_RequiredFieldValidator3 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator3"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator3");
+AjaxHolder_PostComment_RequiredFieldValidator3.controltovalidate = "AjaxHolder_PostComment_tbComment";
+AjaxHolder_PostComment_RequiredFieldValidator3.errormessage = "请输入评论内容";
+AjaxHolder_PostComment_RequiredFieldValidator3.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator3.initialvalue = "";
+var AjaxHolder_PostComment_ValidationSummary1 = document.all ? document.all["AjaxHolder_PostComment_ValidationSummary1"] : document.getElementById("AjaxHolder_PostComment_ValidationSummary1");
+AjaxHolder_PostComment_ValidationSummary1.showmessagebox = "True";
+AjaxHolder_PostComment_ValidationSummary1.showsummary = "False";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+document.getElementById('AjaxHolder_PostComment_ValidationSummary1').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('AjaxHolder_PostComment_ValidationSummary1'));
+}
+Sys.Application.initialize();
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator1').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator1'));
+}
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator2').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator2'));
+}
+
+document.getElementById('AjaxHolder_PostComment_Requiredfieldvalidator4').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_Requiredfieldvalidator4'));
+}
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator3').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator3'));
+}
+//]]>
+</script>
+</form>
+    <script type="text/javascript" src="/script/ShowHidden.js"></script>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-476124-3']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</body>
+</html>

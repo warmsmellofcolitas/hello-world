@@ -1,0 +1,7 @@
+级联修改：在修改对象时级联修改附属对象
+1.进行双向关联
+	emp.setAccount(account);
+	account.setEmployee(emp);
+2.在Employee.hbm.xml中配置属性cascade="all"
+注意修改时根对象主键必须有值，附属对象主键有值则修改，无值则插入新纪录
+3.如果修改帐号时级联修改员工，则在Account.hbm.xml中也须要配置cascade="update"/不用

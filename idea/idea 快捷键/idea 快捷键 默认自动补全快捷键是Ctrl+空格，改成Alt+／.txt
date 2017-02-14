@@ -1,0 +1,2 @@
+File -> Settings -> Keymap -> Copy(然后找到keymaps，拷贝一份) -> Main menu ->
+code -> complete code -> basic。将本来的ctrl＋space（空格）改成Alt＋/ -> OK

@@ -1,0 +1,2 @@
+Criteria的创建方式：Criteria criteria=session.createCriteria(Emp.class);
+条件：criteria.add(Restrictions.eq('name','谢攀'));

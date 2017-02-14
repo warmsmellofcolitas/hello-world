@@ -1,0 +1,28 @@
+public class ConnDB{
+	private static String url="jdbc:sqlserver://localhost:1433;databasename=emp";
+	private static String user="sa";
+	private static String password="sa";
+	
+	private ConnDB(){
+		
+	}
+
+	static{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public static Connection getConnection(){
+		Connection conn=DriverManager.getConnection(url,user,password);
+		return conn;
+	}
+	
+	public static void close(Connection conn){
+		if(conn!=null&&!conn.isClosed()){
+			conn.close();
+		}
+	}
+}

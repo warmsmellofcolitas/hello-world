@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/plugins/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/comm.css" />
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-base.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTree.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/MultiComboBox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/SearchField.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTreeCheckbox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/commutil.js"></script>
+<style type="text/css">
+	.nav {
+ 		background-image:url(resources/plugins/ext3/icons/cog.png);
+  	}
+</style>
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+	var panel;
+	var buildPanel = function () {
+		panel = new Ext.Panel({
+			width:400,
+        		height:200,
+         		html:"2234324343sdfd",
+			id:"123", // 唯一的组件id（默认为自动分配的id）。出于你打算用id来获取组件引用这一目的
+        		title:"nihao", // 显示在面板头部的文本标题(默认为'')
+        		iconCls:'nav', // 一个能提供背景图片的CSS样式类，用于面板头部前面的图标：（默认为''），title为nihao前面有个齿轮的图标
+			renderTo:Ext.getBody()
+		});
+	};
+	
+	var init = function () {
+		buildPanel();
+	};
+	
+	Ext.onReady(init);
+</script>
+<body>
+</body>
+</html>

@@ -1,0 +1,2 @@
+在项目空白位置或在项目上面右键->TortoiseGit->Show Log->通过control和鼠标，选中两个分支，
+接着按鼠标右键，选中Compare revisions，就可以比较两个分支了

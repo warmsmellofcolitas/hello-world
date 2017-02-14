@@ -1,0 +1,2 @@
+Each additional recursive call takes up memory, and eventually will slow down the brower.
+每个额外的递归调用都会占用更多的内存,从而减慢浏览器的运行.

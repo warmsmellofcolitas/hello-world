@@ -1,0 +1,15 @@
+安装流程： 
+1.解压jad1.5.8g.zip，将jad.exe放到jre的bin目录下如F：\Java\jre1.5.0_06\bin 
+2.安装jadeclipse 
+http://jaist.dl.sourceforge.net/sourceforge/jadclipse/net.sf.jadclipse_3.3.0.jar 
+将jadclipse_3.1.0.jar复制到D：\Program Files\eclipse\myplugin\eclipse\plugins目录下。【Myeclipse 考到如D:\MyEclipse\eclipse\plugins的目录下】 
+
+3.重新启动MyEclipse，如果插件安装成功的话在 
+Windows——>Perference——>Java下面应该会多出一个JadClipse目录，相关的设置可以在此修改配置jadclipse： 
+    设置path to decompiler为jad.exe的全路径，如：F：\Java\jre1.5.0_06\bin\jad.exe 
+
+4.如果存在中文反编译的问题则点击Window > Preferences > Java > JadClipse > Misc，将Convert Unicode strings into ANSI strings选项打勾。 
+
+四：在eclipse无论你是打开一个.html文件，还是.jsp文件，它都有关联了打开它的相应程序，这个windows是一样的，用word打开. word文件，好，明白了这个理，你得在eclipse里设定你打开一个.class文件是用什么打开，也就是在这里你把你的jadclipse关联到 class文件上，“window”--->"preferences",你在过滤文本框中输入“file asso”字样，“file association”就会浮出水面，你双击它，出现的框框，你仔细看看，我这里看到的是上下两个框，上面的那个框放的是各种类型的文件，而下面框放的是默认打开上面文件的编辑器，上面的框中，你点“add”添加".class"进去，接着在下面的框中，选中“jadclipse”点击右面的 “default”按钮 把它设为打开.class文件的默认编辑器。
+
+五：不得不说，写到这里我已经十分的不耐烦了，你在想要查看源代码的类名上，如“ActionSupport”上，按住“ctrl”键，鼠标单击它，源代码就立即出现 

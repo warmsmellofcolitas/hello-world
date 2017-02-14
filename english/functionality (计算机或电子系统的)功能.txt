@@ -1,0 +1,2 @@
+Specific functionality can vary between some operating systems.
+特定功能在某些操作系统间会有所不同。

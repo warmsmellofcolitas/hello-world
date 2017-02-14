@@ -1,0 +1,17 @@
+1.响应消息头<meta http-equiv="Content-Type" content="text/html;charset=gb2312">
+2.<meta http-equiv="Refresh" content="1;url=http://www.it315.org">
+3.<meta http-equiv="Expires" content="Mon,12 May 2001 00:20:00 GMT",将content设置为0，可以禁止浏览器使用缓存页面
+4.将meta标签的http-equiv属性设置为Window-Target，例如，要防止自己的页面被别人当作一个frame页面调用，可以使用<meta http-equiv="Window-Target" content="_top">
+6.<meta http-equiv="Page-Enter" content="revealTrans(Transition=23,Duration=1.000)">页面进入特效
+7.<meta http-equiv="Page-Exit" content="revealTrans(Transition=23,Duration=1.000)">页面退出特效
+8.<meta name="属性值" content="对该属性值进行补充说明">
+9.<meta http-equiv="属性值" content="对该属性值进行补充说明">
+10.<meta name="keywords" content="vc java 培训"> name还可以是Description，Roberts（index，noindex，follow，nofollow，all，none），Generator，Author，Copyright
+11.<base href="http://www.it315.com/techworld/" target="_blank">,若网页中有<a href="index.html"></a>这样的超链接，它不会指向当前页面相同目录下的index.html,而是指向http://www.it315/techworld/index.html页面，页面所有的<a>标签中都加上了target="_blank"
+12.
+
+
+
+
+
+

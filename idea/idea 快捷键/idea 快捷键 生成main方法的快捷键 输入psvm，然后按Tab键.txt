@@ -1,0 +1,1 @@
+control+J，然后输入main，然后回车

@@ -1,0 +1,4 @@
+<property name="hbm2ddl.auto">create-drop</property>   在测试中使用   在启动时会创建表，在结束后会删掉
+<property name="hbm2ddl.auto">create</property>在测试中使用，在启动是会创建表，结束后不会删表，但在每次创建前会把相同名字的表删掉，查询这个表的时候也会把同名表数据清空
+<property name="hbm2ddl.auto">update</property>   如果不一致可以把表结构更新一下
+<property name="hbm2ddl.auto">validate</property>   在正式环境运行时使用，可以校验映射文件和表是不是对应起来，如果对应不起来它不会更新表，会报错

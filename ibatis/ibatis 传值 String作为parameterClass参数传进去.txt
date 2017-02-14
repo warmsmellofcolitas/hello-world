@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "sql-map-2.dtd">
+<sqlMap namespace="user">
+	<typeAlias alias="User" type="com.neusoft.gazelle.core.entity.account.User"/>
+	<resultMap id="user_result" class="User">
+		<result property="id" column="c_user_id"/>
+		<result property="loginName" column="c_login_name"/>
+		<result property="password" column="c_pwd"/>
+		<result property="name" column="c_name"/>
+	</resultMap>
+	<select id="getMap" parameterClass="java.lang.String" resultMap="user_result">
+		select * FROM t_gz_user where c_name='$value$'
+	</select>
+</sqlMap>
+----------
+package com.service.tree;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.neusoft.gazelle.core.entity.account.User;
+import com.neusoft.gazelle.core.service.BaseService;
+@Transactional
+@Service
+public class TreService extends BaseService{
+	public void add(){
+		String s="222";
+		List<User> result=(List<User>)this.getDao().queryForList("user.getMap",s);
+		System.out.println(result.get(0).getName());
+	}
+}
+
+
+

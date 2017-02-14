@@ -1,0 +1,3 @@
+删除远程分支：
+项目反键->TortoiseGit->Switch/Checkout->Branch后面的...->remotes->origin->user->选中lijie->
+选中webgate->反键->Delete remote branch->Yes->完成

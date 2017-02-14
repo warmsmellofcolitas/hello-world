@@ -1,0 +1,164 @@
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("abc.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#-- 对于hello这个自定义指令而言,hello后的都是参数,有两个参数一个是num一个是ok -->
+		<#macro hello num ok>
+			<#list 1..num as aa>
+				<h1>Hello${ok}${aa}</h1>
+			</#list>
+		</#macro>
+		
+		<#-- <@hello/>会报错,因为hello有两个参数,特别注意,在调用的时候参数名不能省略 -->
+		<@hello num=3 ok="world"/>
+		
+		<#-- 特别注意,如果参数有默认值,在调用的时候可以省略参数,如果省略会使用默认值 -->
+		<#macro repeat num=10 ok="world">
+			<#list 1..num as aa>
+				<h1>Hello${ok}${aa}</h1>
+			</#list>
+		</#macro>
+		<@repeat/>
+		<#macro test>
+			<#-- nested会输出指令中的内容 -->
+			<#nested 12 33>
+			<#nested 11 22>
+			<#nested 22 33>
+		</#macro>
+		<@test;x,y>
+			<h1>你好啊---${x}---${y}</h1>
+		</@test>
+	</body>
+</html>
+--------------------------------------------
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("abc.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("username", "张三"); // 这种变量成为:模型中的变量
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+src/ftl/abc.ftl:
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#-- 
+		使用include可能会出现覆盖的问题,可以使用import完成导入,并且加入名称空间,见下面的例子
+		<#include "/inc/inc1.ftl"/>
+		<#include "/inc/inc2.ftl"/>
+		${username} <#-- 输出:钱八 -->
+		-->
+		<#import "/inc/inc1.ftl" as inc1/>
+		<#import "/inc/inc2.ftl" as inc2>
+		${inc1.username} <#-- 输出:李功 -->
+		${inc2.username} <#-- 输出:钱八 -->
+		<#-- 将一个变量定义到一个名称空间,下面的如果写成<#assign age=12 in inc3/>会报错 -->
+		<#assign age=12 in inc2/>
+		${inc2.age} <#-- 输出:12 -->
+		<#-- 访问名称空间的自定义指令,如果写成:<@test/>会报错 -->
+		<@inc1.test/>	
+	</body>
+</html>
+
+src/ftl//inc/inc1.ftl:
+<#assign username="李功"/>
+<#macro test>
+	hello world
+</#macro>
+
+src/ftl//inc/inc2.ftl:
+<#assign username="钱八"/>
+--------------------------------------------
+package cn.com.leadfar.struts2.freemarker;
+
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("abc.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("username", "张三"); // 这种变量成为:模型中的变量
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#-- 带默认值的参数必须都放在最后,不然会报错,如果带默认值则调用的时候可以省略,如果不带默认值则不能省略,不然会报错 -->
+		<#macro test1 id name="444" password="321">
+			${id}----${name}----${password}
+		</#macro>
+		<#-- 调用的时候名字带上且必须相同,但顺序可以改变 -->
+		<@test1 name="haha" id="777"/><#-- 打出:777----haha----321
+	</body>
+</html>

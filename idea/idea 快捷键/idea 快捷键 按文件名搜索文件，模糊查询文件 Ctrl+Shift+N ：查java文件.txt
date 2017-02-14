@@ -1,0 +1,2 @@
+Ctrl+N:查所有的文件
+Ctrl+Shift+N ：查java文件

@@ -1,0 +1,321 @@
+index.jsp:
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<a href="test!add.action">增</a>
+<a href="test!delete.action">删</a>
+<a href="test!update.action">改</a>
+<a href="test!select.action">查</a>
+<a href="test!count.action">count</a>
+</body>
+</html>
+------------------------------------------
+TestAction.java:
+package com.neusoft.gazelle.core.action;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.poi.hssf.record.formula.functions.True;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import com.google.common.collect.Lists;
+import com.neusoft.gazelle.core.entity.account.User;
+import com.neusoft.gazelle.core.service.account.UserService;
+import com.opensymphony.xwork2.ActionSupport;
+@Results({
+	@Result(name="xx",location="index.jsp")//默认会寻找WEB-INF下的content目录下的index.jsp
+})
+public class TestAction extends ActionSupport{
+	private UserService userService;
+	public String add() {
+		User user=new User();
+		user.setId(666L);
+		user.setLoginName("xxx");
+		user.setPassword("xxx");
+		user.setName("jack");
+		userService.add(user);
+		return "xx";
+	}
+	public String delete() {
+		userService.delete(666L);
+		return "xx";
+	}
+	public String update() {
+		User user=new User();
+		user.setId(666L);
+		user.setLoginName("rose");
+		user.setPassword("rose");
+		user.setName("rose");
+		userService.update(user);
+		return "xx";
+	}
+	public String select() {
+		Map<String,String> params=new HashMap<String,String>();
+		//params.put("para1","ddd");
+		//params.put("para2","ddd");
+		List<User> u=userService.select(params);
+		System.out.println("size:"+u.size());
+		System.out.println(u.get(0).getLoginName());
+		return "xx";
+	}
+	public String count(){
+		int count=userService.count(666L);
+		System.out.println(count);
+		return "xx";
+	}
+	public UserService getUserService() {
+		return userService;
+	}
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+}
+------------------------------------------
+ibatis-config.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings useStatementNamespaces="true"></settings>
+	<sqlMap resource="/ibatis/gazelle/account/user.xml"></sqlMap>
+</sqlMapConfig>
+------------------------------------------
+user.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "sql-map-2.dtd">
+<sqlMap namespace="user">
+	<typeAlias alias="User" type="com.neusoft.gazelle.core.entity.account.User"/>
+	<resultMap id="user_result" class="User">
+		<result property="id" column="c_user_id"/>
+		<result property="loginName" column="c_login_name"/>
+		<result property="password" column="c_pwd"/>
+		<result property="name" column="c_name"/>
+	</resultMap>
+	<insert id="addUser" parameterClass="User">
+		insert into t_gz_user(c_login_name,c_pwd,c_name,c_user_id,c_deleted)
+		values(#loginName#,#password#,#name#,#id#,0)
+	</insert>
+	<delete id="deleteUser" parameterClass="java.lang.Long">
+		delete from t_gz_user t where t.c_user_id='$value$'
+	</delete>
+	<update id="updateUser" parameterClass="User">
+		update t_gz_user set c_login_name=#loginName#,c_pwd=#password#,c_name=#name# where c_user_id=#id#
+	</update>
+	<select id="queryUserForList" resultMap="user_result" parameterClass="java.util.Map">
+		select * from t_gz_user t where 1=1 
+		<isNotEmpty prepend="AND" property="para1">
+			t.c_login_name='#para1#' 
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="para2">
+			t.c_name='#para2#'
+		</isNotEmpty>
+	</select>
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.lang.Long">
+		select count(1) from t_gz_user t where c_user_id='$value$'
+	</select>
+</sqlMap>
+------------------------------------------
+UserService.java:
+package com.neusoft.gazelle.core.service.account;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.google.common.collect.Lists;
+import com.neusoft.gazelle.core.entity.account.User;
+import com.neusoft.gazelle.core.service.BaseService;
+import com.neusoft.gazelle.core.service.ServiceException;
+@Service
+@Transactional
+public class UserService extends BaseService{
+	public Long add(User user) throws ServiceException{
+		Long id;
+		try{
+			id=(Long)this.getDao().insert("user.addUser",user);
+		}catch(DataAccessException dae){
+			throw new ServiceException("新增用户时发生数据访问错误。",dae);
+		}
+		return id;
+	}
+	public int delete(Long id) throws ServiceException{
+		int result;
+		try{
+			result=this.getDao().delete("user.deleteUser",id);
+		}catch(DataAccessException dae){
+			throw new ServiceException("删除用户时发生数据访问错误。",dae);
+		}
+		return result;
+	}
+	public int update(User user) throws ServiceException{
+		int result;
+		try{
+			result=this.getDao().update("user.updateUser",user);
+		}catch(DataAccessException dae){
+			throw new ServiceException("更新用户时发生数据访问错误。",dae);
+		}
+		return result;
+	}
+	public List<User> select(Map<String,String> params) throws ServiceException{
+		List<User> result=Lists.newArrayList();
+		try{
+			result=(List<User>)this.getDao().queryForList("user.queryUserForList",params);
+		}catch(DataAccessException dae){
+			throw new ServiceException("查询用户时发生数据访问错误。",dae);
+		}
+		return result;
+	}
+	public int count(Long id) throws ServiceException{
+		int count;
+		try{
+			count=(Integer)this.getDao().queryForObject("user.count",id);
+		}catch(DataAccessException dae){
+			throw new ServiceException("查询用户时发生数据访问错误。",dae);
+		}
+		return count;
+	}
+}
+------------------------------------------
+
+
+
+------------------------------------------
+web.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>AnalysisTool</display-name>
+	<description>Welcome to CPIC Analysis Tool.</description>
+	<!--spring applicationcontext载入-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:/applicationContext.xml</param-value>
+	</context-param>
+    <listener>
+       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+	<!--struts filter-->
+	<filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>  
+    </filter>
+    
+    <filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+  	<!--sessin的超时配置-->
+	<session-config>
+		<session-timeout>180</session-timeout>
+	</session-config>
+</web-app>
+----------------------------
+struts.xml:
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>  
+	<!--用了convention插件来实现所谓的0配置-->
+	<!--确定搜索包的路径,只要是结尾为action的包都要搜索-->
+	<constant name="struts.convention.package.locators" value="action"/>
+	<!--这个属性用于约定Action类的根包-->
+	<constant name="struts.convention.package.locators.basePackage" value="com"/>
+	<!--定义package节点的父节点-->
+	<constant name="struts.convention.default.parent.package" value="default"/>
+	<!--包括的jar,一般用于大型项目,其action一般打包成jar-->
+	<constant name="struts.convention.action.includeJars" value=".*_wl_cls_gen.*"/>
+	<constant name="struts.convention.action.fileProtocols" value="jar,zip" />
+	<constant name="struts.multipart.maxSize" value="1000000000"/>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+    <package name="default" extends="convention-default">  
+        <result-types>  
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
+    </package>  
+</struts>
+----------------------------
+applicationContext.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+	<description>Spring公共配置</description>
+	<!--使用annotation自动注册bean，并保证@Required,@Autowired的属性被注入-->
+	<context:component-scan base-package="com"/>
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	 	<property name="jndiName">
+	  		<value>java:comp/env/jdbc/ldata</value>
+	 	</property>
+	</bean>
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations">
+			<value>classpath*:/ibatis/ibatis-config.xml</value>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+    </bean>
+	<!--事务管理器配置，单数据源事务-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!--使用annotation定义事务-->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value ="classpath:messages_zh_CN"/>
+	</bean>
+</beans>
+-------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

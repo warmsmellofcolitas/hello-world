@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/ext/ext-all.css">
+<script type="text/javascript" src="js/ext/ext-all.js"></script>
+<script type="text/javascript">
+Ext.application({
+	name:'myApp',
+	launch:function(){
+		Ext.create('Ext.container.Viewport',{
+			items:{
+				html:'Mh app<br>Mh app<br>Mh app<br>'
+			}
+		});
+	}
+});
+</script>
+</head>
+<body>
+<input type="button" value="提交" id="aaa">
+</body>
+</html>
+----------------------
+这做了很多的事情。首先，创建了一个名为MyApp的全局变量.所有的应用程序类(如Models,Views,Controllers)都被认为在一个单独的命名空间下。这大幅降低了全局变量名冲突的机会。
+MyApp也有一个全局的方法来获得对当前应用的引用
+var app =MyApp.getApplication();当所有的页面内容准备好并且所有的javascript被加载后，你的应用程序的launch函数被调用，此刻启动您的应用程序并运行代码。
+通常这些代码就想我们上面的实例一样包含创建一个Viewport
+
+
+

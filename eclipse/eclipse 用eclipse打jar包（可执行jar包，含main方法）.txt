@@ -1,0 +1,2 @@
+File->Export->Java->Runnable JAR file->Next->Launch configuration（选择需要打包的含main方法的类）->Export destination（打包地址）
+->Library handing（库的处理，选择第二个：Package required libraries into genereated jar）->Finish

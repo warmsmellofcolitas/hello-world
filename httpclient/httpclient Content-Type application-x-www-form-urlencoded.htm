@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Content-Type: application/x-www-form-urlencoded -  - ITeye技术网站</title>
+    <meta name="description" content="接受第三方的post过来的xml，如果没有设置Content-Type: application/x-www-form-urlencoded。则可以通过流来解析代码如下  BufferedReader in= new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream()));  			String s=&qu ..." />
+    <meta name="keywords" content="xml java struts2 webwork Content-Type: application/x-www-form-urlencoded" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="ITeye" />
+    <link href="/rss" rel="alternate" title="" type="application/rss+xml" />
+    <link href="http://www.iteye.com/stylesheets/blog.css?1378455706" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.iteye.com/stylesheets/themes/blog/blue.css?1326191326" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://www.iteye.com/javascripts/application.js?1358214518" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="http://www.iteye.com/javascripts/syntaxhighlighter/SyntaxHighlighter.css?1348819953" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1325907333" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/hotkey.js?1324994303" type="text/javascript"></script>
+  <script src="http://www.iteye.com/javascripts/code_favorites.js?1358214518" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/weiboshare.js?1324994303" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+      <div id="user_nav">
+      <a href="/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="/login">登录</a>
+    <a href="/signup" class="nobg">注册</a>
+  </div>
+
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="/">dwlovehcy</a></h1>
+        </div>
+        <div id='fd'></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class='blog_navbar_for'><a href="http://dwlovehcy.iteye.com"><strong>博客</strong></a></li>
+            <li ><a href="/weibo">微博</a></li>
+            <li ><a href="/album">相册</a></li>
+            <li ><a href="/link">收藏</a></li>
+            <li ><a href="/blog/guest_book">留言</a></li>
+            <li ><a href="/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="" />
+              <input class="submit_search" type="submit" value="" />
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="/blog/1196336">Content-Type: application/x-www-form-urlencoded</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class='blog_categories'><strong>博客分类：</strong> <li><a href="/category/182809">J2EE开发过程中的问题</a></li> </ul>
+        <div class='news_tag'><a href="http://www.iteye.com/blogs/tag/xml%20java%20struts2%20webwork">xml java struts2 webwork</a>&nbsp;</div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    <p>接受第三方的post过来的xml，如果没有设置Content-Type: application/x-www-form-urlencoded。则可以通过流来解析<br>代码如下</p>
+<pre class="java" name="code">BufferedReader in= new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream()));
+			String s="";
+			StringBuffer sb=new StringBuffer();
+			while((s=in.readLine())!=null){
+				sb.append(s);
+				}
+			// dom解析xml
+			DocumentBuilderFactory buildFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder build = buildFactory.newDocumentBuilder();
+			Document document = build.parse(httpServletRequest.getInputStream(),"utf-8");
+
+			NodeList nodelist = document.getElementsByTagName("MO");
+			for (int i = 0; i &lt; nodelist.getLength(); i++) {
+				longcodeArray.add(document.getElementsByTagName("LongCode").item(i).getFirstChild().getNodeValue().substring(1)); 
+				messageArray.add(document.getElementsByTagName("Message").item(i).getFirstChild().getNodeValue());
+			}</pre>
+<p>  </p>
+<p> </p>
+<p> </p>
+<p>如果设置了Content-Type: application/x-www-form-urlencoded 则需要去parmmeterMap中间去取</p>
+<pre class="java" name="code">List&lt;String&gt; longcodeArray=new ArrayList&lt;String&gt;();
+		List&lt;String&gt; messageArray=new ArrayList&lt;String&gt;();
+		try {
+			CreateLog log = new CreateLog();
+			HttpServletRequest httpServletRequest = this.getHttpServletRequest();
+			String keyandValue="";
+			String key="";
+			String value="";
+			Iterator&lt;String&gt; it=httpServletRequest.getParameterMap().keySet().iterator();
+			while(it.hasNext()){
+				key=it.next();
+				value = ((Object[])(httpServletRequest.getParameterMap().get(key)))[0].toString();
+				keyandValue=key+"="+value;
+				System.out.println(key+"= "+value);
+			}
+		    if(keyandValue!=null){
+		    	//dom4j来解析xml字符串
+		    	Document document=DocumentHelper.parseText(keyandValue.toString());
+				Element root=document.getRootElement();
+				List mo=root.elements("MO");
+				for(int i=0;i&lt;mo.size();i++){
+					Element longcode=((Element)mo.get(i)).element("LongCode");
+					Element message=((Element)mo.get(i)).element("Message");
+					longcodeArray.add(longcode.getText());
+					messageArray.add(message.getText());
+				}
+		    	
+		    	
+		    }</pre>
+<p> </p>
+<p> </p>
+<p> </p>
+  </div>
+
+  
+
+
+  <IFRAME SRC="/iframe_ggbd/794" SCROLLING=no WIDTH=468 HEIGHT=60 FRAMEBORDER=0></IFRAME>
+  
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type='sina' href="javascript:;" title="分享到新浪微博"><img src="/images/sina.jpg"></a>
+      <a data-type='qq' href="javascript:;" title="分享到腾讯微博"><img src="/images/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="/blog/1196342" class="next" title="在webwork/struts2中多次构造post">在webwork/struts2中多次构造post</a>
+      |
+      <a href="/blog/1181179" class="pre" title="转自CSDN:九月腾讯，创新工场，淘宝等公司最新面试十三题 ">转自CSDN:九月腾讯，创新工场，淘宝等公司 ...</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2011-10-14 16:57</li>
+      <li>浏览 5879</li>
+      <li><a href="#comments">评论(0)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/language">编程语言</a></li>      
+      <li class='last'><a href="http://www.iteye.com/wiki/blog/1196336" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="/login" style="background-color:white;"> <img src="/images/login_icon.png" style="vertical-align:middle; margin-right: 10px;" /></a><a href="/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 1196336;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'Content-Type: application/x-www-form-urlencoded');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', 'Content-Type: application/x-www-form-urlencoded');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href='http://dwlovehcy.iteye.com'><img alt="dwlovehcy的博客" class="logo" src="http://www.iteye.com/upload/logo/user/530261/da0911ff-f257-39dd-9459-b4879d14a99c.jpg?1312392149" title="dwlovehcy的博客: " /></a></div>
+  <div id="blog_owner_name">dwlovehcy</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 7563 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="http://www.iteye.com/images/icon_minigender_1.gif?1324994303" title="男" /></li>
+              <li>来自: 北京</li>
+              <li><img src='/images/status/offline.gif'/></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style='font-weight:normal;font-size:12px;padding-left:30px;'><a href="/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://thelongestday.iteye.com' target='_blank'><img alt="thelongestday的博客" class="logo" src="http://www.iteye.com/upload/logo/user/17927/adde74f2-1dcd-337f-96a0-37b8842223de-thumb.jpg?1236832412" title="thelongestday的博客: Albert的空间" /></a></div>
+                <div class="left"><a href='http://thelongestday.iteye.com' target='_blank' title='thelongestday'>thelongestday</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://dylinshi126.iteye.com' target='_blank'><img alt="dylinshi126的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="dylinshi126的博客: " /></a></div>
+                <div class="left"><a href='http://dylinshi126.iteye.com' target='_blank' title='dylinshi126'>dylinshi126</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://chuibb001.iteye.com' target='_blank'><img alt="chuibb001的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="chuibb001的博客: " /></a></div>
+                <div class="left"><a href='http://chuibb001.iteye.com' target='_blank' title='chuibb001'>chuibb001</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://wangd2006.iteye.com' target='_blank'><img alt="wangd2006的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="wangd2006的博客: " /></a></div>
+                <div class="left"><a href='http://wangd2006.iteye.com' target='_blank' title='wangd2006'>wangd2006</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="/">全部博客 (8)</a></li>
+                
+                  <li><a href="/category/175385">BUG集合 (1)</a></li>
+                
+                  <li><a href="/category/182809">J2EE开发过程中的问题 (2)</a></li>
+                
+                  <li><a href="/category/194457">ANDROID (0)</a></li>
+                
+                  <li><a href="/category/194458">数据结构和算法 (1)</a></li>
+                
+                  <li><a href="/category/195245">设计模式 (3)</a></li>
+                
+              </ul>
+            </div>
+            <div id='month_blogs'>
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="/blog/post">我的论坛</a> (31)
+                </li>
+                <li><a href="/blog/answered_problems">我的问答</a> (0)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="/blog/monthblog/2011-12">2011-12</a> (4)</li>
+                
+                  <li><a href="/blog/monthblog/2011-10">2011-10</a> (2)</li>
+                
+                  <li><a href="/blog/monthblog/2011-09">2011-09</a> (2)</li>
+                
+                <li><a href="/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr/>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br />
+          &copy; 2003-2012 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script>
+
+    
+    
+  </body>
+</html>

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/ext/ext-all.css">
+<script type="text/javascript" src="js/ext/ext-all.js"></script>
+<script type="text/javascript">
+	Ext.application({
+		name : "HelloExt",
+		launch : function() {
+			Ext.create('Ext.panel.Panel', {
+				title : 'Accordion Layout',
+				width : 300,
+				height : 300,
+				x : 20,
+				y : 20,
+				layout : 'accordion',
+				defaults : {
+					bodyStyle : 'padding:15px'
+				},
+				layoutConfig : {
+					titleCollapse : false,
+					animate : true,
+					activeOnTop : true
+				},
+				items : [ {
+					title : 'Panel 1',
+					html : 'Panel content!'
+				}, {
+					title : 'Panel 2',
+					html : 'Panel content!'
+				}, {
+					title : 'Panel 3',
+					html : 'Panel content!'
+				} ],
+				renderTo : Ext.getBody()
+			});
+		}
+	});
+</script>
+</head>
+<body>
+<input type="button" value="提交" id="aaa">
+</body>
+</html>
+------------------
+accordion布局：accordion布局也称手风琴布局，在accordion布局下，在任何时间里，只有一个面板处于激活状态。其中每个面边都支持展开和折叠。注意：只有Ext.Panels 和所有Ext.panel.Panel 子项，才可以使用accordion布局。
+
+
+

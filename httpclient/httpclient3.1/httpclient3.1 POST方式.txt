@@ -1,0 +1,32 @@
+package com.ccbsh;
+
+import java.io.IOException;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.*;
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		HttpClient httpclient = new HttpClient(); // HttpClient最好初始化一次
+
+		PostMethod method = new PostMethod("http://localhost/xxx/aaa");
+		NameValuePair[] params = {new NameValuePair("ip","172.16.56.48"),new NameValuePair("port","9134"),new NameValuePair("message","data")};
+		method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"); // 设置报文头
+		method.setRequestBody(params); // 设置报文体
+		int retCode = httpclient.executeMethod(method); // 执行post请求,返回响应码(200),也可如下得到返回码
+		// StatusLine sl = method.getStatusLine();或者method.getStatusCode();或者method.getStatusText();
+		System.out.println("响应码为:"+retCode);
+		String retMessage = method.getResponseBodyAsString(); // 作为字符串返回报文体数据,也可如下操作流接受
+		/*
+		byte[] resp = method.getResponseBody(); // 以流的形式返回数据
+		if (HttpStatus.SC_OK == retCode) {
+			System.out.println("响应正常");
+			String respStr = new String(resp);
+			System.out.println("返回的数据为：" + respStr);
+		} else {
+			System.out.println("响应错误");
+		}
+		*/
+		method.releaseConnection(); // 释放连接
+		System.out.println("返回的数据为：" + retMessage);
+	}
+}

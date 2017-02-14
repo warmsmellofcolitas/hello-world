@@ -1,0 +1,4 @@
+在eclipse.ini文件最后加上:
+
+-XX:PermSize=128m
+-XX:MaxPermSize=128m

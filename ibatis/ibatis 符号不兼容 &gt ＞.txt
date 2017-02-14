@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "sql-map-2.dtd">
+<sqlMap namespace="user">
+	<select id="getMap" parameterClass="java.util.Map" resultClass="java.lang.Long">
+		select COUNT(1) FROM tes where a&gt;=#a#
+	</select>
+</sqlMap>
+-----------select COUNT(1) FROM tes where a>=#a# ，测试也可以呀
+package com.service.tree;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.neusoft.gazelle.core.entity.account.User;
+import com.neusoft.gazelle.core.service.BaseService;
+@Transactional
+@Service
+public class TreService extends BaseService{
+	public void add(){
+		Map map=new  HashMap();    
+		map.put("a",new Integer(1));
+		Long count=(Long)this.getDao().queryForObject("user.getMap",map);
+		System.out.println(count);
+	
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------
+ibatis mybatis sql语句配置 符号不兼容 大于号 小于号 因为这个是xml格式的，所以不允许出现类似“>”这样的字符，但是都可以使用<![CDATA[ ]]>符号进行说明，
+将此类符号不进行解析 
+你的可以写成这个:
+<![CDATA[ 
+     when min(starttime)<='12:00' and max(endtime)<='12:00'
+]]>
+    &lt;       < 
+    &gt;       >  
+    &lt;&gt;   <>
+    &amp;      & 
+    &apos;     '
+    &quot;     " 
+实例：
+select  to_date(to_char(tf.created_time,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') from t_ff_rt_workitem tf
+where to_date(to_char(tf.created_time,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')<=to_date(to_char('2012-05-19','yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')
+错误：ORA-01722：无效数字
+select  to_date(to_char(tf.created_time,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') from t_ff_rt_workitem tf
+where to_date(to_char(tf.created_time,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')<=to_date('2012-05-19','yyyy-mm-dd hh24:mi:ss')

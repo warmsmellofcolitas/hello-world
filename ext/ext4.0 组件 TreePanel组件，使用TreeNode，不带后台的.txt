@@ -1,0 +1,164 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/plugins/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/comm.css" />
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-base.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTree.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/MultiComboBox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/SearchField.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTreeCheckbox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/commutil.js"></script>
+<style type="text/css">
+	.nav {
+ 		background-image:url(resources/plugins/ext3/icons/cog.png);
+  	}
+</style>
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+var init = function () {
+	var root=new Ext.tree.TreeNode({text:"root"});    	//声明根节点
+   var node2=new Ext.tree.TreeNode({text:"根节点2"}); 	//声明一个子节点
+   var node3=new Ext.tree.TreeNode({text:"根节点3"});	//声明一个子节点
+   var node4=new Ext.tree.TreeNode({text:"根节点4"});	//声明一个子节点
+   var node1=new Ext.tree.TreeNode({text:"根节点1"});	//声明一个子节点
+   node2.appendChild(node3);//节点2添加子节点3
+   node2.appendChild(node4);
+   root.appendChild(node2);
+   root.appendChild(node1);
+   var tree2=new Ext.tree.TreePanel({
+	   title:"自定义数据",   //树形菜单标题
+	   width:300,           //树形菜单宽度
+	   height:300,          //树形菜单高度
+	   frame:true,          //采用渲染
+	   draggable:false,     //不允许拖拽
+	   el:"tree"            //在 HTML页面中ID为tree的标签中显示
+   });
+   tree2.setRootNode(root);   //设置TreePanel的根节点为root
+   tree2.render();            //加载
+};
+Ext.onReady(init);
+</script>
+<body>
+<div id="tree"></div>
+</body>
+</html>
+---------------------------
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/plugins/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/comm.css" />
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-base.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTree.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/MultiComboBox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/SearchField.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTreeCheckbox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/commutil.js"></script>
+<style type="text/css">
+	.nav {
+ 		background-image:url(resources/plugins/ext3/icons/cog.png);
+  	}
+</style>
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+var init = function () {
+	var treePanel=new Ext.tree.TreePanel({
+        applyTo:Ext.get("tree2"),
+        title:"菜单标题",
+        frame:true,
+        width:300,
+        height:400,
+        root : new Ext.tree.TreeNode({
+	        id : 'root',
+	        text : '网页查看',
+	        draggable : false,  //false默认设置，不能被拖拽
+	        expanded : true  //设置菜单展开
+        })
+	});
+
+	//添加子节点
+	treePanel.root.appendChild(new Ext.tree.TreeNode({
+	   id : 'htmlPanel',
+	   text : '百度',
+	   listeners : {
+		   'click' : function(node, event) {
+	     		event.stopEvent();
+	     		window.open("http://www.baidu.com");
+	    	}
+		}
+	}));
+	//添加子节点
+	treePanel.root.appendChild(new Ext.tree.TreeNode({
+		id:"sinaPage",
+		text:"新浪",
+		expanded:true,
+		listeners:{
+		 	"click":function(node,event){
+		  		event.stopEvent();
+		 		window.open("http://www.sina.com");
+		 	}
+		}
+	}));
+	var node=treePanel.getNodeById("sinaPage"); //获取子节点
+	node.appendChild(new Ext.tree.TreeNode({
+	   id:"page1",
+	   text:"新闻",
+	   listeners:{
+	    	"click":function(node,event){
+	       	event.stopEvent();
+	       	window.open("http://book.sina.com.cn/");
+	    	}
+	   }
+	}));
+	//添加子节点的子节点
+	node.appendChild(new Ext.tree.TreeNode({
+   id:"page2",
+   text:"影视",
+   listeners:{
+	   "click":function(node,event){
+	      event.stopEvent();
+	      window.open("http://book.sina.com.cn/");
+	   }
+   }
+	}));
+
+	//添加子节点的子节点
+	node.appendChild(new Ext.tree.TreeNode({
+	   id:"page3",
+	   text:"体育",
+	   listeners:{
+	      "click":function(node,event){
+	         event.stopEvent();
+	         window.open("http://book.sina.com.cn/");
+	      }
+	   }
+	}));
+};
+Ext.onReady(init);
+</script>
+<body>
+<div id="tree2"></div>
+</body>
+</html>
+

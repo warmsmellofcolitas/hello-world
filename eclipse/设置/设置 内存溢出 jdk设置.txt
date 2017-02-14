@@ -1,0 +1,4 @@
+java.lang.OutOfMemoryError
+ 
+设置Default VM Arguments
+在myEclipse中，打开Windows-> Preferences->Java->Installed JREs->点击正在使用的JDK->Edit->Default VM Arguments文本框中输入：-Xms512m -Xmx1024m

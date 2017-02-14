@@ -1,0 +1,1 @@
+File -> Settings -> Editor -> Code Completion ->Ñ¡ÔñCase sensitive completion:None -> OK

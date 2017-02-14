@@ -1,0 +1,1 @@
+选中工程按F4（或者按Project Structure图标） -> Project -> New -> JDK->选中JDK目录->OK

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>meclipse中project&nbsp;facet问题_丫头_樱桃_新浪博客</title>
+<meta name="keywords" content="meclipse中project&nbsp;facet问题_丫头_樱桃_新浪博客,丫头_樱桃,杂谈" />
+<meta name="description" content="meclipse中project&nbsp;facet问题_丫头_樱桃_新浪博客,丫头_樱桃," />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!–[if lte IE 6]>
+<script type="text/javascript">
+try{
+document.execCommand("BackgroundImageCache", false, true);
+}catch(e){}
+</script>
+<![endif]–>
+<script type="text/javascript">
+window.staticTime=new Date().getTime();
+</script>
+<link rel="pingback" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php?rsd" />
+<link href="http://blog.sina.com.cn/blog_rebuild/blog/wlwmanifest.xml" type="application/wlwmanifest+xml" rel="wlwmanifest" />
+<link rel="alternate" type="application/rss+xml" href="http://blog.sina.com.cn/rss/1799842595.xml" title="RSS" />
+<link href="http://simg.sinajs.cn/blog7style/css/conf/blog/article.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/common/common.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/blog/blog.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/module/common/blog.css" type="text/css" rel="stylesheet" /><style id="tplstyle" type="text/css">@charset "utf-8";@import url("http://simg.sinajs.cn/blog7newtpl/css/3/3_14/t.css");
+</style>
+<style id="positionstyle"  type="text/css">
+.sinabloghead .blogtoparea{ left:93px;top:41%;}
+.sinabloghead .blognav{ left:89px;top:59%;}
+</style>
+<style id="bgtyle"  type="text/css">
+</style>
+<style id="headtyle"  type="text/css">
+</style>
+<style id="navtyle"  type="text/css">
+</style>
+<script type="text/javascript" src="http://d1.sina.com.cn/litong/zhitou/sspnew.js"></script></head>
+<body>
+<!--$sinatopbar-->
+<!--$end sinatopbar-->
+<div class="sinabloga" id="sinabloga">
+	<div id="sinablogb" class="sinablogb">
+	  <!--主题内容开始 -->
+<div class="sinablogbody" id="sinablogbody">
+		
+	<!--第一列start-->
+    <div id="column_1" class="SG_colW21 SG_colFirst"><!--Qingtuijian-->
+      <!--BeijingQingtuijian-->
+<!--endBeijingQing-->
+    </div>
+    <!--第一列end-->
+	
+	<!--第二列start-->
+	<div id="column_2" class="SG_colW73">	
+<div id="module_920" class="SG_conn">
+  <div class="SG_connBody">
+<!--博文正文 begin -->
+	<div id="articlebody" class="artical" favMD5='{"6b476b2301012z62":"09eb1b33f2f5d69fa3e819881ebbf3c8"}'>
+		<div class="articalTitle"> 
+			
+								<h2 id="t_6b476b2301012z62" class="titName SG_txta">meclipse中project&nbsp;facet问题</h2>
+		</div>
+		<div class="articalTag" id="sina_keyword_ad_area"></div>
+						<!-- 正文开始 -->
+		<div id="sina_keyword_ad_area2" class="articalContent  ">
+			<div>
+<p>一般出现在从别处import的项目上，只有项目文件夹上有红叉，其他地方都正常，现总结个人的几个解决方案：</P>
+<p>有几种可能：<br />
+1，编码设置是否一致，也即是你项目原来的编码和现在eclipse用的默认编码是否一致<br />
+2，导入项目中jar路径可能已经被改变，多数情况下都是这个原因造成，我也曾经遇见过，你要确保你的jar包路径都没问题。myeclipse有查看jar路径的视图你可切换看看，报红X的就都是路径被改动过的，重新加进来就OK。<br />
+
+3，在problem控制台里有如下错误提示：<span STYLE="FonT-siZe: 24px; FonT-FAMiLY: 黑体">Java compiler level does not
+match the version of the installed Java project
+facet。这种情况一般可以在项目上右键--&gt;properties--&gt;然后找到<font FACE="Georgia" COLOR="#333333" SIZE="3">project facets和 Java
+Compiler两个选项，修改其使用的jdk版本即可。如果没有找到project
+facets选项，可以参考下面的方法：</FONT></SPAN></P>
+<p>&nbsp;<wbr></P>
+<p><span STYLE="FonT-siZe: 24px; FonT-FAMiLY: 黑体">当你安装了两个版本的JDK，用了两个IDE开发工具，比如两个myeclipse，Myeclipse8.5和Myeclipse9.0。<br />
+
+<br />
+这时候涉及到了jdk版本的问题，而在Myeclipse中设置是比较隐藏的。<br />
+Eclipse下有个项目报如上错误，这个是因为Facted Project 中的Java 版本设定与项目的Java
+版本设定不一致。而如果使用的是MyEclipse的话，这个配置修改起来就不是很方便，具体方法稍后再说。如果是eclipse
+jee版本，则使用javaee插件是wtp，在wtp环境在，在当前项目上点右键，属性--Project
+Facets中，配置编译版本与java compiler的版本一致，问题即解决了。<br />
+MyEclipse中没有Project
+Facets配置选项，则需要到当前项目的.settings文件夹下，找到org.eclipse.wst.common.project.facet.core.xml文件，其内容如下：<br />
+
+&lt;?xml version="1.0"
+encoding="UTF-8"?&gt;<br />
+&lt;faceted-project&gt;<br />
+&lt;fixed facet="wst.jsdt.web"/&gt;<br />
+&lt;installed facet="java"
+version="1.6"/&gt;<br />
+&lt;installed facet="jst.web"
+version="2.5"/&gt;<br />
+&lt;installed facet="wst.jsdt.web"
+version="1.0"/&gt;<br />
+&lt;/faceted-project&gt;<br />
+其中&lt;installed facet="java"
+version="1.6"/&gt;这行就是faceted
+project的编译级别配置。&lt;installed facet="jst.web"
+version="2.5"/&gt;这行配置在某些情况下也需要修改，比如在MyEclipse中建了个web项目，后来又导入到eclipse
+jee，有时候就需要修改这个配置。<br />
+保存配置后，刷新并build项目后，问题解决。</SPAN></P>
+</DIV>							
+		</div>
+						<!-- 正文结束 -->
+		<div class="shareUp">
+		  <div class="up"></div>
+            </div>
+		<div class="articalInfo">
+			<!-- 分享到微博 {$t_blog} -->
+			<div class="IL"></div>
+			</div>
+		</div>
+	</div>       
+            </div>
+</div>
+	<!--第二列start-->
+	
+	<!--第三列start-->
+	<!--第三列end-->
+</div>
+<!--主题内容结束 -->
+  
+
+	<div id="diggerFla" style="position:absolute;left:0px;top:0px;width:0px"></div>
+  </div>
+</div>
+<div id="swfbox"></div>
+<script id="PVCOUNTER_FORIE" type="text/javascript"></script>
+</body>
+<script type="text/javascript">
+var scope = {
+    $newTray : 1,
+    $setDomain : true,
+    $uid : "1799842595",
+    $PRODUCT_NAME : "blog7",      //blog7photo,blog7icp
+    $pageid : "article",
+    $key :  "c9e55b662a63aa6d1b28713a1cbd60a7",
+    $uhost : "love2011cherry",
+    $ownerWTtype :"",
+    $private: {"pageset":0,"tj":0,"adver":0,"sms":0,"ad":0,"blogsize":0,"cms":0,"hidecms":0,"top":0,"invitationset":0,"p4p":0,"spamcms":0,"init7":0,"quote":0,"foot":0,"isprivate":0,"headpic":1,"t_sina":0},
+    $is_photo_vip:0,
+		 $nClass:0,
+		 $articleid:"6b476b2301012z62",
+		 $sort_id:117,
+		 $cate_id:"",
+		 $isCommentAllow:0,
+		 $album_pic:"",
+		 $pn_x_rank:0,
+		 $x_quote_c:"2",
+		 $flag2008:"",
+		     component_lists:{"2":{"size":730,"list":[920]},"1":{"size":210,"list":[901,910,903,911,904,47]}},
+    formatInfo:1,
+    UserPic:[{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"}],
+    UserBabyPic:{"photoX":0,"photoY":0,"photoURL":null,"angle":0,"zoom":0,"maskX":0,"maskY":0,"maskURL":null,"frameURL":null},
+    UserColor:1,
+    backgroundcolor:"rgb(232, 220, 200)",
+    tpl:"3_14",
+    reclist:0    };
+var $encrypt_code = "e42a69f24a90ef28fd7f955ad2ece63d";
+</script>
+
+<script type="text/javascript" src="http://sjs.sinajs.cn/blog7common/js/boot.js"></script>
+<script type="text/javascript">__load_js();</script>
+<script type="text/javascript">__render_page();</script>
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=b436f96b-ce3c-469f-93ca-9c0c406fcf10&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+<script type="text/javascript" charset="utf-8">
+        bShare.addEntry({pic: "", title:"分享自丫头_樱桃  《meclipse中project facet问题》", summary:" 一般出现在从别处import的项目上，只有项目文件夹上有红叉，其他地方都正常，现总结个人的几个解决方案： 有几...  (来自 @头条博客)"});
+     </script>
+    <script type="text/javascript" src="http://sjs.sinajs.cn/xblogtheme/js/blog680-min.js"></script>
+<script type="text/javascript">
+        var slotArr = ['atcTitLi_SLOT_41', 'atcTitLi_SLOT_42','loginBarActivity','comm_SLOT_63','comm_SLOT_64','comm_SLOT_65']; //广告位id
+        var sourceArr = ['SLOT_41','SLOT_42','SLOT_43,SLOT_47,SLOT_48','SLOT_63','SLOT_64','SLOT_65'];  //广告资源id
+        SinaBlog680.staticBox(slotArr, sourceArr);
+</script>
+</html>

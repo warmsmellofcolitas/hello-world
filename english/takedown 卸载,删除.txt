@@ -1,0 +1,3 @@
+Through an artificial intelligence system,Microsoft scans the Web for suspicious,popular links and then sends takedown requests to Web service providers,
+providing evidence of questionable activity.
+通过一个人工智能系统,微软扫描网络上可疑,热门的链接,然后利用提供的可疑活动的证据发送撤除请求给网络服务提供商.

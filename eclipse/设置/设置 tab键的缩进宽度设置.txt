@@ -1,0 +1,26 @@
+首先设置文本编辑时候经常需要用到的Tab键缩进，
+
+  
+用4个空格字符来代替，
+
+  
+以确保用vi或vim打开的时候缩进的格式仍然正确。
+
+  
+具体设置步骤如下：
+
+  
+1、打开选项：General
+  -> Editors -> Text Editors
+
+  
+在右侧找到Displayed tab width:
+
+  
+把下面的“Insert spaces for tabs” 勾选上，
+
+  
+点OK保存之后，新建一个html文件输入几个tab键并按左右方向键移动光标测试一下，
+
+  
+发现原来的tab已经被替换成了4个空格字符。

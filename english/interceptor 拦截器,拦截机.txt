@@ -1,0 +1,5 @@
+Coordinator:This is the last interceptor in the chain.
+协调器:这是链中的最后一个拦截器.
+The BAE Systems seeker provides infrared imagery of the targeted warhead to guide the interceptor to its target.
+BAE系统公司的寻找器提供目标弹头的红外成像制导图,引导拦截摧毁目标.
+

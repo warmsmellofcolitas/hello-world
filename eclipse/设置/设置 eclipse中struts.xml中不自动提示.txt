@@ -1,0 +1,8 @@
+a) window – preferences – 搜索 catalog – add
+b) 选择key type为URI
+
+c) key: http://struts.apache.org/dtds/struts-2.0.dtd
+
+d) location: 对应的dtd文件，位于struts-core包中，解压开，指定相应位置，如：D:\share\0750_Struts2.1.6\soft\struts-2.1.6\lib\struts2-core-2.1.6\struts-2.0.dtd
+
+其他spring和hibernate配置出现类似情况也是如此解决

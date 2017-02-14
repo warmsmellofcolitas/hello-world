@@ -1,0 +1,22 @@
+package com.httpConnection;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+public class HttpConnection {
+	public static void main(String[] args) throws Exception {
+		//从Internet获取网页,发送请求,将网页以流的形式读回来
+		URL url=new URL("http://www.baidu.com");
+		HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+		conn.setConnectTimeout(6*1000);
+		if(conn.getResponseCode()!=200){
+			throw new RuntimeException("请求rul失败");
+		}
+		InputStream is = conn.getInputStream();
+		BufferedReader br=new BufferedReader(new InputStreamReader(is, "UTF-8"));
+		System.out.println(br.readLine());
+		conn.disconnect();
+	}
+}

@@ -1,0 +1,1 @@
+window --> preferences --> General --> Startup and Shutdown --> 在列表中找到 "Automatic Updates Scheduler " 项去掉前面的勾。

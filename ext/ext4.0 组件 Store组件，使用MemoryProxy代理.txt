@@ -1,0 +1,68 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/taglib/c.tld" prefix="c" %>
+<%@ page isELIgnored="false"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+  	<title>中国电信融合支付综合管理系统</title>
+	<link rel="stylesheet" type="text/css" href="resources/plugins/ext3/resources/css/ext-all.css" />
+ 	<script type="text/javascript" src="resources/plugins/ext3/ext-base.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ext-all.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ux/TabCloseMenu.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+  	<script type="text/javascript" src="resources/js/PwMenu.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 此处json必须表示成Array数组，一个也要表示成只有一个json对象的数组，否则会出错
+	var jsondata = {"list":[
+  	   {"DEPART_NAME":"研究部","password":"7c4a8d09ca3c26494f8941b","enabled":1,"fkDepartId":1341,"username":"lxg","id":1344,"cname":"李小刚"},
+ 		{"DEPART_NAME":"生化","password":"7c4a8d09ca3762af61494f8941b","enabled":1,"fkDepartId":2,"username":"test2","id":115974,"cname":"于洋"},
+ 		{"DEPART_NAME":"生化","password":"7c4a8d09ca376c26494f8941b","enabled":1,"fkDepartId":2,"username":"liuyang","id":4419,"cname":"刘一"},
+ 		{"DEPART_NAME":"研究组","password":"d033e22ae35850c4da997","enabled":1,"fkDepartId":3,"username":"test","id":115890,"cname":"鲁艺"},
+ 		{"DEPART_NAME":"研究组","password":"35d9eed715664dc","enabled":1,"fkDepartId":3,"username":"lanlan","id":1250,"cname":"蓝雨"},
+ 		{"DEPART_NAME":"研究组","password":"7c4a8d09ca3762a94f8941b","enabled":1,"fkDepartId":3,"username":"admin","id":1,"cname":"超级管理员"},
+ 		{"DEPART_NAME":"研究组","password":"8d3848f3017ad050a","enabled":1,"fkDepartId":3,"username":"yy","id":1241,"cname":"费余翔"}],
+ 		"totalSize":7,"message":"查询成功","success":true};
+	// 定义json数组
+   var jsonListRecord = Ext.data.Record.create([
+	   {name: 'id'},
+	   {name: 'cname'},
+	   {name: 'username'},
+	   {name: 'enabled'},
+	   {name: 'DEPART_NAME'}
+  	]);
+	
+	// 上面的json数组也可以取消前面的那么，和花括号，简化的写成
+	// var jsonListRecord = Ext.data.Record.create(['id','cname','username','enabled','DEPART_NAME']);
+	
+	// Http获取json数据
+	var store = new Ext.data.Store({
+		autoLoad : true, // 自动加载，相当于在最后面写的被注释的代码store.load()
+	   proxy : new Ext.data.MemoryProxy(jsondata), // proxy : new Ext.data.HttpProxy({url:'rightfunction.do?method=getTreesByUserId&belongs=1&parent_id=00000000'})，http数据源
+	   
+	   reader : new Ext.data.JsonReader({
+	   	root:'list', // 表示json数据中以键为list的value作为数据
+	   	totalProperty:'totalSize', // 表示json数据中以键为totalSize的value作为总属性 
+	   	id:'id' // 表示json数据中以键为id的value作为id(本人认为是以此来作为排序的依据)
+	   }, jsonListRecord)
+	   
+	   // 如果json数据只有一层(但必须是json的Array数组，一个也要表示成只有一个json对象的数组)，则上面的reader也可以去掉第一个参数，简化的写成
+	   // reader : new Ext.data.JsonReader({},['id','cname','username','enabled','DEPART_NAME'])
+	   
+	});
+	store.on('load', function(){ // 加载完之后的动作，就是在store.load()之后的操作动作
+		alert(222);
+		alert(store.getTotalCount());
+		alert(store.getAt(6).get("username"));
+		alert(store.getAt(6).get("cname"));
+	});
+	// store.load(); // 手动load，如果需要自动加载，则在初始化strore的时候加上autoLoad:true
+});
+</script>
+</head>
+<body>
+</body>
+</html>

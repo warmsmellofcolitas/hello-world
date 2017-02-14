@@ -1,0 +1,4 @@
+Darcula主题模式下字体设置：
+更改为Darcula主题后，中文都变成了方块，修改方法为：
+进入settings界面（ctrl + alt + s）,进入Appearance面板；
+将Override default fonts by勾选上，然后在字体列表中找到 microsoft yahei即可；

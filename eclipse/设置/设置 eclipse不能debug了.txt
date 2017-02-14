@@ -1,0 +1,2 @@
+Window->Preferences->Run/Debug->Launching->Launch in debug mode when workspace contains breakpoints
+->Ñ¡ÖÐAlways->Ok

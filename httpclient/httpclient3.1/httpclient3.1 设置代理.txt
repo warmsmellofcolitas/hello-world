@@ -1,0 +1,26 @@
+package aa;
+
+import java.io.IOException;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.*;
+
+/**
+ * 最简单的HTTP客户端,用来演示通过GET或者POST方式访问某个页面
+ */
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		HttpClient client = new HttpClient();
+		// client.getHostConfiguration().setProxy("proxy_host_addr",proxy_port); // 设置代理服务器地址和端口
+		// client.getHostConfiguration().setProxy("192.168.19.9", 80); // 翼支付网关上网的代理设置
+		
+		HttpMethod method = new GetMethod("http://java.sun.com"); // 使用GET方法 ，如果服务器需要通过HTTPS连接，那只需要将下面URL中的http换成https
+		// HttpMethod method = new PostMethod("http://java.sun.com"); // 使用POST方法
+		
+		client.executeMethod(method);
+		
+		System.out.println(method.getStatusLine()); // 打印服务器返回的状态
+		System.out.println(method.getResponseBodyAsString()); // 打印返回的信息
+		method.releaseConnection(); // 释放连接
+	}
+}

@@ -1,0 +1,45 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/plugins/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/comm.css" />
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-base.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTree.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/MultiComboBox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/SearchField.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTreeCheckbox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/commutil.js"></script>
+
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+	Ext.onReady(function(){
+	   var vport = new Ext.Viewport({
+	     	layout:"fit", // 采用fit布局，子元素自动填满父容器，在fit布局下，对其子元素设置宽度是无效的，如果在fit布局中设置了多个组件，则只显示第一个元素
+	     	items:[{
+		      title:"面板的标题",
+		      html:"面板中的主体内容部分",
+		      bbar:[
+		         {text:"按钮1"},
+		         {text:"按钮2"}]
+	      }]  
+	   });
+	});
+</script>
+<body>
+</body>
+</html>
+--------------------------
+在Fit布局中，子元素将自动填满整个父容器。注意：在fit布局下，对其子元素设置宽度是无效的。如果在fit布局中放置了多个组件，则只会显示第一个子元素。
+典型的案例就是当客户要求一个window或panel中放置一个GRID组件，grid组件的大小会随着父容器的大小改变而改变。
+
+
+

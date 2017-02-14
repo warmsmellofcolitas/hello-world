@@ -1,0 +1,4 @@
+File->Settings->Editor->Editor Tabs->勾选Mark modified tabs with asterisk->OK
+Editor –> Editor Tabs
+—————————————–
+在IDEA中，你需要做以下设置, 这样被修改的文件会以*号标识出来，你可以及时保存相关的文件。"Mark modifyied tabs with asterisk"

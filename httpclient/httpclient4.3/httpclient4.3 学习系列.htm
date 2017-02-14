@@ -1,0 +1,712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>HttpClient学习系列 -- 学习总结 - hry - ITeye技术网站</title>
+    <meta name="description" content="jar包：   HttpClient 4.x版本     简要介绍  HttpComponents 包括 HttpCore包和HttpClient包  HttpClient：Http的执行http请求  DefaultHttpClient：httpClient默认实现  HttpGet、HttpPost：Get、Post方法执行类  HttpResponse：执行返回的Response，含http的 ..." />
+    <meta name="keywords" content=" HttpClient学习系列 -- 学习总结" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="ITeye" />
+    <link href="/rss" rel="alternate" title="hry" type="application/rss+xml" />
+    <link href="http://www.iteye.com/stylesheets/blog.css?1393920955" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.iteye.com/stylesheets/themes/blog/blue.css?1326191326" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://www.iteye.com/javascripts/application.js?1358214518" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="http://www.iteye.com/javascripts/syntaxhighlighter/SyntaxHighlighter.css?1348819953" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1325907333" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/hotkey.js?1324994303" type="text/javascript"></script>
+  <script src="http://www.iteye.com/javascripts/code_favorites.js?1358214518" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/weiboshare.js?1324994303" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+      <div id="user_nav">
+      <a href="/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="/login">登录</a>
+    <a href="/signup" class="nobg">注册</a>
+  </div>
+
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="/">hry</a></h1>
+        </div>
+        <div id='fd'></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class='blog_navbar_for'><a href="http://huangrongyou.iteye.com"><strong>博客</strong></a></li>
+            <li ><a href="/weibo">微博</a></li>
+            <li ><a href="/album">相册</a></li>
+            <li ><a href="/link">收藏</a></li>
+            <li ><a href="/blog/guest_book">留言</a></li>
+            <li ><a href="/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="" />
+              <input class="submit_search" type="submit" value="" />
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style='display:none'>
+  <a href="http://huangrongyou.iteye.com" class="p-author" target="_blank">huangrongyou</a>
+</div>
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="/blog/1748722">HttpClient学习系列 -- 学习总结</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class='blog_categories'><strong>博客分类：</strong> <li><a href="/category/222775">开源软件</a></li> </ul>
+        <div class='news_tag'>&nbsp;</div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    <p><strong>jar包</strong>：</p>
+<p style="padding-left: 30px;"><span style="font-family: Helvetica, Tahoma, Arial, sans-serif; font-size: 14px; line-height: 25.200000762939453px;"> HttpClient 4.x版本</span></p>
+<p style="padding-left: 30px;"> </p>
+<p><strong>简要介绍</strong></p>
+<p style="padding-left: 30px;">HttpComponents 包括 HttpCore包和HttpClient包</p>
+<p style="padding-left: 30px;">HttpClient：Http的执行http请求</p>
+<p style="padding-left: 30px;">DefaultHttpClient：httpClient默认实现</p>
+<p style="padding-left: 30px;">HttpGet、HttpPost：Get、Post方法执行类</p>
+<p style="padding-left: 30px;">HttpResponse：执行返回的Response，含http的header和执行结果实体Entity</p>
+<p style="padding-left: 30px;">HttpEntity：Http返回结果实体，不含Header内容</p>
+<p style="padding-left: 30px;">HttpParam：连接参数，配合连接池使用</p>
+<p style="padding-left: 30px;">PoolingClientConnectionManager：连接池</p>
+<p style="padding-left: 30px;"> </p>
+<p><strong>基础Get方法</strong></p>
+<pre class="java" name="code">		// 默认的client类。
+		HttpClient client = new DefaultHttpClient();
+		// 设置为get取连接的方式.
+		HttpGet get = new HttpGet(url);
+		// 得到返回的response.
+		HttpResponse response = client.execute(get);
+		// 得到返回的client里面的实体对象信息.
+		HttpEntity entity = response.getEntity();
+		if (entity != null) {
+			System.out.println( entity.getContentEncoding());
+			System.out.println( entity.getContentType());
+			// 得到返回的主体内容.
+			InputStream instream = entity.getContent();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(instream, encoding));
+			System.out.println(reader.readLine());
+			// EntityUtils 处理HttpEntity的工具类
+			// System.out.println(EntityUtils.toString(entity));
+		}
+
+		// 关闭连接.
+		client.getConnectionManager().shutdown();</pre>
+ 
+<p> </p>
+<p><strong>基础Post方法</strong></p>
+<p> </p>
+<pre class="java" name="code">		DefaultHttpClient httpclient = new DefaultHttpClient();
+		HttpPost httpost = new HttpPost(url);
+		// 添加参数
+		List&lt;NameValuePair&gt; formparams = new ArrayList&lt;NameValuePair&gt;();
+		formparams.add(new BasicNameValuePair("p", "1"));
+		formparams.add(new BasicNameValuePair("t", "2"));
+		formparams.add(new BasicNameValuePair("e", "3"));
+
+		UrlEncodedFormEntity urlEntity =  new UrlEncodedFormEntity(formparams, "UTF-8");
+		httpost.setEntity(urlEntity);
+
+		HttpResponse response = httpclient.execute(httpost);
+		HttpEntity entity = response.getEntity();
+
+		System.out.println("Login form get: " + response.getStatusLine() + entity.getContent());
+	//	dump(entity, encoding);
+		System.out.println("Post logon cookies:");
+		List&lt;Cookie&gt; cookies = httpclient.getCookieStore().getCookies();
+		for (int i = 0; i &lt; cookies.size(); i++) {
+			System.out.println("- " + cookies.get(i).toString());
+		}
+		// 关闭请求
+		httpclient.getConnectionManager().shutdown();</pre>
+ 
+<p> </p>
+<p><strong>保留Session，保留用户+密码状态</strong></p>
+<p>Demo1，只支持单线程</p>
+<p> </p>
+<pre class="java" name="code">		DefaultHttpClient httpclient = new DefaultHttpClient(
+			new ThreadSafeClientConnManager());
+
+		HttpPost httpost = new HttpPost(url);
+		// 添加参数
+		List&lt;NameValuePair&gt; formparams = new ArrayList&lt;NameValuePair&gt;();
+		formparams.add(new BasicNameValuePair("p", "1"));
+		formparams.add(new BasicNameValuePair("t", "2"));
+		formparams.add(new BasicNameValuePair("e", "3"));
+		// 设置请求的编码格式
+		httpost.setEntity(new UrlEncodedFormEntity(formparams, Consts.UTF_8));
+		// 登录一遍
+		httpclient.execute(httpost);
+		// 然后再第二次请求普通的url即可。
+		httpost = new HttpPost(url2);
+		BasicResponseHandler responseHandler = new BasicResponseHandler();
+		System.out.println(httpclient.execute(httpost, responseHandler));
+		httpclient.getConnectionManager().shutdown();
+ 
+		return "";</pre>
+ 
+<p> </p>
+<p> </p>
+<p>Demo2：第二次请求带上第一次请求的Cookie </p>
+<p>    用于在用户+密码等候后，后续根据第一次请求的URL获取的Cookie，把这些Cookie添加到第二次请求的Cookie中</p>
+<p> </p>
+<p> </p>
+<pre class="java" name="code">DefaultHttpClient httpclient = new DefaultHttpClient();
+		HttpPost httpost = new HttpPost(url);
+		// 添加参数
+		List&lt;NameValuePair&gt; formparams = new ArrayList&lt;NameValuePair&gt;();
+		formparams.add(new BasicNameValuePair("uname", name));
+		formparams.add(new BasicNameValuePair("pass", "e0c10f451217b93f76c2654b2b729b85"));
+		formparams.add(new BasicNameValuePair("auto_login","0"));
+		formparams.add(new BasicNameValuePair("a","1"));
+		formparams.add(new BasicNameValuePair("backurl","1"));
+ 
+		UrlEncodedFormEntity urlEntity =  new UrlEncodedFormEntity(formparams, "UTF-8");
+		httpost.setEntity(urlEntity);
+		HttpContext localContext = new BasicHttpContext();
+
+		HttpResponse response = httpclient.execute(httpost,localContext);
+		HttpEntity entity = response.getEntity();
+		// 打印获取值
+		System.out.println(Arrays.toString(response.getAllHeaders()));
+		System.out.println(EntityUtils.toString(entity));
+ 
+		// 第二次请求，使用上一次请求的Cookie
+		DefaultHttpClient httpclient2 = new DefaultHttpClient();
+		HttpPost httpost2 = new HttpPost("http://my.ifeng.com/?_c=index&amp;_a=my");
+		// 获取上一次请求的Cookie
+		CookieStore cookieStore2 = httpclient2.getCookieStore();
+		// 下一次的Cookie的值，将使用上一次请求
+		CookieStore cookieStore = httpclient.getCookieStore();
+		List&lt;Cookie&gt; list = cookieStore.getCookies();
+		for(Cookie o : list){
+			System.out.println(o.getName() + " = " + o.getValue() + " 12");;
+			cookieStore2.addCookie(o);
+		}
+ 
+		HttpResponse response2 = httpclient2.execute(httpost2);
+		HttpEntity entity2 = response2.getEntity();
+		System.out.println(Arrays.toString(response2.getAllHeaders()));
+		System.out.println(EntityUtils.toString(entity2));</pre>
+ 
+<p> </p>
+<p> </p>
+<p><strong>获取访问上下文</strong>：</p>
+<p> </p>
+<p> </p>
+<pre class="java" name="code">		HttpClient httpclient = new DefaultHttpClient();
+		// 设置为get取连接的方式.
+		HttpGet get = new HttpGet(url);
+		HttpContext localContext = new BasicHttpContext();
+		// 得到返回的response.第二个参数，是上下文，很好的一个参数！
+		httpclient.execute(get, localContext);
+
+		// 从上下文中得到HttpConnection对象
+		HttpConnection con = (HttpConnection) localContext
+				.getAttribute(ExecutionContext.HTTP_CONNECTION);
+		System.out.println("socket超时时间：" + con.getSocketTimeout());
+
+		// 从上下文中得到HttpHost对象
+		HttpHost target = (HttpHost) localContext
+				.getAttribute(ExecutionContext.HTTP_TARGET_HOST);
+		System.out.println("最终请求的目标:" + target.getHostName() + ":"
+				+ target.getPort());
+
+		// 从上下文中得到代理相关信息.
+		HttpHost proxy = (HttpHost) localContext
+				.getAttribute(ExecutionContext.HTTP_PROXY_HOST);
+		if (proxy != null)
+			System.out.println("代理主机的目标:" + proxy.getHostName() + ":"
+					+ proxy.getPort());
+
+		System.out.println("是否发送完毕:"
+				+ localContext.getAttribute(ExecutionContext.HTTP_REQ_SENT));
+
+		// 从上下文中得到HttpRequest对象
+		HttpRequest request = (HttpRequest) localContext
+				.getAttribute(ExecutionContext.HTTP_REQUEST);
+		System.out.println("请求的版本:" + request.getProtocolVersion());
+		Header[] headers = request.getAllHeaders();
+		System.out.println("请求的头信息: ");
+		for (Header h : headers) {
+			System.out.println(h.getName() + "--" + h.getValue());
+		}
+		System.out.println("请求的链接:" + request.getRequestLine().getUri());
+
+		// 从上下文中得到HttpResponse对象
+		HttpResponse response = (HttpResponse) localContext
+				.getAttribute(ExecutionContext.HTTP_RESPONSE);
+		HttpEntity entity = response.getEntity();
+		if (entity != null) {
+			System.out.println("返回结果内容编码是：" + entity.getContentEncoding());
+			System.out.println("返回结果内容类型是：" + entity.getContentType());
+		}</pre>
+ 
+<p> </p>
+<p> </p>
+<p> </p>
+<p><strong>连接池和代理：</strong></p>
+<p>   每次使用最后一句new DefaultHttpClient(cm, httpParams);获取新的HttpClient</p>
+<p>   里面还有一条如何设置代理</p>
+<p> </p>
+<pre class="java" name="code">		// HttpParams 
+		HttpParams httpParams  = new BasicHttpParams();  
+		// HttpConnectionParams 设置连接参数
+		 // 设置连接超时时间  
+        HttpConnectionParams.setConnectionTimeout(httpParams, 30000);  
+        // 设置读取超时时间  
+        HttpConnectionParams.setSoTimeout(httpParams, 60000); 
+
+		SchemeRegistry schemeRegistry = new SchemeRegistry();
+		schemeRegistry.register(
+		         new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
+//		schemeRegistry.register(
+//		         new Scheme("https", 443, SSLSocketFactory.getSocketFactory()));
+		PoolingClientConnectionManager cm = new PoolingClientConnectionManager(schemeRegistry);
+		// 设置最大连接数  
+		cm.setMaxTotal(200);
+		// 设置每个路由默认最大连接数  
+		cm.setDefaultMaxPerRoute(20);
+//		// 设置代理和代理最大路由
+//		HttpHost localhost = new HttpHost("locahost", 80);
+//		cm.setMaxPerRoute(new HttpRoute(localhost), 50);
+        // 设置代理，
+        HttpHost proxy = new HttpHost("10.36.24.3", 60001);
+        httpParams.setParameter(ConnRoutePNames.DEFAULT_PROXY,  proxy);
+		
+		HttpClient httpClient = new DefaultHttpClient(cm, httpParams);</pre>
+ 
+<p><strong>自动重连</strong></p>
+<p>   如果某次请求请求失败，可以自动重连</p>
+<p> </p>
+<pre class="java" name="code">DefaultHttpClient httpClient = new DefaultHttpClient();
+			// 可以自动重连
+			HttpRequestRetryHandler requestRetryHandler2 = new HttpRequestRetryHandler() {  
+		        // 自定义的恢复策略  
+		        public synchronized boolean retryRequest(IOException exception, int executionCount, HttpContext context) {  
+		            // 设置恢复策略，在发生异常时候将自动重试3次  
+		            if (executionCount &gt; 3) {    
+		                // 超过最大次数则不需要重试    
+		                return false;    
+		            }    
+		            if (exception instanceof NoHttpResponseException) {    
+		                // 服务停掉则重新尝试连接    
+		                return true;    
+		            }    
+		            if (exception instanceof SSLHandshakeException) {    
+		                // SSL异常不需要重试    
+		                return false;    
+		            }   
+		            HttpRequest request = (HttpRequest) context.getAttribute(ExecutionContext.HTTP_REQUEST);  
+		            boolean idempotent = (request instanceof HttpEntityEnclosingRequest);  
+		            if (!idempotent) {  
+		                // 请求内容相同则重试  
+		                return true;  
+		            }  
+		            return false;  
+		        }  
+		    }; 
+			httpClient.setHttpRequestRetryHandler(requestRetryHandler2); </pre>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><strong>使用自定义ResponseHandler处理返回的请求</strong></p>
+<p> </p>
+<p> </p>
+<pre class="java" name="code">			HttpClient httpClient = new DefaultHttpClient();
+			HttpGet get = new HttpGet(url);
+				// 定义一个类处理URL返回的结果
+				ResponseHandler&lt;byte[]&gt; handler = new ResponseHandler&lt;byte[]&gt;() {
+					public byte[] handleResponse(HttpResponse response)
+							throws ClientProtocolException, IOException {
+						HttpEntity entity = response.getEntity();
+						if (entity != null) {
+							return EntityUtils.toByteArray(entity);
+						} else {
+							return null;
+						}
+					}
+				};
+				// 不同于 httpClient.execute(request)，返回值是HttpResponse；返回值右ResponseHandler决定
+				byte[] charts = httpClient.execute(get, handler);
+				FileOutputStream out = new FileOutputStream(fileName);
+				out.write(charts);
+				out.close();
+ 
+				httpClient.getConnectionManager().shutdown();</pre>
+<p> </p>
+<p> </p>
+<p><strong>参考文献</strong></p>
+<p> </p>
+<p> </p>
+<ul>
+<li>
+<a href="http://hc.apache.org/" target="_blank">HttpClient官网</a>   api 下载  </li>
+<li><a href="http://hc.apache.org/httpcomponents-client-ga/tutorial/pdf/httpclient-tutorial.pdf" target="_blank">HttpClient官方pdf  </a></li>
+<li>
+<a href="http://renjie120.iteye.com/blog/1727933" target="_blank">httpclient4.2.2的几个常用方法，登录之后访问页面问题，下载文件</a>  </li>
+</ul>
+<p> </p>
+<p> </p>
+  </div>
+
+  
+
+
+  <IFRAME SRC="/iframe_ggbd/794" SCROLLING=no WIDTH=468 HEIGHT=60 FRAMEBORDER=0></IFRAME>
+  
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type='sina' href="javascript:;" title="分享到新浪微博"><img src="/images/sina.jpg"></a>
+      <a data-type='qq' href="javascript:;" title="分享到腾讯微博"><img src="/images/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="/blog/1753371" class="next" title="spring学习系列 -- 定时器一TimerTask">spring学习系列 -- 定时器一TimerTask</a>
+      |
+      <a href="/blog/1748694" class="pre" title="HtmlParser学习系列 -- 学习总结">HtmlParser学习系列 -- 学习总结</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2012-12-17 22:43</li>
+      <li>浏览 1200</li>
+      <li><a href="#comments">评论(0)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/opensource">开源软件</a></li>      
+      <li class='last'><a href="http://www.iteye.com/wiki/blog/1748722" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="/login" style="background-color:white;"> <img src="/images/login_icon.png" style="vertical-align:middle; margin-right: 10px;" /></a><a href="/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 1748722;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'HttpClient学习系列 -- 学习总结');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', 'HttpClient学习系列 -- 学习总结');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href='http://huangrongyou.iteye.com'><img alt="huangrongyou的博客" class="logo" src="http://www.iteye.com/images/user-logo.gif?1324994303" title="huangrongyou的博客: hry" /></a></div>
+  <div id="blog_owner_name">huangrongyou</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 43041 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="http://www.iteye.com/images/icon_minigender_1.gif?1324994303" title="男" /></li>
+              <li>来自: 杭州</li>
+              <li><img src='/images/status/offline.gif'/></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style='font-weight:normal;font-size:12px;padding-left:30px;'><a href="/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://gaolixu.iteye.com' target='_blank'><img alt="gaolixu的博客" class="logo" src="http://www.iteye.com/upload/logo/user/179053/1f33f1d6-a37e-3e5d-8c24-e64601baaa74-thumb.png?1260524223" title="gaolixu的博客: 不疯的疯子" /></a></div>
+                <div class="left"><a href='http://gaolixu.iteye.com' target='_blank' title='gaolixu'>gaolixu</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://javacodersh.iteye.com' target='_blank'><img alt="javaCoderSH的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="javaCoderSH的博客: " /></a></div>
+                <div class="left"><a href='http://javacodersh.iteye.com' target='_blank' title='javaCoderSH'>javaCoderSH</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://guanzhenxing.iteye.com' target='_blank'><img alt="guanzhenxing的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="guanzhenxing的博客: 迷失在开发的世界里" /></a></div>
+                <div class="left"><a href='http://guanzhenxing.iteye.com' target='_blank' title='guanzhenxing'>guanzhenxing</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://undertopia.iteye.com' target='_blank'><img alt="undertopia的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="undertopia的博客: 混沌未开" /></a></div>
+                <div class="left"><a href='http://undertopia.iteye.com' target='_blank' title='undertopia'>undertopia</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="/">全部博客 (107)</a></li>
+                
+                  <li><a href="/category/132309">Linux (2)</a></li>
+                
+                  <li><a href="/category/146756">WebService (4)</a></li>
+                
+                  <li><a href="/category/146757">Java基础 (18)</a></li>
+                
+                  <li><a href="/category/217873">优秀博客文章 (6)</a></li>
+                
+                  <li><a href="/category/220459">面试 (2)</a></li>
+                
+                  <li><a href="/category/222694">视频 (1)</a></li>
+                
+                  <li><a href="/category/222775">开源软件 (7)</a></li>
+                
+                  <li><a href="/category/222776">DOS命令、批处理 (2)</a></li>
+                
+                  <li><a href="/category/222779">SSH Mybatis (11)</a></li>
+                
+                  <li><a href="/category/222780">MQ (3)</a></li>
+                
+                  <li><a href="/category/222781">个人开发者 (1)</a></li>
+                
+                  <li><a href="/category/222782">设计模式 (2)</a></li>
+                
+                  <li><a href="/category/222874">博客 (1)</a></li>
+                
+                  <li><a href="/category/222996">缓存 (1)</a></li>
+                
+                  <li><a href="/category/222997">数据库 (10)</a></li>
+                
+                  <li><a href="/category/223013">工具软件 (9)</a></li>
+                
+                  <li><a href="/category/223025">Tomcat (3)</a></li>
+                
+                  <li><a href="/category/223208">网络 (2)</a></li>
+                
+                  <li><a href="/category/223209">XML 、JSON (1)</a></li>
+                
+                  <li><a href="/category/223210">OSGI (1)</a></li>
+                
+                  <li><a href="/category/223320">算法 (1)</a></li>
+                
+                  <li><a href="/category/229483">计算机基础、网络 (1)</a></li>
+                
+                  <li><a href="/category/230834">Web 开发 (3)</a></li>
+                
+                  <li><a href="/category/235710">程序人生 (1)</a></li>
+                
+                  <li><a href="/category/246974">Servlet基础 (1)</a></li>
+                
+                  <li><a href="/category/248675">英语 (1)</a></li>
+                
+                  <li><a href="/category/249458">临时、未分类 (4)</a></li>
+                
+                  <li><a href="/category/252170">网路、word使用技巧 (2)</a></li>
+                
+                  <li><a href="/category/263633">Java性能优化 (0)</a></li>
+                
+              </ul>
+            </div>
+            <div id='month_blogs'>
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="/blog/post">我的论坛</a> (1)
+                </li>
+                <li><a href="/blog/answered_problems">我的问答</a> (0)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="/blog/monthblog/2013-02">2013-02</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2013-01">2013-01</a> (4)</li>
+                
+                  <li><a href="/blog/monthblog/2012-12">2012-12</a> (8)</li>
+                
+                <li><a href="/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href='http://sp42.iteye.com' target='_blank' title='sp42'>sp42</a>： 
+                  受教了 谢谢！<br />
+                  <a href="/blog/1577508#bc2340875">Tomcat自带log的配置</a>
+                </li>
+                
+                <li>
+                  <a href='http://yabou.iteye.com' target='_blank' title='yabou'>yabou</a>： 
+                  你好，我现在要做一个新闻评论的系统，当有人回复我的发言后，会推 ...<br />
+                  <a href="/blog/1685112#bc2324414">消息推送</a>
+                </li>
+                
+                <li>
+                  <a href='http://huangrongyou.iteye.com' target='_blank' title='huangrongyou'>huangrongyou</a>： 
+                  njyu 写道年轻人struts拼错了。。。已经改过来了，谢谢 ...<br />
+                  <a href="/blog/1685773#bc2283750">Struts2学习系列 -- Struts2增加json插件</a>
+                </li>
+                
+                <li>
+                  <a href='http://zzx19880809.iteye.com' target='_blank' title='ZZX19880809'>ZZX19880809</a>： 
+                  年轻人，最常犯的拼写都错了~<br />
+                  <a href="/blog/1685773#bc2283588">Struts2学习系列 -- Struts2增加json插件</a>
+                </li>
+                
+                <li>
+                  <a href='http://xiaopihai.iteye.com' target='_blank' title='njyu'>njyu</a>： 
+                  年轻人struts拼错了。。。<br />
+                  <a href="/blog/1685773#bc2283573">Struts2学习系列 -- Struts2增加json插件</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr/>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br />
+          &copy; 2003-2014 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script>
+
+<script src="http://csdnimg.cn/pubfooter/js/tracking.js?version=20130923164150" type="text/javascript"></script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31997398-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+      
+    
+  </body>
+</html>

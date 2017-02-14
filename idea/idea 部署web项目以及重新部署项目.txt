@@ -1,0 +1,1 @@
+Run->Edit Configurations->配置comcat->Deployment->点击绿色的加号->Artifact

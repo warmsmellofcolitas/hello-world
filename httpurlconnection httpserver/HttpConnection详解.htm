@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HttpConnection详解_IT民工-南宫煌_新浪博客</title>
+<meta name="keywords" content="HttpConnection详解_IT民工-南宫煌_新浪博客,IT民工-南宫煌,httpconnection,杂谈" />
+<meta name="description" content="HttpConnection详解_IT民工-南宫煌_新浪博客,IT民工-南宫煌," />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<!–[if lte IE 6]>
+<script type="text/javascript">
+try{
+document.execCommand("BackgroundImageCache", false, true);
+}catch(e){}
+</script>
+<![endif]–>
+<script type="text/javascript">
+window.staticTime=new Date().getTime();
+</script>
+<link rel="pingback" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://upload.move.blog.sina.com.cn/blog_rebuild/blog/xmlrpc.php?rsd" />
+<link href="http://blog.sina.com.cn/blog_rebuild/blog/wlwmanifest.xml" type="application/wlwmanifest+xml" rel="wlwmanifest" />
+<link rel="alternate" type="application/rss+xml" href="http://blog.sina.com.cn/rss/2712798651.xml" title="RSS" />
+<link href="http://simg.sinajs.cn/blog7style/css/conf/blog/article.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/common/common.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/blog/blog.css" type="text/css" rel="stylesheet" /><link href="http://simg.sinajs.cn/blog7style/css/module/common/blog.css" type="text/css" rel="stylesheet" /><style id="tplstyle" type="text/css">@charset "utf-8";@import url("http://simg.sinajs.cn/blog7newtpl/css/10/10_74/t.css");
+</style>
+<style id="positionstyle"  type="text/css">
+.sinabloghead .blogtoparea{ left:88px;top:110px;}
+.sinabloghead .blognav{ left:87px;top:66%;}
+</style>
+<style id="bgtyle"  type="text/css">
+</style>
+<style id="headtyle"  type="text/css">
+</style>
+<style id="navtyle"  type="text/css">
+</style>
+<script type="text/javascript" src="http://d1.sina.com.cn/litong/zhitou/sspnew.js"></script></head>
+<body>
+<!--$sinatopbar-->
+<!--$end sinatopbar-->
+<div class="sinabloga" id="sinabloga">
+	<div id="sinablogb" class="sinablogb">
+
+	   
+ <div id="sinablogHead" class="sinabloghead">
+     <div style="display: none;" id="headflash" class="headflash"></div>
+      <!--主题内容开始 -->
+    </div>
+ <div class="sinablogbody" id="sinablogbody">
+		
+	<!--第一列start-->
+    <div id="column_1" class="SG_colW21 SG_colFirst"><!--Qingtuijian-->
+      <!--endQing-->
+      <!--BeijingQingtuijian-->
+    </div>
+	<!--第一列end-->
+	
+	<!--第二列start-->
+	<div id="column_2" class="SG_colW73">	
+<div id="module_920" class="SG_conn">
+  <div class="SG_connBody">
+<!--博文正文 begin -->
+	<div id="articlebody" class="artical" favMD5='{"a1b205bb0101amph":"5e539a74e40716eb401e5c634fab0efe"}'>
+		<div class="articalTitle"> 
+			
+								<h2 id="t_a1b205bb0101amph" class="titName SG_txta">HttpConnection详解</h2>
+		</div>
+		<div class="articalTag" id="sina_keyword_ad_area"></div>
+						<!-- 正文开始 -->
+		<div id="sina_keyword_ad_area2" class="articalContent  ">
+			HttpURLConnection对象
+<strong>1.从Internet获取网页,发送请求,将网页以流的形式读回来.</STRONG><strong>步骤：<br /></STRONG>1)创建一个URL对象:URL
+url = new URL(<a HREF="http://www.baidu.com/">http://www.baidu.com</A> );<br />
+2)利用HttpURLConnection对象从网络中获取网页数据:HttpURLConnection conn =
+(HttpURLConnection) url.openConnection();<br />
+3)设置连接超时:conn.setConnectTimeout(6*1000);<br />
+4)对响应码进行判断:if (conn.getResponseCode() != 200) throw new
+RuntimeException("请求url失败");<br />
+5)得到网络返回的输入流:InputStream is = conn.getInputStream();<br />
+6)String result = readData(is, "GBK");<br />
+7)conn.disconnect();<br />
+<strong>总结:<br /></STRONG>--记得设置连接超时,如果网络不好,Android系统在超过默认时间会收回资源中断操作.<br />
+
+--返回的响应码200,是成功.<br />
+--利用ByteArrayOutputStream类,将得到的输入流写入内存.<br />
+--在Android中对文件流的操作和JAVA SE上面是一样的.<br />
+<strong>2.从Internet获取文件</STRONG><br />
+<strong>利用HttpURLConnection对象,从网络中获取文件数据.</STRONG><strong>步骤：<br /></STRONG>1)创建URL对象,并将文件路径传入:URL
+url = new URL(<a HREF="http://photocdn.sohu.com/20100125/Img269812337.jpg">http://photocdn.sohu.com/20100125/Img269812337.jpg</A>
+);<br />
+2)创建HttpURLConnection对象,从网络中获取文件数据:HttpURLConnection conn =
+(HttpURLConnection)url.openConnection();<br />
+3)设置连接超时:conn.setConnectTimeout(6* 1000);<br />
+4)对响应码进行判断:if (conn.getResponseCode() != 200) throw new
+RuntimeException("请求url失败");<br />
+5)得到网络返回的输入流:InputStream is = conn.getInputStream();<br />
+6)将得到的文件流写出:outStream.write(buffer, 0, len);<br />
+<strong>总结:<br /></STRONG>--在对大文件的操作时,要将文件写到SDCard上面,不要直接写到手机内存上.<br />
+
+--操作大文件是,要一遍从网络上读,一遍要往SDCard上面写,减少手机内存的使用.这点很重要,面试经常会被问到.<br />
+--对文件流操作完,要记得及时关闭.<br />
+<strong>3.向Internet发送请求参数</STRONG><strong>步骤：</STRONG>
+<strong><br /></STRONG><strong><br />
+2)创建URL对象:URL realUrl = new URL(requestUrl);<br />
+3)通过HttpURLConnection对象,向网络地址发送请求:HttpURLConnection conn =
+(HttpURLConnection) realUrl.openConnection();<br />
+4)设置容许输出:conn.setDoOutput(true);<br />
+5)设置不使用缓存:conn.setUseCaches(false);<br />
+6)设置使用POST的方式发送:conn.setRequestMethod("POST");<br />
+7)设置维持长连接:conn.setRequestProperty("Connection",
+"Keep-Alive");<br />
+8)设置文件字符集:conn.setRequestProperty("Charset", "UTF-8");<br />
+9)设置文件长度:conn.setRequestProperty("Content-Length",
+String.valueOf(data.length));<br />
+10)设置文件类型:conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");<br />
+
+11)以流的方式输出.<br /></STRONG>总结:<br />
+--发送POST请求必须设置允许输出<br />
+--不要使用缓存,容易出现问题.<br />
+--在开始用HttpURLConnection对象的setRequestProperty()设置,就是生成HTML文件头.<br />
+<strong>4.向Internet发送xml数据<br /></STRONG>XML格式是通信的标准语言,Android系统也可以通过发送XML文件传输数据.<strong>步骤：<br />
+</STRONG>1)将生成的XML文件写入到byte数组中,并设置为UTF-8:byte[] xmlbyte =
+xml.toString().getBytes("UTF-8");<br />
+2)创建URL对象,并指定地址和参数:URL url = new URL(<a HREF="http://localhost:8080/itcast/contanctmanage.do?method=readxml">http://localhost:8080/itcast/contanctmanage.do?method=readxml</A>
+);<br />
+3)获得链接:HttpURLConnection conn = (HttpURLConnection)
+url.openConnection();<br />
+4)设置连接超时:conn.setConnectTimeout(6* 1000);<br />
+5)设置允许输出conn.setDoOutput(true);<br />
+6)设置不使用缓存:conn.setUseCaches(false);<br />
+7)设置以POST方式传输:conn.setRequestMethod("POST");<br />
+8)维持长连接:conn.setRequestProperty("Connection", "Keep-Alive");<br />
+9)设置字符集:conn.setRequestProperty("Charset", "UTF-8");<br />
+10)设置文件的总长度:conn.setRequestProperty("Content-Length",
+String.valueOf(xmlbyte.length));<br />
+11)设置文件类型:conn.setRequestProperty("Content-Type", "text/xml;
+charset=UTF-8");<br />
+12)以文件流的方式发送xml数据:outStream.write(xmlbyte);<br />
+<strong>总结:</STRONG><strong><br /></STRONG>--我们使用的是用HTML的方式传输文件,这个方式只能传输一般在5M一下的文件.<br />
+
+--传输大文件不适合用HTML的方式,传输大文件我们要面向Socket编程.确保程序的稳定性1)将地址和参数存到byte数组中:byte[]
+data = params.toString().getBytes(); 5. <a HREF="http://www.cnblogs.com/cnsoft/archive/2006/04/18/377967.html">HttpURLConnection中如何设置网络超时</A>
+<p>Java中可以使用HttpURLConnection来请求WEB资源。<br />
+HttpURLConnection对象不能直接构造，需要通过URL.openConnection()来获得HttpURLConnection对象，示例代码如下：<br />
+
+String szUrl = "http://www.baidu.com/";<br />
+URL url = new URL(szUrl);<br />
+HttpURLConnection urlCon =
+(HttpURLConnection)url.openConnection();</P>
+<p>
+HttpURLConnection是基于HTTP协议的，其底层通过socket通信实现。如果不设置超时（timeout），在网络异常的情况下，可能会导致程序僵死而不继续往下执行。可以通过以下两个语句来设置相应的超时：<br />
+
+System.setProperty("sun.net.client.defaultConnectTimeout",
+超时毫秒数字符串);<br />
+System.setProperty("sun.net.client.defaultReadTimeout",
+超时毫秒数字符串);</P>
+<p>其中： sun.net.client.defaultConnectTimeout：连接主机的超时时间（单位：毫秒）<br />
+sun.net.client.defaultReadTimeout：从主机读取数据的超时时间（单位：毫秒）</P>
+<p>例如：<br />
+System.setProperty("sun.net.client.defaultConnectTimeout",
+"30000");<br />
+System.setProperty("sun.net.client.defaultReadTimeout",
+"30000");</P>
+<p>JDK
+1.5以前的版本，只能通过设置这两个系统属性来控制网络超时。在1.5中，还可以使用HttpURLConnection的父类URLConnection的以下两个方法：<br />
+
+setConnectTimeout：设置连接主机超时（单位：毫秒）<br />
+setReadTimeout：设置从主机读取数据超时（单位：毫秒）</P>
+<p>例如：<br />
+HttpURLConnection urlCon =
+(HttpURLConnection)url.openConnection();<br />
+urlCon.setConnectTimeout(30000);<br />
+urlCon.setReadTimeout(30000);</P>
+<p>需要注意的是，笔者在JDK1.4.2环境下，发现在设置了
+defaultReadTimeout的情况下，如果发生网络超时，HttpURLConnection会自动重新提交一次请求，出现一次请求调用，请求
+服务器两次的问题（Trouble）。我认为这是JDK1.4.2的一个bug。在JDK1.5.0中，此问题已得到解决，不存在自动重发现象。</P>							
+		</div>
+						<!-- 正文结束 -->
+		<div class="shareUp">
+		  <div class="up"></div>
+            </div>
+		<div class="blogzz_zzlist borderc" id="blog_quote" style="display:none">加载中，请稍候......</div>
+		<div id="loginFollow"></div>
+			</div>
+	<!--博文正文 end -->
+		<script type="text/javascript">
+			var voteid="";
+		</script>
+
+          </div>       
+            <div class="SG_connFoot"></div>
+        </div>
+</div>
+	<!--第二列start-->
+	
+	<!--第三列start-->
+	<!--第三列end-->
+ </div>
+ <!--主题内容结束 -->
+  
+
+	<div id="diggerFla" style="position:absolute;left:0px;top:0px;width:0px"></div>
+    <div class="sinablogfooter" id="sinablogfooter"  style="position:relative;">
+      
+      <p class="SG_linka"><a href="http://control.blog.sina.com.cn/admin/advice/advice_list.php" target="_blank">新浪BLOG意见反馈留言板</a>　<a href="javascript:;" onclick="window.open ('http://control.blog.sina.com.cn/admin/advice/impeach.php?url=http%3A//blog.sina.com.cn/s/blog_4cf7b4ec0100eudp.html%3Ftj%3D1', '','height=495, width=510, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');">不良信息反馈</a>　电话：4006900000 提示音后按1键（按当地市话标准计费）　欢迎批评指正</p>
+   
+      <p class="SG_linka"><a href="http://corp.sina.com.cn/chn/" target="_blank">新浪简介</a> | <a href="http://corp.sina.com.cn/eng/" target="_blank">About Sina</a> | <a href="http://emarketing.sina.com.cn/" target="_blank">广告服务</a> | <a href="http://www.sina.com.cn/contactus.html" target="_blank">联系我们</a> | <a href="http://corp.sina.com.cn/chn/sina_job.html" target="_blank">招聘信息</a> | <a href="http://www.sina.com.cn/intro/lawfirm.shtml" target="_blank">网站律师</a> | <a href="http://english.sina.com" target="_blank">SINA English</a> | <a href="http://members.sina.com.cn/apply/" target="_blank">会员注册</a> | <a href="http://help.sina.com.cn/" target="_blank">产品答疑</a> </p>
+      <p class="copyright SG_linka"> Copyright &copy; 1996 - 2013 SINA Corporation,  All Rights Reserved</p>
+      <p class="SG_linka"> 新浪公司 <a href="http://www.sina.com.cn/intro/copyright.shtml" target="_blank">版权所有</a></p>
+	  <a href="http://www.bj.cyberpolice.cn/index.jsp"  target="_blank" class="gab_link"></a>
+    </div>
+  </div>
+</div>
+<script id="PVCOUNTER_FORIE" type="text/javascript"></script>
+</body>
+<script type="text/javascript">
+var scope = {
+    $newTray : 1,
+    $setDomain : true,
+    $uid : "2712798651",
+    $PRODUCT_NAME : "blog7",      //blog7photo,blog7icp
+    $pageid : "article",
+    $key :  "e39d50e352d498115020cb0ce5b30f52",
+    $uhost : "",
+    $ownerWTtype :"",
+    $private: {"pageset":0,"tj":0,"adver":0,"sms":0,"ad":0,"blogsize":0,"cms":0,"hidecms":0,"top":0,"invitationset":0,"p4p":0,"spamcms":1,"init7":1,"quote":1,"foot":0,"isprivate":0,"headpic":0,"t_sina":"2712798651","oauth_token":1,"oauth_token_secret":1,"uname":"","p_push_t":"1","p_get_t":"1","medal7":1,"articleclass":0},
+    $is_photo_vip:0,
+		 $nClass:0,
+		 $articleid:"a1b205bb0101amph",
+		 $sort_id:117,
+		 $cate_id:"",
+		 $isCommentAllow:0,
+		 $album_pic:"",
+		 $pn_x_rank:0,
+		 $x_quote_c:"",
+		 $flag2008:"",
+		     component_lists:{"2":{"size":730,"list":[920]},"1":{"size":210,"list":[901,910,903,911,904,47]}},
+    formatInfo:1,
+    UserPic:[{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"},{"pid":"","repeat":"repeat-x","align-h":"center","align-v":"top","apply":"0"}],
+    UserBabyPic:{"photoX":0,"photoY":0,"photoURL":null,"angle":0,"zoom":0,"maskX":0,"maskY":0,"maskURL":null,"frameURL":null},
+    UserColor:1,
+    backgroundcolor:"#a5d6ee",
+    tpl:"10_74",
+    reclist:0    };
+var $encrypt_code = "81a4a36f02e633d1c728e5cb111dfbd2";
+</script>
+
+<script type="text/javascript" src="http://sjs.sinajs.cn/blog7common/js/boot.js"></script>
+<script type="text/javascript">__load_js();</script>
+<script type="text/javascript">__render_page();</script>
+
+
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=b436f96b-ce3c-469f-93ca-9c0c406fcf10&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+<script type="text/javascript" charset="utf-8">
+        bShare.addEntry({pic: "", title:"分享自IT民工-南宫煌  《HttpConnection详解》", summary:"HttpURLConnection对象 1.从Internet获取网页,发送请求,将网页以流的形式读回来.步骤：1)创建一个URL对象:URL url = ...  (来自 @头条博客)"});
+     </script>
+    <script type="text/javascript" src="http://sjs.sinajs.cn/xblogtheme/js/blog680-min.js"></script>
+<script type="text/javascript">
+        var slotArr = ['atcTitLi_SLOT_41', 'atcTitLi_SLOT_42','loginBarActivity','comm_SLOT_63','comm_SLOT_64','comm_SLOT_65']; //广告位id
+        var sourceArr = ['SLOT_41','SLOT_42','SLOT_43,SLOT_47,SLOT_48','SLOT_63','SLOT_64','SLOT_65'];  //广告资源id
+        SinaBlog680.staticBox(slotArr, sourceArr);
+</script>
+</html>

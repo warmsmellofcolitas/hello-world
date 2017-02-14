@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/ext/ext-all.css">
+<script type="text/javascript" src="js/ext/ext-all.js"></script>
+<script type="text/javascript">
+	Ext.application({
+		name : 'HelloExt',
+		launch : function() {
+			Ext.create('Ext.Panel', {
+				width : 500,
+				height : 400,
+				title : "Anchor布局",
+				layout : 'anchor',
+				x : 60,
+				y : 80,
+				renderTo : Ext.getBody(),
+				items : [ 
+					{
+						xtype : 'panel',
+						title : '75% 的宽 和 25% 的高',
+						anchor : '75% 25%'
+					},
+					{
+						xtype : 'panel',
+						title : 'Offset -300 Width 和 -200 Height',
+						anchor : '-300 -200'
+					},
+					{
+						xtype : 'panel',
+						title : 'Mixed Offset and Percent',
+						anchor : '-250 30%'
+					} 
+				]
+			});
+		}
+	});
+</script>
+</head>
+<body>
+<input type="button" value="提交" id="aaa">
+</body>
+</html>
+-------------------
+anchor布局将使组件固定于父容器的某一个位置，使用anchor布局的子组件尺寸相对于容器的尺寸，即父容器容器的大小发生变化时，使用anchor布局的组件会根据规定的规则重新渲染位置和大小。
+anchor布局将使组件固定于父容器的某一个位置，使用anchor布局的子组件尺寸相对于容器的尺寸，即父容器容器的大小发生变化时，使用anchor布局的组件会根据规定的规则重新渲染位置和大小。  AnchorLayout布局没有任何的直接配置选项（继承的除外），然而在使用 AnchorLayout布局时，其子组件都有一个anchor属性，用来配置此子组件在父容器中所处的位置。  anchor属性为一组字符串，可以使用百分比或者是-数字来表示。配置字符串使用空格隔开，例如  anchor:'75% 25%'，表示宽度为父容器的75%，高度为父容器的25%  anchor:'-300 -200'，表示组件相对于父容器右边距为300，相对于父容器的底部位200 anchor:'-250 20%'，混合模式，表示组件党对于如容器右边为250，高度为父容器的20%  
+
+
+
+
+
+
+
+
+
+

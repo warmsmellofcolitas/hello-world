@@ -1,0 +1,38 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/taglib/c.tld" prefix="c" %>
+<%@ page isELIgnored="false"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+  	<title>中国电信融合支付综合管理系统</title>
+	<link rel="stylesheet" type="text/css" href="resources/plugins/ext3/resources/css/ext-all.css" />
+ 	<script type="text/javascript" src="resources/plugins/ext3/ext-base.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ext-all.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ux/TabCloseMenu.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+  	<script type="text/javascript" src="resources/js/PwMenu.js"></script>
+<script type="text/javascript">
+Ext.onReady(function() {
+var box = new Ext.BoxComponent({
+		el: 'test', // 这个是必须要填写的，element location，如果下面没有id为box1的div，那么页面会在ext-all.jsp里报错this.el.dom为空或不是对象，所以必须要有这个div
+		style: 'background-color:red;position:absolute;', // positon:absolute可以将下面的div绝对定位
+		pageX: 100, // 下面的div离页面左边的距离为100
+		pageY: 50, // 下面的div离页面上边的距离为100
+		width: 200, // 下面的div的宽度为200
+		height: 150 // 下面的div的高度为150
+	});
+	box.render(); // 这个是必须要填写的，渲染这个组件到test的div，否则没效果
+});
+</script>
+</head>
+<body>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
+<div id="test" style="border-style: solid;border-width: 5pt;border-color: black">ss</div>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>
+</body>
+</html>

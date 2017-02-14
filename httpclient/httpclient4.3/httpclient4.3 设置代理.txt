@@ -1,0 +1,55 @@
+package com.ccbsh;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+public class Main2 {
+	public static void main(String[] args) throws ClientProtocolException, IOException {
+		try {
+			CloseableHttpClient httpClient = HttpClients.createDefault();
+			HttpHost proxy = new HttpHost("192.168.19.9", 80, "http");
+			RequestConfig requestConfig = RequestConfig.custom()
+													.setProxy(proxy)
+													.setConnectTimeout(23000) // 连接超时,最大好像21秒
+													.setSocketTimeout(1000) // 请求超时
+													.build(); 
+			HttpPost httpPost = new HttpPost("http://test.com");
+			httpPost.setConfig(requestConfig);
+			List<NameValuePair> formPair = new ArrayList<NameValuePair>();
+			formPair.add(new BasicNameValuePair("ip", "192.168.2.15"));
+			formPair.add(new BasicNameValuePair("port", "9013"));
+			formPair.add(new BasicNameValuePair("data", "message"));
+			UrlEncodedFormEntity urlEntity = new UrlEncodedFormEntity(formPair, "UTF-8"); // 对参数进行编码
+			httpPost.setEntity(urlEntity);
+			System.err.println("开始："+new Date().toLocaleString());
+			CloseableHttpResponse response = httpClient.execute(httpPost); // 4.3版本不设置超时的话，一旦服务器没有响应，等待时间N久(>24小时)。
+			HttpEntity entity = response.getEntity(); // 返回报文实体
+			StatusLine status = response.getStatusLine();
+			System.out.println("返回的状态码为：" + status); // 具体返回码(200)为status.getStatusCode(); HttpStatus.SC_OK
+			String ret = EntityUtils.toString(entity); // 将返回报文实体转换为字符串
+			System.out.println("返回的报文为：" + ret);
+			EntityUtils.consume(entity);  // 释放是否可以去掉？
+			response.close(); // 关闭资源,可以写在finally里
+			httpPost.releaseConnection(); // 释放资源
+			httpClient.close(); // 关闭资源
+		} catch (Exception e) {
+			System.err.println("结束：："+new Date().toLocaleString());
+		}
+	}
+}

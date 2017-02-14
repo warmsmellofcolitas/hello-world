@@ -1,0 +1,2 @@
+File->Import Project->选择maven项目路径->选择Import project from external model->Maven->Next(下一步，Intellij自动读取出pom.xml中的配置)
+->Next->Next->Finish

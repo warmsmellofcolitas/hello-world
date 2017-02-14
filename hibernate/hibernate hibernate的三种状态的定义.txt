@@ -1,0 +1,4 @@
+transient：内存中一个对象，没id，缓存也叶没有
+persistent：内存中有，缓存中有，数据库有（id）
+detached：内存中有，缓存没有，数据库有，id
+

@@ -1,0 +1,7 @@
+一对一级联删除：就是在删除对象同时删除它的附属对象
+当点击删除时，会将用户的编号传到Action中，先加载后删除或者附属对象主键有值才能级联删除
+在Employee.hbm.xml中的<one-to-one>中配置级联删除cascade="all"或者cascade="delete"(主配置文件和附属配置文件都要配置cascade="all"或cascade="delete"/附属不用)
+
+
+
+

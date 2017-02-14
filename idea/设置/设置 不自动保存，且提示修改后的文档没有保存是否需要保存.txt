@@ -1,0 +1,2 @@
+File->Settings->General->去掉Synchronize files on frame activation，去掉Save files on frame deactivate，去掉Save files automatically if application is idle for 15 sec
+勾选Use "safe write"(save changes to a temporary file first)->OK

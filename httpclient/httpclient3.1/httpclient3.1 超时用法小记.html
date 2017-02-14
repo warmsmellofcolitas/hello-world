@@ -1,0 +1,571 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>HttpClient的超时用法小记 - 柒馨轩 - ITeye技术网站</title>
+    <meta name="description" content="     HttpClient在使用中有两个超时时间，是一直接触和使用的，由于上次工作中使用httpClient造成了系统悲剧的情况，特地对它的两个超时时间进行了小小的测试，在这里记录下。          测试版本为HttpClient——3.1          一：连接超时：connectionTimeout          1：指的是连接一个url的连接等待时间。          2：设 ..." />
+    <meta name="keywords" content="Linux, Java, Apache, Windows, .net HttpClient的超时用法小记" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="ITeye" />
+    <link href="/rss" rel="alternate" title="柒馨轩" type="application/rss+xml" />
+    <link href="http://www.iteye.com/stylesheets/blog.css?1393920955" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.iteye.com/stylesheets/themes/blog/blue.css?1326191326" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://www.iteye.com/javascripts/application.js?1358214518" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="http://www.iteye.com/javascripts/syntaxhighlighter/SyntaxHighlighter.css?1348819953" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1325907333" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/hotkey.js?1324994303" type="text/javascript"></script>
+  <script src="http://www.iteye.com/javascripts/code_favorites.js?1358214518" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/weiboshare.js?1324994303" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+      <div id="user_nav">
+      <a href="/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="/login">登录</a>
+    <a href="/signup" class="nobg">注册</a>
+  </div>
+
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="/">柒馨轩</a></h1>
+        </div>
+        <div id='fd'></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class='blog_navbar_for'><a href="http://guoliangqi.iteye.com"><strong>博客</strong></a></li>
+            <li ><a href="/weibo">微博</a></li>
+            <li ><a href="/album">相册</a></li>
+            <li ><a href="/link">收藏</a></li>
+            <li ><a href="/blog/guest_book">留言</a></li>
+            <li ><a href="/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="" />
+              <input class="submit_search" type="submit" value="" />
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style='display:none'>
+  <a href="http://guoliangqi.iteye.com" class="p-author" target="_blank">yznxing</a>
+</div>
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="/blog/646609">HttpClient的超时用法小记</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class='blog_categories'><strong>博客分类：</strong> <li><a href="/category/100817">java</a></li> </ul>
+        <div class='news_tag'><a href="http://www.iteye.com/blogs/tag/Linux">Linux</a><a href="http://www.iteye.com/blogs/tag/Java">Java</a><a href="http://www.iteye.com/blogs/tag/Apache">Apache</a><a href="http://www.iteye.com/blogs/tag/Windows">Windows</a><a href="http://www.iteye.com/blogs/tag/.net">.net</a>&nbsp;</div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    <p>     HttpClient在使用中有两个超时时间，是一直接触和使用的，由于上次工作中使用httpClient造成了系统悲剧的情况，特地对它的两个超时时间进行了小小的测试，在这里记录下。</p>
+<p> </p>
+<p>     测试版本为HttpClient——3.1</p>
+<p> </p>
+<p>     一：连接超时：connectionTimeout</p>
+<p> </p>
+<p>     1：指的是连接一个url的连接等待时间。</p>
+<p> </p>
+<p>     2：设置方法为：</p>
+<p> </p>
+<p>     <span style="white-space: pre;">public class TestHttpClientMain {</span></p>
+<pre class="java" name="code">
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		HttpClient client = new HttpClient();
+
+		HttpMethod method = new GetMethod(
+				"http://test.com");
+		client.getHttpConnectionManager().getParams()
+				.setConnectionTimeout(3000);
+		client.getHttpConnectionManager().getParams().setSoTimeout(3000);
+		try {
+			int statusCode = client.executeMethod(method);
+			System.out.println(statusCode);
+
+			byte[] responseBody = null;
+
+			responseBody = method.getResponseBody();
+
+			String result = new String(responseBody);
+
+			System.out.println(result);
+
+		} catch (HttpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}</pre>
+ 
+<p> </p>
+<p>     3：测试的时候，将url改为一个不存在的url：“http://test.com”</p>
+<p> </p>
+<p>     4：超时时间3000ms过后，系统报出异常。</p>
+<p> </p>
+<p>     <span style="white-space: pre;">org.apache.commons.httpclient.ConnectTimeoutException: The host did not accept the connection within timeout of 3000 ms</span></p>
+<pre class="java" name="code">	at org.apache.commons.httpclient.protocol.ReflectionSocketFactory.createSocket(ReflectionSocketFactory.java:155)
+	at org.apache.commons.httpclient.protocol.DefaultProtocolSocketFactory.createSocket(DefaultProtocolSocketFactory.java:125)
+	at org.apache.commons.httpclient.HttpConnection.open(HttpConnection.java:707)
+	at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:387)
+	at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:171)
+	at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:397)</pre>
+ 
+<p> </p>
+<p>     二：读取数据超时：soTimeout</p>
+<p> </p>
+<p>     1：指的是连接上一个url，获取response的返回等待时间</p>
+<p> </p>
+<p>     2：设置方法</p>
+<p> </p>
+<p>     <span style="white-space: pre;">public class TestHttpClientMain {</span></p>
+<pre class="java" name="code">
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		HttpClient client = new HttpClient();
+
+		HttpMethod method = new GetMethod(
+				"http://localhost:8080/firstTest.htm?method=test");
+		client.getHttpConnectionManager().getParams()
+				.setConnectionTimeout(3000);
+		client.getHttpConnectionManager().getParams().setSoTimeout(2000);
+		try {
+			int statusCode = client.executeMethod(method);
+			System.out.println(statusCode);
+
+			byte[] responseBody = null;
+
+			responseBody = method.getResponseBody();
+
+			String result = new String(responseBody);
+
+			System.out.println(result);
+
+		} catch (HttpException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}</pre>
+ 
+<p> </p>
+<p>     3：测试的时候的连接url为我本地开启的一个url，http://localhost:8080/firstTest.htm?method=test</p>
+<p> </p>
+<p>     在我这个测试url里，当访问到这个链接时，线程sleep一段时间，来模拟返回response超时。</p>
+<p> </p>
+<p>     <span style="white-space: pre;">@RequestMapping(params = "method=test") //&lt;——②</span></p>
+<pre class="java" name="code">    public String testMethod(ModelMap model) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.println("call testMethod method.");
+        model.addAttribute("name", "test method");
+		return "test";
+    }</pre>
+<p> </p>
+<p> </p>
+<p>     4：将读取response返回超时时间设的时间比那个sleep时间短之后，运行程序给出异常：</p>
+<p> </p>
+<p>      <span style="white-space: pre;">java.net.SocketTimeoutException: Read timed out</span></p>
+<pre class="java" name="code">	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at org.apache.commons.httpclient.HttpParser.readRawLine(HttpParser.java:78)
+	at org.apache.commons.httpclient.HttpParser.readLine(HttpParser.java:106)
+	at org.apache.commons.httpclient.HttpConnection.readLine(HttpConnection.java:1116)
+	at org.apache.commons.httpclient.HttpMethodBase.readStatusLine(HttpMethodBase.java:1973)
+	at org.apache.commons.httpclient.HttpMethodBase.readResponse(HttpMethodBase.java:1735)</pre>
+ 
+<p> </p>
+<p> </p>
+<p>     ok，以后再写httpClient这两个超时时间一定要加上，不加就很可能悲剧的了。</p>
+<p> </p>
+  </div>
+
+  
+
+
+  
+  
+  <div id="bottoms" class="clearfix">
+    <div id="digg_bottom" class="clearfix"><div class='digged'><strong>4</strong> <br/>顶</div><div class='digged'><strong>0</strong> <br/>踩</div></div>
+    <div id="share_weibo">分享到：
+      <a data-type='sina' href="javascript:;" title="分享到新浪微博"><img src="/images/sina.jpg"></a>
+      <a data-type='qq' href="javascript:;" title="分享到腾讯微博"><img src="/images/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="/blog/657534" class="next" title="google Collection 的MapMaker使用体验">google Collection 的MapMaker使用体验</a>
+      |
+      <a href="/blog/645383" class="pre" title="【转】关于LZ77压缩算法">【转】关于LZ77压缩算法</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2010-04-18 10:41</li>
+      <li>浏览 15039</li>
+      <li><a href="#comments">评论(6)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/language">编程语言</a></li>      
+      <li class='last'><a href="http://www.iteye.com/wiki/blog/646609" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    <div id="bc1668059">
+  <div class="comment_title">
+    6 楼
+    <a href='http://guoliangqi.iteye.com' target='_blank' title='yznxing'>yznxing</a>
+    2010-09-12&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><div class="quote_title">littleJava 写道</div><div class="quote_div"><div class="quote_title">yznxing 写道</div><div class="quote_div"><div class="quote_title">littleJava 写道</div><div class="quote_div">在linux环境中，这个参数都设置貌似也无用。如果写一个不存在的http地址，一般是在3分钟后才有异常抛出，代码中设定的参数没有起作用</div><br /><br /><br />是吗？可是我的代码 的确是跑在 linux上的。<br /><br />貌似有用啊。<br /><br />以前不设置这个会被别人拖死，现在都不会了。</div><br />connection超时在linux是正常的，已经用你的代码重新测试了。又有个新问题，在windows平台下，如果请求的域名不存在，例如http://www.test2.com，代码立刻就会给返回，这个时候connection超时是无用的；在linux中是成功的，默认重连3次，connectionTimeout之后给异常返回</div><br /><br /><br />还有这个情况啊。。。<br />域名不存在我在windows下测试过了，的确是立即返回的，linux下没试过。<br /><br />linux下会有这个反应，我下次再试试看，不晓得会是个什么原因。</div>
+</div>
+
+<div id="bc1662909">
+  <div class="comment_title">
+    5 楼
+    <a href='http://littlejava.iteye.com' target='_blank' title='littleJava'>littleJava</a>
+    2010-09-08&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><div class="quote_title">yznxing 写道</div><div class="quote_div"><div class="quote_title">littleJava 写道</div><div class="quote_div">在linux环境中，这个参数都设置貌似也无用。如果写一个不存在的http地址，一般是在3分钟后才有异常抛出，代码中设定的参数没有起作用</div><br /><br /><br />是吗？可是我的代码 的确是跑在 linux上的。<br /><br />貌似有用啊。<br /><br />以前不设置这个会被别人拖死，现在都不会了。</div><br />connection超时在linux是正常的，已经用你的代码重新测试了。又有个新问题，在windows平台下，如果请求的域名不存在，例如http://www.test2.com，代码立刻就会给返回，这个时候connection超时是无用的；在linux中是成功的，默认重连3次，connectionTimeout之后给异常返回</div>
+</div>
+
+<div id="bc1633066">
+  <div class="comment_title">
+    4 楼
+    <a href='http://guoliangqi.iteye.com' target='_blank' title='yznxing'>yznxing</a>
+    2010-08-19&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><div class="quote_title">littleJava 写道</div><div class="quote_div">在linux环境中，这个参数都设置貌似也无用。如果写一个不存在的http地址，一般是在3分钟后才有异常抛出，代码中设定的参数没有起作用</div><br /><br /><br />是吗？可是我的代码 的确是跑在 linux上的。<br /><br />貌似有用啊。<br /><br />以前不设置这个会被别人拖死，现在都不会了。</div>
+</div>
+
+<div id="bc1632176">
+  <div class="comment_title">
+    3 楼
+    <a href='http://littlejava.iteye.com' target='_blank' title='littleJava'>littleJava</a>
+    2010-08-19&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">在linux环境中，这个参数都设置貌似也无用。如果写一个不存在的http地址，一般是在3分钟后才有异常抛出，代码中设定的参数没有起作用</div>
+</div>
+
+<div id="bc1557524">
+  <div class="comment_title">
+    2 楼
+    <a href='http://guoliangqi.iteye.com' target='_blank' title='yznxing'>yznxing</a>
+    2010-06-28&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><div class="quote_title">uniquejava 写道</div><div class="quote_div">原来还有个该死的soTimeout，害得我的程序阻塞不动了。</div><br /><br /><br />哈哈，是的。我因为这个弄的我有一次差点被搞死</div>
+</div>
+
+<div id="bc1556498">
+  <div class="comment_title">
+    1 楼
+    <a href='http://uniquejava.iteye.com' target='_blank' title='uniquejava'>uniquejava</a>
+    2010-06-28&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">原来还有个该死的soTimeout，害得我的程序阻塞不动了。</div>
+</div>
+
+
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="/login" style="background-color:white;"> <img src="/images/login_icon.png" style="vertical-align:middle; margin-right: 10px;" /></a><a href="/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 646609;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'HttpClient的超时用法小记');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', 'HttpClient的超时用法小记');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href='http://guoliangqi.iteye.com'><img alt="yznxing的博客" class="logo" src="http://www.iteye.com/upload/logo/user/239988/6e433792-998e-39bf-8015-870fb3e0fee5.jpg?1272250094" title="yznxing的博客: 柒馨轩" /></a></div>
+  <div id="blog_owner_name">yznxing</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 107646 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="http://www.iteye.com/images/icon_minigender_1.gif?1324994303" title="男" /></li>
+              <li>来自: 杭州</li>
+              <li><img src='/images/status/offline.gif'/></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style='font-weight:normal;font-size:12px;padding-left:30px;'><a href="/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://study-zhaobo.iteye.com' target='_blank'><img alt="study_zhaobo的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="study_zhaobo的博客: " /></a></div>
+                <div class="left"><a href='http://study-zhaobo.iteye.com' target='_blank' title='study_zhaobo'>study_zhaobo</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://qiaoshaohua.iteye.com' target='_blank'><img alt="qiaoshaohua的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="qiaoshaohua的博客: " /></a></div>
+                <div class="left"><a href='http://qiaoshaohua.iteye.com' target='_blank' title='qiaoshaohua'>qiaoshaohua</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://wangwen135.iteye.com' target='_blank'><img alt="wangwen135的博客" class="logo" src="http://www.iteye.com/upload/logo/user/447918/f006cb51-659b-3b67-a9c3-08822bda4aab-thumb.gif?1301131579" title="wangwen135的博客: " /></a></div>
+                <div class="left"><a href='http://wangwen135.iteye.com' target='_blank' title='wangwen135'>wangwen135</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://xubowen.iteye.com' target='_blank'><img alt="xubowen的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="xubowen的博客: " /></a></div>
+                <div class="left"><a href='http://xubowen.iteye.com' target='_blank' title='xubowen'>xubowen</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="/">全部博客 (55)</a></li>
+                
+                  <li><a href="/category/100817">java (39)</a></li>
+                
+                  <li><a href="/category/124981">jetty (0)</a></li>
+                
+                  <li><a href="/category/100818">simple Architecture (4)</a></li>
+                
+                  <li><a href="/category/100819">web UI (1)</a></li>
+                
+                  <li><a href="/category/100820">life (1)</a></li>
+                
+                  <li><a href="/category/100821">IT others (0)</a></li>
+                
+                  <li><a href="/category/100825">转载 (7)</a></li>
+                
+                  <li><a href="/category/112567">java源码 (0)</a></li>
+                
+                  <li><a href="/category/129853">groovy &amp; grails (0)</a></li>
+                
+                  <li><a href="/category/131838">ruby (1)</a></li>
+                
+                  <li><a href="/category/187537">mysql (1)</a></li>
+                
+              </ul>
+            </div>
+            <div id='month_blogs'>
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="/blog/post">我的论坛</a> (5)
+                </li>
+                <li><a href="/blog/answered_problems">我的问答</a> (22)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="/blog/monthblog/2012-02">2012-02</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2011-08">2011-08</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2011-06">2011-06</a> (1)</li>
+                
+                <li><a href="/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href='http://guoliangqi.iteye.com' target='_blank' title='yznxing'>yznxing</a>： 
+                  hao2181 写道这个真扯 a是用来读文件字节数组 跟内部w ...<br />
+                  <a href="/blog/986781#bc2339531">用mina网络传输使用ObjectSerializationCodecFactory一个小注意点</a>
+                </li>
+                
+                <li>
+                  <a href='http://guoliangqi.iteye.com' target='_blank' title='yznxing'>yznxing</a>： 
+                  dyy_gusi 写道yznxing 写道laser_lu 写 ...<br />
+                  <a href="/blog/644876#bc2339530">java读取指定package下的所有class</a>
+                </li>
+                
+                <li>
+                  <a href='http://hao2181.iteye.com' target='_blank' title='hao2181'>hao2181</a>： 
+                  这个真扯 a是用来读文件字节数组 跟内部writer有什么关系 ...<br />
+                  <a href="/blog/986781#bc2337345">用mina网络传输使用ObjectSerializationCodecFactory一个小注意点</a>
+                </li>
+                
+                <li>
+                  <a href='http://dyygusi.iteye.com' target='_blank' title='dyy_gusi'>dyy_gusi</a>： 
+                  yznxing 写道laser_lu 写道貌似缺一个函数。。额 ...<br />
+                  <a href="/blog/644876#bc2334596">java读取指定package下的所有class</a>
+                </li>
+                
+                <li>
+                  <a href='http://zyx283319731.iteye.com' target='_blank' title='zyx283319731'>zyx283319731</a>： 
+                   ...<br />
+                  <a href="/blog/628063#bc2333484">java学习——mina篇</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr/>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br />
+          &copy; 2003-2014 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script>
+
+<script src="http://csdnimg.cn/pubfooter/js/tracking.js?version=20130923164150" type="text/javascript"></script>
+
+    
+    
+  </body>
+</html>

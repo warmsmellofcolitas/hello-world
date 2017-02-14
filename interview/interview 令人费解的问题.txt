@@ -1,0 +1,34 @@
+package com;
+import java.util.HashMap;
+import java.util.Map;
+public class Main {
+	public static void main(String[] args) {
+		Map<String, String> ss = getMap();
+		System.out.println(ss.get("KEY"));
+	}
+
+	/**
+	 * 为什么test3中finally里的b = 150;并没有起到作用而getMap中finally的map.put("KEY",
+	 * "FINALLY"); 起了作用而map =
+	 * null;却没起作用呢？这就是Java到底是传值还是传址的问题了，具体请看精选30道Java笔试题解答，
+	 * 里面有详细的解答，简单来说就是：Java中只有传值没有传址，这也是为什么map = null这句不起作用。
+	 * 这同时也说明了返回语句是try中的return语句而不是 finally外面的return b;这句，不相信的话可以试下， 将return
+	 * b;改为return 294，对原来的结果没有一点影响。
+	 */
+	public static Map<String, String> getMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("KEY", "INIT");
+		try {
+			map.put("KEY", "TRY");
+			return map;
+		} catch (Exception e) {
+			map.put("KEY", "CATCH");
+		} finally {
+			map.put("KEY", "FINALLY");
+			map.put("KEY", "ssss"); // 起作用
+			map = new HashMap<String, String>(); // 不起作用
+			map.put("KEY", "ff"); // 不起作用
+		}
+		return map;
+	}
+}

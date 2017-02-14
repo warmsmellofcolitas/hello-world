@@ -1,0 +1,21 @@
+eclipse如何修改dynamic web module version
+一、修改工程属性：
+右键eclipse的工程，选择属性，再选择Project Facets里面中选择Dynamic Web Module ，将3.0修改为2.5，可能会提示如下信息：
+Cannot change version of project facet Dynamic Web Module to 2.5
+这样表示修改不了，然后采用第二种方法。
+--------------
+二、修改配置文件：
+找到工程项目的硬盘目录，打开项目下的 .setting文件夹，如下图：
+找到 .setting文件夹内的org.eclipse.wst.common.project.facet.core.xml文件，文件格式大致如下：
+
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+<runtime name="Apache Tomcat v5.5"/>
+<fixed facet="jst.web"/>
+<fixed facet="jst.java"/>
+<installed facet="jst.java" version="5.0"/>
+<installed facet="jst.web" version="2.5"/>
+<installed facet="wst.jsdt.web" version="1.0"/>
+</faceted-project>
+
+直接手动修改jst.web对应的version即可。最后重启tomcatX就可以正常使用了。

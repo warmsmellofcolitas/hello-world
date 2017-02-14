@@ -1,0 +1,2 @@
+This method covers the case when you have made one or more revisions to a branch(or to the trunk) and you want to port those changes across to a different brank.
+这个方法适用于你已经在分支(或主干)提交了版本,要合并这些修改到不同分支的场合.

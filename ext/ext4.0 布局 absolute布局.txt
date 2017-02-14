@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/ext/ext-all.css">
+<script type="text/javascript" src="js/ext/ext-all.js"></script>
+<script type="text/javascript">
+	Ext.application({
+		name : "HelloExt",
+		launch : function() {
+			Ext.create('Ext.form.Panel', {
+				title : 'Absolute布局',
+				width : 300,
+				height : 275,
+				x : 20,
+				y : 90,
+				layout : 'absolute',
+				defaultType : 'textfield',
+				items : [ {
+					x : 10,
+					y : 10,
+					xtype : 'label',
+					text : 'Send To:'
+				}, {
+					x : 80,
+					y : 10,
+					name : 'to',
+					anchor : '90%'
+				}, {
+					x : 10,
+					y : 40,
+					xtype : 'label',
+					text : 'Subject:'
+				}, {
+					x : 80,
+					y : 40,
+					name : 'subject',
+					anchor : '90%'
+				}, {
+					x : 0,
+					y : 80,
+					xtype : 'textareafield',
+					name : 'msg',
+					anchor : '100% 100%'
+				} ],
+				renderTo : Ext.getBody()
+			});
+		}
+	});
+</script>
+</head>
+<body>
+<input type="button" value="提交" id="aaa">
+</body>
+</html>
+----------------------
+Absolute布局继承Ext.layout.container.Anchor 布局方式，并增加了X/Y配置选项对子组件进行定位，Absolute布局的目的是为了扩展布局的属性，使得布局更容易使用。
+
+
+

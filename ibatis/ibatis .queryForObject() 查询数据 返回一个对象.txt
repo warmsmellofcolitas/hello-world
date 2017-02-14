@@ -1,0 +1,173 @@
+applicationContext.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+	<description>Spring公共配置</description>
+	<!--使用annotation自动注册bean，并保证@Required,@Autowired的属性被注入-->
+	<context:component-scan base-package="com"/>
+	<!--以静态变量保存ApplicationContext-->
+	<bean class="org.springside.modules.utils.SpringContextHolder" lazy-init="false"/>
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	 	<property name="jndiName">
+	  		<value>java:comp/env/jdbc/ldata</value>
+	 	</property>
+	</bean>
+	<bean id="dataSourcelife" class="org.springframework.jndi.JndiObjectFactoryBean">
+	 	<property name="jndiName">
+	  		<value>java:comp/env/jdbc/life</value>
+	 	</property>
+	</bean>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+    </bean>
+	<bean id="jdbcTemplateLife" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="dataSourcelife"/>
+		</property>
+    </bean>
+	<!-- iBATIS配置 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/ibatis/ibatis-config.xml</value>
+		</property>
+		<property name="dataSource"><ref bean="dataSource"/></property>
+	</bean>
+	<!--事务管理器配置，单数据源事务-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!--使用annotation定义事务-->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+</beans>
+--------------
+ibatis-config.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings useStatementNamespaces="true"></settings>
+	<sqlMap resource="/ibatis/gazelle/account/user.xml"></sqlMap>
+</sqlMapConfig>
+------------
+user.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "sql-map-2.dtd">
+<sqlMap namespace="user">
+	<typeAlias alias="User" type="com.neusoft.gazelle.core.entity.account.User"/>
+	<resultMap id="user_result" class="User">
+		<result property="id" column="c_user_id"/>
+		<result property="loginName" column="c_login_name"/>
+		<result property="password" column="c_pwd"/>
+		<result property="name" column="c_name"/>
+	</resultMap>
+	<insert id="addUser" parameterClass="User">
+		insert into t_gz_user(c_login_name,c_pwd,c_name,c_user_id,c_deleted)
+		values(#loginName#,#password#,#name#,#id#,0)
+	</insert>
+</sqlMap>
+------------
+index.jsp:
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<html>
+	<a href="${ctx}/helper/loginx.action">aaax</a>
+</html>
+------------
+LoginxAction.java:
+package com.cpic.action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.opensymphony.xwork2.ActionSupport;
+import com.service.tree.TreService;
+@Namespace("/helper")
+public class LoginxAction extends ActionSupport{
+	@Autowired
+	private TreService service;
+	public String execute()throws Exception{
+		System.out.println("xxx");
+		service.add();
+		return null;
+	}
+}
+------------
+TreService.java:
+package com.service.tree;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.neusoft.gazelle.core.entity.account.User;
+import com.neusoft.gazelle.core.service.BaseService;
+@Transactional
+@Service
+public class TreService extends BaseService{
+	public void add(){
+		System.out.println("jijiji");
+		User user=new User();
+		user.setId(123);
+		user.setLoginName("123");
+		user.setPassword("123");
+		user.setName("123");
+		this.getDao().insert("user.addUser",user);
+	}
+}
+
+--------------
+BaseService.java:
+package com.neusoft.gazelle.core.service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import org.springframework.stereotype.Service;
+import com.neusoft.gazelle.core.dao.BaseDao;
+@Service
+public class BaseService{
+	private BaseDao dao;
+	
+	public SqlMapClientTemplate getDao(){
+		return dao.getSqlMapClientTemplate();
+	}
+	@Autowired
+	public void setDao(BaseDao ibasedao) {
+		this.dao = ibasedao;
+	}
+}
+------------
+BaseDao.java:
+package com.neusoft.gazelle.core.dao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.springframework.stereotype.Service;
+import com.ibatis.sqlmap.client.SqlMapClient;
+@Service
+public class BaseDao extends SqlMapClientDaoSupport{
+	@Autowired
+	public void setSqlMapClientBase(SqlMapClient sqlMapClient){
+		super.setSqlMapClient(sqlMapClient);
+	}
+}
+-----------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

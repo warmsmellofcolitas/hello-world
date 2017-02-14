@@ -1,0 +1,1 @@
+Console->反键->Preferences->去掉Limit console output前面的勾

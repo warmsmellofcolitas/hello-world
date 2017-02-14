@@ -1,0 +1,33 @@
+maven3安装：
+1.网上下载apache-maven-3.1.0.zip包
+2.解压后我放在E:\apache-maven-3.1.0
+3.配置maven环境变量：
+    MAVEN_HOME=E:\apache-maven-3.1.0
+    path=E:\apache-maven-3.1.0\bin
+4.测试是否安装成功: 
+    打开cmd，在里面敲：mvn -version ，看到与版本信息就是成功
+5.修改maven仓库存放位置：
+    找到maven下的conf下的settings.xml配置文件，我的是在E:\apache-maven-3.1.0\conf\settings.xml
+    <localRepository>E:/maven/repo</localRepository>
+    maven的仓库默认是放在本地用户的临时文件夹下面的.m2文件夹下的repository下
+6.先来体会一下maven，在 cmd 中敲并回车执行：mvn help:system,这时候maven就会从远程仓库开始下载一大堆的东西，没事，让它下载着，迟早都要下载的，
+    接下来是在eclipse 中安装maven插件
+7.离线安装 eclipse maven插件
+8.检查 eclipse 的 maven 插件是否安装成功：
+    Window-->Preferences-->Maven
+9.配置maven：
+    Window-->Preferences-->Maven-->Installating-->Add-->选到你本机安装maven的路径值E:\apache-maven-3.1.0-->勾中刚才创建的-->Ok
+    Window-->Preferences-->Maven-->User Setting-->Browse-->选到你maven的setting.xml配置文件E:\apache-maven-3.1.0\conf\settings.xml-->Ok
+10.完成
+---------------
+
+
+
+
+
+
+
+
+
+
+

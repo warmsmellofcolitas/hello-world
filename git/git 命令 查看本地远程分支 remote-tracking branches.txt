@@ -1,0 +1,8 @@
+远程跟踪分支(Remote-tracking branches)，当你输入“git branch -r”是显示的，如: 
+       $ git branch -r
+       cognac/master
+       fruitfly/server
+       origin/albert
+       origin/ant
+       origin/contrib
+       origin/cross-compile

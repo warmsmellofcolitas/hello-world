@@ -1,0 +1,1 @@
+File->Settings->General->Project Opening->นดัก Open project in new window

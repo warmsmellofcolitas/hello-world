@@ -1,0 +1,6 @@
+<set name="emps">
+	<key column="dept_id"/>  指明外键
+	<one-to-many class="com.mipo.vo.Employee"/> 表示一对多关系，集合中存放的是Employee对象
+</set>
+
+配置一对多的时候因为需要用到外键，所以必须也要配置多对一

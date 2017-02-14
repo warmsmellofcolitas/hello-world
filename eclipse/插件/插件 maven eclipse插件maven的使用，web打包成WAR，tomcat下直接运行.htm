@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>eclipse插件maven的使用，web打包成WAR，tomcat下直接运行 - 程序员部落</title>
+<meta name="keywords" content="eclipse,maven,tomcat,war" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link href="http://www.cxybl.com/style/content.css" rel="stylesheet" media="screen" type="text/css" />
+</head>
+<body>
+<div id="area">
+  <div class="adstyle">
+    <script src='http://www.cxybl.com/ad/myad-23.htm' language='javascript'></script>
+</div>
+<div class="pagebody listpage contentpage">
+  <div class="row1">
+    <div class="col_1">
+      <div class="brd1_box">
+        <div class="cons">
+    <div class="tit_box">
+      <h3>eclipse插件maven的使用，web打包成WAR，tomcat下直接运行</h3>
+            	
+            </div>
+    <div class="content_box">
+                <div id="contexts" class="content_block">
+                  <p>
+	首先下载maven&nbsp; 其下载地址为：http://maven.apache.org/download.html&nbsp;&nbsp; 下载apache-maven-3.0.3-bin.zip</p>
+<p>
+	环境变量配置为&nbsp; 变量名m2&nbsp;&nbsp; 值为%M2_HOME%\bin&nbsp;&nbsp; 变量名为M2_HOME&nbsp;&nbsp; 值为C:\Program Files\apache-maven-3.0.3&nbsp;&nbsp;&nbsp; 在变量名path里添加&nbsp; %M2%</p>
+<p>
+	然后启动eclipse ，在help 里选择install new software 在里面 在URL上输入 http://m2eclipse.sonatype.org/sites/m2e/</p>
+<p>
+	然后重新启动eclipse</p>
+<p>
+	点击new project&nbsp;&nbsp; 选择others&nbsp;&nbsp; 点marven&nbsp; 在里面选择marven project ，如果创建WEB项目就选择 marven-archetype-webapp&nbsp;&nbsp; 接着后面输入 ，自己看着办。</p>
+<p>
+	创建项目后 ，在项目的web.xml中加入如下</p>
+<p>
+	代码&lt;welcome-file-list&gt;<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;<br />
+	&nbsp;&nbsp;&nbsp; &lt;/welcome-file-list&gt;</p>
+<p>
+	点run as 中的marven package 。 将项目生成war文件，然后将该文件拷贝到tomcat的webapps文件下，在tomcat的bin目录下点击startup.dos文件启动tomcat,然后在浏览器上输入http://localhost:8080/项目名/</p>
+<p>
+	然后页面会显示Hello Word!</p>
+</div>
+            </div>
+          </div>
+      </div>
+    </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

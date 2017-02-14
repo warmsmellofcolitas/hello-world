@@ -1,0 +1,93 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/taglib/c.tld" prefix="c" %>
+<%@ page isELIgnored="false"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+  	<title>中国电信融合支付综合管理系统</title>
+	<link rel="stylesheet" type="text/css" href="resources/plugins/ext3/resources/css/ext-all.css" />
+ 	<script type="text/javascript" src="resources/plugins/ext3/ext-base.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ext-all.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ux/TabCloseMenu.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+  	<script type="text/javascript" src="resources/js/PwMenu.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	// 下面是从后台传过的josn数组
+	var jsondata = [{"id":"12","text":"网关对账","leaf":"查询成功"}]; // 此处json必须表示成Array数组，一个也要表示成只有一个json对象的数组，否则会出错
+	// Http获取json数据
+	var store = new Ext.data.Store({
+	  	proxy : new Ext.data.HttpProxy({url:'rightfunction.do?method=getTreesByUserId&belongs=1&parent_id=00000000'}), //http数据源
+	   reader : new Ext.data.JsonReader({},['id','text','leaf']),
+		autoLoad : true // 自动加载，相当于在最后面写的被注释的代码store.load()
+	});
+	store.on('load', function(store,records){ // 加载完之后的动作，就是在store.load()之后的操作动作
+		alert("-------------");
+		alert(records.length); // 得到从后台传过来的json数组的长度
+		alert(records[0].data.leaf); // 得到从后台传过的json数组第一组的键为leaf的value 
+		alert(records[0].data.text); // 得到从后台传过的json数组第一组的键为test的value
+		alert(records[0].data.id); // 得到从后台传过的json数组第一组的键为id的value
+		alert("-------------");
+ 	   alert(store.getAt(0).get("id")); // 得到从后台传过来的json数组的第一组键为id的value
+ 		alert(store.getAt(0).get("text")); // 得到从后台传过来的json数组的第一组键为text的value
+ 		alert(store.getAt(0).get("leaf")); // 得到从后台穿过来的json数组的第一组键为leaf的value
+	});
+});
+</script>
+</head>
+<body>
+</body>
+</html>
+-----------------------------
+package com.mipo;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang.ArrayUtils;
+
+import fuck.CmbFastPayMessage;
+import fuck.ReceiverA;
+import fuck.SenderA;
+import fuck.Util;
+
+public class Abc extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("hhh");
+		response.setCharacterEncoding("UTF-8");
+		String s = request.getParameter("parent_id");
+		String res = "[{\"id\":\"12\",\"text\":\"网关对账\",\"leaf\":\"查询成功\"}]"; // 此处json必须表示成Array数组，一个也要表示成只有一个json对象的数组，否则传到ext.data.Stroe的JsonReader解析不了
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(res);
+		pw.flush();
+      System.out.println(s);
+      System.out.println("KKKK");
+	}
+}

@@ -1,0 +1,5 @@
+修改编辑器中的代码字体方法：
+Editor - Colors&Fonts,
+首先另存为一份，名称随意，我起的名字是MyDarculaConfig.
+然后在左侧树中找到Font,将Name修改为Courier New,Line spacing设置为1.2即可.
+另外还可以设置console font，我的console font设置与font设置相同 

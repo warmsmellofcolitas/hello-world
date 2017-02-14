@@ -1,0 +1,44 @@
+﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/taglib/c.tld" prefix="c" %>
+<%@ page isELIgnored="false"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+  	<title>中国电信融合支付综合管理系统</title>
+	<link rel="stylesheet" type="text/css" href="resources/plugins/ext3/resources/css/ext-all.css" />
+ 	<script type="text/javascript" src="resources/plugins/ext3/ext-base.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ext-all.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ux/TabCloseMenu.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+  	<script type="text/javascript" src="resources/js/PwMenu.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.onReady(function() {
+		new Ext.Viewport({
+			layout:'border', // border边界布局，将页面分成东西南北中五个部分
+			items:[
+				{region:'north',html:'north',height:80,split:true}, // border布局使用region来指定具体的存放位置，north是北，即上面，north和south只能设置height属性(高度)，对north和south设置split属性，只能上下拖动
+				{region:'south',html:'south',height:80}, // north和south只能设置height属性(高度)
+				{region:'east',html:'east',width:80}, // west和east只能设置width属性(宽度)
+				{region:'west',html:'west',width:80,split:true,minSize:70,maxSize:120,title:'west',collapsible:true}, // west和east只能设置width属性(宽度)，对west和east设置split属性，只能左右拖动，minSize:70,maxSize:120设置可拖动的区域，只能拖到离左边的距离为70-120，通过设置minSize和maxSize来控制拖动的最小、最大长度，主要是配置collapsible属性。collapsible属性激活了west区域的折叠功能，不过要注意的是title属性是必须要设置的，因为折叠按钮是出现在title上的。如果没有title那折叠按钮是不会出现的
+				{region:'center',html:'center'} // center不能设置大小，它是根据其他四块设置好后，自动计算出来的，它是唯一一个不能省略的部分，如果items里缺少region:'center'，就会报错
+			]
+			});
+	});
+});
+</script>
+</head>
+<body>
+</body>
+</html>
+
+---------------------
+border布局：border布局也称边界布局，他将页面分隔为west,east,south,north,center这五个部分，我们需要在在其items中指定使用region参数为其子元素指定具体位置。  
+注意：north和south部分只能设置高度（height），west和east部分只能设置宽度（width）。north south west east区域变大，center区域就变小了。  
+参数 split:true 可以调整除了center四个区域的大小。  参数 collapsible:true 将激活折叠功能， title必须设置，因为折叠按钮是出现标题部分的。  
+center 区域是必须使用的，而且center 区域不允许折叠。Center区域会自动填充其他区域的剩余空间。尤其在Extjs4.0中，当指定布局为border时，没有指定center区域时，
+会出现报错信息。
+

@@ -1,0 +1,264 @@
+在freemarker的模板文件中调用自定义的方法
+freemarker
+现有的一些内置函数不能满足我们的需求，这些内置函数包括：chunk, is_date, last, root, j_string,
+contains, is_hash, long, float, ends_with, namespace, matches, time,
+values, seq_last_index_of, uncap_first, byte, substring, is_transform,
+web_safe, groups, seq_contains, is_macro, index_of, word_list, int,
+is_method, eval, parent, xml, number, capitalize, if_exists, rtf,
+node_type, double, is_directive, url, size, default, is_boolean, split,
+node_name, is_enumerable, seq_index_of, is_sequence, sort, is_node,
+sort_by, left_pad, cap_first, interpret, children, node_namespace,
+chop_linebreak, date, short, last_index_of, is_collection, ancestors,
+length, trim, datetime, is_string, reverse, c, keys, upper_case,
+js_string, has_content, right_pad, replace, is_hash_ex, new, is_number,
+is_indexable, lower_case, string, exists, html, first, starts_with
+但freemarker可以自定义方法来达到这一目的：实现的步骤为：
+---------------------------------------------------------------
+与spring集成的例子:
+web.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:spring-beans.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>front</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/front-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>front</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>front</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+</web-app>
+
+front-servlet.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd" default-lazy-init="true">
+
+	<context:component-scan base-package="com.mipo.xpe" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
+	</context:component-scan>
+
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPaths" value="classpath:views,/template/,/WEB-INF/ftl/" />
+		<property name="preferFileSystemAccess" value="false" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="default_encoding">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="false" />
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="attributesMap" >
+			<map>
+				<entry key="FastJsonUtil"><bean class="com.mipo.xpe.FastJsonUtil" /></entry>
+				<entry key="PropertiesUtils"><bean class="com.mipo.xpe.PropertiesUtils" /></entry>
+			</map>
+		</property>
+	</bean>
+	<mvc:annotation-driven />
+</beans>
+
+spring-beans.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+	default-lazy-init="true">
+
+	<context:component-scan base-package="com.mipo.xpe">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController" />
+	</context:component-scan>
+</beans>
+
+/WEB-INF/ftl/hello.ftl:
+<#assign securityName = PropertiesUtils.getPro("nihao") >
+${securityName}<#-- 输出:xxxx -->
+hello
+${FastJsonUtil.toJSONString(user)}<#-- 输出:{"age":10,"id":"1","name":"李四"} -->
+
+package com.mipo.xpe;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+@Controller
+public class HelloAction {
+	public HelloAction() {
+		System.out.println("ssssssssss");
+	}
+	@RequestMapping("hello")
+	public String hello(Model model, HttpServletRequest request){
+		System.out.println("hhhh");
+		User user = new User();
+		user.setId("1");
+		user.setName("李四");
+		user.setAge(10);
+		model.addAttribute("user", user);
+		return "hello";
+	}
+	@RequestMapping("world")
+	public String helloworld(Model model){
+		model.addAttribute("username", "李四");
+		return "world";	
+	}
+}
+
+package com.mipo.xpe;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.JSONLibDataFormatSerializer;
+import com.alibaba.fastjson.serializer.SerializeConfig;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+public class FastJsonUtil {
+	private static final SerializeConfig config;
+	private static final SerializerFeature[] features = {
+		SerializerFeature.WriteMapNullValue, // 输出空置字段
+		SerializerFeature.WriteNullListAsEmpty, // list字段如果为null，输出为[]，而不是null
+		SerializerFeature.WriteNullNumberAsZero, // 数值字段如果为null，输出为0，而不是null
+		SerializerFeature.WriteNullBooleanAsFalse, // Boolean字段如果为null，输出为false，而不是null
+		SerializerFeature.WriteNullStringAsEmpty, // 字符类型字段如果为null，输出为""，而不是null
+		SerializerFeature.DisableCircularReferenceDetect};
+	static {
+		config = new SerializeConfig();
+		config.put(java.util.Date.class, new JSONLibDataFormatSerializer()); // 使用和json-lib兼容的日期输出格式
+		config.put(java.sql.Date.class, new JSONLibDataFormatSerializer()); // 使用和json-lib兼容的日期输出格式 }
+	};
+	public static String toJSONString(Object o) {
+		System.out.println("uuuuuuu");
+		return JSON.toJSONString(o, config, features);
+	}
+}
+
+package com.mipo.xpe;
+public class PropertiesUtils {
+	public static String getPro(String key){
+		System.out.println("haha,"+key);
+		return "xxxx";
+	}
+}
+
+package com.mipo.xpe;
+public class User {
+	private String id;
+	private String name;
+	private int age;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+---------------------------------------------------------------
+不与spring集成的例子:
+
+实现的步骤为：
+写一个类继承TemplateMethodModel
+
+package cn.com.leadfar.struts2.freemarker;
+import java.util.List;
+import freemarker.template.TemplateMethodModel;
+import freemarker.template.TemplateModelException;
+public class TruncateTemplateMethodModel implements TemplateMethodModel {
+	@Override
+    public Object exec(List arguments) throws TemplateModelException {
+        return arguments.get(0).toString().substring(0,1);
+    }
+}
+
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("bbb.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("truncate",new TruncateTemplateMethodModel());
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>insert title here</title>
+	</head>
+	<body>
+		${truncate("abc")} <#-- 输出:a -->
+	</body>
+</html>
+
+
+
+
+
+
+

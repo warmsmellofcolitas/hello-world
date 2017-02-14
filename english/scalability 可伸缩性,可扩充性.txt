@@ -1,0 +1,2 @@
+On a modern system,there are some trades between speed and scalability.
+对于一个现代系统来说,人们会在速度和可扩展性上做一些平衡.

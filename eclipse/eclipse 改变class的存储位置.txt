@@ -1,0 +1,3 @@
+java编译成class文件默认存放在build文件夹里
+必须改为classes目录下
+项目反键->java build path->Properties->source->default output folder

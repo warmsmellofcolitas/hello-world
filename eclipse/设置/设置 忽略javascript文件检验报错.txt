@@ -1,0 +1,22 @@
+Eclipse去掉js错误校验
+去掉.project文件中的以下部分：
+<buildCommand>
+    <name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
+     <arguments></arguments>
+</buildCommand>
+和
+<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+------------------------------
+忽略某个js文件报错的方法：
+Project Properties > JavaScript > Include Path > Source > 选中Exclude > 点击edit按钮 > 在下面的 Exclusion patterns 中添加对应的文件。
+-----------------------------
+1.右单击工程属性
+2.选择JavaScript下的include菜单
+3.选择SOURCE标签
+4.展开菜单
+5.选择Excluded
+6.点击edit按钮
+7.在新对话框中点击add按钮
+8.找到需要排除的javascript文件
+
+

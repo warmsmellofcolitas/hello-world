@@ -1,0 +1,117 @@
+package com.cmbc.payagent;
+import java.io.IOException;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.lang.StringUtils;
+
+public class Test2 {
+    public static void main(String[] args) throws Exception {
+   	 	zhuanzhang();
+    }
+    public static void zhuanzhang() throws Exception {
+   	StringBuffer message = new StringBuffer(); // 报文
+       	message.append("<?xml version=\"1.0\" encoding=\"GBK\"?>");
+       	message.append("<Transaction>");
+       	message.append("<SystemHead>"); // 系统信息头开始
+       	message.append("<Language>zh_CN</Language>"); // 语言
+       	message.append("<Encodeing></Encodeing>"); // 编码
+       	message.append("<Version></Version>");  // 版本
+       	message.append("<ServiceName></ServiceName>"); // 服务名
+       	message.append("<CifNo>2006413533</CifNo>");  // Cif号，相当于商户号
+       	message.append("<UserID>0006</UserID>"); // 用户ID
+       	message.append("<SyMacFlag></SyMacFlag>"); // 系统mac标识
+       	message.append("<MAC></MAC>"); // mac
+       	message.append("<SyPinFlag></SyPinFlag>"); // 系统pin标识
+       	message.append("<PinSeed></PinSeed>"); // pin
+       	message.append("<LicenseId></LicenseId>"); // 认证ID
+       	message.append("<Flag></Flag>"); // 标识
+       	message.append("<Note></Note>"); // 备注
+       	message.append("</SystemHead>"); // 系统信息头结束
+       	message.append("<TransHead>"); // 报文头开始
+       	message.append("<TransCode>b2e004007</TransCode>"); // 交易码，是
+       	message.append("<BatchID>30038556452006121900000019</BatchID>"); // 交易流水号, 上送报文为BatchID防止重复提交用，是，具体格式建议：企业10位客户号+八位日期+八位顺序号，如：20038556452006121800000001
+       	message.append("<JnlDate>20140903</JnlDate>"); // 请求日期，是，YYYYMMDD
+       	message.append("<JnlTime>113034</JnlTime>"); // 请求时间，是，HH24MISS
+       	message.append("</TransHead>"); // 报文头结束
+       	message.append("<TransContent>"); // 报文体开始
+       	message.append("<ReqData>");
+       	message.append("<ClientPatchID>311485564520061251000000190008</ClientPatchID>"); // 客户端批内序号/客户交易号，是，具体格式建议：批次号+四位顺序号
+       	message.append("<transferType>2120</transferType>"); // 转账类型，是，转帐类型（行内转账2122/对外转帐2120）
+       	message.append("<accountNo>75010188000067388</accountNo>"); // 帐户号，是，光大银行账户，17或者21位数字，转出账号
+       	message.append("<perOrEnt>1</perOrEnt>"); // 收款账户对公对私标志，是，0对公 1对私
+       	message.append("<toAccountName>乔张奇</toAccountName>"); // 汇入帐户名称/收款人帐户名称，是，收款账户名称
+       	message.append("<toAccountNo>6217680200662471</toAccountNo>"); // 汇入帐户号/收款人帐户号，是，收款账号
+       	message.append("<toBank>中信银行股份有限公司</toBank>"); // 收报行名称，否，行外转帐要使用该数据项，行外转账时为必输,对公转账好像可以乱填？？
+       	message.append("<bankNo>302100011000</bankNo>"); // 收报行行号，否，行外必输
+       	message.append("<amount>0.01</amount>"); // 交易金额/发生额，是
+       	message.append("<note>转账</note>"); // 转账用途，是，公转私转账用途有限制，需参考对公网银公转私转账用途
+       	message.append("</ReqData>");
+       	message.append("</TransContent>"); // 报文体结束
+       	message.append("</Transaction>");
+       	System.out.println("发送给中国光大银行的报文为：" + message);
+       	String response = send(message.toString());
+    }
+    public static String send (String requestData) throws Exception {
+   	 return send3 (requestData, "http://localhost/xxx/bbb");
+    }
+    public static String send3 (String signData, String url) {
+       try {
+           HttpClient httpClient = new HttpClient();
+           PostMethod post = new PostMethod(url);
+           post.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "GBK"); // 设置编码
+           post.setRequestEntity(new ByteArrayRequestEntity(signData.getBytes("GBK")));
+           int result = 0;
+           System.out.println("向银行发送请求");
+           result = httpClient.executeMethod(post);
+           byte[] signBytes = post.getResponseBody();
+           String resXml = new String(signBytes, "GBK");
+           System.out.println("相应码为:{},返回报文为:{}"+result+resXml);
+           if (200 == result && !StringUtils.isEmpty(resXml)) {
+               System.out.println("银行响应成功，响应报文：{}"+ resXml);
+               System.out.println(resXml);
+               return resXml;
+           } else {
+               System.out.println("银行相应失败,相应码为:{},返回报文为:{}"+ result+ resXml);
+           }
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       return "";
+   }
+}
+--------------------------------------------
+package com.mipo;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class HttpClientSo extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("doget");
+		InputStream is = req.getInputStream();
+		byte[] data = new byte[1024];
+		int len = is.read(data);
+		String msg = new String(data,"GBK");
+		System.out.println("msg:"+msg);
+		
+		resp.getWriter().write("haha");
+		resp.getWriter().flush();
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+	
+}
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+ Html标签<a>的target属性
+
+target属性规定了在何处打开超链接的文档。
+
+如果在一个 <a> 标签内包含一个 target 属性，浏览器将会载入和显示用这个标签的 href 属性命名的、名称与这个目标吻合的框架或者窗口中的文档。如果这个指定名称或 id 的框架或者窗口不存在，浏览器将打开一个新的窗口，给这个窗口一个指定的标记，然后将新的文档载入那个窗口。从此以后，超链接文档就可以指向这个新的窗口。
+
+<html>
+<body>
+
+<h3>Table of Contents</h3>
+<ul>
+  <li><a href="/example/html/pref.html" target="bodyFrame">Preface</a></li>
+  <li><a href="/example/html/chap1.html" target="view_window">Chapter 1</a></li>
+  <li><a href="/example/html/chap2.html" target="view_window">Chapter 2</a></li>
+  <li><a href="/example/html/chap3.html" target="view_window">Chapter 3</a></li>
+</ul>
+<iframe id="bodyFrame" name="bodyFrame" frameborder="0"></iframe>
+</body>
+</html>
+特殊的目标
+
+有 4 个保留的目标名称用作特殊的文档重定向操作：
+_blank
+
+浏览器总在一个新打开、未命名的窗口中载入目标文档。
+_self
+
+这个目标的值对所有没有指定目标的 <a> 标签是默认目标，它使得目标文档载入并显示在相同的框架或者窗口中作为源文档。这个目标是多余且不必要的，除非和文档标题 <base> 标签中的 target 属性一起使用。
+_parent
+
+这个目标使得文档载入父窗口或者包含来超链接引用的框架的框架集。如果这个引用是在窗口或者在顶级框架中，那么它与目标 _self 等效。
+_top
+
+这个目标使得文档载入包含这个超链接的窗口，用 _top 目标将会清除所有被包含的框架并将文档载入整个浏览器窗口。
+
+
+---------------------------------------
+target="_blank" 新窗口打开
+target="_parent" 父窗口打开
+target="_self" 自身窗口打开
+
+也可以是框架中的名字
+target="aa" 将在框架中name=“aa”的框架页打开
+---------------------------------------
+ <ul class="uu">
+                    <li><a class="ad_pic" href="http://www.zhibo8.com" target="_blank"><img src="static/theme1/images/ad_default_03.jpg"/></a></li>
+                    <li><a class="ad_pic" href="http://www.zhibo8.com" target="_blank"><img src="static/theme1/images/ad_default_02.jpg"/></a></li>
+                    <li><a class="ad_pic" href="http://www.zhibo8.com" target="_blank"><img src="static/theme1/images/ad_default_01.jpg"/></a></li>
+</ul>

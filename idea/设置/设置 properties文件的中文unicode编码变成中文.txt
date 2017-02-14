@@ -1,0 +1,1 @@
+File -> Settings -> File Encodings -> Default encoding for properties files:UTF-8 -> นดัก Transparent native-to-ascii conversion -> OK

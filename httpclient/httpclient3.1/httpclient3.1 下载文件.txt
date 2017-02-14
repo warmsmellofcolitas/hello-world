@@ -1,0 +1,52 @@
+package sql;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.PostMethod;
+
+/**
+ * 下载多媒体文件
+ * 
+ * @author lijie
+ * @date 2014-11-27
+ */
+
+public class Main4 {
+	public static void main(String[] args) throws Exception  {
+		 send(null);
+	}
+	
+	/**
+    * 银行调用发送
+    */
+   public static String send(byte[] requestData) throws Exception {
+       System.out.println("银行路由--工具类--进入");
+       HttpClient httpclient = new HttpClient();
+       PostMethod method = new PostMethod("http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=GOAJegfQuW9bU8PdGVnFxjVo-f9zVseMfu7gwfCMwveoIbq8V6pNJGVOKeN19MrpDzuSevIU45Aunkw9xYOXCz3WMvFsmGZCvIuIRYJCpiQ&media_id=TPHOgHNndaKQa4xqnRCIGCfSAvx4kUrN5-VMGfLGVym8rB5kEvumugCA5kw7PakP");
+//       NameValuePair[] params = {new NameValuePair("ip","15.30.6.21"),new NameValuePair("port","9134"),new NameValuePair("message",requestDataStr)};
+//       method.setRequestBody(params);
+       httpclient.executeMethod(method);
+       InputStream is = method.getResponseBodyAsStream();
+       byte[] sss = new byte[1024*100];
+       int len = is.read(sss);
+       ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+ 		 outStream.write(sss, 0, len);
+ 		 byte[] bs = outStream.toByteArray();
+       File f = new File("D:/abc.jpg");
+       f.createNewFile();
+       OutputStream os = new FileOutputStream(f);
+       os.write(bs);
+       os.flush();
+       os.close();
+       String value = method.getResponseBodyAsString();
+       method.releaseConnection(); // 释放连接
+       System.out.println("银行路由--工具类--从银行返回的字节数组转换成十六进制的字符串为：" + value);
+       return "";
+   }
+}

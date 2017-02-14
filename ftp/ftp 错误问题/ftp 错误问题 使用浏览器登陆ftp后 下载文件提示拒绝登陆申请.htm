@@ -1,0 +1,545 @@
+<head>
+<title>使用浏览器登陆ftp后 下载文件提示拒绝登陆申请-红联Linux系统门户</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="keywords" content="使用浏览器登陆ftp后 下载文件提示拒绝登陆申请">
+<meta name="description" content="红联Linux系统门户为广大linux用户解读：使用浏览器登陆ftp后 下载文件提示拒绝登陆申请 -  - Linux通用技术 - Linux技术与应用信息，下面是详情阅读。">
+<link href="http://www.linuxdiyf.com/rss.php" title="RSS" type="application/rss+xml" rel="alternate" >
+<style type="text/css">
+<!--
+body,td,th {
+font-size: 12px;
+font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+body {
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 0px;
+}
+a:link
+{
+color: #22229C;text-decoration: none;
+}
+a:visited
+{
+color: #22229C;text-decoration: none;
+}
+a:hover, a:active
+{
+color: #FF4400;
+}
+textarea,input,object	{ 
+font-size: 12px;
+font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+h1{
+ font-size:20px;
+ margin:0;
+ padding:0;
+}
+h2 {font-size: 12px;font-weight:normal;display : inline}
+select { font-size: 11px;}
+img {border:0;}
+.style1 {color: #FFFFFF}
+.big {font-size: 14px;}
+.name {font-size: 24px; line-height: 34px; font-weight: bold; color:red}
+.title {  font-size: 20px; line-height: 32px; font-weight: bold}
+.message {font-size: 14px;line-height: 24px;}
+.quotetop {width:100%;margin:0px auto 0px auto;font-weight:bold;color:#000000; }
+.quotemain {width:100%;border:1px inset #DDDDDD;padding:5px;margin:0px auto 8px auto;color:#465584;background-color:#FFFFFC; font-family:Courier New; }
+.codetop {width:100%;margin:0px auto 0px auto;font-weight:bold;color:#000000; }
+.codemain {width:100%;border:1px inset #DDDDDD;padding:5px;margin:0px auto 8px auto;color:#465584;background-color:#E9F1F8; font-family:Courier New; }
+td {
+font-size: 12px;
+font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+td {
+font-size: 12px;
+font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+td {
+font-size: 12px;
+font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+.title {  font-size: 20px; line-height: 32px; font-weight: bold}
+.title {  font-size: 20px; line-height: 32px; font-weight: bold}
+.message {font-size: 14px;line-height: 24px;}
+.message {font-size: 14px;line-height: 24px;}
+-->
+</style>
+<SCRIPT language=JavaScript> 
+<!--
+function checkAll(str,checked) {
+    var a = document.getElementsByName(str);
+    var n = a.length;
+
+    for (var i = 0; i < n; i++) {
+        a[i].checked = checked;
+    }
+    em_size(str);
+}
+
+function download(str, i, first) {
+    var a = document.getElementsByName(str);
+    var n = a.length;
+
+    for (var i = i; i < n; i++) {
+        if(a[i].checked) {
+            window.location=a[i].value;
+            if (first)
+                timeout = 6000;
+            else
+                timeout = 500;
+            i++;
+            window.setTimeout("download('"+str+"', "+i+", 0)", timeout);
+            break;
+        }
+    }
+
+}
+
+function copy(str) {
+    var a = document.getElementsByName(str);
+    var n = a.length;
+    var ed2kcopy = document.getElementById("ed2kcopy_"+str)
+    ed2kcopy.innerHTML = ""
+    for (var i = 0; i < n; i++) {
+        if(a[i].checked)
+        {
+            ed2kcopy.innerHTML += a[i].value;
+            ed2kcopy.innerHTML += "<br />";
+        }
+    }
+        var rng = document.body.createTextRange();
+        rng.moveToElementText(ed2kcopy)
+        rng.scrollIntoView();
+        rng.select();
+        rng.execCommand("Copy");
+        rng.collapse(false);
+}
+
+function em_size(str) {
+    var a = document.getElementsByName(str);
+    var n = a.length;
+    try {
+        var input_checkall = document.getElementById("checkall_"+str);
+        var size = 0;
+        input_checkall.checked = true ;
+        for (var i=0; i < n; i++) {
+            if (a[i].checked) {
+                var piecesArray = a[i].value.split( "|" );
+                size += piecesArray[3]*1;
+            } else {
+                input_checkall.checked = false;
+            }
+        }
+        test = document.getElementById("size_"+str);
+        test.innerHTML = gen_size(size, 3, 2);
+    } catch (e) {
+
+    }
+}
+
+function gen_size(val, li, sepa ) {
+    sep = Math.pow(10, sepa); //小数点后的位数
+    li = Math.pow(10, li); //开始截断的长度
+    retval  = val;
+    unit    = 'Bytes';
+    if (val >= li*1000000000) {
+        val = Math.round( val / (1099511627776/sep) ) / sep;
+        unit  = 'TB';
+    } else if (val >= li*1000000) {
+        val = Math.round( val / (1073741824/sep) ) / sep;
+        unit  = 'GB';
+    } else if (val >= li*1000) {
+        val = Math.round( val / (1048576/sep) ) / sep;
+        unit  = 'MB';
+    } else if (val >= li) {
+        val = Math.round( val / (1024/sep) ) / sep;
+        unit  = 'KB';
+    }
+    return val + unit;
+}
+//-->
+</SCRIPT>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+</head>
+
+
+<body>
+
+<div align="center">
+<table width="960" border="1" cellpadding="0" cellspacing="0" height="19" bordercolor="#BCD0ED">
+<tr>
+<td height="19" bgcolor="#E9F1F8" width="753" style="font-size: 12px; font-family: Geneva, Arial, Helvetica, sans-serif">
+</font>　<b><a href="http://www.linuxdiyf.com/"><font color="#000000">红联linux</font></a></b>　<a href="http://www.linuxdiyf.com/articlelist.php?id=2"><font color="#000000">Linux通用技术</font></a> - 
+<a href="http://www.linuxdiyf.com/articlelist.php?id=47">
+<font color="#000000">Linux发行版技术</font></a> - 
+<a href="http://www.linuxdiyf.com/articlelist.php?id=15">
+<font color="#000000">企业应用</font></a> - 
+<a href="http://www.linuxdiyf.com/articlelist.php?id=12">
+<font color="#000000">实验室</font></a></td>
+<td height="19" bgcolor="#E9F1F8" width="205" style="font-size: 12px; font-family: Geneva, Arial, Helvetica, sans-serif">
+　<a target="_blank" href="http://www.linuxdiyf.com/bbs/"><font color="#000000">Linux论坛</font></a></td>
+</tr>
+</table>
+<table width="960" border="0" cellpadding="0" cellspacing="0" height="100" bgcolor="#FFFFFF">
+<tr>
+<td align="center" bgcolor="#FFFFFF" style="font-size: 12px; font-family: Geneva, Arial, Helvetica, sans-serif" width="192">
+<p align="left">
+<a href="http://www.linuxdiyf.com/">
+<img border="0" src="http://www.linuxdiyf.com/bbs/images/default/hllinuxlogo.gif" width="189" height="66"></a></td>
+<td align="center" bgcolor="#FFFFFF" style="font-size: 12px; font-family: Geneva, Arial, Helvetica, sans-serif" width="761"><script type="text/javascript">BAIDU_CLB_fillSlot("396765");</script></td>
+</tr>
+</table>
+</div>
+
+<table width="960"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="70" height="30">您的位置：</td>
+    <td nowrap><a href="http://www.linuxdiyf.com/">红联linux</a> &gt;&gt; <a href=http://www.linuxdiyf.com/articlelist.php?id=2>Linux通用技术</a> &gt;&gt; <h2><a href=http://www.linuxdiyf.com/articlelist.php?id=3>Linux技术与应用</a></h2> &gt;&gt; 查看内容 －<a target="_blank" href="http://www.linuxdiyf.com/viewarticle.php?id=398798">学Linux必读</a> －<a target="_blank" href="http://www.linuxdiyf.com/viewarticle.php?id=405283">Linux学习教程推荐下载</a> －<b><a href="http://www.linuxdiyf.com/bbs/post.php?action=newthread&fid=45" rel="nofollow">发新话题 (游客可发贴)</a></b></td>
+  </tr>
+</table>
+
+<table width="960"  border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td bgcolor="#FFFFFF">
+
+<SCRIPT language=JavaScript>
+function dozoom(size){
+document.getElementById('zoom').style.fontSize=size+'px'
+}
+</SCRIPT>
+
+<script type="text/javascript">BAIDU_CLB_fillSlot("396758");</script><br><script type="text/javascript">/*linux*/ var cpro_id = 'u795372';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
+<table width="960"  border="0" align="center" cellpadding="0" cellspacing="0">
+<tr>
+  <td height="1" valign="top"></td>
+  <td height="1"></td>
+  <td width="1" height="1" valign="top" bgcolor="#648EB2"></td>
+  <td height="1" valign="top" bgcolor="#648EB2"></td>
+  <td width="1" height="1" valign="top" bgcolor="#648EB2"></td>
+</tr>
+<tr>
+<td valign="top">
+
+
+<table width="100%"  border="0" cellpadding="0" cellspacing="1" bgcolor="#648EB2">
+<tr>
+<td bgcolor="#F9F9F9">
+<table width="100%"  border="0" cellpadding="4" cellspacing="4">
+
+<tr><td class="title" align="center"><h1>使用浏览器登陆ftp后 下载文件提示拒绝登陆申请</h1></td></tr>
+<tr><td align="center" height="1" bgcolor="#C0C0C0"></td></tr>
+
+<tr>
+<td align="center">消失的光年发布于 
+2011-4-20 | 
+<script language="JavaScript" type="text/JavaScript" src="http://www.linuxdiyf.com/function.php?action=view&tid=196849&views=4858"></script>次阅读
+&nbsp;&nbsp;字号: <a href="javascript:dozoom(16)">大</a>&nbsp;<a href="javascript:dozoom(14)">中</a>&nbsp;<a href="javascript:dozoom(12)">小</a>&nbsp;&nbsp;(网友评论&nbsp;<font color="red">5</font>&nbsp;条)&nbsp;<a href="http://www.linuxdiyf.com/bbs/viewthread.php?tid=196849" target="_blank" rel="nofollow">我要评论</a>
+</td>
+</tr>
+<tr>
+<td>
+<table width="100%"  border="0" cellspacing="2" cellpadding="2" style="table-layout: fixed; word-wrap: break-word">
+<tr>
+<td class="message" id="zoom"><script type="text/javascript"><!--
+google_ad_client = "pub-8023555791144639";
+/* 728x90, 创建于 11-2-19 */
+google_ad_slot = "2442677665";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><br>使用IE浏览器登陆ftp后   下载文件提示“拒绝登陆申请“ 使用遨游浏览器则正常<br />
+使用windows资源管理器登陆下载可以，使用命令行登陆下载可以</td>
+</tr>
+             </div>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table width="100%"  border="0" cellspacing="2" cellpadding="2" style="table-layout: fixed; word-wrap: break-word">
+<tr><td><div align="center"><script type="text/javascript"><!--
+google_ad_client = "pub-8023555791144639";
+/* 336x280, 创建于 09-12-16 */
+google_ad_slot = "5017353970";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div></td></tr></table>
+</td>
+</tr>
+<tr>
+<td align="right"><a href="http://www.linuxdiyf.com/bbs/viewthread.php?tid=196849" target="_blank" rel="nofollow">【已有<b><font color="red">5</font></b>位网友发表了看法】</a>&nbsp;<a href="javascript:window.print()">【打印】</a>&nbsp;<a href="javascript:window.close()">【关闭】</a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<br>
+<table width="100%"  border="0" cellpadding="0" cellspacing="1" bgcolor="#648EB2">
+<tr>
+<td bgcolor="#F9F9F9">
+<table width="100%"  border="0" cellpadding="1" cellspacing="1">
+
+<tr>
+<td height="20" bgcolor="#BCD0ED">&nbsp;相关评论</td>
+</tr>
+
+<tr>
+<td>
+<table width="100%"  border="0" align="right" cellpadding="2" cellspacing="2" style="table-layout: fixed; word-wrap: break-word">
+<tr>
+<td bgcolor="#EEEEEE">作者: gogo11&nbsp;发布日期: 
+2011-4-20</td>
+</tr>
+<tr>
+<td>你看IE里边有没有设置记住密码项。还有一个可能的问题，匿名有两种:anonymous，guest，也许好浏览器的这个有关（好久以前看的）～～～～～～～～`<br />
+<br />
+强烈建议Firefox，比IE好用多了</td>
+</tr>
+<tr>
+<td bgcolor="#EEEEEE">作者: 消失的光年&nbsp;发布日期: 
+2011-4-20</td>
+</tr>
+<tr>
+<td><b> <a href="http://www.linuxdiyf.com/bbs/redirect.php?goto=findpost&pid=1389309&ptid=196849" target="_blank">2#</a> <i>gogo11</i> </b><br />
+<br />
+<br />
+你说的这个我也知道，这些设置不会有问题了，使用vsftpd搭建的ftp好像所有默认IE就是不能下载？？？</td>
+</tr>
+<tr>
+<td bgcolor="#EEEEEE">作者: 消失的光年&nbsp;发布日期: 
+2011-4-20</td>
+</tr>
+<tr>
+<td>有人说是ftp工作方式的问题，ie好像默认只能识别主动模式，不识别被动模式，但是主动与被动模式我都试过了，却还是不行！！！各位，。。给点意见啊！！！:0)1</td>
+</tr>
+<tr>
+<td bgcolor="#EEEEEE">作者: &nbsp;发布日期: 
+2013-8-02</td>
+</tr>
+<tr>
+<td>IE浏览器下载，需要开启FTP服务器的“匿名账户”</td>
+</tr>
+<tr>
+<td bgcolor="#EEEEEE">作者: gh131461&nbsp;发布日期: 
+2013-12-21</td>
+</tr>
+<tr>
+<td>.....</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td bgcolor="#BCD0ED">
+<table width="100%"  border="0" cellspacing="2" cellpadding="2">
+<tr>
+<td height="20">共有评论数 5/每页显示数 10</td>
+<td align="right"><script language="JavaScript" type="text/JavaScript" src="http://www.linuxdiyf.com/page.php?num=5&perpage=10&phpfile=e&htmlfile=&id=196849&page=1&dirfid=3&dirdateline=1303256435&dirtype=2&usehtml=0&htmlupdatetime=10080"></script></td>
+</tr>
+</table>
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+<br>
+<a name="reply"></a>
+<table width="100%"  border="0" cellpadding="0" cellspacing="1" bgcolor="#648EB2"><script type="text/javascript">/*linuxarticle*/ var cpro_id = 'u820965';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script><p><script type="text/javascript">
+/*Tag Cloud*/
+var cpro_id = "u1381415";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+<tr>
+<td bgcolor="#F9F9F9">
+<table width="100%"  border="0" cellpadding="1" cellspacing="1">
+
+<tr>
+<td height="20" bgcolor="#BCD0ED">&nbsp;我要评论</td>
+</tr>
+
+<tr>
+<td>
+<table width="100%"  border="0" align="right" cellpadding="4" cellspacing="4" style="table-layout: fixed; word-wrap: break-word">
+<form name="form1" method="post" action="http://www.linuxdiyf.com/function.php?action=reply" rel="nofollow">
+<tr>
+<td>发表评论，与各位同人交流。回复请点击下方的我要评论按钮(游客可回复)，要发表贴子请点击 <b><a href="http://www.linuxdiyf.com/bbs/post.php?action=newthread&fid=45" rel="nofollow">发新话题 (游客可发贴)</a></b></td>
+</tr>
+<tr>
+<td>
+<input name="tid" type="hidden" id="tid" value="196849">
+<input name="fid" type="hidden" id="fid" value="3">
+<input name="replysubmit" type="submit" id="replysubmit" value="我要评论"></td>
+</tr>
+</form>
+</table>
+</td>
+</tr>
+
+</table>
+</td>
+</tr>
+</table>
+</td>
+
+<td width="1%"></td>
+
+<td width="1" valign="top" bgcolor="#648EB2"></td>
+<td width="20%" valign="top" bgcolor="#EEEEEE">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8023555791144639";
+/* linuxdiyfviewarticle */
+google_ad_slot = "8147359204";
+google_ad_width = 180;
+google_ad_height = 150;
+//-->
+</script>
+<script type="text/javascript"
+src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<table width="100%"  border="0" cellpadding="4" cellspacing="0">
+<tr><td bgcolor="#BCD0ED">&nbsp;热点主题</td>
+</tr>
+<tr><td height="1" bgcolor="#999999"></td></tr>
+<tr><td height="5"></td></tr>
+<tr><td>
+<table width="100%"  border="0" cellpadding="2" cellspacing="2" style="table-layout: fixed; word-wrap: break-word">
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197095" target="_blank">linux中使用QQ和fetion</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=196902" target="_blank">三个教育网源……</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197014" target="_blank">Linux下怎样安装火狐浏览器</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=196933" target="_blank">lenovo笔记本可以装win7和</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197043" target="_blank">sudo su -  的疑问</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197024" target="_blank">Firefox轻松网银支付 支付</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197021" target="_blank">Fedora 14 下 安装 ZendSt</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=196852" target="_blank">现在除了腾讯的qqlinux能登</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=196899" target="_blank">文本模式怎么用shell注销用</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197131" target="_blank">求助：可执行文件格式错误</a></td>
+</tr>
+</table>
+</td></tr>
+<tr><td height="5"></td></tr>
+</table>
+
+<table width="100%"  border="0" cellpadding="4" cellspacing="0">
+<tr><td bgcolor="#BCD0ED">&nbsp;最新主题</td>
+</tr>
+<tr><td height="1" bgcolor="#999999"></td></tr>
+<tr><td height="5"></td></tr>
+<tr><td>
+<table width="100%"  border="0" cellpadding="2" cellspacing="2" style="table-layout: fixed; word-wrap: break-word">
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197174" target="_blank">RHCE中iptables的问题</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197168" target="_blank">求高人相助！！！</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197167" target="_blank">环境变量和局部变量</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197166" target="_blank">vm 下linux 桥接通过vmnet</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197165" target="_blank">RAID的问题</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197162" target="_blank">vm下 nat方式 xp与linux p</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197160" target="_blank">fedora 14音频解码文件放在</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197158" target="_blank">初学linux，求一个makefile</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197145" target="_blank">光纤通道 多路径</a></td>
+</tr>
+<tr>
+<td width="8" valign="top">·</td><td><a href="http://www.linuxdiyf.com/viewarticle.php?id=197143" target="_blank">ubuntu下的无线图标不见见</a></td>
+</tr>
+</table>
+</td></tr>
+<tr><td height="5"></td></tr>
+</table>
+
+<table width="100%"  border="0" cellpadding="4" cellspacing="0">
+<tr><td bgcolor="#BCD0ED">&nbsp;关注热点</td>
+</tr>
+<tr><td height="1" bgcolor="#999999"></td></tr>
+<tr><td height="5"></td></tr>
+<tr><td>
+<tr><td>
+<table width="100%"  border="0" align="right" cellpadding="2" cellspacing="2" style="table-layout: fixed; word-wrap: break-word">
+<tr><td><script type="text/javascript">/*linuxwebsite*/ var cpro_id = 'u950789';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script><br><p><b>=>Linux教程下载？</b><br>“<a target="_blank" href="http://www.linuxdiyf.com/bbs/thread-405283-1-1.html">Linux学习教程推荐下载</a>”（请点击），Linux教程免费下载。</p>
+<p><b>=>求助Linux问题？</b><br>论坛有39版块，覆盖所有Linux技术层面。前往“<a target="_blank" href="http://www.linuxdiyf.com/bbs/">红联Linux论坛</a>”</p>
+<p><b>=>怎样学Linux</b><br>我的Linux网站，我的Linux之家！学Linux，从这里开始！<br>
+<a target="_blank" href="http://www.linuxdiyf.com/linux/">Linux系统教程</a><br>
+<a target="_blank" href="http://www.linuxdiyf.com/linux/rm/">Linux入门</a>　<a target="_blank" href="http://www.linuxdiyf.com/linux/gl/">Linux管理</a><br>
+<a target="_blank" href="http://www.linuxdiyf.com/linux/jq/">Linux技巧</a>　<a target="_blank" href="http://www.linuxdiyf.com/linux/shell/">Linux命令</a><br>
+<a target="_blank" href="http://www.linuxdiyf.com/linux/ubuntu/">Ubuntu系统</a>　<a target="_blank" href="http://www.linuxdiyf.com/linux/ffq/">Linux服务器</a><br>
+<a target="_blank" href="http://www.linuxdiyf.com/linux/sjk/">Linux数据库</a>　<a target="_blank" href="http://www.linuxdiyf.com/linux/kf/">Linux开发</a></p></td></tr>
+</table>
+</td></tr>
+</td></tr>
+<tr><td height="5"></td></tr>
+</table>
+</td>
+
+<td width="1" valign="top" bgcolor="#648EB2"></td>
+</tr>
+<tr>
+  <td height="1" valign="top"></td>
+  <td height="1"></td>
+  <td width="1" height="1" valign="top" bgcolor="#648EB2"></td>
+  <td height="1" valign="top" bgcolor="#648EB2"></td>
+  <td width="1" height="1" valign="top" bgcolor="#648EB2"></td>
+</tr>
+</table>
+</td></tr></table>
+
+<table width="960"  border="0" align="center" cellpadding="0" cellspacing="0">
+<tr><td bgcolor="#FFFFFF">
+<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0" height="30">
+  <tr>
+    <td height="15" align="center" bgcolor="#E9F1F8">　</td>
+  </tr>
+  <tr>
+  <td height="15" align="center" bgcolor="#EEEEEE"><a target="_blank" href="http://www.linuxdiyf.com/about/hezuo.htm">合作</a>　|　<a target="_blank" href="http://www.linuxdiyf.com/about/">关于我们</a>　|　<a target="_blank" href="http://www.linuxdiyf.com/about/contact.htm">联系我们</a>　|　<a href="http://www.linuxdiyf.com/articlelist.php">导航</a>　|　<a href="http://www.linuxdiyf.com/bbs/register.php">会员注册</a>
+<p>&copy;2014 红联 Powered by SupSite <script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fdf25116b76fb7bf2cb3cd1bf68f5518a' type='text/javascript'%3E%3C/script%3E"));
+</script></p></td>
+</tr>
+  </table>
+</td></tr></table>
+</body>
+</html>

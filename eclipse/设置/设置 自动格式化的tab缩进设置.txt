@@ -1,0 +1,5 @@
+Window ——--> Preferences…… ——--> Java ——--> 
+Code Style ——--> Formatter 点右边的“Edit……”按钮，切换到第一个选项卡“Indentation”，在 General 
+settings 组将 Tab policy 由 Table only 改为 Space only，同时把 Indentation size 和 Tab 
+size 改为 4，最后把最上面的 Profile name 取一个名字，名字任意，再点 OK 按钮就可以了。以后按 Tab 键或者 Ctrl + Shift 
++ F 会自动采用 4 个空格作为一个层次的缩进。 

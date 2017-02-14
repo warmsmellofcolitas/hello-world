@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>Document</title>
+ </head>
+ <body>
+  <!-- 以下三个无法选择 -->
+  <input value="aaa" disabled type="radio" name="quiz" id=""  checked>
+  <input value="bbb" disabled type="radio" name="quiz" id=""  >
+  <input value="ccc" readonly type="radio" name="quiz" id=""  checked>
+  <!-- 以下两个可以选择 -->
+  <input value="ddd" readonly type="radio" name="quiz2" id="" >
+  <input value="eee" readonly type="radio" name="quiz2" id=""  checked>
+ </body>
+</html>
+
+
+HTML readonly属性
+readonly 属性 -- 表示只读(只能看到,不能修改)的输入域(框)
+单击更改“按钮”时text输入域的内容可以更改。
+实例一
+<script type="text/javascript">
+function clearReadOnly(){
+    document.form1.textfield.readOnly=false;
+}
+</script>
+<form name="form1">
+<input type="text" name="textfield" value="111" readOnly>
+<input type="button" onclick="clearReadOnly()" value="更改">
+</form>
+    表现：
+ 
+
+
+textareaObject.readOnly=true|false
+实例二
+<script type="text/javascript">
+function setReadOnly(){
+    document.getElementByIdx_x('txt1').readOnly=true;
+}
+</script>
+
+<textarea id="txt1">Hello world....This is a text area</textarea><br />
+<input type="button" onclick="setReadOnly()" value="Make read-only" />
+    表现：
+ 
+
+
+注意：
+Readonly只针对input(text / password)和textarea有效，而disabled对于所有的表单元素都有效，包括select, radio, checkbox, button等。
+
+readonly属性 文本框不能输入
+实例三
+<form name="MyForm" action="#" method="post">
+    <input type="text" name="textTest" readonly value="myvalue">
+      <input type="submit" value="提交">
+</form>
+<?php
+    $text = $_POST['textTest'];
+    echo $text;
+?>

@@ -1,0 +1,24 @@
+级联保存就是在保存对象的同时也保存它的附属对象。例如：在保存员工同时为员工生成帐号。
+保存员工时级联保存帐号
+	1.
+	//设置双向关联，要通过员工保存帐号，必须进行双向关联
+	account.setEmployee(emp);
+	emp.setAccount(account);
+	//保存员工时级联保存帐号
+	session.save(emp);
+	2.
+	//必须在Employee.hbm.xml文件中加上cascade="all"
+	<one-to-one name="account" class="com.mipo.vo.Account" cascade="all"/> //级联保存帐号
+保存帐号时级联保存员工
+	1.
+	//设置双向关联，要通过帐号保存员工，必须进行双向关联
+	account.setEmployee(emp);
+	emp.setAccount(account);
+	//保存帐号时级联保存员工
+	session.save(account);
+	2.
+	//不需在Account.hbm.xml文件中设置cascade="all"
+	<one-to-one name="employee" class="com.mipo.vo.Employee" constrained="true"/>  constrained="true"表示生成数据库表结构可以生成外键
+
+
+

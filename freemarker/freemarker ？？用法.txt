@@ -1,0 +1,59 @@
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("abc.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("object", "");
+		root.put("object1", null);
+		User user = new User();
+		user.setName("11");
+		user.setId(1);
+		root.put("str", user);
+		root.put("nowDate", new Date());
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#-- 判断object对象不为空,不为空(不为null且不为"")返回true,为空则返回false -->
+		<#if object??>
+			object对象不为空(即object存在)
+			<#else>
+				object对象为空
+		</#if>
+		
+		<#if object1?exists>
+			object1对象不为空
+			<#else>
+				object1对象为空
+		</#if>
+		
+		<#if str??>
+			${str?string}
+		</#if><#--将str以字符串形式显示,输出:cn.com.leadfar.struts2.freemarker.User@1e0a91ff -->
+		
+		${nowDate?time}<#--将现有时间以时间的格式显示:15:13:05,如果直接${nowDate}会报错-->
+		${nowDate?date}<#--以日期格式显示:2011-4-28;(date的格式可以在freemarker.properties文件中配置)-->
+	</body>
+</html>

@@ -1,0 +1,917 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head id="Head"><title>
+	Lombok 安装、入门 - 消除冗长的 java 代码 - fancydeepin - BlogJava
+</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta id="metaKeywords" name="keywords" content="Lombok 安装、入门 - 消除冗长的 java 代码" /><link type="text/css" rel="stylesheet" href="/css/common.css" /><link id="MainCss" type="text/css" rel="stylesheet" href="http://www.blogjava.net/Skins/KJC/style.css" /><link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://www.blogjava.net/fancydeepin/rss.aspx" /></head>
+<body>
+    <form name="Form1" method="post" action="lombok.html" onsubmit="javascript:return WebForm_OnSubmit();" id="Form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="
+__VIEWSTATE" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=hCqqcDq62xC48aLO1-oizzph91mftTcpBQYAMmX9y1_MEKckib0uai68YudFFqahbIRj8ZaZB19FpMr30&amp;t=634604713351482412" type="text/javascript"></script>
+
+<script language=JavaScript>
+									function ctlent(evt,id)
+											{
+												if(evt.ctrlKey && evt.keyCode == 13)
+												{	
+													try
+													{
+														TempSave(id);
+													}
+													catch(ex)
+													{
+													}
+													finally
+													{
+													    __doPostBack('AjaxHolder$PostComment$btnSubmit','')
+													}
+												}
+		
+												}</script>
+												<script language=JavaScript>function SetReplyAuhor(author){document.getElementById('AjaxHolder_PostComment_tbComment').value+="@"+author+"\n";document.getElementById('AjaxHolder_PostComment_tbComment').focus();return false}</script>
+<script src="/ScriptResource.axd?d=TB76SHHPXs0c-M9_tGhAxuTARlsiSpe5Dn70CMDyMu0Be8A_MPH2Z7oqJoDwyxmBxB28VcgK9C-XqFdMNI_DuigegyGH79krj7asDjvAKLqzs7DlCIm2xb4oSA4lM05RrYsRw4Ulp-jfriIG0&amp;t=634604713351482412" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=-BecoVNwDVCZ4TW3gB_ZzPWfgjCQ_C64O4hNc3pweA4UGq0B-lWFnUMMAtqURN0AZF_f7fxk9s5U1gsq0foUhwHdXezBbn_OgCN5EL300MOu7Jb-c7WU_a2OCK01&amp;t=634979389729873750" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=4npu1eCN6HUVuTPPO5YDuuBNC2hrBvTsGEVYQhhAo9CX_hfoT2Mz1UGnoo5C32pPXZvBizBLMnY0_szRgrGRkyv7-BsG0CvEejE8Vl3Xt8nd-D_58kXSDmaBFOFFj7w3EMKivQ2&amp;t=634979389729873750" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+        
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+
+<table class="Framework" cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<td colspan="3">
+			
+<div id="top">
+<table cellpadding="10" cellspacing="0">
+	<tr>
+		<td nowrap>
+			<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.blogjava.net/fancydeepin/"><B>fancydeepin</B></a></h1>
+			<BR>
+<span style="font-family: Courier New; font-size: 13pt;">衣带渐宽终不悔,  为伊消得人憔悴</span>
+		</td>
+	</tr>
+</table>
+</div>
+<div id="sub">
+	<div id="sub-right">
+<div class="BlogStats">posts - 87, comments - 90, trackbacks - 0, articles - 0</div></div>
+	
+&nbsp;
+<a id="Header1_MyLinks1_HomeLink" href="http://www.blogjava.net/">BlogJava</a>&nbsp;::
+<a id="Header1_MyLinks1_MyHomeLink" href="http://www.blogjava.net/fancydeepin/">首页</a>&nbsp;::
+<a id="Header1_MyLinks1_NewPostLink" href="http://www.blogjava.net/fancydeepin/admin/EditPosts.aspx?opt=1">新随笔</a>&nbsp;::
+<a id="Header1_MyLinks1_ContactLink" accesskey="9" href="http://www.blogjava.net/fancydeepin/contact.aspx?id=1">联系</a>&nbsp;::
+<a id="Header1_MyLinks1_Syndication" href="http://www.blogjava.net/fancydeepin/rss">聚合</a>
+<a id="Header1_MyLinks1_XMLLink" class="XMLLink" href="http://www.blogjava.net/fancydeepin/rss"><img src="http://www.blogjava.net/images/xml.gif" style="border-width:0px;" /></a>&nbsp;::
+<a id="Header1_MyLinks1_Admin" href="http://www.blogjava.net/fancydeepin/admin/EditPosts.aspx">管理</a>
+
+</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="LeftCell">
+			<div id="leftmenu">
+			</div>
+		</td>
+		<td class="MainCell">
+			<div id="main">
+				
+					
+	<div class="post">
+		<div class="posthead">
+			<h2>
+				<a id="viewpost1_TitleUrl" class="singleposttitle" href="http://www.blogjava.net/fancydeepin/archive/2012/07/12/lombok.html">Lombok 安装、入门 - 消除冗长的 java 代码</a>
+			</h2>
+ 			Posted on 2012-07-12 21:53 <a href='http://www.blogjava.net/fancydeepin/'>fancydeepin</a> 阅读(3377) <a href='#Post'>评论(0)</a> &nbsp;<a href="http://www.blogjava.net/fancydeepin/admin/EditPosts.aspx?postid=382933">编辑</a> &nbsp;<a href="http://www.blogjava.net/fancydeepin/AddToFavorite.aspx?id=382933">收藏</a>  所属分类: <a href='http://www.blogjava.net/fancydeepin/category/52153.html'>Lombok</a> 
+			<img src ="http://www.blogjava.net/fancydeepin/aggbug/382933.html?webview=1" width = "1" height = "1" />
+			
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+rdf:about="http://www.blogjava.net/fancydeepin/archive/2012/07/12/lombok.html"
+dc:identifier="http://www.blogjava.net/fancydeepin/archive/2012/07/12/lombok.html"
+dc:title="Lombok 安装、入门 - 消除冗长的 java 代码"
+trackback:ping="http://www.blogjava.net/fancydeepin/services/trackbacks/382933.aspx" />
+</rdf:RDF>
+-->
+
+		</div>
+		<div class="postbody"><br /><span style="font-family: Georgia; font-size: 10pt">前言：<br />&nbsp;&nbsp;&nbsp;&nbsp;逛开源社区的时候无意发现的，用了一段时间，觉得还可以，特此推荐一下。<br /><strong>&nbsp;&nbsp;&nbsp;&nbsp;lombok</strong> 提供了简单的注解的形式来帮助我们简化消除一些必须有但显得很臃肿的 java 代码。特别是相对于 POJO，光说不做不是我的风格，先来看看吧。<br /><br /></span><span style="font-family: Georgia; color: red; font-size: 10pt">lombok 的官方网址：</span><span style="font-family: Georgia; font-size: 10pt"><a href="http://projectlombok.org/" target="_blank">http://projectlombok.org/</a>&nbsp;&nbsp;<br /><br />lombok 其实到这里我就介绍完了，开个玩笑，其实官网上有 lombok 三分四十九秒的视频讲解，里面讲的也很清楚了，而且还有文档可以参考。<br />在这里我就不扯太多，先来看一下<strong> lombok 的安装</strong>，其实这个官网视频上也有讲到啦<br /><br /></span><span style="font-family: Georgia; color: red; font-size: 10pt">lombok 安装<br /></span><span style="font-family: Georgia; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;使用 lombok 是需要安装的，如果不安装，IDE 则无法解析 lombok 注解。先在官网下载最新版本的 JAR 包，现在是 0.11.2 版本，我用的是 0.11.0<br />&nbsp;&nbsp;&nbsp;&nbsp;第一次使用的时候我下载的是最新版本的，也就是我现在用的&nbsp;0.11.0，到现在已经更新了两个版本，更新的好快啊 ... ...<br /><br /></span><span style="font-family: Georgia; color: red; font-size: 10pt">1. 双击下载下来的 JAR 包安装 <span style="font-family: Georgia; color: red; font-size: 10pt">lombok</span><br /></span><span style="font-family: Georgia; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;我选择这种方式安装的时候提示没有发现任何 IDE，所以我没安装成功，我是手动安装的。如果你想以这种方式安装，请参考官网的视频。<br /><br /></span><span style="font-family: Georgia; color: red; font-size: 10pt">2.eclipse / myeclipse 手动安装 lombok<br /></span><span style="font-family: Georgia; font-size: 10pt">&nbsp;&nbsp;&nbsp;&nbsp;1. 将 lombok.jar 复制到 myeclipse.ini / eclipse.ini 所在的文件夹目录下<br />&nbsp;&nbsp;&nbsp;&nbsp;2. 打开 eclipse.ini / myeclipse.ini，在最后面插入以下两行并保存：<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Xbootclasspath/a:lombok.jar<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-javaagent:lombok.jar<br />&nbsp;&nbsp;&nbsp;&nbsp;3.重启 eclipse / myeclipse<br /><br /></span><span style="font-family: Georgia; color: red; font-size: 10pt">lombok 注解：</span><span style="font-family: Georgia; font-size: 10pt"><br /><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;lombok 提供的注解不多，可以参考官方视频的讲解和官方文档。<br />&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #008000">Lombok 注解在线帮助文档：</span><a href="http://projectlombok.org/features/index.html">http://projectlombok.org/features/index.<br /></a>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #993300">下面介绍几个我常用的 lombok 注解：</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font size="2"><span style="color: #0000ff">&#64;Data&nbsp;&nbsp; </span></font><font size="2">：注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了equals、canEqual、hashCode、toString 方法<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font size="2"><span style="color: #0000ff">&#64;Setter</span></font><font size="2">：注解在属性上；为属性提供 setting 方法<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font size="2"><span style="color: #0000ff">&#64;Getter</span></font><font size="2">：注解在属性上；为属性提供 getting 方法<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font size="2"><span style="color: #0000ff">&#64;Log4j&nbsp;</span></font><font size="2">：注解在类上；为类提供一个 属性名为log 的 log4j 日志对象<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font size="2"><span style="color: #0000ff">&#64;NoArgsConstructor</span></font><font size="2">：注解在类上；为类提供一个无参的构造方法<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font size="2"><span style="color: #0000ff">&#64;AllArgsConstructor</span></font><font size="2">：注解在类上；为类提供一个全参的构造方法<br /><br /><font size="2">下面是简单示例</font><br /><span style="color: #993300">&nbsp;&nbsp;&nbsp;&nbsp;1.不使用 lombok 的方案 
+<div style="border-bottom: #cccccc 1px solid; border-left: #cccccc 1px solid; padding-bottom: 4px; background-color: #eeeeee; padding-left: 4px; width: 98%; padding-right: 5px; font-size: 13px; word-break: break-all; border-top: #cccccc 1px solid; border-right: #cccccc 1px solid; padding-top: 4px"><!--<br />
+<br />
+Code highlighting produced by Actipro CodeHighlighter (freeware)<br />
+http://www.CodeHighlighter.com/<br />
+<br />
+--><span style="color: #008080">&nbsp;1</span><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" /><span style="color: #000000"><br /></span><span style="color: #008080">&nbsp;2</span><span style="color: #000000"><img id="Codehighlighter1_21_640_Open_Image" onclick="this.style.display='none'; Codehighlighter1_21_640_Open_Text.style.display='none'; Codehighlighter1_21_640_Closed_Image.style.display='inline'; Codehighlighter1_21_640_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedBlockStart.gif"><img style="display: none" id="Codehighlighter1_21_640_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_21_640_Closed_Text.style.display='none'; Codehighlighter1_21_640_Open_Image.style.display='inline'; Codehighlighter1_21_640_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedBlock.gif"></span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;</span><span style="color: #0000ff">class</span><span style="color: #000000">&nbsp;Person&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_21_640_Closed_Text"></span><span id="Codehighlighter1_21_640_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">&nbsp;3</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" /><br /></span><span style="color: #008080">&nbsp;4</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">private</span><span style="color: #000000">&nbsp;String&nbsp;id;<br /></span><span style="color: #008080">&nbsp;5</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">private</span><span style="color: #000000">&nbsp;String&nbsp;name;<br /></span><span style="color: #008080">&nbsp;6</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">private</span><span style="color: #000000">&nbsp;String&nbsp;identity;<br /></span><span style="color: #008080">&nbsp;7</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">private</span><span style="color: #000000">&nbsp;Logger&nbsp;log&nbsp;</span><span style="color: #000000">=</span><span style="color: #000000">&nbsp;Logger.getLogger(Person.</span><span style="color: #0000ff">class</span><span style="color: #000000">);<br /></span><span style="color: #008080">&nbsp;8</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">&nbsp;9</span><span style="color: #000000"><img id="Codehighlighter1_164_170_Open_Image" onclick="this.style.display='none'; Codehighlighter1_164_170_Open_Text.style.display='none'; Codehighlighter1_164_170_Closed_Image.style.display='inline'; Codehighlighter1_164_170_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_164_170_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_164_170_Closed_Text.style.display='none'; Codehighlighter1_164_170_Open_Image.style.display='inline'; Codehighlighter1_164_170_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;Person() </span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_164_170_Closed_Text"></span><span id="Codehighlighter1_164_170_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">10</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">11</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">12</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">13</span><span style="color: #000000"><img id="Codehighlighter1_229_302_Open_Image" onclick="this.style.display='none'; Codehighlighter1_229_302_Open_Text.style.display='none'; Codehighlighter1_229_302_Closed_Image.style.display='inline'; Codehighlighter1_229_302_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_229_302_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_229_302_Closed_Text.style.display='none'; Codehighlighter1_229_302_Open_Image.style.display='inline'; Codehighlighter1_229_302_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;Person(String&nbsp;id,&nbsp;String&nbsp;name,&nbsp;String&nbsp;identity) </span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_229_302_Closed_Text"></span><span id="Codehighlighter1_229_302_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">14</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">this</span><span style="color: #000000">.id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span><span style="color: #000000">=</span><span style="color: #000000">&nbsp;id;<br /></span><span style="color: #008080">15</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">this</span><span style="color: #000000">.name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #000000">=</span><span style="color: #000000">&nbsp;name;<br /></span><span style="color: #008080">16</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">this</span><span style="color: #000000">.identity&nbsp; </span><span style="color: #000000">=</span><span style="color: #000000">&nbsp;identity;<br /></span><span style="color: #008080">17</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">18</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">19</span><span style="color: #000000"><img id="Codehighlighter1_329_345_Open_Image" onclick="this.style.display='none'; Codehighlighter1_329_345_Open_Text.style.display='none'; Codehighlighter1_329_345_Closed_Image.style.display='inline'; Codehighlighter1_329_345_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_329_345_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_329_345_Closed_Text.style.display='none'; Codehighlighter1_329_345_Open_Image.style.display='inline'; Codehighlighter1_329_345_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;String&nbsp;getId()&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_329_345_Closed_Text"></span><span id="Codehighlighter1_329_345_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">20</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">return</span><span style="color: #000000">&nbsp;id;<br /></span><span style="color: #008080">21</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">22</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">23</span><span style="color: #000000"><img id="Codehighlighter1_374_392_Open_Image" onclick="this.style.display='none'; Codehighlighter1_374_392_Open_Text.style.display='none'; Codehighlighter1_374_392_Closed_Image.style.display='inline'; Codehighlighter1_374_392_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_374_392_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_374_392_Closed_Text.style.display='none'; Codehighlighter1_374_392_Open_Image.style.display='inline'; Codehighlighter1_374_392_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;String&nbsp;getName()&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_374_392_Closed_Text"></span><span id="Codehighlighter1_374_392_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">24</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">return</span><span style="color: #000000">&nbsp;name;<br /></span><span style="color: #008080">25</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">26</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">27</span><span style="color: #000000"><img id="Codehighlighter1_425_447_Open_Image" onclick="this.style.display='none'; Codehighlighter1_425_447_Open_Text.style.display='none'; Codehighlighter1_425_447_Closed_Image.style.display='inline'; Codehighlighter1_425_447_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_425_447_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_425_447_Closed_Text.style.display='none'; Codehighlighter1_425_447_Open_Image.style.display='inline'; Codehighlighter1_425_447_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;String&nbsp;getIdentity()&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_425_447_Closed_Text"></span><span id="Codehighlighter1_425_447_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">28</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">return</span><span style="color: #000000">&nbsp;identity;<br /></span><span style="color: #008080">29</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">30</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">31</span><span style="color: #000000"><img id="Codehighlighter1_481_500_Open_Image" onclick="this.style.display='none'; Codehighlighter1_481_500_Open_Text.style.display='none'; Codehighlighter1_481_500_Closed_Image.style.display='inline'; Codehighlighter1_481_500_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_481_500_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_481_500_Closed_Text.style.display='none'; Codehighlighter1_481_500_Open_Image.style.display='inline'; Codehighlighter1_481_500_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;</span><span style="color: #0000ff">void</span><span style="color: #000000">&nbsp;setId(String&nbsp;id)&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_481_500_Closed_Text"></span><span id="Codehighlighter1_481_500_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">32</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">this</span><span style="color: #000000">.id&nbsp;</span><span style="color: #000000">=</span><span style="color: #000000">&nbsp;id;<br /></span><span style="color: #008080">33</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">34</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">35</span><span style="color: #000000"><img id="Codehighlighter1_538_561_Open_Image" onclick="this.style.display='none'; Codehighlighter1_538_561_Open_Text.style.display='none'; Codehighlighter1_538_561_Closed_Image.style.display='inline'; Codehighlighter1_538_561_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_538_561_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_538_561_Closed_Text.style.display='none'; Codehighlighter1_538_561_Open_Image.style.display='inline'; Codehighlighter1_538_561_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;</span><span style="color: #0000ff">void</span><span style="color: #000000">&nbsp;setName(String&nbsp;name)&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_538_561_Closed_Text"></span><span id="Codehighlighter1_538_561_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">36</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">this</span><span style="color: #000000">.name&nbsp;</span><span style="color: #000000">=</span><span style="color: #000000">&nbsp;name;<br /></span><span style="color: #008080">37</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">38</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">39</span><span style="color: #000000"><img id="Codehighlighter1_607_638_Open_Image" onclick="this.style.display='none'; Codehighlighter1_607_638_Open_Text.style.display='none'; Codehighlighter1_607_638_Closed_Image.style.display='inline'; Codehighlighter1_607_638_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockStart.gif"><img style="display: none" id="Codehighlighter1_607_638_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_607_638_Closed_Text.style.display='none'; Codehighlighter1_607_638_Open_Image.style.display='inline'; Codehighlighter1_607_638_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedSubBlock.gif">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;</span><span style="color: #0000ff">void</span><span style="color: #000000">&nbsp;setIdentity(String&nbsp;identity)&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_607_638_Closed_Text"></span><span id="Codehighlighter1_607_638_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">40</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">this</span><span style="color: #000000">.identity&nbsp;</span><span style="color: #000000">=</span><span style="color: #000000">&nbsp;identity;<br /></span><span style="color: #008080">41</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" />&nbsp;&nbsp;&nbsp;&nbsp;}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">42</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedBlockEnd.gif" />}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">43</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" /></span></div><br />&nbsp;&nbsp;&nbsp;&nbsp;2.使用 lombok 的方案<br />
+<div style="border-bottom: #cccccc 1px solid; border-left: #cccccc 1px solid; padding-bottom: 4px; background-color: #eeeeee; padding-left: 4px; width: 98%; padding-right: 5px; font-size: 13px; word-break: break-all; border-top: #cccccc 1px solid; border-right: #cccccc 1px solid; padding-top: 4px"><!--<br />
+<br />
+Code highlighting produced by Actipro CodeHighlighter (freeware)<br />
+http://www.CodeHighlighter.com/<br />
+<br />
+--><span style="color: #008080">&nbsp;1</span><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" /><span style="color: #000000"><br /></span><span style="color: #008080">&nbsp;2</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" />&#64;Data<br /></span><span style="color: #008080">&nbsp;3</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" />&#64;Log4j<br /></span><span style="color: #008080">&nbsp;4</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" />&#64;NoArgsConstructor<br /></span><span style="color: #008080">&nbsp;5</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" />&#64;AllArgsConstructor<br /></span><span style="color: #008080">&nbsp;6</span><span style="color: #000000"><img id="Codehighlighter1_73_146_Open_Image" onclick="this.style.display='none'; Codehighlighter1_73_146_Open_Text.style.display='none'; Codehighlighter1_73_146_Closed_Image.style.display='inline'; Codehighlighter1_73_146_Closed_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ExpandedBlockStart.gif"><img style="display: none" id="Codehighlighter1_73_146_Closed_Image" onclick="this.style.display='none'; Codehighlighter1_73_146_Closed_Text.style.display='none'; Codehighlighter1_73_146_Open_Image.style.display='inline'; Codehighlighter1_73_146_Open_Text.style.display='inline';" align="top" src="/Images/OutliningIndicators/ContractedBlock.gif"></span><span style="color: #0000ff">public</span><span style="color: #000000">&nbsp;</span><span style="color: #0000ff">class</span><span style="color: #000000">&nbsp;Person&nbsp;</span><span style="border-bottom: #808080 1px solid; border-left: #808080 1px solid; background-color: #ffffff; display: none; border-top: #808080 1px solid; border-right: #808080 1px solid" id="Codehighlighter1_73_146_Closed_Text"></span><span id="Codehighlighter1_73_146_Open_Text"><span style="color: #000000">{<br /></span><span style="color: #008080">&nbsp;7</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" /><br /></span><span style="color: #008080">&nbsp;8</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">private</span><span style="color: #000000">&nbsp;String&nbsp;id;<br /></span><span style="color: #008080">&nbsp;9</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000ff">private</span><span style="color: #000000">&nbsp;String&nbsp;name;<br /></span><span style="color: #008080">10</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;</span><span style="color: #0000ff">private</span><span style="color: #000000">&nbsp;String&nbsp;identity;<br /></span><span style="color: #008080">11</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/InBlock.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<br /></span><span style="color: #008080">12</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/ExpandedBlockEnd.gif" />}</span></span><span style="color: #000000"><br /></span><span style="color: #008080">13</span><span style="color: #000000"><img alt="" align="top" src="/Images/OutliningIndicators/None.gif" /></span></div><br /></span><span style="color: #000000">上面的两个 java 类，从作用上来看，它们的效果是一样的，相比较之下，很明显，使用 lombok 要简洁许多，特别是在类的属性较多的情况下，<br />同时也避免了修改字段名字时候忘记修改方法名所犯的低级错误。</span><span style="color: #008000">最后需要注意的是，在使用 lombok 注解的时候记得要导入 lombok.jar 包到工程</span><span style="color: #008000"><br /><br /></span><span style="color: #000000"><br /><br /><br /></span><span style="color: #993300"><br /></span></font></span> <br><br><span style="font-family: Georgia; font-size: 10pt"><br /><span style="font-family: Georgia; color: #008000; font-size: 10pt">&nbsp;&nbsp;&nbsp;[ 随笔均原创，转载请注明出处：<a href="http://www.blogjava.net/fancydeepin" target="_blank">http://www.blogjava.net/fancydeepin</a>&nbsp;]</span></span> <br /><br /><br /></div>
+	</div>
+	<script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('AjaxHolder$scriptmanager1', document.getElementById('Form1'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tAjaxHolder$UpdatePanel1'], [], [], 90);
+//]]>
+</script>
+
+<div id="AjaxHolder_UpdatePanel1">
+	    
+    
+<style>
+td { font-size: 12px }
+.commentTextBox 
+{ 
+    font-family : Verdana; 
+    font-size: 13px;
+ }
+</style>
+<!--Beging Temp Save-->
+<STYLE>.userData { BEHAVIOR: url(#default#userdata) }
+	</STYLE>
+<DIV class="userData" id="CommentsPersistDiv"></DIV>
+
+<script type="text/javascript">
+function pageLoad()
+{
+    Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(handleInitializeRequest);
+    //Sys.WebForms.PageRequestManager.getInstance().add_endRequest(handleEndRequest);
+}
+
+function handleInitializeRequest(sender, args)
+{
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    var eid = args.get_postBackElement().id;
+    if (eid.indexOf("DeleteLink")>0) 
+    {
+       args.get_postBackElement().innerHTML = "<font color='red'>正在删除...</font>";         
+    }    
+    else if (eid.indexOf("btnSubmit")>0) 
+    {
+       document.getElementById("AjaxHolder_PostComment_ltSubmitMsg").innerHTML="正在提交...";
+       document.getElementById("AjaxHolder_PostComment_btnSubmit").disabled = true;       
+    }   
+    else if(eid.indexOf("refreshList")>0)
+    {
+        document.getElementById("AjaxHolder_PostComment_refreshList").innerHTML="<font color='red'>正在刷新...</font>";
+    }
+   
+}	
+
+function TempSave(ElementID)
+{
+	try
+	{
+	CommentsPersistDiv.setAttribute("CommentContent",document.getElementById(ElementID).value);
+	CommentsPersistDiv.save("CommentXMLStore");
+	}
+	catch(ex)
+	{
+	}
+	
+}
+function Restore(ElementID)
+{
+	CommentsPersistDiv.load("CommentXMLStore");
+	document.getElementById(ElementID).value=CommentsPersistDiv.getAttribute("CommentContent");
+}	
+			
+			
+</script>
+<!--Ene TempSave-->
+<div id="divRefreshComments" style="text-align:right;margin-right:10px;margin-bottom:5px;font-size:12px"><a href="/RequireRegister.aspx">新用户注册</a>&nbsp;&nbsp;<a id="AjaxHolder_PostComment_refreshList" href="javascript:__doPostBack('AjaxHolder$PostComment$refreshList','')">刷新评论列表</a>&nbsp;&nbsp;</div>
+<div class="commentform">
+<span id="AjaxHolder_PostComment_ltSubmitMsg" style="color:Red;"></span>
+<br />
+<a name="Feedback"></a>
+	<TABLE cellSpacing="1" cellPadding="1" border="0">	
+		<tr>
+		<td id="AjaxHolder_PostComment_tdOnCommentForm" colspan="3" style="line-height:1.5">
+		<a href="http://q.cnblogs.com" target="_blank">程序员问答平台，解决您的技术难题</a><br/>
+		<!--<a href="http://zt.cnblogs.com/training/2012/" target="_blank">国家职业资格证书-Java高级程序设计员免费培训（上海）</a>-->
+		<!--<div>
+		技术专题：<br/>
+		<a href="http://kb.cnblogs.com/zt/jquery/" title="jQuery" target="_blank">jQuery</a>&nbsp; &nbsp;<a href="http://kb.cnblogs.com/zt/android/" title="Android" target="_blank">Android</a>&nbsp; &nbsp;<a href="http://kb.cnblogs.com/zt/ipad/" title="iPad" target="_blank">iPad</a>
+		</div>-->
+		</td>
+	
+		</tr>
+		<div id="AjaxHolder_PostComment_divCommnentArea">
+		<TR>
+			<TD colSpan="3"></TD>
+		</TR>
+		<TR>
+			<TD width="75"></TD>
+			<TD></TD>
+			<TD></TD>
+		</TR>
+		<TR>
+			<TD></TD>
+			<TD colSpan="2">
+			<a href="http://www.cnblogs.com" target="_blank">博客园</a>&nbsp;  <a href="http://q.cnblogs.com/" target="_blank">博问</a>&nbsp; <a href="http://news.cnblogs.com" target="_blank">IT新闻</a>&nbsp; <!--<a href="http://home.cnblogs.com/ing/" target="_blank">闪存</a>&nbsp;  <a href="http://a4.yeshj.com/rd/36007/" target="_blank">学英语</a>&nbsp;  --><a href="http://job.cnblogs.com/cate-java_programmer/" target="_blank">Java程序员招聘</a>
+			</TD>
+		</TR>
+		<TR>
+			<TD width="55">标题</TD>
+			<TD><input name="AjaxHolder$PostComment$tbTitle" type="text" value="re: Lombok 安装、入门 - 消除冗长的 java 代码" id="AjaxHolder_PostComment_tbTitle" class="commenttb" style="width:320" /></TD>
+			<TD><span id="AjaxHolder_PostComment_RequiredFieldValidator1" style="color:Red;visibility:hidden;">请输入标题</span></TD>
+		</TR>
+		<TR>
+			<TD>姓名</TD>
+			<TD><input name="AjaxHolder$PostComment$tbName" type="text" id="AjaxHolder_PostComment_tbName" class="commenttb" style="width:320" /></TD>
+			<TD><span id="AjaxHolder_PostComment_RequiredFieldValidator2" style="color:Red;visibility:hidden;">请输入你的姓名</span></TD>
+		</TR>
+		<TR>
+			<TD>主页</TD>
+			<TD><input name="AjaxHolder$PostComment$tbUrl" type="text" id="AjaxHolder_PostComment_tbUrl" class="commenttb" style="width:320" /></TD>
+			<TD><FONT face="宋体"></FONT></TD>
+		</TR>
+		<tr>
+			<td align="left" colSpan="3">
+				<table id="AjaxHolder_PostComment_tbCaptchaImage" class="CommentForm" cellspacing="0" cellpadding="0" border="0">
+		<tr>
+			<td colspan="3">
+							<span id="AjaxHolder_PostComment_Requiredfieldvalidator4" style="color:Red;display:none;">请输入验证码</span>
+							<span id="AjaxHolder_PostComment_lblImage" style="color:Red;font-weight:bold;"></span>
+						</td>
+		</tr>
+		<tr>
+			<td width="78">验证码</td>
+			<td><input name="AjaxHolder$PostComment$CodeNumberTextBox" type="text" id="AjaxHolder_PostComment_CodeNumberTextBox" />*&nbsp;&nbsp;<img src="http://www.blogjava.net/Modules/CaptchaImage/JpegImage.aspx?cacheid=20131014141040"/></td>
+			<td align="left"></td>
+		</tr>
+	</table>
+	
+			</td>
+		</tr>
+		<TR>
+			<TD colSpan="3">内容(请不要发表任何与政治相关的内容)
+				<span id="AjaxHolder_PostComment_RequiredFieldValidator3" style="color:Red;visibility:hidden;">请输入评论内容</span><BR>
+				<textarea name="AjaxHolder$PostComment$tbComment" rows="10" cols="50" id="AjaxHolder_PostComment_tbComment" class="commentTextBox" onkeydown="ctlent(event,'AjaxHolder_PostComment_tbComment')" style="Width:480;Height:220"></textarea></TD>
+		</TR>
+		<TR>
+			<TD colSpan="3">
+		<span id="AjaxHolder_PostComment_Message" style="color:Red;"></span>
+		</td>
+		<TR>
+			<TD colSpan="3"><input id="AjaxHolder_PostComment_chkRemember" type="checkbox" name="AjaxHolder$PostComment$chkRemember" checked="checked" tabindex="-1" /><label for="AjaxHolder_PostComment_chkRemember">Remember Me?</label></TD>
+		</TR>
+		<TR>
+			<TD height="23"><input type="submit" name="AjaxHolder$PostComment$btnSubmit" value="提交" onclick="TempSave('AjaxHolder_PostComment_tbComment');WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;AjaxHolder$PostComment$btnSubmit&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="AjaxHolder_PostComment_btnSubmit" class="commentButton" />
+				</TD>
+			<td colSpan="2" height="23">&nbsp;
+				<a id="AjaxHolder_PostComment_lnkLogin" href="http://www.blogjava.net/login.aspx?ReturnURL=http://www.blogjava.net/fancydeepin/archive/2012/07/12/lombok.html&amp;SourceURL=/fancydeepin/archive/2012/07/12/lombok.html">登录</a>&nbsp;&nbsp;<!--<a id="AjaxHolder_PostComment_linkLoginComment" OnClick="if(document.getElementById('AjaxHolder_PostComment_tbComment').value != '') return confirm('未提交的评论内容将会丢失, 你真的要进入高级评论吗?');" href="http://www.blogjava.net/fancydeepin/archive/2012/07/12/lombok.html?login=1#Post">使用高级评论</a>&nbsp;&nbsp;<a href="http://www.blogjava.net/RequireRegister.aspx">新用户注册</a>&nbsp;&nbsp;<A href="#Top">返回页首</A>&nbsp;&nbsp;<a id="AjaxHolder_PostComment_lbRestore" OnClick="Restore('AjaxHolder_PostComment_tbComment'); return false;" href="/fancydeepin/archive/2012/07/12/lombok.html#Post">恢复上次提交</a>&nbsp;&nbsp;-->&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+		</TR>
+		<TR>
+			<TD colSpan="3"><label class="CtrlEnter">[使用Ctrl+Enter键可以直接提交]</label></TD>
+		</TR>
+		</div>
+		
+		<TR>
+			<TD colSpan="3"><!--该文被作者在 2012-07-15 08:56 编辑过--></TD>
+		</TR>
+		<!--
+		<TR>
+			<TD colSpan="3" height="5"></TD>
+		</TR>	
+		-->	
+		<TR>
+		<TD colSpan="3">
+		
+<script type='text/javascript'>
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type='text/javascript'>
+googletag.cmd.push(function() {
+googletag.defineSlot('/1090369/blogjava_blogpost_bottom', [300, 250], 'div-gpt-ad-1364133350381-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+<!-- blogjava_blogpost_bottom -->
+<div id='div-gpt-ad-1364133350381-0' style='width:300px; height:250px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1364133350381-0'); });
+</script>
+</div>
+<br/>
+
+		</TD>
+		</TR>
+		<tr>			
+		<td colspan="3">
+		
+		</td>
+		</tr>
+		<TR>
+		<TD colSpan="3"></TD>
+		</TR>
+		<TR>
+			<TD colSpan="3" height="1">网站导航:<div id="blogsite">
+			<a href="http://www.cnblogs.com" title="程序员的网上家园">博客园</a>&nbsp;&nbsp;
+			<a href="http://news.cnblogs.com">IT新闻</a>&nbsp;&nbsp;
+			<a href="http://kb.cnblogs.com">知识库</a>&nbsp;&nbsp;
+			<a href="http://www.cppblog.com">C++博客</a>&nbsp;&nbsp;
+			<a href="http://job.cnblogs.com">程序员招聘</a>&nbsp;&nbsp;
+			<a href="/fancydeepin/archive/2012/07/12/lombok.html?opt=admin">管理</a>
+			</div>
+		</TD>
+		</TR>
+		<TR>
+			<TD colSpan="3" height="5"></TD>
+		</TR>	
+		<TR>
+			<TD colSpan="3">&nbsp;</TD>
+		</TR>
+		<TR>
+			<TD colSpan="3" height="5"></TD>
+		</TR>
+		<TR>
+			<TD colSpan="3">
+				</TD>
+		</TR>		
+	</TABLE>	
+</div>
+<div id="AjaxHolder_PostComment_ValidationSummary1" style="color:Red;display:none;">
+
+	</div>
+
+</div>
+
+				
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="FooterCell">
+			
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.blogjava.net/" style="font-family:Verdana;font-size:12px;">BlogJava</a>
+	<br />
+	Copyright &copy; fancydeepin
+</p>
+
+		</td>
+	</tr>
+</table>
+<div id="lefttemp" style="DISPLAY:none">
+	
+		
+		
+<div id=cell>
+<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>公告</h3>
+	<div style="font-family: 'Microsoft Yahei', Tahoma, Helvetica, SimSun, sans-serif; font-size: 14px; line-height: 27px; padding-left: 5px;">
+如果您发现本博客内短时间频繁发布新的文章，说明博主近期都在努力的编辑和修改文章，通常多篇草稿一股脑儿发布，鄙视复制粘贴发布。绝对绿色无毒，广大网友可放心阅读。
+</div>
+
+</div>
+
+	
+	
+	
+<div id="cell">
+<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2>
+<h3>常用链接</h3>
+<ul>
+		<li><a id="Singlecolumn2_ctl00_repeaterLinks_ctl01_lnkLinkItem" href="http://www.blogjava.net/fancydeepin/MyPosts.html">我的随笔</a></li>
+	
+		<li><a id="Singlecolumn2_ctl00_repeaterLinks_ctl02_lnkLinkItem" href="http://www.blogjava.net/fancydeepin/MyComments.html">我的评论</a></li>
+	
+		<li><a id="Singlecolumn2_ctl00_repeaterLinks_ctl03_lnkLinkItem" href="http://www.blogjava.net/fancydeepin/OtherPosts.html">我的参与</a></li>
+	
+		<li><a id="Singlecolumn2_ctl00_repeaterLinks_ctl04_lnkLinkItem" href="http://www.blogjava.net/fancydeepin/RecentComments.html">最新评论</a></li>
+	</ul>
+</div>
+		<div id=cell>
+		<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>随笔分类<span style="font-size:11px;font-weight:normal">(99)</span></h3>
+		
+				<ul>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl01_RssLink" title="Subscribe to Convention Plugin(1)" href="http://www.blogjava.net/fancydeepin/category/52898.html/rss"><img title="Subscribe to Convention Plugin(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl01_Link" href="http://www.blogjava.net/fancydeepin/category/52898.html">Convention Plugin(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl02_RssLink" title="Subscribe to Cron(1)" href="http://www.blogjava.net/fancydeepin/category/51953.html/rss"><img title="Subscribe to Cron(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl02_Link" href="http://www.blogjava.net/fancydeepin/category/51953.html">Cron(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl03_RssLink" title="Subscribe to Eclipse(1)" href="http://www.blogjava.net/fancydeepin/category/52458.html/rss"><img title="Subscribe to Eclipse(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl03_Link" href="http://www.blogjava.net/fancydeepin/category/52458.html">Eclipse(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl04_RssLink" title="Subscribe to Exception Gather(2)" href="http://www.blogjava.net/fancydeepin/category/52735.html/rss"><img title="Subscribe to Exception Gather(2)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl04_Link" href="http://www.blogjava.net/fancydeepin/category/52735.html">Exception Gather(2)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl05_RssLink" title="Subscribe to Hibernate(3)" href="http://www.blogjava.net/fancydeepin/category/51931.html/rss"><img title="Subscribe to Hibernate(3)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl05_Link" href="http://www.blogjava.net/fancydeepin/category/51931.html">Hibernate(3)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl06_RssLink" title="Subscribe to Hibernate Annotation(8)" href="http://www.blogjava.net/fancydeepin/category/52774.html/rss"><img title="Subscribe to Hibernate Annotation(8)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl06_Link" href="http://www.blogjava.net/fancydeepin/category/52774.html">Hibernate Annotation(8)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl07_RssLink" title="Subscribe to Java(15)" href="http://www.blogjava.net/fancydeepin/category/52117.html/rss"><img title="Subscribe to Java(15)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl07_Link" href="http://www.blogjava.net/fancydeepin/category/52117.html">Java(15)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl08_RssLink" title="Subscribe to java 设计模式(9)" href="http://www.blogjava.net/fancydeepin/category/52299.html/rss"><img title="Subscribe to java 设计模式(9)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl08_Link" href="http://www.blogjava.net/fancydeepin/category/52299.html">java 设计模式(9)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl09_RssLink" title="Subscribe to Javamail(3)" href="http://www.blogjava.net/fancydeepin/category/51935.html/rss"><img title="Subscribe to Javamail(3)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl09_Link" href="http://www.blogjava.net/fancydeepin/category/51935.html">Javamail(3)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl10_RssLink" title="Subscribe to Jetty(1)" href="http://www.blogjava.net/fancydeepin/category/52031.html/rss"><img title="Subscribe to Jetty(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl10_Link" href="http://www.blogjava.net/fancydeepin/category/52031.html">Jetty(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl11_RssLink" title="Subscribe to JFreeChart(3)" href="http://www.blogjava.net/fancydeepin/category/52349.html/rss"><img title="Subscribe to JFreeChart(3)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl11_Link" href="http://www.blogjava.net/fancydeepin/category/52349.html">JFreeChart(3)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl12_RssLink" title="Subscribe to JNI(1)" href="http://www.blogjava.net/fancydeepin/category/52126.html/rss"><img title="Subscribe to JNI(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl12_Link" href="http://www.blogjava.net/fancydeepin/category/52126.html">JNI(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl13_RssLink" title="Subscribe to JVM(3)" href="http://www.blogjava.net/fancydeepin/category/53931.html/rss"><img title="Subscribe to JVM(3)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl13_Link" href="http://www.blogjava.net/fancydeepin/category/53931.html">JVM(3)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl14_RssLink" title="Subscribe to log4j(1)" href="http://www.blogjava.net/fancydeepin/category/52773.html/rss"><img title="Subscribe to log4j(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl14_Link" href="http://www.blogjava.net/fancydeepin/category/52773.html">log4j(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl15_RssLink" title="Subscribe to Lombok(1)" href="http://www.blogjava.net/fancydeepin/category/52153.html/rss"><img title="Subscribe to Lombok(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl15_Link" href="http://www.blogjava.net/fancydeepin/category/52153.html">Lombok(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl16_RssLink" title="Subscribe to Maven(10)" href="http://www.blogjava.net/fancydeepin/category/51930.html/rss"><img title="Subscribe to Maven(10)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl16_Link" href="http://www.blogjava.net/fancydeepin/category/51930.html">Maven(10)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl17_RssLink" title="Subscribe to Maven3 Guide(2)" href="http://www.blogjava.net/fancydeepin/category/52156.html/rss"><img title="Subscribe to Maven3 Guide(2)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl17_Link" href="http://www.blogjava.net/fancydeepin/category/52156.html">Maven3 Guide(2)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl18_RssLink" title="Subscribe to min-snail(1)" href="http://www.blogjava.net/fancydeepin/category/53534.html/rss"><img title="Subscribe to min-snail(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl18_Link" href="http://www.blogjava.net/fancydeepin/category/53534.html">min-snail(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl19_RssLink" title="Subscribe to Quartz(1)" href="http://www.blogjava.net/fancydeepin/category/51952.html/rss"><img title="Subscribe to Quartz(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl19_Link" href="http://www.blogjava.net/fancydeepin/category/51952.html">Quartz(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl20_RssLink" title="Subscribe to Spring(5)" href="http://www.blogjava.net/fancydeepin/category/51934.html/rss"><img title="Subscribe to Spring(5)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl20_Link" href="http://www.blogjava.net/fancydeepin/category/51934.html">Spring(5)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl21_RssLink" title="Subscribe to Urlrewrite(1)" href="http://www.blogjava.net/fancydeepin/category/51933.html/rss"><img title="Subscribe to Urlrewrite(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl21_Link" href="http://www.blogjava.net/fancydeepin/category/51933.html">Urlrewrite(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl22_RssLink" title="Subscribe to WebServices(1)" href="http://www.blogjava.net/fancydeepin/category/52738.html/rss"><img title="Subscribe to WebServices(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl22_Link" href="http://www.blogjava.net/fancydeepin/category/52738.html">WebServices(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl23_RssLink" title="Subscribe to XML(1)" href="http://www.blogjava.net/fancydeepin/category/51932.html/rss"><img title="Subscribe to XML(1)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl23_Link" href="http://www.blogjava.net/fancydeepin/category/51932.html">XML(1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl24_RssLink" title="Subscribe to 小菜一叠(7)" href="http://www.blogjava.net/fancydeepin/category/53303.html/rss"><img title="Subscribe to 小菜一叠(7)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl24_Link" href="http://www.blogjava.net/fancydeepin/category/53303.html">小菜一叠(7)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl25_RssLink" title="Subscribe to 数据结构(12)" href="http://www.blogjava.net/fancydeepin/category/52938.html/rss"><img title="Subscribe to 数据结构(12)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl25_Link" href="http://www.blogjava.net/fancydeepin/category/52938.html">数据结构(12)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl26_RssLink" title="Subscribe to 用自己的话说出来(5)" href="http://www.blogjava.net/fancydeepin/category/53939.html/rss"><img title="Subscribe to 用自己的话说出来(5)" src="/Skins/KJC/Images/xmlsmall.gif" style="border-width:0px;" /></a><a id="Singlecolumn2_Categories_CatList_ctl00_LinkList_ctl26_Link" href="http://www.blogjava.net/fancydeepin/category/53939.html">用自己的话说出来(5)</a>
+				</li>
+			
+				</ul>
+			</div>
+	
+		<div id=cell>
+		<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>随笔档案<span style="font-size:11px;font-weight:normal">(74)</span></h3>
+		
+				<ul>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl01_Link" href="http://www.blogjava.net/fancydeepin/archive/2013/10.html">2013年10月 (1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl02_Link" href="http://www.blogjava.net/fancydeepin/archive/2013/09.html">2013年9月 (2)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl03_Link" href="http://www.blogjava.net/fancydeepin/archive/2013/04.html">2013年4月 (1)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl04_Link" href="http://www.blogjava.net/fancydeepin/archive/2013/03.html">2013年3月 (2)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl05_Link" href="http://www.blogjava.net/fancydeepin/archive/2013/02.html">2013年2月 (11)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl06_Link" href="http://www.blogjava.net/fancydeepin/archive/2012/11.html">2012年11月 (3)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl07_Link" href="http://www.blogjava.net/fancydeepin/archive/2012/10.html">2012年10月 (14)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl08_Link" href="http://www.blogjava.net/fancydeepin/archive/2012/08.html">2012年8月 (15)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl09_Link" href="http://www.blogjava.net/fancydeepin/archive/2012/07.html">2012年7月 (14)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl01_LinkList_ctl10_Link" href="http://www.blogjava.net/fancydeepin/archive/2012/06.html">2012年6月 (11)</a>
+				</li>
+			
+				</ul>
+			</div>
+	
+		<div id=cell>
+		<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>115 网盘资源</h3>
+		
+				<ul>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl01_Link" href="http://115.com/file/bemui0zy#DWR%20%e4%b8%ad%e6%96%87%e6%96%87%e6%a1%a3.rar" target="_blank">DWR 入门及使用中文文档</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl02_Link" href="http://115.com/file/anc1kvhm#Ext%203.0%20%e4%b8%ad%e6%96%87API.chm" target="_blank">Ext 3.0 中文 api chm</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl03_Link" href="http://115.com/file/e7jm4kxb#Java2%e6%a0%b8%e5%bf%83%e6%8a%80%e6%9c%af%e5%8d%b72-%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7-%e7%ac%ac7%e7%89%88%e4%b8%ad%e6%96%87%e9%ab%98%e6%b8%85PDF%e7%89%88.rar" target="_blank">Java2核心技术卷2-第7版</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl04_Link" href="http://115.com/file/e7jmvwkt#JavaScript-%e6%89%8b%e5%86%8c.rar" target="_blank">JavaScript 参考手册 chm</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl05_Link" href="http://115.com/file/dpkeb1dm#JAVA%e5%8f%82%e8%80%83%e5%a4%a7%e5%85%a8.J2SE.5EDITION(%e4%b8%96%e7%95%8c%e7%ba%a7%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1%e5%a4%a7%e5%b8%88%e4%bd%9c%e5%93%81)%20.rar" target="_blank">JAVA参考大全</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl06_Link" href="http://115.com/file/bemu95py#Java%e7%bc%96%e7%a8%8b%e6%80%9d%e6%83%b3(%e7%ac%ac4%e7%89%88).7z" target="_blank">Java编程思想(第4版)</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl07_Link" href="http://115.com/file/dpk80h63#jQueryAPI-100214.chm">JQuery api</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl08_Link" href="http://115.com/file/c2eft5kt#Linux%20-%20PDF.7z" target="_blank">Linux 操作系统电子书</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl09_Link" href="http://115.com/file/c2ef7joj#Maven%20-%20PDF.7z" target="_blank">maven3 电子书</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl10_Link" href="http://115.com/file/e7jm4ey8#[%e4%bb%a3%e7%a0%81%e6%95%b4%e6%b4%81%e4%b9%8b%e9%81%93].(%e7%be%8e)%e9%a9%ac%e4%b8%81.%e6%89%ab%e6%8f%8f%e7%89%88.pdf" target="_blank">代码整洁之道</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl11_Link" href="http://115.com/file/c2eiqy0p#%e5%a4%a7%e8%af%9d%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f(%e5%b8%a6%e7%9b%ae%e5%bd%95%e5%ae%8c%e6%95%b4%e7%89%88)%20%e7%a8%8b%e6%9d%b0.rar" target="_blank">大话设计模式 - 程杰</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl12_Link" href="http://115.com/file/dpkeb8k7#[%e7%96%af%e7%8b%82JAVA%e8%ae%b2%e4%b9%89].%e6%9d%8e%e5%88%9a.%e9%ab%98%e6%b8%85%e6%89%ab%e6%8f%8f%e7%89%88.pdf" target="_blank">疯狂JAVA讲义-李刚</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl13_Link" href="http://115.com/file/dpkeb0y0#[%e7%96%af%e7%8b%82Java%ef%bc%9a%e7%aa%81%e7%a0%b4%e7%a8%8b%e5%ba%8f%e5%91%98%e5%9f%ba%e6%9c%ac%e5%8a%9f%e7%9a%8416%e8%af%be].%e6%9d%8e%e5%88%9a.%e6%ba%90%e4%bb%a3%e7%a0%81.rar" target="_blank">突破程序员基本功的16课-李刚</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl14_Link" href="http://115.com/file/c2ef8y3t#%e8%bd%bb%e9%87%8f%e7%ba%a7%20J2EE%20%e4%bc%81%e4%b8%9a%e5%ba%94%e7%94%a8%e5%ae%9e%e6%88%98%ef%bc%9aStruts+Spring+Hibernate%20%e6%95%b4%e5%90%88%e5%bc%80%e5%8f%91%20.rar" target="_blank">轻量级J2EE企业应用实战-李刚</a>
+				</li>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl02_LinkList_ctl15_Link" href="http://115.com/file/e7jm4gbt#[%e9%87%8d%e6%9e%84-%e6%94%b9%e5%96%84%e6%97%a2%e6%9c%89%e4%bb%a3%e7%a0%81%e7%9a%84%e8%ae%be%e8%ae%a1].(Refactoring.Improving.the.Design.of.Existing.Code).Martin.Fowler.%e6%96%87%e5%ad%97%e7%89%88.pdf" target="_blank">重构-改善既有代码的设计</a>
+				</li>
+			
+				</ul>
+			</div>
+	
+		<div id=cell>
+		<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>eclipse-plugin</h3>
+		
+				<ul>
+			
+				<li><a id="Singlecolumn2_Categories_CatList_ctl03_LinkList_ctl01_Link" href="http://115.com/file/dpk80gj0#eclipse-maven3-plugin.7z" target="_blank">eclipse-maven3-plugin</a>
+				</li>
+			
+				</ul>
+			</div>
+	
+
+<div id="cell">
+<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>最新随笔</h3>
+<ul style="word-break:break-all">
+	
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl00_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/10/02/cookie_and_session.html">1. Session 与 Cookie</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl01_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/09/30/fan_servlet.html">2. JSP/Servlet 工作原理</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl02_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/09/29/jvm_heep.html">3. Java 堆内存</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl03_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/04/23/min-snail.html">4. 小瓜牛漫谈系列</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl04_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/03/31/java-ee-context.html">5. 几个 Context 上下文的区别</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl05_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/03/30/java-ee_web-xml.html">6. web.xml 的加载过程</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl06_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/07/Java_static_final_transient.html">7. static、final、transient [ Java ]</a></li>
+		
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl06_RecentPostsList2_ctl01_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/07/xiaocai_submax.html">8. 最大连续子串的和</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl07_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/06/CPP_JAVA_BinarySearch.html">9. 折半查找(二分法查找) [ C++ / Java ]</a></li>
+		
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl07_RecentPostsList2_ctl01_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/06/CPP_JAVA_SelectSort.html">10. 选择排序 [ C++ / Java ]</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl08_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/05/CPP_JAVA_ShellSort.html">11. 插入排序 —— 希尔排序 [ C++ / Java ] </a></li>
+		
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl08_RecentPostsList2_ctl01_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/05/CPP_JAVA_InsertSort.html">12. 插入排序 —— 直接插入排序 [ C++ / Java ]</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl09_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/04/CPP_BinarySearchTree.html">13. 二叉排序树 [ C++ 实现 ]</a></li>
+		
+		
+	
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl10_RecentPostsList2_ctl00_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/03/CPP_BinaryTreeSearch.html">14. 二叉树的深度优先遍历与广度优先遍历 [ C++ 实现 ]</a></li>
+		
+			<li><a id="Singlecolumn2__b6a7b8582e5_RecentPostsList_ctl10_RecentPostsList2_ctl01_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/02/03/CPP_BinaryTree.html">15. 二叉树 [ C++ 实现 ]</a></li>
+		
+	
+</ul>
+</div>
+
+<script language="JavaScript">
+function SearchGoogle(key,evt,site)
+		{
+			if(evt.keyCode==13 || evt.keyCode==0)
+			{
+				key.focus();
+				var keystr = encodeURIComponent(key.value);
+				url = "http://www.google.com/search?q=";
+				url = url+keystr;
+				url += "&ie=UTF-8&oe=GB2312&hl=zh-CN&domains="+site+"&sitesearch="+site;
+				window.location = url;
+				return false;			
+			}
+			
+		}
+</script>
+<div id="cell">
+<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><H3>搜索</H3>
+<ul>
+	<li><input style="WIDTH: 130px" type="text" name="q" id="q" onkeydown="return SearchGoogle(document.getElementById('q'),event,'http://www.blogjava.net/fancydeepin/')">&nbsp;<input onclick="SearchGoogle(document.getElementById('q'),event,'http://www.blogjava.net/fancydeepin/')" type="button" value="搜索" name="sa"></li></ul>
+</div>
+<div id=cell>
+<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><H3>积分与排名</H3>
+<ul>
+	<li>
+		积分 -
+		169526
+	<li>
+		排名 -
+		176
+	</li>
+</ul>
+</div>
+
+<div id="cell">
+<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>最新评论
+	<a id="Singlecolumn2__208a11da475a_RSSHyperlink1" href="http://www.blogjava.net/fancydeepin/CommentsRSS.aspx"><img src="/images/xml.gif" style="border-width:0px;" /></a></h3>
+<div class="RecentComment">
+	
+			<ul>
+		
+			<li style="word-break:break-all">
+				<a id="Singlecolumn2__208a11da475a_CommentList_ctl01_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/10/11/384783.html#404860">1. re: java 建造者模式（Builder）</a>
+			</li>
+			<li style="word-break:break-all">
+				看了几篇相关的，终于第一篇让我明白了。因为有一个&quot;不用设计模式的实现&quot;，谢谢了，呵～
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--经典小笑话</li>
+		
+			<li style="word-break:break-all">
+				<a id="Singlecolumn2__208a11da475a_CommentList_ctl02_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/10/09/404589.html#404790">2. re: Session 与 Cookie</a>
+			</li>
+			<li style="word-break:break-all">
+				博主写得很认真！表扬一下
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--xhqgogogo</li>
+		
+			<li style="word-break:break-all">
+				<a id="Singlecolumn2__208a11da475a_CommentList_ctl03_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/10/02/404589.html#404668">3. re: Session 与 Cookie</a>
+			</li>
+			<li style="word-break:break-all">
+				@快开工具<br>谢谢。
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--fancydeepin</li>
+		
+			<li style="word-break:break-all">
+				<a id="Singlecolumn2__208a11da475a_CommentList_ctl04_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/10/02/404589.html#404664">4. re: Session 与 Cookie</a>
+			</li>
+			<li style="word-break:break-all">
+				支持一下博主！
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--快开工具</li>
+		
+			<li style="word-break:break-all">
+				<a id="Singlecolumn2__208a11da475a_CommentList_ctl05_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2013/10/01/404571.html#404660">5. re: JSP/Servlet 工作原理</a>
+			</li>
+			<li style="word-break:break-all">
+				@零柒锁业<br>这句话有什么问题吗? 请指教。
+			</li>
+			<li style="text-align:right;margin-right:4px">
+				--fancydeepin</li>
+		
+			</ul>
+		
+</div>
+</div>
+
+<div id="cell">
+<img src="/Skins/KJC/Images/icon-group.jpg" hspace=5 align=left vspace=2><h3>阅读排行榜</h3>
+<div class="RecentComment">
+	
+			<ul style="word-break:break-all">
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl01_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/07/13/382965.html">1. eclipse maven plugin 插件 安装 和 配置(62928)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl02_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/06/12/380605.html">2. Maven 手动添加 JAR 包到本地仓库(11960)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl03_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/08/25/386241.html">3. java 泛型 深入(5424)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl04_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/06/10/380521.html">4. hibernate one-to-many many-to-one 双向注解(5089)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl05_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/07/12/382933.html">5. Lombok 安装、入门 - 消除冗长的 java 代码(3377)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl06_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/08/27/386381.html">6. java 动态代理（Proxy）(3372)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl07_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/08/31/386636.html">7. Spring Security 3（Spring 安全服务）(2556)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl08_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/07/13/382966.html">8. eclipse maven3 创建 maven 项目 之 HelloWorld 入门(2501)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl09_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/11/19/391520.html">9. eclipse SDK 安装和配置 GDB 为 C/C++ 开发环境提供 debug 调试 [ 带自录制视频 ](2412)</a>
+			</li>
+		
+			<li>
+				<a id="Singlecolumn2__3011ef3db6c4_TopList_ctl10_Hyperlink1" href="http://www.blogjava.net/fancydeepin/archive/2012/10/26/390244.html">10. Struts2 Convention Plugin ( struts2 零配置 )(2257)</a>
+			</li>
+		
+			</ul>
+		
+</div>
+</div>
+
+</div>
+
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("AjaxHolder_PostComment_ValidationSummary1"));
+var Page_Validators =  new Array(document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator1"), document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator2"), document.getElementById("AjaxHolder_PostComment_Requiredfieldvalidator4"), document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator3"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var AjaxHolder_PostComment_RequiredFieldValidator1 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator1"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator1");
+AjaxHolder_PostComment_RequiredFieldValidator1.controltovalidate = "AjaxHolder_PostComment_tbTitle";
+AjaxHolder_PostComment_RequiredFieldValidator1.errormessage = "请输入标题";
+AjaxHolder_PostComment_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator1.initialvalue = "";
+var AjaxHolder_PostComment_RequiredFieldValidator2 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator2"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator2");
+AjaxHolder_PostComment_RequiredFieldValidator2.controltovalidate = "AjaxHolder_PostComment_tbName";
+AjaxHolder_PostComment_RequiredFieldValidator2.errormessage = "请输入你的姓名";
+AjaxHolder_PostComment_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator2.initialvalue = "";
+var AjaxHolder_PostComment_Requiredfieldvalidator4 = document.all ? document.all["AjaxHolder_PostComment_Requiredfieldvalidator4"] : document.getElementById("AjaxHolder_PostComment_Requiredfieldvalidator4");
+AjaxHolder_PostComment_Requiredfieldvalidator4.controltovalidate = "AjaxHolder_PostComment_CodeNumberTextBox";
+AjaxHolder_PostComment_Requiredfieldvalidator4.errormessage = "请输入验证码";
+AjaxHolder_PostComment_Requiredfieldvalidator4.display = "Dynamic";
+AjaxHolder_PostComment_Requiredfieldvalidator4.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_Requiredfieldvalidator4.initialvalue = "";
+var AjaxHolder_PostComment_RequiredFieldValidator3 = document.all ? document.all["AjaxHolder_PostComment_RequiredFieldValidator3"] : document.getElementById("AjaxHolder_PostComment_RequiredFieldValidator3");
+AjaxHolder_PostComment_RequiredFieldValidator3.controltovalidate = "AjaxHolder_PostComment_tbComment";
+AjaxHolder_PostComment_RequiredFieldValidator3.errormessage = "请输入评论内容";
+AjaxHolder_PostComment_RequiredFieldValidator3.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+AjaxHolder_PostComment_RequiredFieldValidator3.initialvalue = "";
+var AjaxHolder_PostComment_ValidationSummary1 = document.all ? document.all["AjaxHolder_PostComment_ValidationSummary1"] : document.getElementById("AjaxHolder_PostComment_ValidationSummary1");
+AjaxHolder_PostComment_ValidationSummary1.showmessagebox = "True";
+AjaxHolder_PostComment_ValidationSummary1.showsummary = "False";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+document.getElementById('AjaxHolder_PostComment_ValidationSummary1').dispose = function() {
+    Array.remove(Page_ValidationSummaries, document.getElementById('AjaxHolder_PostComment_ValidationSummary1'));
+}
+Sys.Application.initialize();
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator1').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator1'));
+}
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator2').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator2'));
+}
+
+document.getElementById('AjaxHolder_PostComment_Requiredfieldvalidator4').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_Requiredfieldvalidator4'));
+}
+
+document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator3').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('AjaxHolder_PostComment_RequiredFieldValidator3'));
+}
+//]]>
+</script>
+</form>
+    <script type="text/javascript" src="/script/ShowHidden.js"></script>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-476124-3']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+</body>
+</html>

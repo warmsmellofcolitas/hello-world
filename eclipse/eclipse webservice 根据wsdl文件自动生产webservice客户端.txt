@@ -1,0 +1,37 @@
+1.首先用浏览器访问webservice的站点，点击“webservice说明”链接，就打开了wsdl页面：
+    http://localhost/ssh/cpic/HelloWord?wsdl
+2.接着保存打开的页面，后缀为.wsdl，把保存好的文件拷入eclipse的工程中。
+3.在eclipse中新建一个项目test->New->Other->Web Services->Web Service Client->Next->在Service definition中写入http://localhost/ssh/cpic/HelloWord?wsdl
+    ->Finish
+4.生成的文件中，作为接口来使用的文件名为：####Stub.java。####因webservice的类名不同而不同。这个文件中就包含了webservice的所有方法。
+5.在调用##Stub.java中的方法之前，必须要实例化,具体如下：
+    ServiceLocator service = new ServiceLocator();
+    java.net.URL url = new new java.net.URL(wsdl地址);
+    ServiceStub stub = new ServiceStub(url,service);
+  或者：
+    ServiceStub stub=(ServiceStub) new ServiceLocator().getXXPort();//或者HelloWorld helloWorld=new HelloWorldImplServiceLocator().getHelloWorldImplPort();
+---------------------------------------------
+自动生成的客户端调用方法：
+package test;
+import java.rmi.RemoteException;
+import javax.xml.rpc.ServiceException;
+import com.webservice.Customer;
+import com.webservice.HelloWorld;
+import com.webservice.HelloWorldImplServiceLocator;
+import com.webservice.HelloWorldImplServiceSoapBindingStub;
+public class Main {
+	public static void main(String[] args) throws ServiceException, RemoteException {
+		Customer customer =new Customer();
+		customer.setName("rainbow");
+		//或者HelloWorld helloWorld=new HelloWorldImplServiceLocator().getHelloWorldImplPort();
+		HelloWorldImplServiceSoapBindingStub helloWorld=(HelloWorldImplServiceSoapBindingStub) new HelloWorldImplServiceLocator().getHelloWorldImplPort();//或者HelloWorld helloWorld=new HelloWorldImplServiceLocator().getHelloWorldImplPort();
+		String s=helloWorld.sayHello(customer);
+		System.out.println(s);
+	}
+}
+
+
+
+
+
+

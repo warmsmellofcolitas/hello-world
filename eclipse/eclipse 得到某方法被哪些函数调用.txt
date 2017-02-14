@@ -1,0 +1,1 @@
+选中这个方法名->反键->Open Call Hierarchy->下面Call Hierarchy插件框会显示调用此函数的所有方法

@@ -1,0 +1,30 @@
+package com.ccbsh;
+
+import java.io.IOException;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
+public class Main2 {
+	public static void main(String[] args) throws ClientProtocolException, IOException {
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpGet httpGet = new HttpGet("http://localhost:80/xxx/aaa?ip=192.168.2.18&port=7034&data=message");
+		CloseableHttpResponse response = httpClient.execute(httpGet); // 4.3版本不设置超时的话，一旦服务器没有响应，等待时间N久(>24小时)。
+		HttpEntity entity = response.getEntity(); // 返回报文实体
+		StatusLine status = response.getStatusLine();
+		System.out.println("返回的状态码为：" + status); // 具体返回码(200)为status.getStatusCode(); 
+		String ret = EntityUtils.toString(entity); // 将返回报文实体转换为字符串
+		System.out.println("返回的报文为：" + ret);
+		EntityUtils.consume(entity);  // 释放是否可以去掉？
+		response.close(); // 关闭资源,可以写在finally里
+		httpGet.releaseConnection(); // 释放资源
+		httpClient.close(); // 关闭资源
+	}
+}
+

@@ -1,0 +1,115 @@
+空值处理:
+package cn.com.leadfar.struts2.freemarker;
+public class User {
+	private int id;
+	private String name;
+	private int age;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		Configuration cfg = new Configuration(); // 通过freemarker的configuration读取相应的ftl
+		cfg.setClassForTemplateLoading(Test.class, "/ftl"); // 设置加载模板文件的目录
+		Template template = cfg.getTemplate("aaa.ftl"); // 加载模板,找到名为aaa.ftl的文件
+		Map<String, Object> root = new HashMap<String, Object>(); // 创建数据模型
+		User user = new User();
+		user.setId(1);
+		user.setAge(6);
+		root.put("user", user); // 为数据模型添加值
+		root.put("username", "管理员");
+		Writer out = new PrintWriter(System.out); // 通过template将模版文件输出到相应的流
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+类路径下src/ftl/aaa.ftl:
+<html>
+  <body>
+	<#-- ${user.name}因为值为null会报错,所以这样处理,如果为null则输出没有值,也可写成${user.name!} -->
+	<h1>${user.id}------------${user.name!"没有值"}------------${user.age}</h1>
+  </body>
+</html>
+------------------------------------------------------------------
+空值处理2:
+package cn.com.leadfar.struts2.freemarker;
+public class Group {
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+package cn.com.leadfar.struts2.freemarker;
+public class User {
+	private int id;
+	private String name;
+	private int age;
+	private Group group;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public Group getGroup() {
+		return group;
+	}
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+}
+类路径下src/ftl/aaa.ftl:
+<html>
+	<body>
+		<#-- ${user.group}因为值为null会报错,所以这样处理,如果为null则输出没有值,也可写成${user.group!}-->
+		<h1>${user.id}-----${user.group!"没有值"}-----${user.age}</h1>
+		<#-- 如果写成${user.group.name!"没有值"},freemarker仅仅只会判断group.name是不是空值,所以还是会报错 -->
+		<h1>${user.id}-----${(user.group.name)!"没有值"}-----${user.age}</h1> <#-- 加个括号才会逐级导航判断null值 -->
+        </body>
+</html>
+
+
+
+
+

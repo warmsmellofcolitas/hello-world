@@ -1,0 +1,1 @@
+Servers控制台->双击->Open launch configuration->Argument->在VM arguments后面加上-Xms128m -Xmx512m -XX:PermSize=128m -XX:MaxPermSize=128m->ok

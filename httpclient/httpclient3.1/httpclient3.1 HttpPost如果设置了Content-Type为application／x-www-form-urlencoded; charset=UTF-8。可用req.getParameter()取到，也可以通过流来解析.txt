@@ -1,0 +1,81 @@
+接受第三方的post过来的xml，如果没有设置Content-Type: application/x-www-form-urlencoded。则可以通过流来解析
+如果设置了Content-Type: application/x-www-form-urlencoded 则需要去parmmeterMap中间去取
+---------------------------------------
+package httpclient;
+import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpConnectionManager;
+import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.commons.httpclient.cookie.CookiePolicy;
+import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+public class HttpCli {
+	public static void main(String[] args) throws Exception{
+		HttpConnectionManagerParams params = new HttpConnectionManagerParams();
+        	params.setConnectionTimeout(15000);//连接超时
+        	params.setSoTimeout(30000);//应答超时
+        	//网络参数
+        	params.setStaleCheckingEnabled(true);
+        	params.setTcpNoDelay(true);
+        	params.setDefaultMaxConnectionsPerHost(100);
+        	params.setMaxTotalConnections(1000);
+        	params.setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
+        	HttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
+        	connectionManager.setParams(params);
+        	HttpClient client=new HttpClient(connectionManager);
+		PostMethod method = new PostMethod("http://localhost:80/hxb/payWeb.action");
+        	method.addRequestHeader("Connection", "Keep-Alive");
+        	method.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
+        	method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false));
+       	 	method.setRequestEntity(new ByteArrayRequestEntity("username=lijie&password=861006".getBytes()));
+        	method.addRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        	int statusCode = client.executeMethod(method);
+        	if (statusCode != HttpStatus.SC_OK) {
+            		System.out.println("错误");
+        	}else{
+        		byte[] b=method.getResponseBody();
+        		String s=new String(b);
+        		System.out.println(s);
+        	}
+
+        	method.releaseConnection();
+	}
+}
+-----------------------------------
+package com;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts2.ServletActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.unionpay.upmp.sdk.service.UpmpService;
+public class PayWebAction extends ActionSupport{
+	@Override
+	public String execute() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		Iterator<String> it = request.getParameterMap().keySet().iterator();
+		System.out.println("-----------------------");
+		while(it.hasNext()){
+			String key=it.next();
+			String value = ((Object[])(request.getParameterMap().get(key)))[0].toString();
+			System.out.println(key+":"+value);
+		}
+		System.out.println("-----------------------");
+		PrintWriter os=response.getWriter();
+		os.write("ILoveThisGame");
+		return null;
+	}
+}
+
+
+
+
+
+

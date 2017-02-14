@@ -1,0 +1,7 @@
+lazy缺省的是代理，即lazy="proxy" lazy表示什么时候抓取，fetch表示用什么方式抓取fetch="join"，fetch缺省的是select，即fetch="select"
+即默认的是 lazy="proxy" fetch="select"/> 不写的时候就是这样的
+
+如果配置fetch="join"则你再配置lazy则lazy失效了
+
+能够懒加载的对象都是被改写过的代理对象，当相关联的session没有关闭时，访问这些懒加载对象（代理对象）的属性（getId和getClass除外）hibernate会初始化这些代理，或用
+Hibernate.initialize(proxy)来初始化代理对象，相关联的session关闭后，再访问懒加载的对象将出现异常。

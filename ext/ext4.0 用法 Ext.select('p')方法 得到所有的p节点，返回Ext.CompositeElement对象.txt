@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/ext/ext-all.css">
+<script type="text/javascript" src="js/ext/ext-all.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	alert('hello world!');
+	var ps = Ext.select('p'); // 获取所有p元素
+	ps.each(function(el){
+		el.highlight(); // 背景色变黄，一会消失
+	});
+});
+</script>
+
+</head>
+<body>
+<p>aaa</p>
+<p>bbb</p>
+<p>ccc</p>
+</body>
+</html>
+------------------
+select参数还可以更复杂一些,其中可以包括W3C Css3Dom选取器,基本的XPath,HTML属性等,详细情况,可以查看DomQuery API的文档,来了解细节. 

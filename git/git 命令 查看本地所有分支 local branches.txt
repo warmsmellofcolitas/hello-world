@@ -1,0 +1,5 @@
+本地分支(local branches) ，当你输入“git branch”时显示的。例如下面这个小例子： 
+$ git branch
+   debian
+   server
+ * master

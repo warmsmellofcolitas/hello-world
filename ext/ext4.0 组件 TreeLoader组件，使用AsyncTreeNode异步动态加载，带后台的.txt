@@ -1,0 +1,537 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib uri="/WEB-INF/taglib/c.tld" prefix="c" %>
+<%@ page isELIgnored="false"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+	
+	<link rel="stylesheet" type="text/css" href="resources/plugins/ext3/resources/css/ext-all.css" />
+ 	<script type="text/javascript" src="resources/plugins/ext3/ext-base.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ext-all.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/ux/TabCloseMenu.js"></script>
+  	<script type="text/javascript" src="resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+  	<script type="text/javascript" src="resources/js/PwMenu.js"></script>
+  	<style type="text/css">
+  		.nav {
+        	background-image:url(resources/plugins/ext3/icons/cog.png);
+    	}
+  		html, body {
+	        font:normal 12px verdana;
+	        margin:0;
+	        padding:0;
+	        border:0 none;
+	        overflow:hidden;
+	        height:100%;
+    	}
+    	.settings {
+        	background-image:url(resources/plugins/ext3/icons/cog.png);
+    	}
+    	
+    	A{color: #006600;text-decoration:none;}
+		A:hover {TEXT-DECORATION: none}
+		
+		.guide { PADDING-RIGHT: 0.5em;  PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0.5em;PADDING-TOP: 0.5em;}
+		.guide a{
+			text-decoration:none;
+			padding:2px 2px 2px 2px;
+			margin:0px 0px;
+			border:1px solid #FFFFFF;
+		}
+		.guide a:hover{background-color:#F0F8FF;text-decoration:none;border:1px solid #FFFFFF;}
+		.guide a:visited{text-decoration:none;}
+    	.s1 {COLOR: #008000}
+		.s2 {COLOR: #984b98}
+		.s3 {COLOR: #fa891b}
+		.s4 {COLOR: #0033ff}
+		.s5 {COLOR: #659b28}
+		.h {PADDING-RIGHT: 0.4em; PADDING-LEFT: 0.4em; BACKGROUND: url(images/bg.png) #9AC0CD repeat-x 0px -200px; PADDING-BOTTOM: 0.2em; COLOR: #006600; PADDING-TOP: 0.2em; BORDER-BOTTOM: #deead2 1px solid; TEXT-ALIGN: center}
+		.menu {BORDER-RIGHT: #deead2 1px solid; BORDER-TOP: #deead2 1px solid; BACKGROUND: #fff; BORDER-LEFT: #deead2 1px solid; BORDER-BOTTOM: #deead2 1px solid; POSITION: absolute}
+		.menu LI {PADDING: 0px;  BACKGROUND: #fff;  MARGIN: 0px;}
+		.menu UL {PADDING: 0px;  BACKGROUND: #fff;  MARGIN: 0px;}
+		.menu LI {LIST-STYLE-TYPE: none}
+		.menu A {PADDING-RIGHT: 15px; DISPLAY: block; PADDING-LEFT: 15px; BACKGROUND: #fff; PADDING-BOTTOM: 0px; PADDING-TOP: 0px}
+		.menu A:hover {BACKGROUND: #E0EEEE; COLOR: #000000; TEXT-DECORATION: none}
+		.menu UL.ul1 LI A {PADDING-RIGHT: 0px; DISPLAY: inline; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px}
+				
+    	
+    </style>
+	<script type="text/javascript">
+	Ext.BLANK_IMAGE_URL = 'resources/plugins/ext3/resources/images/default/s.gif';
+	var isOnload=true;
+    Ext.onReady(function(){   
+       Ext.QuickTips.init(); 
+       Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+       var viewport = new Ext.Viewport({
+            layout:'border',
+            items:[
+            	new Ext.BoxComponent({ // raw
+               	region:'north',
+              		el: 'north',
+              		height:23
+            	}),new Ext.BoxComponent({
+              		region:'south',
+              		el: 'south',
+              		height:20
+          		}),{ // 默认的xtype是panel类型，如果设置了id可以通过Ext.getComp("id")得到，如没设置id也可以通过viewport.items.get(2)得到，通过nav.getXType()可以得到这个组件的类型，为panel
+                	region:'west',
+               	width:200,
+                 	split:true,
+                	title:'菜单导航',
+                	collapsible:true,
+                 	layout:'accordion',
+                 	defaults:{autoScroll:true,border:true},
+                 	layoutConfig:{
+                  	animate:true
+                	}
+            	},
+              	new Ext.TabPanel({
+               	region:'center',
+                 	id:'center-panel',
+                	deferredRender:false,
+                	defaults: {autoScroll:true},
+                	plugins: new Ext.ux.TabCloseMenu(),
+                	enableTabScroll:true,
+                	activeTab:0, // 第一个组件被激活
+                 	items:[{ // 增加第一个tab
+	              		contentEl:'welcome',
+	                  id:'tab_welcome',
+	                  title: '欢迎',
+	                  closable:false,
+	                  html:'<iframe name="iftab_welcome" scrolling="auto" frameborder="0" width="100%" height="100%" src="welcome.jsp"></iframe>',
+	                  autoScroll:true
+                  }],
+                	listeners:{
+                  	'beforeremove': function(tdemo,item,event) {
+	                 		if(item.id!="tab_welcome"){
+		                 		document.getElementsByName('if'+item.id)[0].src="about:blank";                  
+	                   	}
+                		}
+              		}
+           		})
+        		]
+     		});
+       	new Ext.data.Store({
+    	   	proxy:new Ext.data.HttpProxy({url:'rightfunction.do?method=getTreesByUserId&belongs=1&parent_id=00000000'}),
+       		reader:new Ext.data.JsonReader({},['id','text','leaf']),
+        		autoLoad:true
+       	}).on('load',function(store,records){
+    	   	var nav = viewport.items.get(2);
+        		for (var i=0; i<records.length;i++) {
+       			if(records[i].data.leaf)continue;
+        	  		var menu = new Ext.Panel({ // 最高的根目录，把id和title放在panel的头上，使用panel做的，然后把panel放在左边的大panel上，打panel是accordion布局
+           			id:records[i].data.id,
+            		title:records[i].data.text,
+            		iconCls:'nav'
+           		});
+        	   	// 操作权限
+           		var tree = new Ext.tree.TreePanel({
+       	  			border:false,
+       	  			rootVisible:false,
+       	  			loader : new Ext.tree.TreeLoader({dataUrl:'rightfunction.do?method=getTreesByUserId&belongs=1&parent_id='+records[i].data.id}),
+       	 			root : new Ext.tree.AsyncTreeNode({
+      	   			id : records[i].data.id,
+      	   			text : records[i].data.text
+       				}),
+       	   		listeners: {
+       	     			click: function(n){ // 可以得到改node节点的所有参数
+       	     				// alert("uuuu"+n.attributes.id); // tree从后台传过来id的值
+       	     				// alert("uuuu"+n.attributes.text); // tree从后台传过来的text的值
+       	     				// alert("uuuu"+n.attributes.url); // tree从后台传过来的url的值
+                 			if(!n.attributes.leaf)return;
+                 			var c = Ext.getCmp('center-panel');
+                  		var tab = c.getComponent("tab_"+n.attributes.id);
+       			  			if(tab){c.remove(tab);} // 判断是否已经打开该面板，如果开打则关闭，重新加载
+       			    		tab = c.add({
+       							'id' : 'tab_'+n.attributes.id,
+       							'title' : n.attributes.text,
+       					 		closable : true,  //通过html载入目标页
+       					 		html:'<iframe name="iftab_'+n.attributes.id+'" scrolling="auto" frameborder="0" width="100%" height="100%" src="'+n.attributes.url+'"></iframe>'
+       				  		});
+       			     		c.setActiveTab(tab);
+       	        		}
+       	    		}
+           		});
+         		tree.on('beforeload',function(node){ // 每次在点击的节点的时候（点击节点就是在加载）调用后台的url之前，把参数改变
+         			// alert("xx:"+node.id); // 结合Ext.tree.AsyncTreeNode使用，加载之前把id传到这里，然后将loader的url改变一下，不然会传到后台的一直是00000011
+            		this.loader.dataUrl = 'rightfunction.do?method=getTreesByUserId&belongs=1&parent_id='+node.id; // 改变传到后台的参数
+         		});
+         		/*貌似要不要这个无所谓
+          		menu.on("expand",function(){
+           			if(!isOnload){ // 正在加载则不需要展开，因为默认展开第一个。如果加载完成后，因为根元素被隐藏了，所以需要将根元素的子元素展开，不然会展开后会是空的
+            			this.items.get(0).root.expand();
+             		}
+        			});
+         		*/
+          		menu.add(tree);
+        	 		nav.add(menu);
+        	 		//viewport.doLayout(); // 貌似要不要这个无所谓
+      		}
+
+	         var menu = new Ext.Panel({
+	             id:'pw12432',
+	             title:'我的面板',
+	             iconCls:'nav'
+	             
+	         });
+
+           	// 个人中心的tree
+           	var treeself = new Ext.tree.TreePanel({
+              	el:'self',  
+              	animate:false,
+              	autoScroll:true,
+              	rootVisible:false,
+           		border:false,
+           		lines:true
+           	});
+           	var rootself=new Ext.tree.TreeNode({text:"我的面板"}); 
+           	var password=new Ext.tree.TreeNode({
+   	      	text:"修改密码",
+   	     		id:"password",
+   	     		listeners:{
+	   		 		'click':function(node, event) {
+	   			  		event.stopEvent();
+	   			  		updatePinkey();
+	   		    	}
+   	      	}
+   	  		});
+   	    	var mobilephone=new Ext.tree.TreeNode({
+   	     		text:"修改基本信息",
+   	     		id:"mobilephone",
+   	     		listeners:{
+	   				'click':function(node, event) {
+	   			  		event.stopEvent();
+	   			    	updateMobile();
+	   		     	}
+   	      	}
+   	   	});
+      	   rootself.appendChild(password);
+      	   rootself.appendChild(mobilephone);
+           	treeself.setRootNode(rootself);
+           	
+           	menu.add(treeself);
+      	   nav.add(menu);  
+      	   viewport.doLayout(); 
+           	isOnload=false;
+    		});
+		});
+    
+		var winPinKey;
+		var fpPinKey;
+		function updatePinkey(){
+			if(!winPinKey){
+				fpPinkey = new Ext.form.FormPanel({
+		     		labelWidth:80,
+		       	labelAlign:'right',
+		        	bodyStyle:'padding:10px',
+		        	items:[{
+		         	xtype:'fieldset',
+		            title:'密码',
+		            autoHeight:true,
+		            items:[{
+		            	layout:'column',
+		            	border:false,
+		             	defaults:{border:false},
+		              	items:[{
+		               	columnWidth:1,
+		               	layout:'form',
+		                	defaultType:'textfield',
+		                 	defaults:{width:200},
+		                	items:[
+					   			{fieldLabel:'旧密码',name:'pinkeyOld',inputType:"password",vtype:'alphanum',minLength:6,minText:'长度不能少于6',maxLength:32,maxText:'长度不能超过32'}
+					   			,{fieldLabel:'新密码',name:'pinkey',inputType:"password",vtype:'alphanum',minLength:8,minText:'长度不能少于8',maxLength:20,maxText:'长度不能超过20',regex: /^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{8,20}$/,regexText:"密码必须由大写字母，小写字母和数字组成!"}				   			
+					   			,{fieldLabel:'新密码确认',name:'pinkeyConfirm',inputType:"password",vtype:'alphanum',minLength:8,minText:'长度不能少于8',maxLength:20,maxText:'长度不能超过20',regex: /^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{8,20}$/,regexText:"密码必须由大写字母，小写字母和数字组成!"}		   			
+		                	]
+		          		}]
+		         	}]
+		      	}]
+		 		});
+				winPinkey = new Ext.Window({
+		     		width:400,
+		        	height:220,
+		        	layout:'fit',
+		        	title:'修改密码',
+		        	closeAction:'hide',
+		        	plain: true,
+		        	items:fpPinkey,
+		        	buttons:[{
+		       		text:'保存',
+		            handler:savePinkeyEntity
+		        	},{
+		            text:'取消',
+		            handler:function(){winPinkey.hide();}
+		        	}]
+		    	});
+			}
+			winPinkey.show();
+			fpPinkey.form.reset();
+		}
+		
+    	var winMobile;
+		var fpMobile;
+		function updateMobile(){
+			if(!winMobile){
+				fpMobile = new Ext.form.FormPanel({
+		      	labelWidth:80,
+		        	labelAlign:'right',
+		        	bodyStyle:'padding:10px',
+		        	items:[{
+		        		xtype:'fieldset',
+		            title:'基本信息',
+		            autoHeight:true,
+		            items:[{
+		           		layout:'column',
+		              	border:false,
+		               defaults:{border:false},
+		               items:[{
+		               	columnWidth:1,
+		                 	layout:'form',
+		                 	defaultType:'textfield',
+		                 	defaults:{width:200},
+		                	items:[
+					   			{fieldLabel:'姓名',name:'name',allowBlank:false,blankText:'不能为空',xtype:'textfield',maxLength:30,maxText:'长度不能超过30'}
+					   			,{fieldLabel:'电子邮件',name:'email',xtype:'textfield',maxLength:100,maxText:'长度不能超过100',vtype:"email",vtypeText:"不是有效的邮箱地址",allowBlank:false,blankText:'不能为空'}
+					   			,{fieldLabel:'手机号',name:'phone',regex : /^[0-9]*$/,regexText:"只能输入数字!",allowBlank:false,blankText:'不能为空',xtype:'textfield',minLength:11,minText:'长度不能少于11',maxLength:11,maxText:'长度不能超过11'}			   			
+					   			,{fieldLabel:'手机号确认',name:'phoneConfirm',regex : /^[0-9]*$/,regexText:"只能输入数字!",allowBlank:false,blankText:'不能为空',xtype:'textfield',minLength:11,minText:'长度不能少于11',maxLength:11,maxText:'长度不能超过11'}	
+		                	]
+		            	}]
+		        		}]
+		    		}]
+		    	});
+				winMobile = new Ext.Window({
+		      	width:400,
+		        	height:250,
+		        	layout:'fit',
+		        	title:'修改基本信息',
+		        	closeAction:'hide',
+		        	plain: true,
+		        	items:fpMobile,
+		        	buttons:[{
+		       		text:'保存',
+		            handler:saveMobileEntity
+		        	},{
+		            text:'取消',
+		            handler:function(){winMobile.hide();}
+		        	}]
+		    	});
+			}
+			winMobile.show();
+			fpMobile.form.reset();
+		}
+		
+		function savePinkeyEntity(){
+	    	if (fpPinkey.form.isValid()==false){
+	    		Ext.MessageBox.alert('提示信息','您填写的资料存在格式不合法项！');
+	        	return;
+	    	}
+	     	if(fpPinkey.form.findField('pinkeyOld').getValue()==fpPinkey.form.findField('pinkey').getValue()){
+				Ext.MessageBox.alert('提示信息','您输入新密码和旧密码相同！');
+	        	return;
+			}
+			if(fpPinkey.form.findField('pinkey').getValue()!=fpPinkey.form.findField('pinkeyConfirm').getValue()){
+				Ext.MessageBox.alert('提示信息','您输入的两次密码不一致！');
+	        	return;
+			}
+			fpPinkey.form.submit({
+	    		url:'infouser.do?method=updatePinkey',
+	    		success : function(form,action){ // 传过来的json数据的格式({"success":"true","rtnStatus":"88","rtnDesc":"您输入的旧密码不正确!"})，不能是json数组，且必须有一个节点是success:true或success:false，否则总是运行failure分支
+	    			var result= Ext.util.JSON.decode(action.response.responseText);
+		    		if(result.rtnStatus=="0"){
+						Ext.MessageBox.alert('提示信息',result.rtnDesc);
+						winPinkey.hide();
+					}else{
+						Ext.Msg.alert('提示信息',result.rtnDesc);
+					}
+	        	},
+	        	failure : function(form,action){ // 传过来的json数据的格式，如果success节点为false，那么会运行此分支。如果没有success分支则默认为false，只会运行此分支
+	        		Ext.MessageBox.alert('警告','操作失败');
+	        	}
+	    	});	
+		}
+
+		function saveMobileEntity(){
+	    	if (fpMobile.form.isValid()==false){
+	    		Ext.MessageBox.alert('提示信息','您填写的资料存在格式不合法项！');
+	        	return;
+	    	}
+			if(fpMobile.form.findField('phone').getValue()!=fpMobile.form.findField('phoneConfirm').getValue()){
+				Ext.MessageBox.alert('提示信息','您输入的两次手机号码不一致！');
+	        	return;
+			}
+			fpMobile.form.submit({
+	    		url:'infouser.do?method=updateMobile',
+	    		success:function(form,action){
+	    			var result= Ext.util.JSON.decode(action.response.responseText);
+		    		if(result.rtnStatus=="0"){
+						Ext.MessageBox.alert('提示信息',result.rtnDesc);
+						winMobile.hide();
+					}else{
+						Ext.Msg.alert('提示信息',result.rtnDesc);
+					}
+	    		},
+	        	failure:function(form,action){
+	            Ext.MessageBox.alert('警告','操作失败');
+	        	}
+	    	});
+		}
+
+		window.onunload=function(){
+			Ext.Ajax.request({
+        		url:'logout.jsp',
+        		method:'POST'
+	    	});
+		};
+	</script>
+	
+	<script type="text/javaScript">
+	function addBookmark(title, url){
+		if(window.sidebar){
+			window.sidebar.addPanel(title, url, ""); 
+		}else if(document.all){
+			window.external.AddFavorite(url, title);
+		}else if(window.opera && window.print){
+			return true;
+		}
+	}
+	</script>
+</head>
+<body>
+  <div id="west" ></div>
+  <div id="north" align="right" >
+    <span class="guide" >
+	  	<span class="s3" >&raquo;欢迎您:jack<!-- ${INFOUSER.name} --></span> 
+		<span class="s3" style="FONT-WEIGHT: bold"></span>&nbsp;
+		登录时间：${logintime}
+		<a onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('<%=basePath%>');return(false)" href="javascript:">设为首页</a> | 
+		<a onclick="addBookmark('中国电信融合支付综合管理系统','<%=basePath%>')" href="javascript:">加入收藏</a>| 
+	 	<a href="logout.jsp">重新登录</a> | 
+		<a id="version" href="#">当前版本</a> 
+	</span>
+  </div>
+  
+  <div class="menu" id="menu_version" style="display:none" >
+  	当前版本：1.0.0<br>...
+  </div>
+  
+  <div id="center"></div>
+  <div id="welcome"></div>
+  <div id="self"></div>
+  <div id="south">
+    <center><span>版权所有&copy 2009：号百集团 | 开发商：上海华腾软件系统有限公司</span></center>
+  </div>
+  
+  <script language="javaScript">
+	  var openmenu={'version':'menu_version'};
+	  var menu_read=new PwMenu();
+	  menu_read.InitMenu();
+  </script>
+  
+ </body>
+</html>
+-------------------------
+package com.mipo;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class Abc extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		String parentId = request.getParameter("parent_id");
+		System.out.println("开始传进来的parentId为：" + parentId);
+		String res = "";
+		if ("00000000".equals(parentId)) { // 最高的根目录
+			System.out.println("进入最高的跟目录");
+			res = "[{'id':'00000011','text':'网关对账','leaf':false},{'id':'00000012','text':'网关退款','leaf':false}]"; // 此处json必须表示成Array数组，一个也要表示成只有一个json对象的数组，否则传到ext.data.Stroe的JsonReader解析不了
+		}
+		
+		if ("00000011".equals(parentId)) { // 第二级目录
+			System.out.println("进入第二级目录，对账");
+			res = "[{'id':'00000013','text':'招行对账文件下载','leaf':false},{'id':'00000014','text':'建行对账文件下载','leaf':false}]";
+		}
+		
+		if ("00000013".equals(parentId)) { // 第三级目录
+			System.out.println("进入第三级目录，对账，招行");
+			res = "[{'id':'00000015','text':'一月文件下载','leaf':true,'url':'http://baidu.com'},{'id':'00000016','text':'二月文件下载','leaf':true,'url':'http://hao123.com'}]";
+		}
+		
+		if ("00000014".equals(parentId)) { // 第三级目录
+			System.out.println("进入第三级目录，对账，建行");
+			res = "[{'id':'00000017','text':'一月文件下载','leaf':true,'url':'http://sina.com'},{'id':'00000018','text':'二月文件下载','leaf':true,'url':'http://sohu.com'}]";
+		}
+		
+		if ("00000012".equals(parentId)) { // 第二级目录
+			System.out.println("进入第二级目录，退款");
+			res = "[{'id':'00000019','text':'招行退款','leaf':false},{'id':'00000020','text':'建行退款','leaf':false}]";
+		}
+		
+		if ("00000019".equals(parentId)) { // 第三级目录
+			System.out.println("进入第三级目录，退款");
+			res = "[{'id':'00000021','text':'一月退款','leaf':true},{'id':'00000022','text':'二月退款','leaf':true}]";
+		}
+		
+		if ("00000020".equals(parentId)) { // 第三级目录
+			System.out.println("进入第三级目录，退款");
+			res = "[{'id':'00000023','text':'一月退款','leaf':true},{'id':'00000024','text':'二月退款','leaf':true}]";
+		}
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(res);
+		pw.flush();
+      System.out.println(res);
+	}
+}
+-----------------------------
+package com.mipo;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class Aaa extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		String method = request.getParameter("method");
+		String res = "";
+		if ("updatePinkey".equals(method)) { // 修改密码
+			String pinkey = request.getParameter("pinkey");
+			System.out.println("pinkey:" + pinkey);
+			res = "{'success':true,'rtnStatus':'0','rtnDesc':'修改密码成功!'}"; // 传过来的json数据的格式({"success":"true","rtnStatus":"88","rtnDesc":"您输入的旧密码不正确!"})，不能是json数组，且必须有一个节点是success:true或success:false，否则总是运行failure分支。json后面的节点可以自己定义
+		}
+
+		if ("updateMobile".equals(method)) { // 修改个人信息
+			String email = request.getParameter("email");
+			System.out.println("email:" + email);
+			res = "{'success':true,'rtnStatus':'0','rtnDesc':'修改个人信息成功!'}"; // 传过来的json数据的格式({"success":"true","rtnStatus":"88","rtnDesc":"您输入的旧密码不正确!"})，不能是json数组，且必须有一个节点是success:true或success:false，否则总是运行failure分支。json后面的节点可以自己定义
+		}
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(res);
+		pw.flush();
+	}
+}
+
+
+
+
+
+

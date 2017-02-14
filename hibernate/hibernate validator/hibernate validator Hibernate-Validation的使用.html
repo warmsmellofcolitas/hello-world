@@ -1,0 +1,770 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Hibernate-Validation的使用 - 好好学习，天天向上 - ITeye技术网站</title>
+    <meta name="description" content=" 首先是要加入下面两个包  hibernate-validator-4.1.0.Final.jar validation-api-1.0.0.GA.jar     如果在验证不通过的时候进行了添加、更新或删除操作的时候，则会抛出javax.validation.ConstraintViolationException异常  下面是测试用的类     Model2：  import javax.per ..." />
+    <meta name="keywords" content="Hibernate Hibernate-Validation的使用" />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="ITeye" />
+    <link href="/rss" rel="alternate" title="好好学习，天天向上" type="application/rss+xml" />
+    <link href="http://www.iteye.com/stylesheets/blog.css?1393920955" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.iteye.com/stylesheets/themes/blog/red.css?1326191326" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://www.iteye.com/javascripts/application.js?1358214518" type="text/javascript"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-535605-1']);
+  _gaq.push(['_setDomainName', 'iteye.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+      <link href="http://www.iteye.com/javascripts/syntaxhighlighter/SyntaxHighlighter.css?1348819953" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1325907333" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/hotkey.js?1324994303" type="text/javascript"></script>
+  <script src="http://www.iteye.com/javascripts/code_favorites.js?1358214518" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/weiboshare.js?1324994303" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="header">
+      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">招聘</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+      <div id="user_nav">
+      <a href="/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="/login">登录</a>
+    <a href="/signup" class="nobg">注册</a>
+  </div>
+
+    </div>
+
+    <div id="page">
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="/">好好学习，天天向上</a></h1>
+        </div>
+        <div id='fd'></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class='blog_navbar_for'><a href="http://haohaoxuexi.iteye.com"><strong>博客</strong></a></li>
+            <li ><a href="/weibo">微博</a></li>
+            <li ><a href="/album">相册</a></li>
+            <li ><a href="/link">收藏</a></li>
+            <li ><a href="/blog/guest_book">留言</a></li>
+            <li ><a href="/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="" />
+              <input class="submit_search" type="submit" value="" />
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style='display:none'>
+  <a href="http://haohaoxuexi.iteye.com" class="p-author" target="_blank">234390216</a>
+</div>
+
+
+<div class="blog_main">
+  <div class="blog_title">
+    <h3>
+      <a href="/blog/1025623">Hibernate-Validation的使用</a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class='blog_categories'><strong>博客分类：</strong> <li><a href="/category/154983">hibernate</a></li> </ul>
+        <div class='news_tag'><a href="http://www.iteye.com/blogs/tag/Hibernate">Hibernate</a></div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    <div class="iteye-blog-content-contain" style="font-size: 14px;">
+<p>首先是要加入下面两个包</p>
+<p>hibernate-validator-4.1.0.Final.jar<br> validation-api-1.0.0.GA.jar</p>
+<p> </p>
+<p>如果在验证不通过的时候进行了添加、更新或删除操作的时候，则会抛出javax.validation.ConstraintViolationException异常</p>
+<p>下面是测试用的类</p>
+<p> </p>
+<p><span style="font-size: medium;"><strong>Model2：</strong></span></p>
+<pre name="code" class="java">import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.URL;
+
+@Entity
+@Table(name="t_Model2")
+@TableGenerator(name="mytable",initialValue=1,allocationSize=1)
+public class Model2 {
+
+	private int id;
+	private String name;
+	private String address;
+	private String phoneNumber;
+	private String email;
+	private int age;
+	private Model3 model3;
+	private String url;
+
+	@Id
+	@GeneratedValue(generator="mytable",strategy=GenerationType.TABLE)
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@NotNull(message="姓名不能为空！")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@NotNull(message="地址不能为空！")
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Size(max=11,min=11,message="长度只能为11位！")
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	@Email(message="email地址无效！")
+	@NotNull(message="email地址不能为空！")
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@NotNull(message = "Model3不能为空！")
+	@Valid
+	@ManyToOne
+	public Model3 getModel3() {
+		return model3;
+	}
+
+	public void setModel3(Model3 model3) {
+		this.model3 = model3;
+	}
+
+	@Min(value=18,message="必须年满18岁！")
+	@Max(value=30,message="年龄不能大于30岁！")
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	@URL(message="无效的URL地址")
+	@NotNull(message = "URL不能为空！")
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+}
+</pre>
+<p> <span style="font-size: medium;"><strong>Model3：</strong></span></p>
+<pre name="code" class="java">import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name="t_Model3")
+public class Model3 {
+
+	private int id;
+	
+	private String name;
+
+	@Id
+	@GeneratedValue
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@NotNull(message="model3的名称不能为空！")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+}
+</pre>
+<p> </p>
+<p><span style="font-size: medium;"><strong>Test类：</strong></span></p>
+<pre name="code" class="java">import org.springframework.context.ApplicationContext;
+
+import com.tiantian.test.model.Model2;
+import com.tiantian.test.service.Model2Service;
+import com.tiantian.test20110430.util.Util;
+
+public class Test1 {
+
+	public static void main(String args[]) {
+		ApplicationContext context = Util.getContext();
+		Model2Service service = context.getBean(Model2Service.class);
+		Model2 model = new Model2();
+		model.setName("hello");
+		model.setEmail("testHibernateValidate@sohu.com");
+		model.setAddress("湖南长沙");
+		model.setPhoneNumber("15012345678");
+
+		String result = Util.validateModel(model);// 返回的验证结果，验证结果就是一个字符串，如果有错误的话则该字符串的长度大于0
+		System.out.println(result);
+		if (result.length() == 0)// 验证不通过的时候就不添加
+			service.add(model);
+
+	}
+
+}
+</pre>
+<p> </p>
+<p><span style="font-size: medium;"><strong> 上面用到的Util类：</strong></span></p>
+<pre name="code" class="java">import java.util.Iterator;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Util {
+
+	private static ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+	
+	public static ApplicationContext getContext() {
+		return context;
+	}
+	
+	public static String validateModel(Object obj) {//验证某一个对象
+		
+		StringBuffer buffer = new StringBuffer(64);//用于存储验证后的错误信息
+		
+		Validator validator = Validation.buildDefaultValidatorFactory()
+				.getValidator();
+
+		Set&lt;ConstraintViolation&lt;Object&gt;&gt; constraintViolations = validator
+				.validate(obj);//验证某个对象,，其实也可以只验证其中的某一个属性的
+
+		Iterator&lt;ConstraintViolation&lt;Object&gt;&gt; iter = constraintViolations
+				.iterator();
+		while (iter.hasNext()) {
+			String message = iter.next().getMessage();
+			buffer.append(message);
+		}
+		return buffer.toString();
+	}
+	
+}
+</pre>
+<p> </p>
+<p> </p>
+<p><span style="font-size: medium;"><strong>下面是一些主要的注解：</strong></span></p>
+<pre name="code" class="java">		@AssertTrue //用于boolean字段，该字段只能为true
+		@AssertFalse//该字段的值只能为false
+		@CreditCardNumber//对信用卡号进行一个大致的验证
+		@DecimalMax//只能小于或等于该值
+		@DecimalMin//只能大于或等于该值
+		@Digits(integer=2,fraction=20)//检查是否是一种数字的整数、分数,小数位数的数字。
+		@Email//检查是否是一个有效的email地址
+		@Future//检查该字段的日期是否是属于将来的日期
+		@Length(min=,max=)//检查所属的字段的长度是否在min和max之间,只能用于字符串
+		@Max//该字段的值只能小于或等于该值
+		@Min//该字段的值只能大于或等于该值
+		@NotNull//不能为null
+		@NotBlank//不能为空，检查时会将空格忽略
+		@NotEmpty//不能为空，这里的空是指空字符串
+		@Null//检查该字段为空
+		@Past//检查该字段的日期是在过去
+		@Size(min=, max=)//检查该字段的size是否在min和max之间，可以是字符串、数组、集合、Map等
+		@URL(protocol=,host,port)//检查是否是一个有效的URL，如果提供了protocol，host等，则该URL还需满足提供的条件
+		@Valid//该注解只要用于字段为一个包含其他对象的集合或map或数组的字段，或该字段直接为一个其他对象的引用，
+				//这样在检查当前对象的同时也会检查该字段所引用的对象</pre>
+<p> </p>
+<p> </p>
+</div>
+  </div>
+
+  
+
+
+  
+  
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type='sina' href="javascript:;" title="分享到新浪微博"><img src="/images/sina.jpg"></a>
+      <a data-type='qq' href="javascript:;" title="分享到腾讯微博"><img src="/images/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="/blog/1025676" class="next" title="DWR整合Spring使用Annotation">DWR整合Spring使用Annotation</a>
+      |
+      <a href="/blog/1025510" class="pre" title="JFreeChart(2)   设置PieChart的一些属性">JFreeChart(2)   设置PieChart的一些属性</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2011-04-30 23:07</li>
+      <li>浏览 4863</li>
+      <li><a href="#comments">评论(2)</a></li>
+      
+      
+      <li>分类:<a href="http://www.iteye.com/blogs/category/architecture">企业架构</a></li>      
+      <li class='last'><a href="http://www.iteye.com/wiki/blog/1025623" target="_blank" class="more">相关推荐</a></li>
+    </ul>
+  </div>
+
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    <div id="bc2303973">
+  <div class="comment_title">
+    2 楼
+    <a href='http://haohaoxuexi.iteye.com' target='_blank' title='234390216'>234390216</a>
+    2013-03-15&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content"><div class="quote_title">yzxqml 写道</div><div class="quote_div">如果抛出了异常，在SpringMVC中怎么能捕捉到这个异常并处理呢？</div><br />如果是要在springMVC中使用Hibernate Validator的话请参考我的另一篇博客<a rel="nofollow" href="http://haohaoxuexi.iteye.com/blog/1812584" target="_blank">http://haohaoxuexi.iteye.com/blog/1812584</a></div>
+</div>
+
+<div id="bc2303940">
+  <div class="comment_title">
+    1 楼
+    <a href='http://yzxqml.iteye.com' target='_blank' title='yzxqml'>yzxqml</a>
+    2013-03-15&nbsp;&nbsp;
+    
+    
+  </div>
+  <div class="comment_content">如果抛出了异常，在SpringMVC中怎么能捕捉到这个异常并处理呢？</div>
+</div>
+
+
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="/login" style="background-color:white;"> <img src="/images/login_icon.png" style="vertical-align:middle; margin-right: 10px;" /></a><a href="/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 1025623;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', 'Hibernate-Validation的使用');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', 'Hibernate-Validation的使用');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href='http://haohaoxuexi.iteye.com'><img alt="234390216的博客" class="logo" src="http://www.iteye.com/upload/logo/user/566675/392b0b83-7725-374c-a0eb-f9f5b7ab3ddd.jpg?1318215227" title="234390216的博客: 好好学习，天天向上" /></a></div>
+  <div id="blog_owner_name">234390216</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 469386 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="http://www.iteye.com/images/icon_minigender_1.gif?1324994303" title="男" /></li>
+              <li>来自: 长沙</li>
+              <li><img src='/images/status/offline.gif'/></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style='font-weight:normal;font-size:12px;padding-left:30px;'><a href="/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://xian0726.iteye.com' target='_blank'><img alt="xian0726的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="xian0726的博客: " /></a></div>
+                <div class="left"><a href='http://xian0726.iteye.com' target='_blank' title='xian0726'>xian0726</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://xuanyuan000000.iteye.com' target='_blank'><img alt="xuanyuan000000的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="xuanyuan000000的博客: " /></a></div>
+                <div class="left"><a href='http://xuanyuan000000.iteye.com' target='_blank' title='xuanyuan000000'>xuanyuan000000</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://chao121.iteye.com' target='_blank'><img alt="chao121的博客" class="logo" src="http://www.iteye.com/upload/logo/user/652452/ab24828d-59ca-3cef-aa4e-094d6a7a45b7-thumb.png?1332322448" title="chao121的博客: " /></a></div>
+                <div class="left"><a href='http://chao121.iteye.com' target='_blank' title='chao121'>chao121</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://narsil.iteye.com' target='_blank'><img alt="narsil的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1324994303" title="narsil的博客: " /></a></div>
+                <div class="left"><a href='http://narsil.iteye.com' target='_blank' title='narsil'>narsil</a></div>
+              </div>
+            
+          </div>
+
+          
+            <div>
+              <h5>博客专栏</h5>
+              
+
+  
+  <dl class="series" style="padding-bottom:5px;">
+    <dt>
+      <a href="http://www.iteye.com/blogs/subjects/Oracle168" target="_blank"><img alt="36ec76c2-5688-3c93-85ae-c80807882448" src="http://www.iteye.com/upload/logo/blog_wiki/696658/36ec76c2-5688-3c93-85ae-c80807882448.jpg?1339990916" /></a>
+    </dt>
+    <dd>
+    <a href="http://www.iteye.com/blogs/subjects/Oracle168" target="_blank" title="Oracle基础">Oracle基础</a><br />
+      <span class="visited">浏览量：26805</span>
+    </dd>
+  </dl>
+  
+  <dl class="series" style="padding-bottom:5px;">
+    <dt>
+      <a href="http://www.iteye.com/blogs/subjects/springMVC" target="_blank"><img alt="Efe16dc7-0b0a-35f8-bfd8-5c206a1f2557" src="http://www.iteye.com/upload/logo/blog_wiki/793480/efe16dc7-0b0a-35f8-bfd8-5c206a1f2557.jpg?1358317712" /></a>
+    </dt>
+    <dd>
+    <a href="http://www.iteye.com/blogs/subjects/springMVC" target="_blank" title="springMVC介绍">springMVC介绍</a><br />
+      <span class="visited">浏览量：116519</span>
+    </dd>
+  </dl>
+  
+  <dl class="series" style="padding-bottom:5px;">
+    <dt>
+      <a href="http://www.iteye.com/blogs/subjects/mybatis" target="_blank"><img alt="Ebf4ec87-7ba2-3839-a8d3-a7e730b554c9" src="http://www.iteye.com/upload/logo/blog_wiki/828079/ebf4ec87-7ba2-3839-a8d3-a7e730b554c9.png?1365421536" /></a>
+    </dt>
+    <dd>
+    <a href="http://www.iteye.com/blogs/subjects/mybatis" target="_blank" title="Mybatis简介">Mybatis简介</a><br />
+      <span class="visited">浏览量：139971</span>
+    </dd>
+  </dl>
+  
+  <dl class="series" style="padding-bottom:5px;">
+    <dt>
+      <a href="http://www.iteye.com/blogs/subjects/springjms" target="_blank"><img alt="Group-logo" src="http://www.iteye.com/images/group-logo.gif?1324994303" /></a>
+    </dt>
+    <dd>
+    <a href="http://www.iteye.com/blogs/subjects/springjms" target="_blank" title="Spring整合JMS">Spring整合JMS</a><br />
+      <span class="visited">浏览量：24494</span>
+    </dd>
+  </dl>
+  
+
+
+            </div>
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="/">全部博客 (165)</a></li>
+                
+                  <li><a href="/category/164370">配置文件 (2)</a></li>
+                
+                  <li><a href="/category/155097">dwr (2)</a></li>
+                
+                  <li><a href="/category/176065">安全 (1)</a></li>
+                
+                  <li><a href="/category/299032">cxf (3)</a></li>
+                
+                  <li><a href="/category/161765">CKEDITOR (3)</a></li>
+                
+                  <li><a href="/category/172948">电子邮件 (3)</a></li>
+                
+                  <li><a href="/category/158024">extjs4 (6)</a></li>
+                
+                  <li><a href="/category/159974">freemarker (2)</a></li>
+                
+                  <li><a href="/category/154983">hibernate (5)</a></li>
+                
+                  <li><a href="/category/156571">itext (1)</a></li>
+                
+                  <li><a href="/category/182974">JasperReport (4)</a></li>
+                
+                  <li><a href="/category/155852">java (17)</a></li>
+                
+                  <li><a href="/category/131097">jbpm4 (2)</a></li>
+                
+                  <li><a href="/category/155042">jfreeChart (3)</a></li>
+                
+                  <li><a href="/category/157196">jquery (7)</a></li>
+                
+                  <li><a href="/category/202499">jsp (4)</a></li>
+                
+                  <li><a href="/category/265283">Linux (1)</a></li>
+                
+                  <li><a href="/category/181358">Lucene (1)</a></li>
+                
+                  <li><a href="/category/269897">maven (7)</a></li>
+                
+                  <li><a href="/category/131096">mybatis (9)</a></li>
+                
+                  <li><a href="/category/165959">MySQL (4)</a></li>
+                
+                  <li><a href="/category/156935">oracle (25)</a></li>
+                
+                  <li><a href="/category/156541">poi (7)</a></li>
+                
+                  <li><a href="/category/304463">Servlet (4)</a></li>
+                
+                  <li><a href="/category/156737">实用技巧 (6)</a></li>
+                
+                  <li><a href="/category/156657">Spring (10)</a></li>
+                
+                  <li><a href="/category/175984">SpringMVC (13)</a></li>
+                
+                  <li><a href="/category/182468">spring Security (0)</a></li>
+                
+                  <li><a href="/category/154645">struts2 (5)</a></li>
+                
+                  <li><a href="/category/155732">swing (1)</a></li>
+                
+                  <li><a href="/category/177387">svn (1)</a></li>
+                
+                  <li><a href="/category/156444">web前端 (5)</a></li>
+                
+                  <li><a href="/category/253146">Weblogic (3)</a></li>
+                
+                  <li><a href="/category/156645">问题 (2)</a></li>
+                
+                  <li><a href="/category/186746">xml (2)</a></li>
+                
+                  <li><a href="/category/268768">面试 (1)</a></li>
+                
+              </ul>
+            </div>
+            <div id='month_blogs'>
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="/blog/post">我的论坛</a> (13)
+                </li>
+                <li><a href="/blog/answered_problems">我的问答</a> (4)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="/blog/monthblog/2014-05">2014-05</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2014-04">2014-04</a> (4)</li>
+                
+                  <li><a href="/blog/monthblog/2014-03">2014-03</a> (4)</li>
+                
+                <li><a href="/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+              <div id="comments_top">
+                <h5>评论排行榜</h5>
+                <ul>
+                  
+                    <li><a href="/blog/1893038" title="Spring整合JMS(一)——基于ActiveMQ实现">Spring整合JMS(一)——基于ActiveMQ实现</a></li>
+                  
+                    <li><a href="/blog/1900937" title="Spring整合JMS（三）——MessageConverter介绍">Spring整合JMS（三）——MessageConverter ...</a></li>
+                  
+                    <li><a href="/blog/1942464" title="Mybatis返回Map的一种实现">Mybatis返回Map的一种实现</a></li>
+                  
+                    <li><a href="/blog/1893676" title="Spring整合JMS(二)——三种消息监听器">Spring整合JMS(二)——三种消息监听器</a></li>
+                  
+                    <li><a href="/blog/1983109" title="Oracle——24定时任务">Oracle——24定时任务</a></li>
+                  
+                </ul>
+              </div>
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href='http://youjianbo-han-87.iteye.com' target='_blank' title='youjianbo_han_87'>youjianbo_han_87</a>： 
+                  算一个思路吧，但是不是实现分页的最佳实践，拦截器拦截面太广了。 ...<br />
+                  <a href="/blog/1851081#bc2346859">Mybatis拦截器介绍及分页插件</a>
+                </li>
+                
+                <li>
+                  <a href='http://xiushan.iteye.com' target='_blank' title='xiushan'>xiushan</a>： 
+                  Ascii码11是垂直制表符，当然在表格里面有效<br />
+                  <a href="/blog/2037193#bc2346784">POI写Word换行</a>
+                </li>
+                
+                <li>
+                  <a href='http://tongmugou.iteye.com' target='_blank' title='tongmugou'>tongmugou</a>： 
+                  写的非常好，看了你这个和拦截器，收获很多 <br />
+                  <a href="/blog/1847854#bc2346398">Mybatis类型转换介绍</a>
+                </li>
+                
+                <li>
+                  <a href='http://lwl550660646.iteye.com' target='_blank' title='lwl550660646'>lwl550660646</a>： 
+                  MyBatis本来是用来支持多数据库的。不同的数据库，SQL语 ...<br />
+                  <a href="/blog/806288#bc2346367">mybatis模糊查询</a>
+                </li>
+                
+                <li>
+                  <a href='http://haohaoxuexi.iteye.com' target='_blank' title='234390216'>234390216</a>： 
+                  acodeape_fiay 写道234390216 写道aco ...<br />
+                  <a href="/blog/1983109#bc2346351">Oracle——24定时任务</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+      </div>
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr/>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br />
+          &copy; 2003-2014 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script>
+
+<script src="http://csdnimg.cn/pubfooter/js/tracking.js?version=20130923164150" type="text/javascript"></script>
+
+    
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29372414-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+      
+    
+  </body>
+</html>

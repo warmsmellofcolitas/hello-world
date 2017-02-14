@@ -1,0 +1,9 @@
+在eclipse根目录下创建links文件夹-->在links下建xxx.link文件（最好为每个插件建一个.link文件，比如svn.link，在这里我的插件安装目录结构为F:\eclipsePlugins\svn）
+-->在svn.link中写入一句话path=F:/EclipsePlugins/svn或者path=F:\\EclipsePlugins\\svn(指明eclipse去哪个路径加载插件)-->svn下的目录结构为:
+svn
+  +eclipse
+  +plugins
+  +feature
+-->重启eclipse
+注意：如果发现插件没有安装成功，则删除eclipse目录下的configuration目录中的文件夹org.eclipse.update(这是一个记录插件更新情况的文件夹，其中的platform.xml
+文件是当前使用的插件)，删除掉这个文件夹后，eclipse会重新扫描所有的插件，此时在重新启动eclipse可能会比刚才稍微慢点。

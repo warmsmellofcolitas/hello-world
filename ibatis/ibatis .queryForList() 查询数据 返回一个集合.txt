@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "sql-map-2.dtd">
+<sqlMap namespace="user">
+	<typeAlias alias="User" type="com.neusoft.gazelle.core.entity.account.User"/>
+	<resultMap id="user_result" class="User">
+		<result property="id" column="c_user_id"/>
+		<result property="loginName" column="c_login_name"/>
+		<result property="password" column="c_pwd"/>
+		<result property="name" column="c_name"/>
+	</resultMap>
+	<select id="getMap" parameterClass="java.util.Map" resultMap="user_result">
+		select * FROM t_gz_user WHERE c_user_id=#a#
+	</select>
+</sqlMap>
+-------------
+package com.service.tree;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.neusoft.gazelle.core.entity.account.User;
+import com.neusoft.gazelle.core.service.BaseService;
+@Transactional
+@Service
+public class TreService extends BaseService{
+	public void add(){
+		Map map=new  HashMap();    
+		map.put("a",new Integer(123));
+		List<User> result=(List<User>)this.getDao().queryForList("user.getMap",map);
+		System.out.println(result.get(0).getName());
+	}
+}
+-----------
+package com.neusoft.gazelle.core.entity.account;
+import java.util.Date;
+import org.apache.commons.lang.builder.ToStringBuilder;
+public class User{
+	private long id;
+	private String loginName;
+	private String password;
+	private String name;
+	private int type;
+	private boolean deleted;
+	private boolean disabled;
+	private boolean expired;
+	private boolean locked;
+	private Date createTime;
+	private Date lastLoginTime;
+	private Date lastChangePasswordTime;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getLoginName() {
+		return loginName;
+	}
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	public boolean isDisabled() {
+		return disabled;
+	}
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+	public boolean isExpired() {
+		return expired;
+	}
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
+	public boolean isLocked() {
+		return locked;
+	}
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	public Date getLastChangePasswordTime() {
+		return lastChangePasswordTime;
+	}
+	public void setLastChangePasswordTime(Date lastChangePasswordTime) {
+		this.lastChangePasswordTime = lastChangePasswordTime;
+	}
+	@Override
+	public String toString(){
+		return ToStringBuilder.reflectionToString(this);
+	}
+}
+

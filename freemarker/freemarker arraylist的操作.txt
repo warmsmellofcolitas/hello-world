@@ -1,0 +1,76 @@
+package cn.com.leadfar.struts2.freemarker;
+public class User {
+	private int id;
+	private String name;
+	private int age;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+}
+
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test2 {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为test01.ftl的文件
+		Template template = cfg.getTemplate("bbb.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		User user1 = new User();
+		user1.setAge(18);
+		user1.setId(1);
+		user1.setName("jack");
+		User user2 = new User();
+		user2.setAge(19);
+		user2.setId(2);
+		user2.setName("rose");
+		List<User> users = new ArrayList<User>();
+		users.add(user1);
+		users.add(user2);
+		// 为数据模型添加值
+		root.put("users", users);
+		// 通过template将模版文件输出到相应的流
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+在类路径下src/ftl/bbb.ftl:
+<html>
+  <head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+	<title>hello</title>
+  </head>
+  <body>
+	<#list users as user>
+		${user.id}-------${user.name}-------${user.age}<br/>
+	</#list>
+  </body>
+</html>

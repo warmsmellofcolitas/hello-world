@@ -1,0 +1,27 @@
+package com.ccbsh;
+
+import java.io.IOException;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.*;
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		HttpClient httpclient = new HttpClient(); // HttpClient最好初始化一次
+		GetMethod method = new GetMethod("http://localhost/xxx/aaa?ip=172.16.56.48&port=9134");
+		int retCode = httpclient.executeMethod(method);
+		// StatusLine sl = method.getStatusLine();或者method.getStatusCode();或者method.getStatusText();
+		System.out.println("响应码为:"+retCode);
+		String value = method.getResponseBodyAsString(); // 作为字符串返回报文体数据,也可如下操作流接受
+		/*
+		byte[] resp = method.getResponseBody(); // 以流的形式返回数据
+		if (HttpStatus.SC_OK == retCode) {
+			System.out.println("响应正常");
+			String respStr = new String(resp);
+			System.out.println("返回的数据为：" + respStr);
+		} else {
+			System.out.println("响应错误");
+		}
+		*/
+		System.out.println("xxxx"+value);
+	}
+}

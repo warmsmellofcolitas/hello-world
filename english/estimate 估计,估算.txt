@@ -1,0 +1,4 @@
+Try to estimate how many steps it will takes to get to a close object.
+尽力估算一下达到一个近距离目标需要多少步.
+I estimate that the total cost for treatment will be $12500.
+我估计治疗费用总共会有12500美元.

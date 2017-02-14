@@ -1,0 +1,3 @@
+光标位置：
+默认情况下，鼠标点哪里，当前光标就在那里，感觉别扭（不习惯）。所以修改为鼠标点哪里，光标就定位到当前行的末尾；
+配置位置：file - settings - Editor面板中的Virtual Space组中的 Allow placement of caret after end of line配置项勾掉即可;

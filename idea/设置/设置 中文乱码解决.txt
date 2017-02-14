@@ -1,0 +1,12 @@
+中文乱码问题
+
+Settings-> File Encondings 选择 IDE Encoding为GBK。
+
+ 
+
+在包含中文文件名或者文件夹的时候会出现??的乱码，解决方法如下：
+
+File菜单->Settings->Colors & Fonts->Editor Font=宋体, size=12, line spacing =1.0
+
+Settings->Appearance中勾选Override default fonts by (not recommended)，设置Name:NSimSun，Size:12
+t设置与font设置相同 

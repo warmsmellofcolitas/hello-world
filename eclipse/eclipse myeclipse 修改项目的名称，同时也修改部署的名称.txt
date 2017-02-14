@@ -1,0 +1,13 @@
+方法二：
+
+      ①Package Explorer中，右击项目名->Refactor->Rename，然后输入新的项目名。Eclipse会自动帮你更改所有相关的地方。
+
+      ②在系统文件中找到项目的根目录下的.mymetadata文件，将project-module节点下的name属性修改为新的项目名（打开.mymetadata文件的方法是在Myeclipse中菜单栏Navigate-Show in-Navigator或者Alt+Shift+W选择Navigator之后打开你要查看的项目就可以了，这时候就可以查看编辑项目下的.mymetadata等文件了。）
+      ③移除原有的项目，关闭tomcat
+      ④重启myeclipse，重新部署项目并运行
+
+     方法三：
+
+      ①先F2修改项目名称
+
+      ②选中该项目-->选中MyEclipse窗口上方的选项Project-->Properties-->弹出新窗口选择MyEclipse-->Web-->Context Root中的Web Context-root选项，在Web Context-root选项中填入新项目名称，重新发布。

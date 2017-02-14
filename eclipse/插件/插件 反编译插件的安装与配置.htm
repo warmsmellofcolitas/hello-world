@@ -1,0 +1,138 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><META content="IE=8.0000" 
+http-equiv="X-UA-Compatible">
+<TITLE>eclipse 反编译 插件 （转） - 在大地画满窗子 - 博客园</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css 
+href="http://common.cnblogs.com/blog/css/common.css?id=20130704"><LINK 
+id=MainCss rel=stylesheet type=text/css 
+href="http://common.cnblogs.com/Skins/sea/style.css?id=20130704"><LINK 
+rel=stylesheet type=text/css 
+href="http://common.cnblogs.com/blog/css/common2.css"><LINK rel=stylesheet 
+type=text/css href="http://common.cnblogs.com/css/shStyle.css"><LINK title=RSS 
+rel=alternate type=application/rss+xml 
+href="http://www.cnblogs.com/drawwindows/rss"><LINK title=RSD rel=EditURI 
+type=application/rsd+xml href="http://www.cnblogs.com/drawwindows/rsd.xml"><LINK 
+rel=wlwmanifest type=application/wlwmanifest+xml 
+href="http://www.cnblogs.com/drawwindows/wlwmanifest.xml">
+<SCRIPT type=text/javascript src="http://common.cnblogs.com/script/gpt.js" 
+async="true"></SCRIPT>
+
+<SCRIPT type=text/javascript src="http://www.google-analytics.com/ga.js" 
+async="true"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://common.cnblogs.com/script/jquery.js"></SCRIPT>
+
+<SCRIPT type=text/javascript>
+var currentBlogApp = 'drawwindows';
+</SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://common.cnblogs.com/blog/script/common.js?id=20130704"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://common.cnblogs.com/script/json2.js"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://common.cnblogs.com/script/syntaxHighlighter.js"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://partner.googleadservices.com/gampad/google_ads_gpt.js" 
+async="true"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://pagead2.googlesyndication.com/pagead/osd.js"></SCRIPT>
+</HEAD>
+<BODY>
+<DIV id=centercontent>
+<DIV class=post>
+  <H1 class=postTitle><A id=cb_post_title_url class=postTitle2 
+href="http://www.cnblogs.com/drawwindows/archive/2012/05/11/2495558.html">eclipse 
+反编译 插件 </A></H1>
+<DIV id=cnblogs_post_body>
+<P>我相信，您能够到我这里来肯定是知道jadclipse的作用的，好！我用的版本是 helios版本的eclipse，今天为了安装这个jadclipse 
+插件，我差不多花了一个下午的时间，当然在安装的时候，中间杀出了这样或那样的问题，这些问题我们都不应该放开不管的，还要知道它的原理是什么，我刚从 
+j2se转向j2ee，有很多的不适应，也希望你在百度求解的时候，不要有走马观花的那种焦躁感。写这篇博客，我今天下午累计至少百度了120次，我也把在这个过程零零碎碎解决的问题罗列出来。</P>
+<P><SPAN style="BACKGROUND-COLOR: #ff0000">&nbsp;</SPAN><STRONG><SPAN 
+style="BACKGROUND-COLOR: #ff0000">安装前你必须知道的知识：</SPAN></STRONG></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5">&nbsp;&nbsp; 
+1：adclipse与你所使用的eclipse的版本要对应好，<SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN>jadclipse_&lt;?XML:NAMESPACE 
+PREFIX = ST1 
+/&gt;3.2.4对应</SPAN><SPAN>Eclipse3.2</SPAN>版，<SPAN>jadclipse_3.3.0对应</SPAN><SPAN>Eclipse3.3M6</SPAN>以上，大家对应好咯，我现在遇到的第一个问题是：我安装的eclipse是helios版本，那么helios用数字表示是什么版本的呢？明白这个很重要，经查，原来eclipse3.6及其以上的版本，发神经的eclipse突然给他们取了个很好听的名字“helios”是为“太阳神”的意思，在 
+eclipse ，你可以这样来查：：“<SPAN style="BACKGROUND-COLOR: #ff007f">Help”菜单----&gt;"about 
+eclipse"----&gt;你仔细看看弹出来的框框，你使用的IDE具体的版本号，我的是&nbsp;Helios Service Release 
+1，你可以再在左下方点击“Installation details”看看具体的eclipse 
+平台是什么，我就先引领你到这，你自己熟悉熟悉，所谓“工欲善其事必先利其器”是也！</SPAN></SPAN></SPAN></P>
+<P><STRONG><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ff0000; COLOR: #000000">安装具体步骤：</SPAN></SPAN></SPAN></STRONG></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">好，你根据你安装的eclipse在心中知道了自己要安装的哪款的jadclipse,你现在要做的就是再次百度“求XXX版本的jadclipse插件下载”，呵呵，这步我帮你省了，<A 
+href="http://jadclipse.sf.net/update">http://jadclipse.sf.net/update</A>，我现在先给你这个3.4.0版本的jadclipse，如果你的是helios版本的话，这个版本你适合你不必急着登到这个网站上去下载，让 
+eclipse IDE来为你服务，开玩笑我们几百兆的容量养它，它肯定是要干活的，你这样：“Help”菜单—&gt;"install new 
+software",这下弹出了“install”的输入框，麻烦你把眼神锁定到方框的右上方，有个"add"按钮，你点点击它，这时会弹出一个框，在上面写上你要装的软件的名字，下面的输入框把刚才的那个urL地址复制进去，好了，应该可以了，接下来，顺水推舟，最后，eclipse问你是否重启，你让它去好了，我就引领你到这步；</SPAN></SPAN></SPAN></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">二：上面的那个步骤你有没有成功执行呢，来看下，“window”--&gt;"prefercnces"----&gt;"java"看下java下有没有出现“jadclipse”项，如果有，我说你成功了百分之八十，如果没有，看来你要再次百度了。我假设你成功了。</SPAN></SPAN></SPAN></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">三：上面你成功了，你还要下载一个叫jad.exe的应用程序，这个jad.exe才是真正用来反编译类文件的，你问我前面装的jadclipse又装上来做什么，我也不知道哦，</SPAN></SPAN></SPAN></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">你去网上下载这个jad.exe,这步应该很好做的，你下载好这后，你把它存放到某个位置，然后把它放置的绝对路径复制下，粘贴的地方是：“window” 
+--&gt;"preferences"--&gt;“java”---&gt;"jadclipse",双击这个“jadclipse”,出现的框框里，有个是“path 
+to decompile”就是反编译工具程序的路径，你粘贴在这，就好了</SPAN></SPAN></SPAN></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">，最后有最后一步</SPAN></SPAN></SPAN></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">四：在eclipse无论你是打开一个.html文件，还是.jsp文件，它都有关联了打开它的相应程序，这个windows是一样的，用word打开. 
+word文件，好，明白了这个理，你得在eclipse里设定你打开一个.class文件是用什么打开，也就是在这里你把你的jadclipse关联到 
+class文件上，“window”---&gt;"preferences",你在过滤文本框中输入“file asso”字样，“file 
+association”就会浮出水面，你双击它，出现的框框，你仔细看看，我这里看到的是上下两个框，上面的那个框放的是各种类型的文件，而下面框放的是默认打开上面文件的编辑器，上面的框中，你点“add”添加".class"进去，接着在下面的框中，选中“jadclipse”点击右面的 
+“default”按钮 把它设为打开.class文件的默认编辑器。</SPAN></SPAN></SPAN></P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">五：不得不说，写到这里我已经十分的不耐烦了，你在想要查看源代码的类名上，如“ActionSupport”上，按住“ctrl”键，鼠标单击它，源代码就立即出现 
+。</SPAN></SPAN></SPAN></P>
+<P>&nbsp;</P>
+<P><SPAN style="BACKGROUND-COLOR: #ffe5e5"><SPAN 
+style="BACKGROUND-COLOR: #ffffff; FONT-SIZE: 12px"><SPAN 
+style="BACKGROUND-COLOR: #ffe5e5; COLOR: #000000">另外：可用decompilor 
+插件</SPAN></SPAN></SPAN></P></DIV>
+<SCRIPT type=text/javascript>
+var isLogined = false;
+var cb_blogId = 92129;
+var cb_entryId = 2495558;
+var cb_blogApp = currentBlogApp;
+var cb_blogUserGuid = "505d4100-c8a6-e011-a53f-842b2b196315";
+var cb_entryCreatedDate = '2012/5/11 10:46:00';
+var enableGoogleAd = true;
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+</SCRIPT>
+<SCRIPT type=text/javascript>
+    //SyntaxHighlighter.config.strings.expandSource = '<span><img src="http://static.cnblogs.com/images/expand-code.gif" alt="" class="expand-code-icon"/>View Code</span>';
+    $(function () {  
+        loadViewCount(cb_entryId);
+        fixPostBodyFormat();
+        loadAdUnderPost();
+        loadBlogSignature();
+        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);        
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);        
+    });
+</SCRIPT>
+</DIV>
+<SCRIPT type=text/javascript 
+src="http://counter.cnblogs.com/blog/post/2495558"></SCRIPT>
+<SCRIPT type=text/javascript>var commentManager = new blogCommentManager();commentManager.renderComments(0);</SCRIPT>
+</DIV>
+<!--done-->
+<SCRIPT type=text/javascript 
+src="http://common.cnblogs.com/script/google-analytics.js"></SCRIPT>
+</BODY></HTML>

@@ -1,0 +1,89 @@
+package com.cmbc.payagent;
+
+import java.io.IOException;
+
+import javax.validation.Validation;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.lang.StringUtils;
+
+import com.solab.iso8583.util.ConvertUtil;
+
+/**
+ * 中国光大银行代付
+ *
+ * @author li_jie
+ * @see 02中国光大银行银企通平台第二批接口.doc
+ */
+public class Test {
+    public static void main(String[] args) throws Exception {
+	duizhang();
+   	 
+    }
+    
+    /**
+     * 跨行互联对账单文件下载接口（b2e004009）
+    * @throws Exception 
+     */
+    public static void duizhang() throws Exception {
+   	 StringBuffer message = new StringBuffer(); // 报文
+       message.append("<?xml version=\"1.0\" encoding=\"GBK\"?>");
+       message.append("<Transaction>");
+       message.append("<SystemHead>"); // 系统信息头开始
+       message.append("<Language>zh_CN</Language>"); // 语言
+       message.append("<Encodeing></Encodeing>"); // 编码
+       message.append("<Version></Version>");  // 版本
+       message.append("<ServiceName></ServiceName>"); // 服务名
+       message.append("<CifNo>2008074628</CifNo>");  // Cif号，相当于商户号
+       message.append("<UserID>002</UserID>"); // 用户ID
+       message.append("<SyMacFlag></SyMacFlag>"); // 系统mac标识
+       message.append("<MAC></MAC>"); // mac
+       message.append("<SyPinFlag></SyPinFlag>"); // 系统pin标识
+       message.append("<PinSeed></PinSeed>"); // pin
+       message.append("<LicenseId></LicenseId>"); // 认证ID
+       message.append("<Flag></Flag>"); // 标识
+       message.append("<Note></Note>"); // 备注
+       message.append("</SystemHead>"); // 系统信息头结束
+       message.append("<TransHead>"); // 报文头开始
+       message.append("<TransCode>downloadFileExt2</TransCode>"); // 交易码，是
+       message.append("<BatchID>40038556452006121900000001</BatchID>"); // 交易流水号, 上送报文为BatchID防止重复提交用，是，具体格式建议：企业10位客户号+八位日期+八位顺序号，如：20038556452006121800000001
+       message.append("<JnlDate>20140805</JnlDate>"); // 请求日期，是，YYYYMMDD
+       message.append("<JnlTime>104534</JnlTime>"); // 请求时间，是，HH24MISS
+       message.append("</TransHead>"); // 报文头结束
+       message.append("<TransContent>"); // 报文体开始
+       message.append("<ReqData>");
+       message.append("<ClientPatchID>410485564520061258000000030006</ClientPatchID>"); // 客户端批内序号/客户交易号，是，具体格式建议：批次号+四位顺序号
+       message.append("<accountNo>35500188000602406</accountNo>"); // 帐户号,光大银行账户，17或者21位数字，转出账号
+       message.append("</ReqData>");
+       message.append("</TransContent>"); // 报文体结束
+       message.append("</Transaction>");
+       System.out.println("发送给中国光大银行的报文为：" + message);
+       String response = send(message.toString());
+    }
+    
+    /**
+     * 银行调用发送
+     */
+    public static String send(String requestData) throws Exception {
+        System.out.println("银行路由--工具类--进入");
+        HttpClient httpclient = new HttpClient();
+        PostMethod method = new PostMethod("http://wapchargewg.bestpay.com.cn/bankRouterPingAn3");
+        NameValuePair[] params = {new NameValuePair("url","http://localhost:8888/ent/b2e004007.do?userId=2008074628&operatorID=002&userPassword=123456&Sigdata=1"),new NameValuePair("message", requestData)};
+        method.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8"); // 设置编码
+        method.setRequestBody(params);
+        httpclient.executeMethod(method);
+        String value = method.getResponseBodyAsString();
+        method.releaseConnection(); // 释放连接
+        System.out.println("从中国光大银行返回的报文为：" + value);
+        return value;
+    }
+    
+}
+
+
+

@@ -1,0 +1,1 @@
+windows->Customize Perspective->commands->java element creation 将相应的勾上即可

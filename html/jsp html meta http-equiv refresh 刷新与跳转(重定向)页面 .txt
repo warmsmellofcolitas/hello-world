@@ -1,0 +1,48 @@
+refresh属性值--刷新与跳转(重定向)页面
+refresh用于刷新与跳转(重定向)页面
+refresh出现在http-equiv属性中，使用content属性表示刷新或跳转的开始时间与跳转的网址
+----------------------------------
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="refresh" content="5"><!--5秒之后刷新本页面-->
+</head>
+<body>
+xxxxxx
+</body>
+</html>
+----------------------------------
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="refresh" content="5; url=http://www.baidu.com/"><!--5秒之后转到百度-->
+</head>
+<body>
+xxxxxx
+</body>
+</html>
+----------------------------------
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<html>
+<head>
+<meta http-equiv="refresh" content="0;url=searchTopProgram.do"/><!--0秒之后转到searchTopProgram.do-->
+</head>
+<body></body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

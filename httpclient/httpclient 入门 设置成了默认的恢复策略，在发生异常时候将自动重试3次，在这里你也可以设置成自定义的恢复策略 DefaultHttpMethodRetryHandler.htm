@@ -1,0 +1,1261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+	
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+  <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>HttpClient入门</title>
+<meta http-equiv="PICS-Label" content='(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r (cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true r (SS~~000 1))'/>
+<link rel="schema.DC" href="http://purl.org/DC/elements/1.0/"/>
+<link rel="SHORTCUT ICON" href="http://www.ibm.com/favicon.ico"/>
+  <meta name="Owner" content="dw@cn.ibm.com"/>
+  <meta name="DC.Language" scheme="rfc1766" content="zh-CN"/>
+  <meta name="IBM.Country" content="CN"/>
+<meta name="Security" content="Public"/>
+<meta name="IBM.SpecialPurpose" content="SP001"/>
+<meta name="IBM.PageAttributes" content="sid=1003,1004"/>
+<meta name="Source" content="v16 Template Generator"/>
+<meta name="Robots" content="index,follow"/>
+<meta name="Abstract" content="HttpClient 是 Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。本文首先介绍 HTTPClient，然后根据作者实际工作经验给出了一些常见问题的解决方法。"/>
+<meta name="Description" content="HttpClient 是 Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。本文首先介绍 HTTPClient，然后根据作者实际工作经验给出了一些常见问题的解决方法。"/>
+<meta name="Keywords" content="Apache Jakarta Common, HttpClient, HTTP 协议, 开发工具包, 金发华, 陈樟洪, tttosca, tttwaca"/>
+<meta name="DC.Date" scheme="iso8601" content="2005-11-10"/>
+<meta name="DC.Type" scheme="IBM_ContentClassTaxonomy" content="CT316"/>
+<meta name="DC.Subject" scheme="IBM_SubjectTaxonomy" content="TT400"/>
+<meta scheme="IBM_WTMCategory" name="IBM.WTMCategory" content="SOFDCOSRCN" />
+<meta name="DC.Rights" content="© Copyright IBM Corporation 2005"/>
+<meta name="IBM.Effective" scheme="W3CDTF" content="2005-11-10"/>
+<meta name="title" content="HttpClient入门"/>
+
+<!-- HEADER_SCRIPTS_AND_CSS_INCLUDE -->
+<link href="//dw1.s81c.com/common/v16/css/all.css" media="all" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/common/v16/css/screen.css" media="screen,projection" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/common/v16/css/screen-uas.css" media="screen,projection" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/common/v16/css/cn/zh/screen-fonts.css" media="screen,projection" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/common/v16/css/handheld.css" media="handheld" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/common/v16/css/print.css" media="print" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/common/v16/css/overlay.css" media="screen,projection" rel="stylesheet" title="www" type="text/css"/>
+
+<!-- dW-specific CSS -->
+<link href="//dw1.s81c.com/developerworks/css/dw-screen.css" media="screen,projection" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/developerworks/css/dw-mf/dw-mf2013-N.css" rel="stylesheet" title="www" type="text/css"/>	
+<link href="//dw1.s81c.com/developerworks/css/dw-local-site-N.css" media="screen,projection" rel="stylesheet" title="www" type="text/css"/>
+
+<link href="//dw1.s81c.com/developerworks/css/dw-screen-comments-ratings-signin.css" media="screen,projection" rel="stylesheet" title="www" type="text/css"/>
+<link href="//dw1.s81c.com/developerworks/js/jquery/cluetip98/jquery.cluetip.css" media="screen,projection" rel="stylesheet"  title="www" type="text/css" />
+
+<!-- JPP: LOCAL URL FOR TESTING V16 DEFIANT MASTHEAD/FOOTER -->
+
+<script src="//dw1.s81c.com/common/js/ibmcommon.js" type="text/javascript">//</script>
+<script src="//dw1.s81c.com/common/js/dynamicnav.js" type="text/javascript">//</script>
+<script language="JavaScript" src="//dw1.s81c.com/developerworks/js/urltactic.js" type="text/javascript"></script>
+<!-- Rating_START -->
+<script language="JavaScript" type="text/javascript">
+  // <![CDATA[
+
+ dwr = {};
+  dwr.clickhere = '点击评分';
+  dwr.starIntro = ''; 
+  dwr.stars = '星';
+  dwr.star = '星'; 
+  dwr.avgRatingOf = '平均分';
+  dwr.youRated = '您的评分是';
+  dwr.avgRating = '平均分';
+  dwr.basedOnVote = '共 {1} 个评分'; // {1} to be substitue by code
+  dwr.basedOnVotes = '共 {1} 个评分';
+  dwr.leftParen = '（'; 
+  dwr.rightParen = ' ）'; 
+  dwr.space = ' '; 
+  dwr.yourRating = '您的评分';
+dwr.avgRating2 = '总共 {1} 评分的平均分';
+dwr.avgRating3 = '平均分{1} 星';
+dwr.rateThisArticle = '为本文评分';
+dwr.votes = '{1}个评分';
+dwr.vote = '{1}个评分';
+dwr.submitErr = '错误：提交失败，请重试。';
+dwr.noRatingErr = '错误：请选择一个评分并重新提交。';
+dwr.submit = '提交';
+// ]]>
+</script>
+
+<!-- Rating_START -->
+<script language="JavaScript" src="//dw1.s81c.com/developerworks/js/artrating/showrating.js" type="text/javascript"></script>
+<style type="text/css">
+  .metavalue {
+  display: none;
+  }
+</style>
+<!-- Rating_END --><!-- RESERVED_HEADER_INCLUDE -->
+<script language="javascript" src="//dw1.s81c.com/developerworks/js/ajax1.js" type="text/javascript"></script>
+<script language="javascript" src="//dw1.s81c.com/developerworks/js/search_counter-maverick.js" type="text/javascript"></script>
+<script language="javascript" src="//dw1.s81c.com/developerworks/js/request_referer_capture-maverick.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+ <!--
+ setDefaultQuery('defaultHere');
+ //-->
+</script>
+<script language="JavaScript" type="text/javascript">
+ <!--
+ function openNewWindow(url,tar,arg){window.open(url,tar,arg);}
+ //-->
+</script>
+  <!-- Include file support -->
+  <script language="JavaScript" type="text/javascript">
+    (function($) {
+    jQuery.extend({
+    getInc: function(u,d){
+    if(u==null)return;
+    jQuery.ajax({
+    type: "GET",
+    url: u,
+    dataType: "text",
+    success: function(t) {
+    jQuery(d).html(t);
+    ibmCommon.initShowHide(jQuery(d).children()[0]);	
+    },
+    async: true
+    });
+    }
+    });
+    })(jQuery);
+  </script>
+</head>
+
+<body id="ibm-com">
+<div id="ibm-top" class="ibm-landing-page">
+
+<!-- MASTHEAD_BEGIN -->
+<!-- MASTHEAD_BEGIN -->
+<div class="ibm-access"><a href="#ibm-content">跳转到主要内容</a></div>
+<div id="ibm-masthead-dw">
+  
+    <!-- TOP ROW -->    
+    <div id="dw-masthead-top-row">
+    	<ul id="ibm-mast-options-dw">
+			<li id="dw-mast-top-4">
+				<a href="http://www.ibm.com/developerworks/cn" class=""><img width="43" height="22" aria-label="dW" alt="dW" src="//dw1.s81c.com/developerworks/i/mf/dwn-dw-badge.png"></a>
+			</li>
+    		<li id="dw-mast-top-0" class="navtab"> 	
+    			<a class="dw-mf-noscript" href="#" title="登录（或注册）需启用 JavaScript">登录 (或注册)</a>
+    		</li>
+    		<li id="dw-mast-top-1" class="navtab">
+    				<a href="#SELECTLANG">日本語</a>
+			</li>
+        	<li id="dw-mast-top-2" class="navtab dw-mf-hide">
+				<a href="#">[userid]</a>
+			</li>
+    		<li id="dw-mast-top-3" class="navtab">
+				<a href="#">IBM</a>
+			</li>
+    	</ul>
+	</div>
+    
+    <!-- TOP ROW SLIDER -->
+    <div id="ibm-my-menu-dw">    
+        <div class="ibm-ribbon-pane-dw">
+            <div class="ibm-ribbon-section-dw">
+                <!-- Sign-in -->
+                <div class="dw-mast-columns">                
+					<div class="dw-mast-col-1-1">
+						<div id="dw-mast-sso">
+							<!--<div id="dw-mast-sso-reg">
+								<p class="dw-mast-sso-reg-cn">如果您还没有注册到 IBM 注册系统，我们为给您带来的不便表示道歉，并请您马上注册。 							
+									<a href="#" onclick="(function () {window.location='/developerworks/dwwi/DWAuthRouter?m=reg&amp;lang=zh&amp;d='+encodeURIComponent(location.href);})();">现在注册</a>。</p>
+							</div>-->
+							<div id="signin_error_mf" class="dw-mf-hide"></div>
+							<div id="dw-mast-sso-form">
+								<form id="sForm_mf" action="" method="post" name="sForm_name_mf" onsubmit="return false;">
+									<div id="dw-mast-sso-id" class="dw-mast-sso-id-cn">
+										<label for="ibmid_mf">IBM ID：</label>
+										<input id="ibmid_mf" type="text" value="" name="ibmid_name_mf" maxlength="100" onkeypress="handleEP(event,this.form,'mf');"/>
+									</div>
+									<div id="dw-mast-sso-pw" class="dw-mast-sso-pw-cn">
+										<label for="pw_mf">密码：</label>
+										<input id="pw_mf" type="password" value="" name="pw_name_mf" maxlength="100" onkeypress="handleEP(event,this.form,'mf');"/>
+									</div>
+									<div id="dw-mast-sso-target" class="dw-mast-sso-target-cn">
+										<p class="dw-mf-perm-box">
+											<input id="perm_mf" type="checkbox" name="perm_name_mf"/><label for="perm_mf"> 保持登录。</label>
+										</p>
+									</div>
+									<div id="dw-mast-sso-terms">
+										<p class="dw-mast-sso-terms-cn">单击提交则表示您同意developerWorks 的条款和条件。 <a href="/developerworks/mydeveloperworks/terms?lang=zh">查看条款和条件</a>.</p>
+									</div>
+									<div>
+										<input class="dw-mf-submit-btn-cn" name="ibm_submit_name_mf" value="提交" onclick="signin('mf');return false;" type="submit" />
+									</div>
+								</form>
+							</div>
+							<div id="dw-mast-sso-update">
+								<div id="dw-mast-sso-update-id">
+									<ul>
+										<li><a class="ibm-forward-link" href="#" onclick="(function () {window.location='/developerworks/dwwi/DWAuthRouter?m=reg&amp;lang=zh_CN&amp;d='+encodeURIComponent(location.href);})();">需要一个 IBM ID？</a></li>
+										
+									<li><a class="ibm-forward-link" href="/developerworks/dwwi/jsp/WSHelp.jsp?lang=zh_CN">忘记 IBM ID？</a></li>
+									</ul>
+								</div>
+								<div id="dw-mast-sso-update-pw">
+								<ul class="dw-mf-pwupdate">
+									<li><a class="ibm-forward-link" href="#" onclick="(function () {window.location='https://www.ibm.com/account/profile?page=forgot&amp;lang=zh_CN&amp;appname=ibm&amp;required=null&amp;d='+encodeURIComponent(getAuthUrl())+'%3Fm%3Dloginpage%26lang%3Dzh_CN%26d%3D'+encodeURIComponent(location.href);})();">忘记密码？</a></li>
+									<li><a class="ibm-forward-link" href="#" onclick="(function () {window.location='https://www.ibm.com/account/profile?page=chpw&amp;lang=zh_CN&amp;appname=ibm&amp;required=null&amp;d='+encodeURIComponent(location.href);})();">更改您的密码</a></li>
+								</ul>
+									</div>
+							</div>
+							<div id="dw-mast-sso-text">
+			<!-- lk v17 updated text -->				    
+			<p>这是您第一次登陆到 developerWorks，已经自动为您创建了您的概要文件。 <strong>选择您概要文件中可以公开的信息的信息（如姓名、国家/地区，以及公司），这些信息同时也会与您所发布的内容相关联。 </strong>您可以随时更新您的 IBM 账号。</p>
+							<p class="dw-mf-secure-cn">所有提交的信息确保安全。</p>
+							</div>
+							<div class="dw-mast-close">
+								<ul>
+									<li><div class="dw-mast-close-sign-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+								</ul>
+							</div>	
+						</div>
+						
+						<div id="dw-mast-dname" class="dw-mf-hide">
+							<p>当您初次登录到 developerWorks 时，将会为您创建一份概要信息，您需要指定一个昵称。您的昵称将和您在 developerWorks 发布的内容显示在一起。</p><p><strong>昵称长度在 3 至 31 个字符之间</strong>。 您的昵称在 developerWorks 社区中必须是唯一的，并且出于隐私保护的原因，不能是您的电子邮件地址。</p>
+							<div id="signin_dname_error_mf" class="dw-mf-hide"></div>
+							<div id="dw-mast-dname-form">
+								<form id="dForm_mf" action="" method="post" name="dForm_name_mf" onsubmit="return false;">
+									<div id="dw-mast-dname-mf">
+										<label for="dname_mf">昵称：</label>
+										<input id="dname_mf" name="dname_name_mf" maxlength="31" size="25" value="" type="text" onkeypress="handleEP(event,this.form,'mf');" />
+									</div>
+									<div id="dw-mast-dname-terms">
+										<p class="dw-mast-dname-terms-cn">单击<strong>提交</strong>则表示您同意developerWorks 的条款和条件。 <a href="/developerworks/mydeveloperworks/terms?lang=zh">查看条款和条件</a>.</p>
+									</div>
+									<div>
+										<input class="dw-mf-submit-btn-cn" name="dname_submit_name_mf" value="提交" onclick="signin('mf');return false;" type="submit" />
+									</div>
+								</form>								
+							</div>
+							<div id="dw-mast-dname-secure">
+								<p class="dw-mf-secure-cn">所有提交的信息确保安全。</p>
+							</div>
+							<div class="dw-mast-close">
+								<ul>
+									<li><div class="dw-mast-close-sign-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+								</ul>
+							</div>	
+						</div>
+	
+						<div id="dw-mast-auth" class="dw-mf-hide">
+							<div>
+
+								<h2>My developerWorks:</h2>
+<!-- lk v17 updated links and text -->							    
+               		<ul>
+							<li><a id="dw-mast-top-0-0" href="//www.ibm.com/developerworks/community/homepage?lang=zh">我的首页</a></li>						    
+							<li><a
+							    href="//www.ibm.com/developerworks/community/profiles/html/myProfileView.do?lang=zh">我的概要信息</a></li>
+							<li><a
+							    href="//www.ibm.com/developerworks/community/groups/service/html/mycommunities?lang=zh">我的社区</a></li>
+			                 <li><a href="/developerworks/community/news/?lang=zh">设置</a></li>
+										    
+						</ul>      
+							</div>
+							<div id="dw-mast-notify" class="dw-mf-hide">
+								<h2>我的通知：</h2>
+								<ul>
+									<li><a id="new_notify" href="/developerworks/mydeveloperworks/homepage?lang=zh">{[num_notify] 个新通知}([num_notify] 个新通知)</a></li>
+									<li><a id="new_invite" href="/developerworks/mydeveloperworks/profiles/html/wc.do?action=in&requireAuth=true&widgetId=friends&lang=[lang]">{[num_invite] 个网络请求}([num_invite] 个网络请求)</a></li>  
+								</ul>
+							</div>
+							<div class="dw-mast-more">
+								<ul class="ibm-link-list">
+									<li><a class="dw-more-link" href="#" onclick="signOut(); return false;"><strong>退出</strong></a></li>
+								</ul>
+							</div>
+							<div class="dw-mast-close">
+								<ul>
+									<li><div class="dw-mast-close-sign"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+								</ul>
+							</div>		
+						</div>
+						
+					</div>
+                	
+                </div>
+                <!-- Site selector --> 
+				<div class="dw-mast-columns">
+					<div class="dw-mast-col-2-1">
+						<h2>选择语言：</h2>
+						<ul>
+							<li><a id="dw-mast-top-1-0" href="http://www.ibm.com/developerworks/">English</a></li>
+							<li><a href="http://www.ibm.com/developerworks/cn/">中文</a></li>
+							<li><a href="http://www.ibm.com/developerworks/jp/">日本語</a></li>
+						    <li><a href="http://www.ibm.com/developerworks/ru/">Русский</a></li>
+						</ul>
+					</div>
+					<div class="dw-mast-col-2-2">
+						<ul>
+							<li><a href="http://www.ibm.com/developerworks/br/">Português (Brasil)</a></li>
+							<li><a href="http://www.ibm.com/developerworks/ssa/">Español</a></li>
+							<li><a href="http://www.ibm.com/developerworks/vn/">Việt</a></li>
+						</ul>
+					</div>
+					<div class="dw-mast-close">
+						<ul>
+							<li><div class="dw-mast-close-lang"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+						</ul>
+                    </div>
+                </div>
+                <div class="dw-mast-columns"><!-- Authenticated --></div>
+                <!-- IBM -->
+				<div class="dw-mast-columns">
+					<div class="dw-mast-col-2-1">
+						<ul>
+							<li><a id="dw-mast-top-3-0" href="http://www.ibm.com/cn/zh/">IBM 主页</a></li>
+							<li><a href="http://www.ibm.com/solutions/cn/zh/">解决方案</a></li>
+							<li><a href="http://www.ibm.com/software/cn/">软件</a></li>
+						</ul>
+					</div>
+					<div class="dw-mast-col-2-2 dw-mast-ibm">
+						<ul>
+							<li><a href="http://www.ibm.com/support/cn/zh/">支持门户</a></li>
+							<li><a href="http://www.ibm.com/support/documentation/cn/zh/">产品文档</a></li>
+							<li><a href="http://www.ibm.com/redbooks/">Redbooks（英文）</a></li>
+						</ul>
+					</div>
+					<div class="dw-mast-close">
+						<ul>
+							<li><div class="dw-mast-close-ibm-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+						</ul>
+                    </div> 
+				</div>
+			</div>
+        </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div id="ibm-universal-nav-dw">
+        <ul id="ibm-unav-links-dw">
+        <li id="ibm-unav-home-dwlogo">
+				<a href="http://www.ibm.com/developerworks/"><img width="225" height="28" alt="developerWorks&reg;" src="//dw1.s81c.com/developerworks/i/mf/dwn-dw-wordmark.png"></a>
+            </li>
+        </ul>
+    	<ul id="ibm-menu-links-dw" class="ibm-menu-links-dw-cn">
+    		<li id="dw-mast-nav-0"><a href="http://www.ibm.com/developerworks/cn/topics">技术主题</a></li>
+    		<li id="dw-mast-nav-1"><a
+    			href="http://www.ibm.com/developerworks/cn/downloads/">软件下载</a></li>
+    		<li id="dw-mast-nav-2"><a
+    			href="https://www.ibm.com/developerworks/community/?lang=zh">社区</a></li>
+    		<li id="dw-mast-nav-3"><a href="https://www.ibm.com/developerworks/community/groups/service/html/communityview?communityUuid=6d7f9e5d-5f89-4767-a006-a81b8d186370&amp;lang=zh">技术讲座</a></li>
+    	</ul>
+		<form id="ibm-search-form" action="//www.ibm.com/search/csass/search/" method="get" name="form1">
+		<p>
+		<label for="q"><span class="ibm-access">搜索 developerWorks</span></label>
+		<input type="text" value="搜索 developerWorks" name="q" maxlength="100" id="q"/>
+    		<input type="hidden" name="sn" value="dw" />
+    		<input type="hidden" name="lang" value="zh" />
+    		<input type="hidden" name="cc" value="CN" />
+    		<input type="hidden" name="en" value="utf" />
+    		<input type="hidden" name="hpp" value="20" />
+    		<input type="hidden" name="dws" value="cndw" />
+    		<input type="hidden" name="lo" value="zh" />
+			<input type="submit" id="ibm-search-dw" class="ibm-btn-search-dw" name="Search" value="搜索" />
+    		</p>
+    	</form>  
+    </div>
+    
+    <!-- BOTTOM ROW SLIDER -->
+    <div id="ibm-common-menu-dw">
+        <div class="ibm-ribbon-pane-dw">
+            <div class="ibm-ribbon-section-dw">
+				<!-- Technical topics category -->
+  
+            	<div class="dw-mast-columns">
+            	<div class="dw-mast-col-5-1">
+            		<h2><a id="dw-mast-nav-0-0" href="http://www.ibm.com/developerworks/cn/topics/">技术主题</a></h2>
+            		
+            		<ul>
+            		    <li><a href="http://www.ibm.com/developerworks/cn/agile/">Agile
+            			    transformation</a></li>
+            			<li><a href="http://www.ibm.com/developerworks/cn/aix/">AIX and UNIX</a></li>
+            		    <li><a href="http://www.ibm.com/developerworks/cn/bigdata/">Big data</a></li>
+            			<li><a href="http://www.ibm.com/developerworks/cn/cloud/">Cloud computing</a></li>
+            		
+            			
+            		</ul>     
+            	</div>
+            	<div class="dw-mast-col-5-2">
+            		
+            		<ul>
+						<li><a href="http://www.ibm.com/developerworks/cn/ibmi/">IBM i</a></li>
+            		    <li><a href="http://www.ibm.com/developerworks/cn/data/">Information management</a></li>
+            		    <li><a href="http://www.ibm.com/developerworks/cn/java/">Java technology</a></li>
+            		    <li><a href="http://www.ibm.com/developerworks/cn/linux/">Linux</a></li>
+            			
+           			
+            		</ul>
+            	</div>
+            	<div class="dw-mast-col-5-3">
+            		
+            		<ul>
+						<li><a href="http://www.ibm.com/developerworks/cn/lotus/">Lotus</a></li>
+            		    <li><a href="http://www.ibm.com/developerworks/cn/mobile/">Mobile development</a></li>
+						<li><a href="http://www.ibm.com/developerworks/cn/opensource/">Open source</a></li>
+            		    <li><a href="http://www.ibm.com/developerworks/cn/rational/">Rational</a></li>
+            			<!--<li><a href="http://www.ibm.com/developerworks/cn/webservices/">SOA and web services</a></li>-->
+						
+            			</ul>
+            		
+            	</div>
+            	<div class="dw-mast-col-5-4">
+            		<ul>
+					<li><a href="http://www.ibm.com/developerworks/cn/social/">Social Business</a></li> 
+             		<li><a href="http://www.ibm.com/developerworks/cn/web/">Web development</a></li>  
+					<li><a href="http://www.ibm.com/developerworks/cn/websphere/">WebSphere</a></li> 
+           		<!--	<li><a href="http://www.ibm.com/developerworks/cn/xml/">XML</a></li>-->
+            		</ul>        
+            	</div>
+            	<div class="dw-mast-col-5-5">
+            		<ul>
+            			<li><a href="http://www.ibm.com/developerworks/cn/library/"><strong>文档库</strong></a></li>
+            			<li><a href="http://www.ibm.com/developerworks/cn/products/"><strong>产品 A - Z</strong></a></li>				    
+            		</ul>        
+            	</div>
+            	<div class="dw-mast-close">
+            		<ul>
+            			<li><div class="dw-mast-close-tech-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+            		</ul>
+            	</div>
+            </div>
+            	<!-- Evaluation software category -->
+            	<div class="dw-mast-columns">
+            		<div class="dw-mast-col-2-1">
+            			<h2><a id="dw-mast-nav-1-0" href="http://www.ibm.com/developerworks/cn/downloads">软件下载</a></h2>
+            			<ul>
+            				<li><a href="http://www.ibm.com/developerworks/cn/downloads/#data">Information management</a></li>
+            				<li><a href="http://www.ibm.com/developerworks/cn/downloads/#lotus">Lotus</a></li>
+            				<li><a href="http://www.ibm.com/developerworks/cn/downloads/#rational">Rational</a></li>
+            			</ul>            
+            		</div>
+            		<div class="dw-mast-col-2-2">
+            			<ul>
+            				<li><a href="http://www.ibm.com/developerworks/cn/downloads/#tivoli">Tivoli</a></li>
+            				<li><a href="http://www.ibm.com/developerworks/cn/downloads/#websphere">WebSphere</a></li>
+            				
+            			</ul>            
+            		</div>
+            		<div class="dw-mast-close">
+            			<ul>
+            				<li><div class="dw-mast-close-eval-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+            			</ul>
+            		</div>
+            	</div>
+            	<!-- Community category -->
+                <!-- lk v17 removed links, updated urls -->
+            	<div class="dw-mast-columns">
+            		<div class="dw-mast-col-2-1">
+            			<h2><a id="dw-mast-nav-2-0" href="https://www.ibm.com/developerworks/community/?lang=zh">社区</a></h2>
+            			<ul>
+            				<li><a href="https://www.ibm.com/developerworks/community/homepage/?lang=zh">我的首页</a></li>
+            				<li><a href="https://www.ibm.com/developerworks/community/profiles/?lang=zh">概要信息</a></li>
+            				<li><a href="https://www.ibm.com/developerworks/community/groups/?lang=zh">群组</a></li>
+							<li><a href="https://www.ibm.com/developerworks/community/blogs/?lang=zh">博客</a></li>
+             			</ul>     
+            		</div>
+            		<div class="dw-mast-col-2-2">
+            			<ul>
+                    
+				    <li><a href="https://www.ibm.com/developerworks/community/forums/?lang=zh">论坛</a></li>
+					<li><a href="https://www.ibm.com/developerworks/community/wikis/?lang=zh">Wiki</a></li>
+					<li><a href="https://www.ibm.com/developerworks/community/activities/?lang=zh">活动</a></li>
+            			</ul>
+            		</div>
+            		<div class="dw-mast-close">
+            			<ul>
+            				<li><div class="dw-mast-close-comm-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+            			</ul>
+            		</div>
+            	</div>
+            	<!-- Events category -->
+            	<div class="dw-mast-columns">
+            		<div class="dw-mast-col-1-1">
+            			<h2><a id="dw-mast-nav-3-0" href="https://www.ibm.com/developerworks/community/groups/service/html/communityview?communityUuid=6d7f9e5d-5f89-4767-a006-a81b8d186370&amp;lang=zh">技术讲座</a></h2>
+            			<ul>
+            				<li><a href="https://www.ibm.com/developerworks/community/groups/service/html/communityview?communityUuid=6d7f9e5d-5f89-4767-a006-a81b8d186370&amp;lang=zh">技术讲座</a></li>
+            				<li><a href="http://www.ibm.com/developerworks/cn/swi/">多媒体课堂</a></li>
+            				<li><a href="http://www.ibm.com/developerworks/find/webcasts/">网络广播（英文）</a></li>
+            				<li><a href="http://www.ibm.com/developerworks/find/events/">查找活动（技术讲座，网络广播，会议等）（英文）</a></li> 
+            			</ul>            
+            		</div>
+            		<div class="dw-mast-close">
+            			<ul>
+            				<li><div class="dw-mast-close-event-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10" border="0"/></a></div></li>
+            			</ul>
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </div>
+	
+</div>
+<div id="fdiv" class="ibm-access"></div>
+<!-- MASTHEAD_END --><!-- MASTHEAD_END -->
+
+<div id="ibm-pcon">
+
+<!-- CONTENT_BEGIN -->
+<div id="ibm-content">
+
+<!-- Navigation_Trail_BEGIN -->
+<!-- &nbsp; -->
+      <div id="ibm-content-head"><ul id="ibm-navigation-trail"><li class="ibm-first"><a href="http://www.ibm.com/developerworks/cn/">developerWorks 中国</a></li><li><a href="http://www.ibm.com/developerworks/cn/opensource/">Open source</a></li><li><a href="http://www.ibm.com/developerworks/cn/views/opensource/libraryview.jsp">文档库</a></li></ul></div>
+<!-- Navigation_Trail_END -->
+
+<!-- dW_Summary Area_START -->
+<div id="dw-summary-article">
+
+<div class="dw-content-head">
+<h1>HttpClient入门</h1><p/>
+</div>
+
+<div class="ibm-container-body ibm-two-column">
+
+<div class="ibm-column ibm-first">
+<div class="author"><a class="dwauthor" rel="#authortip1" href="#author1">发华 金</a>, 软件工程师，IBM CSDL, EMC</div><div id="authortip1" class="dwauthor-onload-state ibm-no-print">金发华是一名工作在 IBM CSDL 的软件工程师。他喜欢钻研各种新的技术，在 Java 网络开发和 Web 开发方面颇有经验。</div><div class="author"><a class="dwauthor" rel="#authortip2" href="#author2">樟洪 陈</a>, 软件工程师，IBM CSDL, EMC</div><div id="authortip2" class="dwauthor-onload-state ibm-no-print">陈樟洪是一位 IBM CSDL 的软件工程师，目前从事企业电子商务应用的开发。</div>
+<p></p>
+  <p><strong>简介：</strong>&nbsp;HttpClient 是 Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。本文首先介绍 HTTPClient，然后根据作者实际工作经验给出了一些常见问题的解决方法。</p>
+
+ 
+</div>
+
+<div class="ibm-column ibm-second">
+
+<p class="leading"><b>发布日期：</b>&nbsp;2005 年 11 月 10 日
+  
+<br /><b>级别：</b>&nbsp;高级
+    
+
+<br /><strong>访问情况 ：</strong>&nbsp;129024 次浏览
+  <br /><strong>评论：</strong>&nbsp;<span id="nCmts"><img alt="" src="//dw1.s81c.com/developerworks/i/circle-preloader.gif" height="12" width="50" /><img alt="" src="//dw1.s81c.com/i/c.gif" height="14" width="1" /></span>
+  <!-- Rating_Area_Begin -->
+  <div id="art-rating-summary"></div>
+  <!-- Rating_Area_End -->
+  <br />
+</p>
+</div>
+
+</div>
+</div>
+<!-- dW_Summary_Area_END -->
+
+<!-- CONTENT_BODY -->
+<div id="ibm-content-body">
+
+<!-- MAIN_COLUMN_BEGIN -->
+<div id="ibm-content-main">
+
+<!-- Related_Searches_Area_And_Overlays_Begin -->
+
+<!-- MAIN_COLUMN_CONTAINER_BEGIN -->
+<div class="ibm-container">
+
+<!-- MAIN_COLUMN_CONTENT_BEGIN -->
+<p><a name="N10053"><span class="atitle">HttpClient简介</span></a></p>
+      <p>HTTP 协议可能是现在 Internet 上使用得最多、最重要的协议了，越来越多的 Java 应用程序需要直接通过 HTTP 协议来访问网络资源。虽然在 JDK 的 java.net 包中已经提供了访问 HTTP 协议的基本功能，但是对于大部分应用程序来说，JDK 库本身提供的功能还不够丰富和灵活。HttpClient 是 Apache Jakarta Common 下的子项目，用来提供高效的、最新的、功能丰富的支持 HTTP 协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。HttpClient 已经应用在很多的项目中，比如 Apache Jakarta 上很著名的另外两个开源项目 Cactus 和 HTMLUnit 都使用了 HttpClient，更多使用 HttpClient 的应用可以参见<a href="http://wiki.apache.org/jakarta-httpclient/HttpClientPowered">http://wiki.apache.org/jakarta-httpclient/HttpClientPowered</a>。HttpClient 项目非常活跃，使用的人还是非常多的。目前 HttpClient 版本是在 2005.10.11 发布的 3.0 RC4 。</p>
+      <div class="ibm-alternate-rule"><hr/></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><p><a name="N10060"><span class="atitle">HttpClient 功能介绍</span></a></p>
+      <p>以下列出的是 HttpClient 提供的主要的功能，要知道更多详细的功能可以参见 HttpClient 的主页。</p>
+      <ul>
+        <li>实现了所有 HTTP 的方法（GET,POST,PUT,HEAD 等）</li>
+        <li>支持自动转向</li>
+        <li>支持 HTTPS 协议</li>
+        <li>支持代理服务器等</li>
+      </ul>
+      <p>下面将逐一介绍怎样使用这些功能。首先，我们必须安装好 HttpClient。</p>
+      <ul>
+        <li>HttpClient 可以在<a href="http://jakarta.apache.org/commons/httpclient/downloads.html">http://jakarta.apache.org/commons/httpclient/downloads.html</a>下载</li>
+        <li>HttpClient 用到了 Apache Jakarta common 下的子项目 logging，你可以从这个地址<a href="http://jakarta.apache.org/site/downloads/downloads_commons-logging.cgi">http://jakarta.apache.org/site/downloads/downloads_commons-logging.cgi</a>下载到 common logging，从下载后的压缩包中取出 commons-logging.jar 加到 CLASSPATH 中</li>
+        <li>HttpClient 用到了 Apache Jakarta common 下的子项目 codec，你可以从这个地址<a href="http://jakarta.apache.org/site/downloads/downloads_commons-codec">http://jakarta.apache.org/site/downloads/downloads_commons-codec</a>.cgi 下载到最新的 common codec，从下载后的压缩包中取出 commons-codec-1.x.jar 加到 CLASSPATH 中</li>
+      </ul>
+      <div class="ibm-alternate-rule"><hr/></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><p><a name="N10093"><span class="atitle">HttpClient 基本功能的使用</span></a></p>
+      <p><a name="N10099"><span class="smalltitle">GET 方法</span></a></p>
+      <p>使用 HttpClient 需要以下 6 个步骤：</p>
+      <p>1.  创建 HttpClient 的实例</p>
+      <p>2.  创建某种连接方法的实例，在这里是 GetMethod。在 GetMethod 的构造函数中传入待连接的地址</p>
+      <p>3.  调用第一步中创建好的实例的 execute 方法来执行第二步中创建好的 method 实例</p>
+      <p>4.  读 response</p>
+      <p>5.  释放连接。无论执行方法是否成功，都必须释放连接</p>
+      <p>6.  对得到后的内容进行处理</p>
+      <p>根据以上步骤，我们来编写用GET方法来取得某网页内容的代码。</p>
+      <ul>
+        <li>大部分情况下 HttpClient 默认的构造函数已经足够使用。
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+HttpClient httpClient = new HttpClient();
+</pre></td></tr></table><br />
+        </li>
+        <li>创建GET方法的实例。在GET方法的构造函数中传入待连接的地址即可。用GetMethod将会自动处理转发过程，如果想要把自动处理转发过程去掉的话，可以调用方法setFollowRedirects(false)。
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+GetMethod getMethod = new GetMethod("http://www.ibm.com/");
+</pre></td></tr></table><br />
+        </li>
+        <li>调用实例httpClient的executeMethod方法来执行getMethod。由于是执行在网络上的程序，在运行executeMethod方法的时候，需要处理两个异常，分别是HttpException和IOException。引起第一种异常的原因主要可能是在构造getMethod的时候传入的协议不对，比如不小心将"http"写成"htp"，或者服务器端返回的内容不正常等，并且该异常发生是不可恢复的；第二种异常一般是由于网络原因引起的异常，对于这种异常 （IOException），HttpClient会根据你指定的恢复策略自动试着重新执行executeMethod方法。HttpClient的恢复策略可以自定义（通过实现接口HttpMethodRetryHandler来实现）。通过httpClient的方法setParameter设置你实现的恢复策略，本文中使用的是系统提供的默认恢复策略，该策略在碰到第二类异常的时候将自动重试3次。executeMethod返回值是一个整数，表示了执行该方法后服务器返回的状态码，该状态码能表示出该方法执行是否成功、需要认证或者页面发生了跳转（默认状态下GetMethod的实例是自动处理跳转的）等。
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+//设置成了默认的恢复策略，在发生异常时候将自动重试3次，在这里你也可以设置成自定义的恢复策略
+getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, 
+        new DefaultHttpMethodRetryHandler()); 
+//执行getMethod
+int statusCode = client.executeMethod(getMethod);
+if (statusCode != HttpStatus.SC_OK) {
+  System.err.println("Method failed: " + getMethod.getStatusLine());
+}
+</pre></td></tr></table><br />
+        </li>
+        <li>  在返回的状态码正确后，即可取得内容。取得目标地址的内容有三种方法：第一种，getResponseBody，该方法返回的是目标的二进制的byte流；第二种，getResponseBodyAsString，这个方法返回的是String类型，值得注意的是该方法返回的String的编码是根据系统默认的编码方式，所以返回的String值可能编码类型有误，在本文的"字符编码"部分中将对此做详细介绍；第三种，getResponseBodyAsStream，这个方法对于目标地址中有大量数据需要传输是最佳的。在这里我们使用了最简单的getResponseBody方法。
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+byte[] responseBody = method.getResponseBody();
+</pre></td></tr></table><br />
+        </li>
+        <li>释放连接。无论执行方法是否成功，都必须释放连接。
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+method.releaseConnection();
+</pre></td></tr></table><br />
+        </li>
+        <li>处理内容。在这一步中根据你的需要处理内容，在例子中只是简单的将内容打印到控制台。
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+System.out.println(new String(responseBody));
+</pre></td></tr></table><br />
+        </li>
+      </ul>
+      <p>下面是程序的完整代码，这些代码也可在附件中的test.GetSample中找到。</p>
+      <br />
+      <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycode">
+package test;
+import java.io.IOException;
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+public class GetSample{
+  public static void main(String[] args) {
+  //构造HttpClient的实例
+  HttpClient httpClient = new HttpClient();
+  //创建GET方法的实例
+  GetMethod getMethod = new GetMethod("http://www.ibm.com");
+  //使用系统提供的默认的恢复策略
+  getMethod.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
+    new DefaultHttpMethodRetryHandler());
+  try {
+   //执行getMethod
+   int statusCode = httpClient.executeMethod(getMethod);
+   if (statusCode != HttpStatus.SC_OK) {
+    System.err.println("Method failed: "
+      + getMethod.getStatusLine());
+   }
+   //读取内容 
+   byte[] responseBody = getMethod.getResponseBody();
+   //处理内容
+   System.out.println(new String(responseBody));
+  } catch (HttpException e) {
+   //发生致命的异常，可能是协议不对或者返回的内容有问题
+   System.out.println("Please check your provided http address!");
+   e.printStackTrace();
+  } catch (IOException e) {
+   //发生网络异常
+   e.printStackTrace();
+  } finally {
+   //释放连接
+   getMethod.releaseConnection();
+  }
+ }
+}
+</pre></td></tr></table><br />
+      <p><a name="N100F0"><span class="smalltitle">POST方法</span></a></p>
+      <p>根据RFC2616，对POST的解释如下：POST方法用来向目的服务器发出请求，要求它接受被附在请求后的实体，并把它当作请求队列（Request-Line）中请求URI所指定资源的附加新子项。POST被设计成用统一的方法实现下列功能：</p>
+      <ul>
+        <li>对现有资源的注释（Annotation of existing resources）</li>
+        <li>向电子公告栏、新闻组，邮件列表或类似讨论组发送消息</li>
+        <li>提交数据块，如将表单的结果提交给数据处理过程</li>
+        <li>通过附加操作来扩展数据库</li>
+      </ul>
+      <p>调用HttpClient中的PostMethod与GetMethod类似，除了设置PostMethod的实例与GetMethod有些不同之外，剩下的步骤都差不多。在下面的例子中，省去了与GetMethod相同的步骤，只说明与上面不同的地方，并以登录清华大学BBS为例子进行说明。</p>
+      <ul>
+        <li>构造PostMethod之前的步骤都相同，与GetMethod一样，构造PostMethod也需要一个URI参数，在本例中，登录的地址是http://www.newsmth.net/bbslogin2.php。在创建了PostMethod的实例之后，需要给method实例填充表单的值，在BBS的登录表单中需要有两个域，第一个是用户名（域名叫id），第二个是密码（域名叫passwd）。表单中的域用类NameValuePair来表示，该类的构造函数第一个参数是域名，第二参数是该域的值；将表单所有的值设置到PostMethod中用方法setRequestBody。另外由于BBS登录成功后会转向另外一个页面，但是HttpClient对于要求接受后继服务的请求，比如POST和PUT，不支持自动转发，因此需要自己对页面转向做处理。具体的页面转向处理请参见下面的"自动转向"部分。代码如下：
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+String url = "http://www.newsmth.net/bbslogin2.php";
+PostMethod postMethod = new PostMethod(url);
+// 填入各个表单域的值
+NameValuePair[] data = { new NameValuePair("id", "youUserName"),
+new NameValuePair("passwd", "yourPwd") };
+// 将表单的值放入postMethod中
+postMethod.setRequestBody(data);
+// 执行postMethod
+int statusCode = httpClient.executeMethod(postMethod);
+// HttpClient对于要求接受后继服务的请求，象POST和PUT等不能自动处理转发
+// 301或者302
+if (statusCode == HttpStatus.SC_MOVED_PERMANENTLY || 
+statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
+    // 从头中取出转向的地址
+    Header locationHeader = postMethod.getResponseHeader("location");
+    String location = null;
+    if (locationHeader != null) {
+     location = locationHeader.getValue();
+     System.out.println("The page was redirected to:" + location);
+    } else {
+     System.err.println("Location field value is null.");
+    }
+    return;
+}
+</pre></td></tr></table><br />
+        </li>
+      </ul>
+      <p>完整的程序代码请参见附件中的test.PostSample</p>
+      <div class="ibm-alternate-rule"><hr/></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><p><a name="N10118"><span class="atitle">使用HttpClient过程中常见的一些问题</span></a></p>
+      <p>下面介绍在使用HttpClient过程中常见的一些问题。</p>
+      <p><a name="N10121"><span class="smalltitle">字符编码</span></a></p>
+      <p>某目标页的编码可能出现在两个地方，第一个地方是服务器返回的http头中，另外一个地方是得到的html/xml页面中。</p>
+      <ul>
+        <li>在http头的Content-Type字段可能会包含字符编码信息。例如可能返回的头会包含这样子的信息：Content-Type: text/html; charset=UTF-8。这个头信息表明该页的编码是UTF-8，但是服务器返回的头信息未必与内容能匹配上。比如对于一些双字节语言国家，可能服务器返回的编码类型是UTF-8，但真正的内容却不是UTF-8编码的，因此需要在另外的地方去得到页面的编码信息；但是如果服务器返回的编码不是UTF-8，而是具体的一些编码，比如gb2312等，那服务器返回的可能是正确的编码信息。通过method对象的getResponseCharSet()方法就可以得到http头中的编码信息。</li>
+        <li>对于象xml或者html这样的文件，允许作者在页面中直接指定编码类型。比如在html中会有&lt;meta http-equiv="Content-Type" content="text/html; charset=gb2312"/&gt;这样的标签；或者在xml中会有&lt;?xml version="1.0" encoding="gb2312"?&gt;这样的标签，在这些情况下，可能与http头中返回的编码信息冲突，需要用户自己判断到底那种编码类型应该是真正的编码。</li>
+      </ul>
+      <p><a name="N10133"><span class="smalltitle">自动转向</span></a></p>
+      <p>根据RFC2616中对自动转向的定义，主要有两种：301和302。301表示永久的移走（Moved Permanently），当返回的是301，则表示请求的资源已经被移到一个固定的新地方，任何向该地址发起请求都会被转到新的地址上。302表示暂时的转向，比如在服务器端的servlet程序调用了sendRedirect方法，则在客户端就会得到一个302的代码，这时服务器返回的头信息中location的值就是sendRedirect转向的目标地址。</p>
+      <p>HttpClient支持自动转向处理，但是象POST和PUT方式这种要求接受后继服务的请求方式，暂时不支持自动转向，因此如果碰到POST方式提交后返回的是301或者302的话需要自己处理。就像刚才在POSTMethod中举的例子：如果想进入登录BBS后的页面，必须重新发起登录的请求，请求的地址可以在头字段location中得到。不过需要注意的是，有时候location返回的可能是相对路径，因此需要对location返回的值做一些处理才可以发起向新地址的请求。</p>
+      <p>另外除了在头中包含的信息可能使页面发生重定向外，在页面中也有可能会发生页面的重定向。引起页面自动转发的标签是：&lt;meta http-equiv="refresh" content="5; url=http://www.ibm.com/us"&gt;。如果你想在程序中也处理这种情况的话得自己分析页面来实现转向。需要注意的是，在上面那个标签中url的值也可以是一个相对地址，如果是这样的话，需要对它做一些处理后才可以转发。</p>
+      <p><a name="N10142"><span class="smalltitle">处理HTTPS协议</span></a></p>
+      <p>HttpClient提供了对SSL的支持，在使用SSL之前必须安装JSSE。在Sun提供的1.4以后的版本中，JSSE已经集成到JDK中，如果你使用的是JDK1.4以前的版本则必须安装JSSE。JSSE不同的厂家有不同的实现。下面介绍怎么使用HttpClient来打开Https连接。这里有两种方法可以打开https连接，第一种就是得到服务器颁发的证书，然后导入到本地的keystore中；另外一种办法就是通过扩展HttpClient的类来实现自动接受证书。</p>
+      <p>方法1，取得证书，并导入本地的keystore：</p>
+      <ul>
+        <li>安装JSSE （如果你使用的JDK版本是1.4或者1.4以上就可以跳过这一步）。本文以IBM的JSSE为例子说明。先到IBM网站上下载JSSE的安装包。然后解压开之后将ibmjsse.jar包拷贝到&lt;java-home&gt;\lib\ext\目录下。</li>
+        <li>取得并且导入证书。证书可以通过IE来获得：
+<p>1．  用IE打开需要连接的https网址，会弹出如下对话框：</p>
+          
+            <br />
+            <img alt="" border="0" height="301" src="images/image001.png" width="384"/>
+          <br />
+          <p>2．  单击"View Certificate"，在弹出的对话框中选择"Details"，然后再单击"Copy to File"，根据提供的向导生成待访问网页的证书文件</p>
+          
+            <br />
+            <img alt="" border="0" height="476" src="images/image003.png" width="409"/>
+          <br />
+          <p>3．  向导第一步，欢迎界面，直接单击"Next"，</p>
+          
+            <br />
+            <img alt="" border="0" height="386" src="images/image005.png" width="503"/>
+          <br />
+          <p>4．  向导第二步，选择导出的文件格式，默认，单击"Next"，</p>
+          
+            <br />
+            <img alt="" border="0" height="386" src="images/image007.png" width="503"/>
+          <br />
+          <p>5．  向导第三步，输入导出的文件名，输入后，单击"Next"，</p>
+          
+            <br />
+            <img alt="" border="0" height="454" src="images/image009.png" width="506"/>
+          <br />
+          <p>6．  向导第四步，单击"Finish"，完成向导</p>
+          
+            <br />
+            <img alt="" border="0" height="386" src="images/image011.png" width="503"/>
+          <br />
+          <p>7．  最后弹出一个对话框，显示导出成功</p>
+          
+            <br />
+            <img alt="" border="0" height="100" src="images/image013.png" width="183"/>
+          <br />
+        </li>
+        <li>
+          <p>用keytool工具把刚才导出的证书倒入本地keystore。Keytool命令在&lt;java-home&gt;\bin\下，打开命令行窗口，并到&lt;java-home&gt;\lib\security\目录下，运行下面的命令：</p>
+          <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+keytool -import -noprompt -keystore cacerts 
+-storepass changeit -alias yourEntry1 -file your.cer
+</pre></td></tr></table><br />
+          <p>其中参数alias后跟的值是当前证书在keystore中的唯一标识符，但是大小写不区分；参数file后跟的是刚才通过IE导出的证书所在的路径和文件名；如果你想删除刚才导入到keystore的证书，可以用命令：</p>
+          <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+keytool -delete -keystore cacerts -storepass changeit -alias yourEntry1
+</pre></td></tr></table><br />
+        </li>
+        <li>写程序访问https地址。如果想测试是否能连上https，只需要稍改一下GetSample例子，把请求的目标变成一个https地址。
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+GetMethod getMethod = new GetMethod("https://www.yourdomain.com");
+</pre></td></tr></table><br />
+          <p>运行该程序可能出现的问题：</p>
+          <p>1.  抛出异常java.net.SocketException: Algorithm SSL not available。出现这个异常可能是因为没有加JSSEProvider，如果用的是IBM的JSSE Provider，在程序中加入这样的一行：</p>
+          <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+ if(Security.getProvider("com.ibm.jsse.IBMJSSEProvider") == null)
+ Security.addProvider(new IBMJSSEProvider());
+ </pre></td></tr></table><br />
+          <p>或者也可以打开&lt;java-home&gt;\lib\security\java.security，在行</p>
+          <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+security.provider.1=sun.security.provider.Sun
+security.provider.2=com.ibm.crypto.provider.IBMJCE
+</pre></td></tr></table><br />
+          <p>后面加入security.provider.3=com.ibm.jsse.IBMJSSEProvider</p>
+          <p>2.  抛出异常java.net.SocketException: SSL implementation not available。出现这个异常可能是你没有把ibmjsse.jar拷贝到&lt;java-home&gt;\lib\ext\目录下。</p>
+          <p>3.  抛出异常javax.net.ssl.SSLHandshakeException: unknown certificate。出现这个异常表明你的JSSE应该已经安装正确，但是可能因为你没有把证书导入到当前运行JRE的keystore中，请按照前面介绍的步骤来导入你的证书。</p>
+        </li>
+      </ul>
+      <p>方法２，扩展HttpClient类实现自动接受证书</p>
+      <p>因为这种方法自动接收所有证书，因此存在一定的安全问题，所以在使用这种方法前请仔细考虑您的系统的安全需求。具体的步骤如下：</p>
+      <ul>
+        <li>提供一个自定义的socket factory（test.MySecureProtocolSocketFactory）。这个自定义的类必须实现接口org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory，在实现接口的类中调用自定义的X509TrustManager(test.MyX509TrustManager)，这两个类可以在随本文带的附件中得到</li>
+        <li>创建一个org.apache.commons.httpclient.protocol.Protocol的实例，指定协议名称和默认的端口号
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+Protocol myhttps = new Protocol("https", new MySecureProtocolSocketFactory (), 443);
+</pre></td></tr></table><br />
+        </li>
+        <li>注册刚才创建的https协议对象
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycodeliquid">
+Protocol.registerProtocol("https ", myhttps);
+</pre></td></tr></table><br />
+        </li>
+        <li>然后按照普通编程方式打开https的目标地址，代码请参见test.NoCertificationHttpsGetSample</li>
+      </ul>
+      <p><a name="N10232"><span class="smalltitle">处理代理服务器</span></a></p>
+      <p>HttpClient中使用代理服务器非常简单，调用HttpClient中setProxy方法就可以，方法的第一个参数是代理服务器地址，第二个参数是端口号。另外HttpClient也支持SOCKS代理。</p>
+      <br />
+      <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="code-outline"><pre class="displaycode">
+httpClient.getHostConfiguration().setProxy(hostName,port);
+</pre></td></tr></table><br />
+      <div class="ibm-alternate-rule"><hr/></div><p class="ibm-ind-link ibm-back-to-top"><a href="#ibm-pcon" class="ibm-anchor-up-link">回页首</a></p><p><a name="N10244"><span class="atitle">结论</span></a></p>
+      <p>从上面的介绍中，可以知道HttpClient对http协议支持非常好，使用起来很简单，版本更新快，功能也很强大，具有足够的灵活性和扩展性。对于想在Java应用中直接访问http资源的编程人员来说，HttpClient是一个不可多得的好工具。</p>
+    <!-- CMA ID: 99064 --> <!-- Site ID: 10 --> <!-- XSLT stylesheet used to transform this file:  dw-article-6.0-beta.xsl -->
+<br />
+<p><a name="resources"><span class="atitle">参考资料 </span></a></p>
+      <ul><li>Commons logging包含了各种各样的日志API的实现，读者可以通过站点http://jakarta.apache.org/commons/logging/得到详细的内容<br /><br /></li><li>Commons codec包含了一些一般的解码/编码算法。包含了语音编码、十六进制、Base64和URL编码等，通过http://jakarta.apache.org/commons/codec/可以得到详细的内容<br /><br /></li><li>rfc2616是关于HTTP/1.1的文档，可以在http://www.faqs.org/rfcs/rfc2616.html上得到详细的内容，另外rfc1945是关于HTTP/1.0的文档，通过http://www.faqs.org/rfcs/rfc1945.html可以得到详细内容<br /><br /></li><li>SSL――SSL 是由 Netscape Communications Corporation 于 1994 年开发的，而 TLS V1.0 是由 Internet Engineering Task Force（IETF）定义的标准，它基于 SSL V3.0，并且在使用的加密算法上与其有些许的不同。例如，SSL 使用 Message Authentication Code（MAC）算法来生成完整性校验值，而 TLS 应用密钥的 Hashing for Message Authentication Code（HMAC）算法。<br /><br /></li><li>IBM JSSE提供了SSL（Secure Sockets Layer）和TLS（Transport Layer Security）的java实现，在http://www-03.ibm.com/servers/eserver/zseries/software/java/jsse.html中可以得到详细的信息<br /><br /></li><li>Keytool是一个管理密钥和证书的工具。关于它详细的使用信息可以在http://www.doc.ic.ac.uk/csg/java/1.3.1docs/tooldocs/solaris/keytool.html上得到<br /><br /></li><li>HTTPClient的主页是http://jakarta.apache.org/commons/httpclient/，你可以在这里得到关于HttpClient更加详细的信息<br /><br /></li></ul>
+<p><a name="author"><span class="atitle">作者简介</span></a></p><div class="ibm-container ibm-portrait-module ibm-alternate-two"><div class="ibm-container-body"><p><a name="author1"></a>金发华是一名工作在 IBM CSDL 的软件工程师。他喜欢钻研各种新的技术，在 Java 网络开发和 Web 开发方面颇有经验。</p></div><div class="ibm-container-body"><p><a name="author2"></a>陈樟洪是一位 IBM CSDL 的软件工程师，目前从事企业电子商务应用的开发。</p></div></div>
+<!-- MAIN_COLUMN_CONTENT_END -->
+  <!-- OVERLAYS_START -->
+  <!-- Report_Abuse_Start -->
+  <div class="ibm-common-overlay ibm-no-print" id="reportabuseoverlay">
+    <div class="ibm-head"><p><a class="ibm-common-overlay-close" href="#">关闭 [x]</a></p></div>
+    <div class="ibm-body">
+      <div class="ibm-main">
+        <a class="ibm-access" name="reportabuseoverlay">关于报告滥用的帮助</a>   
+        <div class="ibm-title"><h1>报告滥用</h1></div>
+        <div class="ibm-container ibm-alternate">
+          <p><strong>谢谢!</strong>  此内容已经标识给管理员注意。</p>
+          <div class="ibm-overlay-rule"><hr /></div>
+          <div class="ibm-buttons-row">
+            <input type="button" onclick="ibmCommon.Overlays.hide('reportabuseoverlay');return false;" class="ibm-btn-cancel-sec dw-btn-cancel-sec" name="ibm-cancel" value="关闭" />
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="ibm-footer"></div>
+  </div>
+  <!-- Report_Abuse_Error_Start -->
+  <div class="ibm-common-overlay ibm-no-print" id="reportabuseoverlayerror">
+    <div class="ibm-head"><p><a class="ibm-common-overlay-close" href="#">关闭 [x]</a></p></div>
+    <div class="ibm-body">
+      <div class="ibm-main">
+        <a class="ibm-access" name="reportabuseoverlayerror">关于报告滥用的帮助</a>   
+        <div class="ibm-title"><h1>报告滥用</h1></div>
+        <div class="ibm-container ibm-alternate">
+          <p class="ibm-ind-error"><strong>报告滥用提交失败。  请稍后重试。</strong></p>
+          <div class="ibm-overlay-rule"><hr /></div>
+          <div class="ibm-buttons-row">
+            <input type="button" onclick="ibmCommon.Overlays.hide('reportabuseoverlayerror');return false;" class="ibm-btn-cancel-sec dw-btn-cancel-sec" name="ibm-cancel" value="关闭" />
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="ibm-footer"></div>
+  </div>
+  <!-- Sign in OVERLAY STARTS HERE --> 
+  <div class="ibm-common-overlay" id="signin_overlay">
+    <div class="ibm-head">
+      <p><a class="ibm-common-overlay-close" href="#" onclick="clearForm();">关闭 [x]</a></p>
+    </div>
+    <div class="ibm-body">
+      <div class="ibm-main">
+        <div class="ibm-title ibm-subtitle">
+          <h1>developerWorks：登录</h1>
+          <div id="ibm-overlay-error-signin" class="no-display"></div>
+        </div>
+        
+        <div class="ibm-container ibm-alternate ibm-buttons-last">
+          <div class="ibm-container-body">
+
+            <form class="ibm-column-form" id="sFormId" action="" method="post" name="sForm" onsubmit="return false;">
+              <p><label for="ibmid">IBM ID：</label><span><input name="ibm-id" id="ibmid" size="25" value="" class="required" type="text" onkeypress="handleEP(event,this.form);" />
+                <br /><a class="ibm-forward-link" href="#" onclick="(function () {window.location='/developerworks/dwwi/DWAuthRouter?m=reg&amp;lang=zh_CN&amp;d='+encodeURIComponent(location.href);})();">需要一个 IBM ID？</a>
+                <br /><a class="ibm-forward-link" href="/developerworks/dwwi/jsp/WSHelp.jsp?lang=zh_CN">忘记 IBM ID？</a></span>   
+              </p> 
+              <p><label for="password">密码：</label><span><input name="password" id="password" size="25" value="" class="required" type="password" onkeypress="handleEP(event,this.form);" /><br />
+                <a class="ibm-forward-link" href="#" onclick="(function () {window.location='https://www.ibm.com/account/profile?page=forgot&amp;lang=zh_CN&amp;appname=ibm&amp;required=null&amp;d='+encodeURIComponent(getAuthUrl())+'%3Fm%3Dloginpage%26lang%3Dzh_CN%26d%3D'+encodeURIComponent(location.href);})();">忘记密码？</a><br />
+                <a class="ibm-forward-link" href="#" onclick="(function () {window.location='https://www.ibm.com/account/profile?page=chpw&amp;lang=zh_CN&amp;appname=ibm&amp;required=null&amp;d='+encodeURIComponent(location.href);})();">更改您的密码</a></span></p> 
+
+              <p class="dw-perm-box">
+                <span><input id="perm" type="checkbox" name="perm_name"/><label for="perm"> 保持登录。</label></span>
+              </p>
+
+              <p>单击提交则表示您同意developerWorks 的条款和条件。 <a href="/developerworks/mydeveloperworks/terms?lang=zh">使用条款</a></p>
+              <div class="ibm-buttons-row">
+                <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="提交" onclick="signin();return false;" type="submit" /><span class="ibm-sep">&nbsp;</span>
+                  <input value="取消" type="button" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="clearForm();ibmCommon.Overlays.hide('signin_overlay');return false;"/></p>
+              </div>
+            </form>
+            <div class="ibm-overlay-rule"><hr /></div>
+            <p>当您初次登录到 developerWorks 时，将会为您创建一份概要信息。<strong>您在 developerWorks 概要信息中选择公开的信息将公开显示给其他人，但您可以随时修改这些信息的显示状态。</strong>您的姓名（除非选择隐藏）和昵称将和您在 developerWorks 发布的内容一同显示。</p>
+            <div class="dw-overlay-legal"><p>所有提交的信息确保安全。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ibm-footer"></div>
+  </div>
+  <!-- Sign in OVERLAY ENDS HERE --> 
+  
+  
+  <!-- Display name OVERLAY STARTS HERE --> 
+  <div class="ibm-common-overlay" id="displayname_overlay">
+    <div class="ibm-head">
+      <p><a class="ibm-common-overlay-close" href="#" onclick="clearForm();">关闭 [x]</a></p>
+    </div>
+    <div class="ibm-body">
+      <div class="ibm-main">
+        <div class="ibm-title ibm-subtitle">
+          <h1>请选择您的昵称：</h1>
+          <div id="ibm-overlay-error-dname" class="no-display"></div>
+        </div>
+        <div class="ibm-container ibm-alternate ibm-buttons-last">
+          <div class="ibm-container-body">
+            <p class="ibm-overlay-intro">当您初次登录到 developerWorks 时，将会为您创建一份概要信息，您需要指定一个昵称。您的昵称将和您在 developerWorks 发布的内容显示在一起。</p><p><strong>昵称长度在 3 至 31 个字符之间</strong>。 您的昵称在 developerWorks 社区中必须是唯一的，并且出于隐私保护的原因，不能是您的电子邮件地址。</p>
+            <form id="dFormId" method="post" action="" name="dForm" onsubmit="return false;" class="ibm-column-form">
+              <p><label for="displayname">昵称：</label><span><input name="displayname" id="displayname" size="25" value="" type="text" onkeypress="handleEP(event,this.form);" /></span><span class="ibm-form-note">（长度在 3 至 31 个字符之间）</span>
+              </p>
+              
+              <div class="ibm-overlay-rule"><hr />
+              </div>
+              <p>单击<strong>提交</strong>则表示您同意developerWorks 的条款和条件。 <a href="/developerworks/mydeveloperworks/terms?lang=zh">使用条款</a>.</p>
+              <div class="ibm-buttons-row">
+                <p><input class="ibm-btn-arrow-pri" name="ibm-submit" value="提交" onclick="signin();return false;" type="submit" /><span class="ibm-sep">&nbsp;</span>
+                  <input value="取消" type="button" name="ibm-cancel" class="ibm-btn-cancel-sec" onclick="clearForm();ibmCommon.Overlays.hide('displayname_overlay');return false;" /></p>
+              </div>
+            </form>
+            <div class="ibm-overlay-rule"><hr /></div>
+            <div class="dw-overlay-legal"><p>所有提交的信息确保安全。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ibm-footer"></div>
+  </div>
+  <!-- Display name OVERLAY ENDS HERE -->
+  <!-- OVERLAYS_END -->
+  <!-- RATINGS START -->
+  <p class="ibm-no-print"><span class="atitle"><a name="iratings">为本文评分</a></span></p>
+  <input id="art-rating" name="ratinga" type="hidden" value="0"/><div id="art-rating-module"></div>
+  <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+   // widget div id and article id as args
+   window.artRating.init('art-rating-module','art-rating-summary');
+// ]]>
+  </script>
+  <!-- RATINGS END --> 
+  
+  <!-- INLINE_COMMENTS_START -->
+  <p class="ibm-no-print"><span class="atitle"><a name="icomments">评论</a></span></p>
+    <script language="JavaScript" type="text/javascript">
+      // <![CDATA[
+dwc = {};
+dwc.cmts = '条评论';
+dwc.signInPreText = '请';
+dwc.signIn = '登录';
+dwc.or = '或';
+dwc.register = '注册';
+dwc.signInPostText = '';
+dwc.leaveCmt = '后发表评论。';
+dwc.view = '查看';
+dwc.totalCmts = '共有评论';
+dwc.postYourCmt = '添加您的评论';
+dwc.show = '显示：';
+dwc.recentCmts = '最新评论';
+dwc.allCmts = '所有评论';
+dwc.tooLongCmt = '您的评论超过了 1000 字符限制';
+dwc.numCharsLeft = '剩余 <span id="charCount">{1}</span> 字符';
+dwc.reportAbuse = '报告滥用';
+dwc.notifyMsg = '有新评论时提醒我';
+dwc.htmlWarning = '注意：评论中不支持 HTML 语法'; 
+dwc.cmt = '评论：';
+dwc.addCmts = '添加评论';
+dwc.addCmt = '添加评论';
+dwc.doNotErase = '--在下方添加评论--'; 
+dwc.viewOrAddCmts = '查看或添加评论';
+dwc.reportInapprCont = '举报不良信息';
+dwc.reportInapprContLink = 'http://www.ibm.com/developerworks/forums/forum.jspa?forumID=1834';
+dwc.postingCmt = '正在发布评论……';
+dwc.noCmt = '快来添加第一条评论';
+dwc.netwkErr = '在检索评论时出错，请稍后刷新。';
+dwc.addACmt = '添加评论';
+dwc.instructCmt = '标有星号（<span class="ibm-required">*</span>）的是必填项目。';
+dwc.btnPost = '发布';
+dwc.btnPostAnon = '匿名发布';
+dwc.btnClrCmt = '清除评论';
+dwc.btnCancel = '取消';
+dwc.showRecent = '显示最新的 {1} 条评论'; // {1} is the count to be substituted
+dwc.showNext = '显示后 {1} 条评论'; // {1} is the count to be substituted
+dwc.showAllCmts = '显示所有评论';
+dwc.enterCmt = '请输入评论内容。';
+dwc.loginErr = '暂时无法验证您的登录状态，请稍后再试。';
+dwc.postErr = '暂时无法发布您的评论，请稍后再试。';
+dwc.postBy = '由 <strong>{1}</strong>  于 {2} '; // {1} is the author to be substituted; {2} is the date
+dwc.siteId = 10;
+dwc.lang = 'zh_CN';
+dwc.viperLang = 'zh';
+// ]]>
+    </script>
+    <div id="threadShow"></div>
+  <!-- INLINE_COMMENTS_END -->
+  
+
+  <p class="ibm-ind-link ibm-back-to-top"><a class="ibm-anchor-up-link" href="#ibm-pcon">回页首</a></p>
+
+<!-- Overlays -->
+<!-- lk - pull in overlays from ww when required on cn -->
+  </div>
+<!-- MAIN_COLUMN_CONTAINER_END -->
+
+<!-- Rating_Meta_BEGIN -->
+<!--Rating_Meta_BEGIN--><div class="metavalue">static.content.url=http://www.ibm.com/developerworks/js/artrating/</div><div class="metavalue">SITE_ID=10</div><div class="metavalue">Zone=Open source, Web development</div><div class="metavalue">ArticleID=99064</div><div class="metavalue">ArticleTitle=HttpClient入门</div><div class="metavalue">publish-date=11102005</div><div class="metavalue">author1-email=</div><div class="metavalue">author1-email-cc=</div><div class="metavalue">author2-email=</div><div class="metavalue">author2-email-cc=</div><script language="javascript" type="text/javascript">document.write('<div class="metavalue">url='+location.href.replace(/</g, '%3C')+'</div>');</script><!--Rating_Meta_END-->
+<!-- Rating_Meta_END -->
+
+</div>
+<!-- MAIN_COLUMN_END-->
+
+<!-- RIGHT_COLUMN_BEGIN -->
+<div id="ibm-content-sidebar">
+
+<!-- RIGHT_COLUMN_CONTENT_BEGIN --> 
+<div class="ibm-container"><h2>内容</h2><div class="ibm-container-body"><img alt="" height="1" width="1" src="//www.ibm.com/i/c.gif"/><ul class="ibm-bullet-list"><li><a class="ibm-feature-link" href="#N10053">HttpClient简介</a></li><li><a class="ibm-feature-link" href="#N10060">HttpClient 功能介绍</a></li><li><a class="ibm-feature-link" href="#N10093">HttpClient 基本功能的使用</a></li><li><a class="ibm-feature-link" href="#N10118">使用HttpClient过程中常见的一些问题</a></li><li><a class="ibm-feature-link" href="#N10244">结论</a></li><li><a class="ibm-feature-link" href="#resources">参考资料 </a></li><li><a class="ibm-feature-link" href="#author">作者简介</a></li><li><a class="ibm-feature-link" href="#icomments">建议</a></li></ul></div></div>
+
+ 
+
+
+<!-- Dig_Deeper -->
+
+<!-- High_Visibility_Offer -->
+
+<!-- Special_Offers -->
+
+<!-- RIGHT_COLUMN_CONTENT_END -->
+
+</div>
+<!-- RIGHT_COLUMN_END -->
+
+<!-- CONTENT_BODY_END -->
+</div>
+
+</div>
+<!-- CONTENT_END -->
+
+ <!-- END_IBM-PCON -->
+</div>
+
+<!-- FOOTER_BEGIN -->
+<div id="ibm-footer">
+<!-- IBM footer container; disabled -->
+</div>
+
+<div id="ibm-page-tools-dw">
+	<div id="dw-footer-top-row">
+		<ul id="dw-foot-options">
+			<li id="dw-print"><a class="ibm-print-link" href="#">打印此页面</a></li>
+		</ul>
+		<ul id="ibm-foot-options-dw">
+			<li id="dw-foot-0"><a href="#">分享此页面</a></li>
+			<li id="dw-foot-1"><a href="#">关注 developerWorks</a></li>
+		</ul>
+	</div>       
+	
+	
+	<!-- TOP ROW SLIDER -->
+    <div id="dw-page-tools-menu">    
+        <div class="ibm-ribbon-pane-dw">
+            <div class="ibm-ribbon-section-dw">
+				<!-- Share this page -->			
+                <div class="dw-footer-columns">
+                    <div class="dw-footer-col-4-1">
+                    	<h2>分享此页面：</h2>                            
+						<ul class="ibm-link-list">
+						  <!--<li><a id="dw-foot-0-0" class="dwcn-sina-link"
+						        href="#"
+						        onClick="javascript:location.href='http://hits.sinajs.cn/A1/weiboshare.html?&amp;appkey=&amp;title='+escape(document.title)+'&amp;url='+escape(location.href)'+'&amp;pic=&ralateUid&amp;language=zh_cn;
+						        ">新浪微博</a></li> -->
+						   <li><a id="dw-foot-0-0" class="dwcn-sina-link"
+						        href="#"
+						        onClick="javascript:location.href='http://service.weibo.com/share/share.php?title='+encodeURIComponent(document.title)+'&amp;url='+escape(location.href)+'&amp;language=zh_cn'
+						        ; ">新浪微博</a></li> 
+						   <li><a class="dwcn-renren-link"
+						        href="#" onClick="javascript:location.href='http://share.renren.com/share/buttonshare?title='+encodeURIComponent(document.title)+'&amp;link='+escape(location.href);
+						        ">人人网</a></li> 
+						    <li><a class="dwcn-tencent-link"
+						        href="#" onClick="javascript:location.href='http://v.t.qq.com/share/share.php?title='+encodeURIComponent(document.title)+'&amp;url='+escape(location.href);
+						        ">腾讯微博</a></li> 
+						   				
+						</ul>
+                    </div>
+                    <div class="dw-footer-col-4-2">
+						<ul class="ibm-link-list">
+						    <li><a class="dwcn-sohu-link"
+						        href="#"
+						        onClick="javascript:location.href='http://t.sohu.com/third/post.jsp?title='+encodeURIComponent(document.title)+'&amp;link='+escape(location.href);
+						        ">搜狐微博</a></li>
+						    
+						    <li><a class="dwcn-netease-link"
+						        href="#"
+						        onClick="javascript:location.href='http://t.163.com/article/user/checkLogin.do?info='+encodeURIComponent(document.title)+ '' +escape(location.href);
+						        ">网易微博</a></li>
+						    <li><a class="ibm-facebook-link" href="#">Facebook</a></li>
+						</ul>
+                </div>
+                    <div class="dw-footer-col-4-3">
+						<ul class="ibm-link-list">
+						 <li><a class="ibm-linkedin-link" href="#">LinkedIn</a></li>   
+						 <li><a class="ibm-twitter-link" href="#">Twitter</a></li>   
+						 <li><a class="ibm-delicious-link" href="#">Delicious</a></li>
+						
+						</ul>
+                    </div>
+                   <div class="dw-footer-col-4-4">
+						<ul class="ibm-link-list">
+						 <li><a class="ibm-digg-link" href="#">Digg</a></li>   
+						 <li><a class="ibm-email-link" href="#">发送此页面</a></li>
+						</ul>
+                    </div>
+                    <div class="dw-footer-close">
+						<ul>
+							<li><div class="dw-footer-close-share"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10"/></a></div></li>
+						</ul>
+                    </div>
+                </div>
+                  <!-- Follow developerWorks -->
+                <div class="dw-footer-columns">
+                    <div class="dw-footer-col-1-1 dw-footer-col-1-1-cn">
+                    	<h2>关注 developerWorks 中国网站：</h2>
+						<ul class="ibm-link-list">
+							<!--<li><a id="dw-foot-1-0" class="ibm-twitter-link" href="http://www.twitter.com/dwchina">Twitter</a></li>-->
+						    <li><a id="dw-foot-1-0" class="dwcn-sina-link"
+						        href="http://weibo.com/ibmdw/">新浪微博</a></li>
+						</ul>
+                    </div>
+                    <div class="dw-footer-close">
+						<ul>
+							<li><div class="dw-footer-close-follow-cn"><a href="#"><img src="//dw1.s81c.com/i/c.gif" alt="关闭 [x]" width="20" height="10"/></a></div></li>
+						</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ibm-footer-module-dw">
+	<div class="dw-footer-columns">
+		<div class="dw-footer-col-6-1">
+			<ul>
+				<!--<li><a href="http://www.ibm.com/developerworks/aboutdw/">About</a></li>-->
+				<li><a href="https://www.ibm.com/developerworks/secure/feedback.jsp?domain=dwchina">帮助</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/author/">联系编辑</a></li>
+				<li><a href="https://www.ibm.com/developerworks/secure/myideas2.jsp?domain=dwchina&start=true">提交内容</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/sitemap/">网站导航</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-2">
+			<ul>
+				<li><a href="http://www.ibm.com/developerworks/cn/rss/">订阅源</a></li>
+				<li><a href="http://www.ibm.com/vrm/newsletter/10104?S_TACT=105AGX52&S_CMP=dwcntop">在线浏览每周时事通讯</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-3">
+			<ul>
+				<li><a href="https://www.ibm.com/developerworks/community/report?lang=zh">报告滥用</a></li>
+				<li><a href="https://www.ibm.com/developerworks/community/terms?lang=zh">使用条款</a></li>
+				<li><a href="http://www.ibm.com/privacy/cn/zh/">隐私条约</a></li>
+				<li><a href="http://www.ibm.com/ibm/accessibility/cn/">浏览辅助</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-4">
+			<ul>
+			<li><a href="http://www.ibm.com/developerworks/cn/academic/">IBM 教育学院教育培养计划</a></li>
+				<li><a href="http://www.ibm.com/developerworks/cn/gep/">IBM 创业企业全球扶持计划</a></li>
+				<li><a href="http://www.ibm.com/partnerworld/isv/">ISV 资源 (英语)</a></li>
+			</ul>
+		</div>
+		<div class="dw-footer-col-6-5">
+		</div>
+		<div class="dw-footer-col-6-6">
+			<img src="//dw1.s81c.com/developerworks/i/mf/dwn-ibm-logo-v16.png" alt="IBM®" width="100" height="46"/>
+			<img class="dw-preload" src="//dw1.s81c.com/developerworks/i/mf/arrow-down-active.gif" alt="" width="1" height="1"/>
+		</div>
+	</div>
+	<!-- Language selector no-script -->
+	<noscript>
+	<div id="dw-footer-selectlang">
+		<h2><a name="SELECTLANG">选择语言：</a></h2>
+		<ul>
+			<li><a href="http://www.ibm.com/developerworks/">English</a></li>
+			<li><a href="http://www.ibm.com/developerworks/cn/">中文</a></li>
+			<li><a href="http://www.ibm.com/developerworks/jp/">日本語</a></li>
+			<li><a href="http://www.ibm.com/developerworks/ru/">Русский</a></li>
+			<li><a href="http://www.ibm.com/developerworks/br/">Português (Brasil)</a></li>
+			<li><a href="http://www.ibm.com/developerworks/ssa/">Español</a></li>
+			<li><a href="http://www.ibm.com/developerworks/vn/">Việt</a></li>
+		</ul>
+	</div>
+	</noscript>
+</div><!-- FOOTER_END -->
+
+ <!-- END_IBM-TOP -->
+</div>
+ 
+ <!-- SCRIPTS_INCLUDE_BEGIN -->
+<!-- JQuery start -->
+<script type="text/javascript" language="JavaScript" src="//dw1.s81c.com/developerworks/js/jquery/cluetip98/jquery.hoverIntent.minified.js"></script>
+<script type="text/javascript" language="JavaScript" src="//dw1.s81c.com/developerworks/js/jquery/cluetip98/jquery.cluetip.js"></script>
+<!-- xM Masthead/Footer -->
+<script src="//dw1.s81c.com/developerworks/js/dw-mf/jquery.tools.min.js" type="text/javascript">//</script>
+<script src="//dw1.s81c.com/developerworks/js/dw-mf/jquery.jscroll.js" type="text/javascript">//</script>
+<script src="//dw1.s81c.com/developerworks/js/dw-mf/dw_v16.js" type="text/javascript">//</script>
+<script src="//dw1.s81c.com/developerworks/js/dw-mf/flash-detect.js" type="text/javascript">//</script>
+<script src="//dw1.s81c.com/developerworks/js/dw-mf/dwsi.js" type="text/javascript">//</script>
+<script type="text/javascript" language="JavaScript" src="/developerworks/js/dw-mf/showcomments.js">//</script>
+<script language="JavaScript" type="text/javascript">
+	// <![CDATA[
+ jQuery('threadShow').showComments('95%',5,'nCmts','icomments');
+// ]]>
+</script>
+<script type="text/javascript" language="JavaScript">
+	jQuery.noConflict();     
+	// Put all your code in your document ready area
+	jQuery(document).ready(function(jQuery) {
+	// Do jQuery stuff using jQuery 
+	jQuery('a.dwauthor').cluetip({
+	local: true,
+	showTitle: false,
+	positionBy: 'bottomTop',
+	sticky: true,	
+	mouseOutClose: true,
+	closeText: '<img src="//dw1.s81c.com/developerworks/js/jquery/cluetip98/i/x.gif" alt="Close" />',
+	arrows: false,
+	dropShadow: true,
+	cluetipClass: 'dwbasic'
+	});   	
+	
+	rBHash = {};
+	rBHash['viperLang'] = 'zh';
+	rBHash['urlLang'] = 'cn';
+
+	// si
+	initSI();
+	});
+</script>
+<!-- JQuery end -->
+<!-- Overlay js -->
+<script language="JavaScript" src="//dw1.s81c.com/common/js/overlay.js" type="text/javascript"></script><!-- BEGIN: Use this section to set page specific variables for the Unica Page Tag -->
+<script language="JavaScript">var NTPT_PGEXTRA="ibmSkillLevel=4&ibmAdoptPhase=648&ibmRole=36&ibmCmaId=99064&ibmContentAreas=opensource,web";</script>
+<!--END --><!-- SCRIPTS_INCLUDE_END -->
+
+<div id="ibm-metrics">
+<script src="//dw1.s81c.com/common/stats/stats.js" type="text/javascript">//</script>
+</div>
+
+</body>
+</html>

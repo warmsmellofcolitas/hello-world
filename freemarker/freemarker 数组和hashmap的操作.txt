@@ -1,0 +1,53 @@
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("abc.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+类路径下的src/ftl/abc.ftl:
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#assign nums=[1,3,4,56,33,43]/>
+		<#assign nums=12..200/><#-- 定义一个连续的序列从12到200 -->
+		<#assign nuam=nums[0..9]/><#-- 序列的拆分,将上面的nums的第一个到第十个拆分出来 -->
+		<#list nuam as num>
+			${num}
+		</#list>
+		${"你好,你来了吗今天看书了吗!"[0..8]}...<#-- 输出:你好,你来了吗今天... -->
+		
+		<#assign aaa={"1":"张三", "2":"李四"}/>
+		${aaa["1"]}<#-- 输出:张三 --> <#--如果key值为数字,不能用${aaa.1}这种,只有key为字符串才可以,见下面例子-->
+		
+		<#assign fff={"username":"张三丰", "password":"123"}/>
+		${fff.username}---${fff["password"]}<#-- 输出:张三丰---123 -->
+		
+		<#assign bbb=aaa?keys> <#-- 将map的key转换为相应的序列 -->
+		<#list bbb as key>
+			${key}----${aaa[key]}
+		</#list>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+package com.cmbc.payagent;
+
+import java.io.IOException;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+
+/**
+ * 中国光大银行代付
+ *
+ * @author li_jie
+ * @see 02中国光大银行银企通平台第二批接口.doc
+ */
+public class Test {
+
+    public static String send(String requestData) throws Exception {
+        System.out.println("银行路由--工具类--进入");
+        HttpClient httpclient = new HttpClient();
+        PostMethod method = new PostMethod("http://wapchargewg.bestpay.com.cn/bankRouterPingAn2");
+        NameValuePair[] params = {new NameValuePair("url","http://172.17.8.48:6799/ent/b2e004001.do?userId=2008074628&operatorID=002&userPassword=123456&Sigdata=1"),new NameValuePair("message", requestData)};
+        method.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8"); // 设置编码
+        method.setRequestBody(params);
+        httpclient.executeMethod(method);
+        String value = method.getResponseBodyAsString();
+        method.releaseConnection(); // 释放连接
+        System.out.println("从中国光大银行返回的报文为：" + value);
+        return value;
+    }
+}

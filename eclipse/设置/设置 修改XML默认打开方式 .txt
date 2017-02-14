@@ -1,0 +1,11 @@
+用Eclipse开发Android的时候 默认的XML是采用Android xml editor 打开，这个工具不够直观，如果想直接看文本的XML的话，可以通过如下方式修改
+
+1.菜单：Window   ->   Preferences   ->   General   ->   Editors   ->   File   Associations 
+2. File   types:   *.xml
+
+Associated   editors:   XML Editor***  ->   Default
+
+在Associated   editors选择框里点击“XML Editor***  ”，点击“Default”按钮。
+
+
+看到“XML Editor***  ”排在最上面，其变为“XML Editor(Default)***  ”。 

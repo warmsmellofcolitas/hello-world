@@ -1,0 +1,1 @@
+File->Settings->Version Control->Git->Path to Git executable->ÕÒµ½git.exeÄ¿Â¼£¨C:\Program Files\Git\bin\git.exe£©->OK

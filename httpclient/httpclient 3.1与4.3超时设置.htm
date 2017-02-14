@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='zh-CN' xml:lang='zh-CN' xmlns='http://www.w3.org/1999/xhtml'>
+
+<head>
+<title>HttpClient 4.3超时设置 - OPEN 开发经验库</title>
+<meta content="text/html; charset=utf-8" http-equiv=content-type>
+<meta name=robots content=index,follow>
+<meta name=keywords content="HttpClient,网络工具包">
+<meta name=description content="HttpClient 4.3。HttpClient这货和Lucene一样，每个版本的API都变化很大，这有点让人头疼。就好比创建一个HttpClient对象吧，每一个版本的都不一样， ">
+<link rel="shortcut icon" href="/lib/favicon.ico">
+<link rel=copyright href="http://www.open-open.com/">
+
+
+
+<link type="text/css" rel="stylesheet" href="/lib/syntaxhighlighter_2.1.382/styles/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/lib/syntaxhighlighter_2.1.382/styles/shThemeEclipse.css"/>
+ 
+<style type="text/css" media="screen, projection">
+		/*<![CDATA[*/
+			@import "/lib/css/common.css";
+			@import "/lib/css/main.css";
+			@import "/lib/css/thickbox.css";
+			@import "/lib/css/jquery.ui.css";
+		/*]]>*/
+</style> 
+
+
+
+<script type="text/javascript">
+	var rooturl="/lib";
+	var wgDocKey='1383751765321';
+	var wgDocTitle='HttpClient 4.3超时设置';
+	var wgDocStatusFlag='';
+	var wgUserFolders=null;
+	var wgDownFrame=null;
+	var wgCostByUser=null;
+	var wgDocFavoriteByUser=false;
+	var wgDocScoreByUser=null;
+	var wgUserLogined=0;
+	var tb_pathToImage = "/lib/images/loadingAnimation.gif";
+
+
+</script>
+</head>
+<body id=view>
+
+        
+
+
+<div id=topnav>
+<div id=Personal>
+	
+		<a href="/lib/members/login?keepThis=true&TB_iframe=true&height=177&width=280" title="登录OPEN经验库" class="thickbox"">登录</a>&nbsp;&nbsp;
+		<a href="/lib/members/register?keepThis=true&TB_iframe=true&height=460&width=710" title="注册新的账号" class="thickbox">注册</a>
+	
+		
+</div>
+<div id=topmenu>
+<ul>
+		<li><a title=Java开源 href="http://www.open-open.com/">Java开源</a></li>
+		<li><a title=PHP开源 href="http://www.php-open.com/">PHP开源</a></li>
+		<li><a title=JS脚本大全 href="http://www.open-open.com/ajax/">JS脚本大全</a></li>
+		<li><a title=OPEN家园 href="http://www.open-open.com/home/">OPEN家园</a></li>
+		<li class=selected>OPEN经验库</li>
+		<li><a title='OPEN文档频道' href="http://www.open-open.com/doc/">OPEN文档</a></li>
+		<li><a title='OPEN资讯频道' href="http://www.open-open.com/news/">OPEN资讯</a></li>
+		<li><a title='OPEN论坛频道' href="http://www.open-open.com/bbs">OPEN论坛</a></li>
+		
+
+</ul>
+</div>
+</div>
+<!--end top nav-->
+<div id=head>
+<div id=head-logo><a title=OPEN开发经验库 href="http://www.open-open.com/lib/"><img border=0 alt=OPEN开发经验库 src="/lib/images/logo.jpg"></a></div>
+<div id=head-search>
+<form method=get name=search action="/lib/search" accept-charset="GBK" onsubmit="document.charset='GBK';">
+
+<table border=0 cellspacing=0 cellpadding=0>
+		
+		<tbody>
+				<tr>
+						<td align=left>
+							<input id=searchinput maxlength="1048" style="height: 23px;font-size:18px"  value="" x-webkit-speech size=45 name=q>
+							<input id=searchbutton value="经验搜索" type="submit" style="height: 28px;font-size:17">
+							<input id=od  type=hidden name=od value="0">
+&nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size: 9.5pt"><b>推荐：</b></font><a href="http://www.miniui.com/demo/#src=datagrid/celledit.html" title="jQuery MiniUI，Web界面控件库！" target="_blank" rel="nofollow"><font color="red" style="font-size: 9.5pt"><b>jQuery MiniUI，Web界面控件库！</b></font></a>
+						</td>
+						</tr>
+		</tbody>
+</table>
+</form>
+
+</div>
+<div id=head-ad>
+
+</div>
+
+</div>
+<!-- end head -->
+
+<div id=content>
+<div id=content-nav>
+<a href="/lib/list/all">所有分类</a>
+
+	&nbsp;&gt;&nbsp;
+	<a href="/lib/list/1">软件开发</a>
+
+	&nbsp;&gt;&nbsp;
+	<a href="/lib/list/21">网络工具包</a>
+
+</div>
+
+
+<div id=view-main>
+
+
+<div id=view-titleh>
+<div id=view-title>
+	<h3>HttpClient 4.3超时设置</h3>
+</div>
+<div id=view-summary>
+<table>
+		<tbody>
+				<tr>
+						<td><strong>您的评价</strong>:</td>
+						<td>
+						<div id=rate class=rate-container><span id=star1 class=star-big-off title=很差>&nbsp;</span><span id=star2 class=star-big-off title=较差>&nbsp;</span><span id=star3 class=star-big-off title=还行>&nbsp;</span><span
+								id=star4 class=star-big-off title=不错>&nbsp;</span><span id=star5 class=star-big-off title=力荐>&nbsp;</span></div>
+						</td>
+						<td width=30>
+						<div id=rate-tip></div>
+						</td>
+						
+						<td>
+						<div id=favorite-container><span class="icon favorite">&nbsp;</span><a id=favorite href="javascript:void(0)"><strong>收藏该经验</strong></a>&nbsp;&nbsp;&nbsp;&nbsp;
+						 </div>
+
+</td>
+				</tr>
+		</tbody>
+</table>
+<div id=favorite-box>
+<table>
+		<tbody>
+				<tr>
+						<td width=70 align=right>文件夹</td>
+						<td><select id=fav_folderlist name=folder>
+								<option selected value=0>请选择...</option>
+								<option id=newfolder-sp disabled value="">-------------</option>
+								<option value=-1>新增文件夹...</option>
+						</select></td>
+				</tr>
+				<tr style="display: none" id=newfolder-input>
+						<td align=right>新增文件夹</td>
+						<td><input id=fav_newfolder maxlength=50 type=text name=newfolder></td>
+				</tr>
+				<tr>
+						<td align=right>标签</td>
+						<td><input id=fav_tags maxlength=135 size=20 type=text name=tags></td>
+				</tr>
+				<tr>
+						<td></td>
+						<td colspan=2>(多个标签用逗号分隔)</td>
+				</tr>
+		</tbody>
+</table>
+</div>
+
+</div>
+
+</div>
+
+
+<div id=readercontainer>
+ <div id="toc"></div>
+<!-- google_ad_section_start -->
+<p>HttpClient 4.3。HttpClient这货和Lucene一样，每个版本的API都变化很大，这有点让人头疼。就好比创建一个HttpClient对象吧，每一个版本的都不一样， </p>
+<p>3.X是这样的 </p>
+<pre class="brush:java; toolbar: true; auto-links: false;">HttpClient httpClient=new DefaultHttpClient();</pre>4.3是这样的 <pre class="brush:java; toolbar: true; auto-links: false;">CloseableHttpClient httpClient = HttpClients.createDefault();</pre>当然，上面这些变化只不过是一些小变化，大家看看API大家就都会了。 <p>我要讲的是超时设置,HttpClient有三种超时设置，最近比较忙，没时间具体归纳总结，以后再补上，我这里就讲一些最简单最易用的超时设置方法。 </p>
+<p>这是个3.X的超时设置方法 </p>
+<pre class="brush:java; toolbar: true; auto-links: false;">HttpClient client = new HttpClient();
+client.setConnectionTimeout(30000);  
+client.setTimeout(30000);</pre><pre class="brush:java; toolbar: true; auto-links: false;">HttpClient httpClient= new HttpClient();  
+httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(5000);</pre>4.X版本的超时设置(4.3后已过时) <pre class="brush:java; toolbar: true; auto-links: false;">HttpClient httpClient=new DefaultHttpClient();
+httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,2000);//连接时间
+httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,2000);//数据传输时间</pre>4.3版本超时设置 <pre class="brush:java; toolbar: true; auto-links: false;">CloseableHttpClient httpClient = HttpClients.createDefault();
+HttpGet httpGet=new HttpGet("http://www.baidu.com");//HTTP Get请求(POST雷同)
+RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(2000).setConnectTimeout(2000).build();//设置请求和传输超时时间
+httpGet.setConfig(requestConfig);
+httpClient.execute(httpGet);//执行请求</pre>BTW,4.3版本不设置超时的话，一旦服务器没有响应，等待时间N久(&gt;24小时)。
+
+
+</div>
+
+<div style="margin-top: 10px;margin-bottom: 2px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7963911354665843";
+/* 728x90, 创建于 11-1-27 */
+google_ad_slot = "5890482646";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div>
+
+			<table width='100%'><tr>
+				<td  valign='top' width="49%" class="Related">
+                <div style="border-bottom: 1px #ccc solid;margin-top: 5px"><strong>相关资讯</strong> 　—　<a href="http://www.open-open.com/news" target="_blank" rel="nofollow">更多</a></div>
+            	<ul>
+            		
+            	     <li><a href="http://www.open-open.com/news/view/143078f" target="_blank" rel="nofollow" title="Java的HTTP协议库 HttpComponents HttpClient 4.1.2 (GA)">Java的HTTP协议库 HttpComponents HttpClient 4.1.2 (GA)</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/a58d21" target="_blank" rel="nofollow" title="Java的HTTP协议库 HttpComponents HttpClient 4.1.3 (GA)">Java的HTTP协议库 HttpComponents HttpClient 4.1.3 (GA)</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/1105643" target="_blank" rel="nofollow" title="Java的HTTP协议库 HttpComponents HttpClient 4.2 GA 发布">Java的HTTP协议库 HttpComponents HttpClient 4.2 GA 发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/181292e" target="_blank" rel="nofollow" title="Android 快速开发框架，Afinal 0.3.2 发布">Android 快速开发框架，Afinal 0.3.2 发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/12399fd" target="_blank" rel="nofollow" title="JavaEE参考示例 SpringSide 4.0.0.RC4 -- 2012.08.26发布">JavaEE参考示例 SpringSide 4.0.0.RC4 -- 2012.08.26发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/164eeda" target="_blank" rel="nofollow" title="Web应用压力测试工具，JMeter 2.8 发布">Web应用压力测试工具，JMeter 2.8 发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/6da9d0" target="_blank" rel="nofollow" title="JMeter 2.11 发布了，改进的JMS，HTTPS客户端认证测试">JMeter 2.11 发布了，改进的JMS，HTTPS客户端认证测试</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/1c57352" target="_blank" rel="nofollow" title="Android的快速开发框架，Afinal 0.2.1 发布 ">Android的快速开发框架，Afinal 0.2.1 发布 </a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/9ec8dd" target="_blank" rel="nofollow" title="性能/压力测试工具 JMeter 2.5 发布">性能/压力测试工具 JMeter 2.5 发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/1be48a8" target="_blank" rel="nofollow" title="ASP.NET Web API现使用Json.NET，获得若干增强">ASP.NET Web API现使用Json.NET，获得若干增强</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/10ed238" target="_blank" rel="nofollow" title="Java开源Web服务框架，XINS 3.0 发布">Java开源Web服务框架，XINS 3.0 发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/1b1c90b" target="_blank" rel="nofollow" title="Java网络组件 HttpComponents 4.2-beta1发布">Java网络组件 HttpComponents 4.2-beta1发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/120eaf" target="_blank" rel="nofollow" title="Java爬虫框架，WebMagic 0.4.0 发布">Java爬虫框架，WebMagic 0.4.0 发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/a2e555" target="_blank" rel="nofollow" title="Java的HTTP协议库 HttpComponents HttpCore 4.2-alpha1发布">Java的HTTP协议库 HttpComponents HttpCore 4.2-alpha1发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/12a1ab9" target="_blank" rel="nofollow" title="Java的HTTP协议库 HttpComponents HttpCore 4.2-alpha2">Java的HTTP协议库 HttpComponents HttpCore 4.2-alpha2</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/a87c0" target="_blank" rel="nofollow" title="HttpComponents HttpCore 4.1.4 (GA)">HttpComponents HttpCore 4.1.4 (GA)</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/48d878" target="_blank" rel="nofollow" title="Java的HTTP协议库 HttpComponents">Java的HTTP协议库 HttpComponents</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/6bba7a" target="_blank" rel="nofollow" title="全文搜索服务器，Apache Solr 3.6 发布">全文搜索服务器，Apache Solr 3.6 发布</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/e24382" target="_blank" rel="nofollow" title="SpringSide 4.2.1.GA版，窦大仙版的八和九生版">SpringSide 4.2.1.GA版，窦大仙版的八和九生版</a></li>            
+            	     
+            	     <li><a href="http://www.open-open.com/news/view/42ab97" target="_blank" rel="nofollow" title="HttpComponents HttpCore 4.2 Beta1">HttpComponents HttpCore 4.2 Beta1</a></li>            
+            	     
+            	     
+            	</ul>
+        		 <div style="clear: both; font-size: 1px; line-height: 0;"></div>
+            </td>
+			<td width="5px"></td>
+			<td valign='top' width="49%" class="Relatedb">
+			 	<div style="border-bottom: 1px #ccc solid;margin-top: 5px"><strong>相关文档</strong> 　—　<a href="http://www.open-open.com/doc" rel="nofollow" target="_blank">更多</a></div>
+            	<ul >
+            		
+            	     <li><a  href="http://www.open-open.com/doc/view/560a13a3b44a4129967596f9e85da458" rel="nofollow" target="_blank" title="httpclient4 中文版帮助文档.docx">httpclient4 中文版帮助文档.docx</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/67d6ab1c59704bb6968662555080bfc3" rel="nofollow" target="_blank" title="httpclient4 中文版帮助文档.pdf">httpclient4 中文版帮助文档.pdf</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/94731f1c18184cf18d8073d0335cbfca" rel="nofollow" target="_blank" title="Apache HttpClient4.x 简明教程.pdf">Apache HttpClient4.x 简明教程.pdf</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/3a69a65c72a343b3a05bc901d31e0ab0" rel="nofollow" target="_blank" title="httpClient 上传文件.docx">httpClient 上传文件.docx</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/b399a8ad56234a659f3d243410cea7d3" rel="nofollow" target="_blank" title="HttpClient  教程.pdf">HttpClient  教程.pdf</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/c993fbcb30ce41628cdcb1f9770850eb" rel="nofollow" target="_blank" title="HttpClient教程.pdf">HttpClient教程.pdf</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/aa0474252f7242ac9db3318a14d421c9" rel="nofollow" target="_blank" title="HttpClient  Help 最新.chm">HttpClient  Help 最新.chm</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/d6f7716d955c4fe4b4b9c40d251b4b46" rel="nofollow" target="_blank" title="HttpClient 入门.doc">HttpClient 入门.doc</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/37cf8c6f4f1c4093885e3c24bf0bf00a" rel="nofollow" target="_blank" title="HttpClient 应用实例.pdf">HttpClient 应用实例.pdf</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/8316abc0a6b44f8ab1e69e126561cda4" rel="nofollow" target="_blank" title="HttpClient使用教程.doc">HttpClient使用教程.doc</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/d60bb0429f0b4ed383feacbdec03f953" rel="nofollow" target="_blank" title="HttpClient入门.docx">HttpClient入门.docx</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/64379e2aa94c409d8ca702cc7367e395" rel="nofollow" target="_blank" title="HttpClient技术介绍.doc">HttpClient技术介绍.doc</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/7287409500854d6fa34de2811095b6a9" rel="nofollow" target="_blank" title="HttpClient 入门教程.docx">HttpClient 入门教程.docx</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/bb73c20887e048b1bbee06c860fad37a" rel="nofollow" target="_blank" title="HttpClient 教程.doc">HttpClient 教程.doc</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/4e987c2689a747eeb0110116970b5ba8" rel="nofollow" target="_blank" title="HttpClient  教程.pdf">HttpClient  教程.pdf</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/fba17731feb74e14a70084ee2b5530ab" rel="nofollow" target="_blank" title="HttpClient.docx">HttpClient.docx</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/1ee45459c56446d6b4d1338c61793bab" rel="nofollow" target="_blank" title="httpClient 手册（中文）.docx">httpClient 手册（中文）.docx</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/e46b80ec58084c818da7d6ef71b61037" rel="nofollow" target="_blank" title="HttpClient 教程.docx">HttpClient 教程.docx</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/e7b65969c78a428885586fea4fba2ef6" rel="nofollow" target="_blank" title="HttpClient-4.0.1 官方教程.doc">HttpClient-4.0.1 官方教程.doc</a></li>            
+            	    
+            	     <li><a  href="http://www.open-open.com/doc/view/e022c955b4db4b5db0a241e6c5ad9b1e" rel="nofollow" target="_blank" title="HttpClient-4.0.1 官方教程.pdf">HttpClient-4.0.1 官方教程.pdf</a></li>            
+            	    
+            	</ul>
+            </td>
+			</tr></table>
+<div style="margin-top: 10px;margin-bottom: 10px;">
+<div id="baiduad1" style="margin-bottom: 5px;">
+</div>	
+
+</div>
+
+<div style="margin-top: 10px;margin-bottom: 2px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7963911354665843";
+/* 728x90, 创建于 11-1-27 */
+google_ad_slot = "5890482646";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div>
+
+<div style="margin-top: 10px;margin-bottom: 10px;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7963911354665843";
+/* 横向单元 */
+google_ad_slot = "6546082871";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>	
+	
+</div>
+
+<div id=view-side>
+<div id=upload-box class="box-blue angle">
+<div class=box-bg>
+<div class=box-body><a id=upload class=upload href="#"></a>
+</div>
+</div>
+</div>
+
+<div class="box-blue angle-footer">
+<div class=box_1></div>
+<div class=box_2></div>
+<div class=box_3></div>
+<div class=box-bg>
+<div class=box-title>内容信息</div>
+<div id=docinfo class=box-body>
+<div id=doc-score><span id=score-stars class=stars-big-10 title=经验评价得分：5.0分>&nbsp;</span><span id=score-num>5.0</span><br>
+<div id=score-ratecount>(已有1个人评价)</div>
+<div id=score-scale>
+<span class="starscale stars-small-10" title=力荐>&nbsp;</span>
+<div style="width: 100px" class=power></div>
+100%<br>
+<span class="starscale stars-small-8" title=不错>&nbsp;</span>
+<div style="width: 0px" class=power></div>
+0%<br>
+<span class="starscale stars-small-6" title=还行>&nbsp;</span>
+<div style="width: 0px" class=power></div>
+0%<br>
+<span class="starscale stars-small-4" title=较差>&nbsp;</span>
+<div style="width: 0px" class=power></div>
+0%<br>
+<span class="starscale stars-small-2" title=很差>&nbsp;</span>
+<div style="width: 0px" class=power></div>
+0%<br>
+</div>
+</div>
+<div class=sp></div>
+<div id=doc-status>
+<span class=item>收藏：3人</span>
+
+<span class=item>发布时间：2013-11-07 09:22:15</span>
+</div>
+</div>
+</div>
+</div>
+
+<div id=upload-box class="box-blue angle">
+<div class=box-bg>
+<div class=box-body>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7963911354665843";
+/* CHf */
+google_ad_slot = "4696250819";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+
+<div id=view-tag class="box-blue angle">
+<div class=box-bg>
+<div class=box-title>经验标签</div>
+<div id=tag-list class=box-body>
+	
+		<a href="/lib/tag/HttpClient">HttpClient</a>
+	 
+</div>
+
+</div>
+</div>
+<div id=view-topic class="box-blue angle">
+<div class=box-bg>
+<div class=box-title>同类热门经验</div>
+<div class=box-body>
+	<ul id=topic-list class=file-shortlist>
+		
+			<li>
+				<span class="samelist"></span><a title=HttpClient 4.0的使用详解  href="/lib/view/open1328834211312.html"><span class=title>HttpClient 4.0的使用详解 </span></a>
+				<div class=attribute><span>14093次浏览</span></div>
+			</li>
+		
+			<li>
+				<span class="samelist"></span><a title=Java高性能轻量级网络通信框架 - nSocket href="/lib/view/open1355140307164.html"><span class=title>Java高性能轻量级网络通信框架 - nSocket</span></a>
+				<div class=attribute><span>2893次浏览</span></div>
+			</li>
+		
+			<li>
+				<span class="samelist"></span><a title=Jva NIO框架 Apache Mina 2.x 简易入门解析 href="/lib/view/open1328680465093.html"><span class=title>Jva NIO框架 Apache Mina 2.x 简易入门解析</span></a>
+				<div class=attribute><span>5685次浏览</span></div>
+			</li>
+		
+			<li>
+				<span class="samelist"></span><a title=Gmail的Java接口 Gmail4J href="/lib/view/open1325773665937.html"><span class=title>Gmail的Java接口 Gmail4J</span></a>
+				<div class=attribute><span>2640次浏览</span></div>
+			</li>
+		
+			<li>
+				<span class="samelist"></span><a title=Java Socket类库 Java Sockets href="/lib/view/open1325819616546.html"><span class=title>Java Socket类库 Java Sockets</span></a>
+				<div class=attribute><span>1982次浏览</span></div>
+			</li>
+		
+			<li>
+				<span class="samelist"></span><a title=Java网络应用框架 Netty href="/lib/view/open1325078892733.html"><span class=title>Java网络应用框架 Netty</span></a>
+				<div class=attribute><span>3545次浏览</span></div>
+			</li>
+		
+</ul>
+</div>
+</div>
+</div>
+
+<div id=view-top-category class="box-blue angle-header">
+<div class=box-bg>
+<div class=box-title>相关经验</div>
+<div class=box-body>
+<ul id=top-list class=file-shortlist>
+		
+			<li><span class="samelist"></span><a title=HttpClient工具类 href="/lib/view/open1379316263990.html" target=_blank><span
+				class=title>HttpClient工具类</span></a><br>
+			<div class=attribute><span class="score stars-small-10" title=经验评价得分：5.0分>&nbsp;</span> <span>1人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=Apache HttpClient 4.3开发指南 href="/lib/view/open1392606148569.html" target=_blank><span
+				class=title>Apache HttpClient 4.3开发指南</span></a><br>
+			<div class=attribute><span class="score stars-small-0" title=经验评价得分：0.0分>&nbsp;</span> <span>0人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=Android架构: MVC 模式加载数据 前台显示  href="/lib/view/open1345524526767.html" target=_blank><span
+				class=title>Android架构: MVC 模式加载数据 前台显示 </span></a><br>
+			<div class=attribute><span class="score stars-small-10" title=经验评价得分：5.0分>&nbsp;</span> <span>1人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=HttpClient4.1 使用示例  href="/lib/view/open1392185497301.html" target=_blank><span
+				class=title>HttpClient4.1 使用示例 </span></a><br>
+			<div class=attribute><span class="score stars-small-0" title=经验评价得分：0.0分>&nbsp;</span> <span>0人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=为android的HttpClient添加请求超时时间 href="/lib/view/open1326868826030.html" target=_blank><span
+				class=title>为android的HttpClient添加请求超时时间</span></a><br>
+			<div class=attribute><span class="score stars-small-8" title=经验评价得分：4.0分>&nbsp;</span> <span>1人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=HttpClient 4.0的使用详解  href="/lib/view/open1328834211312.html" target=_blank><span
+				class=title>HttpClient 4.0的使用详解 </span></a><br>
+			<div class=attribute><span class="score stars-small-8" title=经验评价得分：4.3分>&nbsp;</span> <span>10人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=HttpClient 4.3学习笔记 href="/lib/view/open1391347817770.html" target=_blank><span
+				class=title>HttpClient 4.3学习笔记</span></a><br>
+			<div class=attribute><span class="score stars-small-0" title=经验评价得分：0.0分>&nbsp;</span> <span>0人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title= HttpClient工具类 href="/lib/view/open1350613453539.html" target=_blank><span
+				class=title> HttpClient工具类</span></a><br>
+			<div class=attribute><span class="score stars-small-9" title=经验评价得分：4.5分>&nbsp;</span> <span>2人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=HttpClient获取并解析JSON数据  href="/lib/view/open1377956762049.html" target=_blank><span
+				class=title>HttpClient获取并解析JSON数据 </span></a><br>
+			<div class=attribute><span class="score stars-small-0" title=经验评价得分：0.0分>&nbsp;</span> <span>0人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=Android中使用gzip传递数据  href="/lib/view/open1392708476913.html" target=_blank><span
+				class=title>Android中使用gzip传递数据 </span></a><br>
+			<div class=attribute><span class="score stars-small-0" title=经验评价得分：0.0分>&nbsp;</span> <span>0人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=Android 如何用HttpClient 以Get方式获取数据并添加http头信息  href="/lib/view/open1328168399328.html" target=_blank><span
+				class=title>Android 如何用HttpClient 以Get方式获取数据并添加http头信息 </span></a><br>
+			<div class=attribute><span class="score stars-small-0" title=经验评价得分：0.0分>&nbsp;</span> <span>0人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=利用HttpClient进行http文件上传 href="/lib/view/open1336700624718.html" target=_blank><span
+				class=title>利用HttpClient进行http文件上传</span></a><br>
+			<div class=attribute><span class="score stars-small-6" title=经验评价得分：3.0分>&nbsp;</span> <span>1人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=Android 如何用HttpClient 以Post方式提交数据并添加http头信息  href="/lib/view/open1328168361921.html" target=_blank><span
+				class=title>Android 如何用HttpClient 以Post方式提交数据并添加http头信息 </span></a><br>
+			<div class=attribute><span class="score stars-small-8" title=经验评价得分：4.0分>&nbsp;</span> <span>1人评</span>
+			</div>
+		</li>
+		
+			<li><span class="samelist"></span><a title=HTTP 客户端开发包 CSharp HttpClient href="/lib/view/open1323999699218.html" target=_blank><span
+				class=title>HTTP 客户端开发包 CSharp HttpClient</span></a><br>
+			<div class=attribute><span class="score stars-small-0" title=经验评价得分：0.0分>&nbsp;</span> <span>0人评</span>
+			</div>
+		</li>
+		
+</ul>
+</div>
+</div>
+<div class=box_3></div>
+<div class=box_2></div>
+<div class=box_1></div>
+
+</div>
+
+<div id=view-top-category class="box-blue angle-header">
+<div class=box-bg>
+<div class=box-title>相关讨论 - <a href="http://www.open-open.com/bbs" target="_blank" rel="nofollow">更多</a></div>
+<div class=box-body>
+<ul id=top-list class=file-shortlist>
+		
+			<li >
+			<span class="samelist"></span><a title=Log4j与common-logging  href="http://www.open-open.com/bbs/view/1318596826374" rel="nofollow" target=_blank><span class=title>Log4j与common-logging </span></a>
+		</li>
+		
+			<li >
+			<span class="samelist"></span><a title=反向Ajax，第4部分：Atmosphere和CometD href="http://www.open-open.com/bbs/view/1318937557531" rel="nofollow" target=_blank><span class=title>反向Ajax，第4部分：Atmosphere和CometD</span></a>
+		</li>
+		
+			<li >
+			<span class="samelist"></span><a title=简单的Junit4应用 href="http://www.open-open.com/bbs/view/1320567890671" rel="nofollow" target=_blank><span class=title>简单的Junit4应用</span></a>
+		</li>
+		
+			<li >
+			<span class="samelist"></span><a title=HTML4 和 HTML5 的10个关键区别 href="http://www.open-open.com/bbs/view/1318518374390" rel="nofollow" target=_blank><span class=title>HTML4 和 HTML5 的10个关键区别</span></a>
+		</li>
+		
+			<li >
+			<span class="samelist"></span><a title=哥终于知道了苹果为什么发布的是iPhone 4S而非iPhone 5  href="http://www.open-open.com/bbs/view/1318331408468" rel="nofollow" target=_blank><span class=title>哥终于知道了苹果为什么发布的是iPhone 4S而非iPhone 5 </span></a>
+		</li>
+		
+			<li >
+			<span class="samelist"></span><a title=CSS3 基本要素概览 href="http://www.open-open.com/bbs/view/1320764153077" rel="nofollow" target=_blank><span class=title>CSS3 基本要素概览</span></a>
+		</li>
+		
+			<li >
+			<span class="samelist"></span><a title=如何设置JVM  heap 大小 href="http://www.open-open.com/bbs/view/1339080775344" rel="nofollow" target=_blank><span class=title>如何设置JVM  heap 大小</span></a>
+		</li>
+		
+</ul>
+</div>
+</div>
+<div class=box_3></div>
+<div class=box_2></div>
+<div class=box_1></div>
+
+</div>
+
+<!-- end top list--></div>
+</div>
+
+
+
+
+<div id=footer>
+<div id=footer-menu><a href="http://www.open-open.com/home/1">联系我们</a> - <a href="http://www.open-open.com/home/1">问题反馈</a> </div>
+<p>2005-2013 OPEN-OPEN, all rights reserved.</p>
+</div>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.3.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="/lib/js/thickbox.patch.js"></script>
+
+<script type="text/javascript" src="/lib/js/app.js"></script>
+<script type="text/javascript" src="/lib/js/scrolltopcontrol.js"></script>
+<script type="text/javascript">
+	var rooturl="/lib";
+	var tb_pathToImage = "/lib/images/loadingAnimation.gif";
+	
+  	
+</script>
+<script type="text/javascript" src="http://libs.baidu.com/jqueryui/1.8.22/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/lib/js/scrolltopcontrol.js"></script>
+<script type="text/javascript" src="/lib/js/view.js"></script>
+<script type="text/javascript" src="/lib/syntaxhighlighter_2.1.382/scripts/shCore.js"></script>
+<script type="text/javascript" src="/lib/syntaxhighlighter_2.1.382/scripts/shBrush.js"></script>
+
+<script type="text/javascript">
+  	scrolltotop.offset(95,165);
+	scrolltotop.init();
+  </script>
+<script type="text/javascript">
+	SyntaxHighlighter.config.clipboardSwf = '/lib/syntaxhighlighter_2.1.382/scripts/clipboard.swf';
+	//SyntaxHighlighter.defaults['collapse'] = true; 
+	SyntaxHighlighter.config.strings.expandSource = "展开代码";
+	SyntaxHighlighter.config.strings.copyToClipboard = "复制到剪切板";
+	SyntaxHighlighter.config.strings.copyToClipboardConfirmation = "代码已经复制到剪切板";
+	SyntaxHighlighter.config.strings.viewSource = "查看源码";
+	SyntaxHighlighter.config.strings.print = "打印";
+	SyntaxHighlighter.all();
+</script>
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=0&amp;pos=right&amp;uid=6734290" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+var bds_config={"bdTop":256};
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+</script>
+<!-- Baidu Button END --></body>
+</html>

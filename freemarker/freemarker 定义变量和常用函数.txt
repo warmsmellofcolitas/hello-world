@@ -1,0 +1,130 @@
+freemarker主要有四种数据类型:数字,字符串,boolean,日期
+
+案例:
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("aaa.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("now", new Date());
+		// 通过template将模版文件输出到相应的流
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+类路径下src/ftl/aaa.ftl:
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#-- 定义变量 -->
+		<#assign username="张三"/>
+		<#-- 定义了一个数字 -->
+		<#assign num=10/>
+		<#assign str="10"/>
+		<#assign b=true/>
+		<#-- ${b}会报错,因为不能直接输出数字或字符串以外的类型,否则报错,需要转换为字符串才能输出,使用xxx?string可以完成对字符串的转换 -->
+		${username}----${num+11}----${str+11}----${b?string}----${b?string("x","w")}
+		<#-- ${now}会报错,日期也不能直接输出,需要转换为字符串 --><#-- 字符串连接和插值的方式连接字符串 -->
+		${now?string("yyyy-MM-dd HH:mm:ss")}----${"hello"+username}----${"hello${username}"}
+		<#-- 字符串转换为日期,date用来转换日期,datetime用来转换日期和时间,time用来转换时间,${"1979-11-22 12:22:33"?date("yyyy-MM-dd HH:mm:ss")}会被截断 -->
+		<#assign birthday="1979-11-22"?date("yyyy-MM-dd")/>
+		${birthday}----${"1979-11-22"?date("yyyy-MM-dd")}----${"1979-11-22 12:22:33"?datetime("yyyy-MM-dd HH:mm:ss")}
+		${"<br/>"?html}----${"abc"?left_pad(7,"op")}----${1.5?floor}----${1.5?round}
+		${1.4?int}<#-- 强制转换为int -->
+	</body>
+</html>
+
+输出:
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		张三----21----1011----true----x
+		2015-09-22 23:46:35----hello张三----hello张三
+		1979-11-22----1979-11-22----1979-11-22 12:22:33
+		&lt;br/&gt;----opopabc----1----2
+		1
+	</body>
+</html>
+-----------------------------
+package cn.com.leadfar.struts2.freemarker;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("abc.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("username", "张三"); // 这种变量成为:模型中的变量
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+src/ftl/abc.ftl:
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#-- 此时模版中的变量名称和模型中的变量名称一致,不是覆盖,而是隐藏 -->
+		<#assign username="李四"/> <#--这种变量成为:模版中的变量-->
+		${username} <#-- 输出:李四 -->
+		
+		<#-- 使用.globals可以访问模型中的变量 -->
+		${.globals.username} <#-- 输出:张三 -->
+		
+		<#macro test>
+			<#-- 此时当调用该指令后,会将模版中的变量username覆盖为王武,这种方式有风险,所以一般不使用这种方式在指令中定义变量,使用local -->
+			<#assign username="王武">
+			<#local username="赵柳"/><#-- 输出:赵柳;使用local声明局部变量,局部变量只能在这里,出去之后又恢复了 -->
+			${username}
+		</#macro>
+		<#list 1..3 as username>
+			${username}<#--输出:1,2,3;循环中的变量与局部变量一样,出了循环就消失-->
+		</#list>
+		${username} <#-- 输出:李四 -->
+		<@test/>
+		${username} <#-- 输出:王武 -->
+	</body>
+</html>
+-----------------------------
+
+
+
+
+

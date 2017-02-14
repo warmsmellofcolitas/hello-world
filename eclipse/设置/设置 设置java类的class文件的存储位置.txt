@@ -1,0 +1,1 @@
+项目反键->Properties->Java Build Path->Source->Default output folder->填写class类的路径->OK

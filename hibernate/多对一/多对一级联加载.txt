@@ -1,0 +1,6 @@
+多对一缺省是延迟加载，如果查询员工时需要查询它的部门，则必须配lazy="false"或Hibernate.initialize(employee.getDept());
+所以我们还是要配置<many-to-one lazy="false"/>使它立即加载，即查询员工时立即加载了部门
+如果没有配置<many-to-one lazy="false"/>也可以在代码中设置立即加载，即Hibernate.initialize(emp.getDept());即初始化代理，个人觉得这种方式更灵活些，可以看你查询的部门需不需要
+
+
+

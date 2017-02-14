@@ -1,0 +1,74 @@
+package sql;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+
+import com.solab.iso8583.util.ConvertUtil;
+
+/**
+ * 自定义菜单创建接口
+ * 
+ * @author lijie
+ * @date 2014-11-27
+ */
+public class Main2 {
+	public static void main(String[] args) throws Exception  {
+		String s = "{\n" +
+      "    \"button\": [\n" +
+      "        {\n" +
+      "            \"type\": \"click\",\n" +
+      "            \"name\": \"今日歌曲\",\n" +
+      "            \"key\": \"V1001_TODAY_MUSIC\"\n" +
+      "        },\n" +
+      "        {\n" +
+      "            \"name\": \"菜单\",\n" +
+      "            \"sub_button\": [\n" +
+      "                {\n" +
+      "                    \"type\": \"view\",\n" +
+      "                    \"name\": \"搜索\",\n" +
+      "                    \"url\": \"http://www.soso.com/\"\n" +
+      "                },\n" +
+      "                {\n" +
+      "                    \"type\": \"view\",\n" +
+      "                    \"name\": \"视频\",\n" +
+      "                    \"url\": \"http://v.qq.com/\"\n" +
+      "                },\n" +
+      "                {\n" +
+      "                    \"type\": \"click\",\n" +
+      "                    \"name\": \"赞一下我们\",\n" +
+      "                    \"key\": \"V1001_GOOD\"\n" +
+      "                }\n" +
+      "            ]\n" +
+      "        }\n" +
+      "    ]\n" +
+      "}";
+		System.out.println(s);
+		send(s);
+	}
+	
+	/**
+    * 银行调用发送
+    */
+   public static String send(String requestData) throws Exception {
+       System.out.println("银行路由--工具类--进入");
+       HttpClient httpclient = new HttpClient();
+       PostMethod method = new PostMethod("https://api.weixin.qq.com/cgi-bin/menu/create?access_token=Xl5LRstiZo9NX_-wrCLL4zov0PZtKiO574P_CuMmFMqx_omQrCZ3mJGxyGMmprb4tRzcQqR7Fc8IoLBsPnf6gYgiBifhikyJj1bqN5jaUdo");
+//       NameValuePair[] params = {new NameValuePair("message",requestData)};
+//       method.setRequestBody(params);
+       //InputStream is = new 
+       method.setRequestBody(new ByteArrayInputStream(requestData.getBytes("UTF-8")));
+       httpclient.executeMethod(method);
+       String value = method.getResponseBodyAsString();
+       method.releaseConnection(); // 释放连接
+       System.out.println("银行路由--工具类--从银行返回的字节数组转换成十六进制的字符串为：" + value);
+       return "";
+   }
+}

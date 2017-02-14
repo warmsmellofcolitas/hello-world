@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/plugins/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/comm.css" />
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-base.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTree.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/MultiComboBox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/SearchField.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTreeCheckbox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/commutil.js"></script>
+
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+	var tabpanel;
+
+	var buildTabpanel = function () {
+		tabpanel = new Ext.TabPanel({
+			activeTab: 0, // 0表示默认显示第一个选项卡，1表示默认显示第二个选项卡，2表示默认显示第三个选项卡
+	      items:[{
+	            title: '网关交易流水',
+	            html:'<iframe src="../GateDtl/index.jsp" scrolling="auto" frameborder="0" width="100%" height="100%" ></iframe>'
+	         },{
+	            title: 'POSP前置流水',
+	            html:'<iframe src="../PospTxn/index.jsp" scrolling="auto" frameborder="0" width="100%" height="100%" ></iframe>'
+	         },{
+	            title: '省业务前置流水',
+	            html:'<iframe src="../LogProv/provAudit.jsp" scrolling="auto" frameborder="0" width="100%" height="100%" ></iframe>'
+	   	}]
+		});
+	};
+	
+	var buildLayout = function () {
+		var viewPort = new Ext.Viewport({ // VeiwPort代表整个浏览器显示区域，该对象渲染到页面的body区域，并会随着浏览器显示区域的大小自动改变，一个页面中只能有一个ViewPort实例,Viewport不需要再指定renderTo，而我们也看到Viewport确实填充了整个浏览器显示区域，并会随着浏览器显示区域大小的改变而改改。Viewport主要用于应用程序的主界面，可以通过使用不同的布局来搭建出不同风格的应用程序主界面。
+			layout:"fit", // 采用fit布局，子元素自动填满父容器，在fit布局下，对其子元素设置宽度是无效的，如果在fit布局中设置了多个组件，则只显示第一个元素
+			items:tabpanel
+		});
+	};
+	
+	var init = function () {
+		buildTabpanel();
+		buildLayout();
+	};
+	
+	Ext.onReady(init); // 必须写在init方法后面，否则报错
+</script>
+<body>
+</body>
+</html>
+---------------------------
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/plugins/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/comm.css" />
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-base.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTree.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/MultiComboBox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/SearchField.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTreeCheckbox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/commutil.js"></script>
+
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+	Ext.onReady(function(){
+	   var vport = new Ext.Viewport({
+	     	layout:"fit", // 采用fit布局，子元素自动填满父容器，在fit布局下，对其子元素设置宽度是无效的，如果在fit布局中设置了多个组件，则只显示第一个元素
+	     	items:[{
+		      title:"面板的标题",
+		      html:"面板中的主体内容部分",
+		      bbar:[
+		         {text:"按钮1"},
+		         {text:"按钮2"}]
+	      }]  
+	   });  
+	});
+</script>
+<body>
+</body>
+</html>
+----------------------
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/plugins/ext3/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/resources/css/comm.css" />
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-base.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/ext-all.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ext-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTree.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/MultiComboBox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/SearchField.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/plugins/ComboBoxTreeCheckbox.js"></script>
+<script type="text/javascript" src="<%=path%>/resources/plugins/ext3/commutil.js"></script>
+
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">  
+	Ext.onReady(function(){
+		var vport = new Ext.Viewport({
+			layout:"border",//采用border布局   
+			items:[{
+				region:"north",
+		      height:80,
+		      title:"面板的标题(上部分)",
+		      html:"<h1>新闻后台管理系统</h1>"
+		   },{
+		      region:"west",
+		      width:120,
+		      title:"面板的标题(左部分)",
+		      html:"<h1>连接部分</h1>"
+		   },{
+		      xtype:"tabpanel", // 面板的类型
+		      region:"center",
+		      html:"<h1>显示操作部分</h1>",
+		      items:[
+	     			{title:"新闻管理"},
+	        		{title:"用户管理"}
+			]}]
+		});  
+	});
+</script>  
+<body>
+</body>
+</html>
+----------------------
+VeiwPort代表整个浏览器显示区域，该对象渲染到页面的body区域，并会随着浏览器显示区域的大小自动改变，一个页面中只能有一个ViewPort 实例。
+Viewport不需要再指定renderTo，而我们也看到Viewport确实填充了整个浏览器显示区域，并会随着浏览器显示区域大小的改变而改改。
+Viewport主要用于应用程序的主界面，可以通过使用不同的布局来搭建出不同风格的应用程序主界面。在Viewport上常用的布局有fit、border等，当然在需要的时候其它布局也会常用
+
+

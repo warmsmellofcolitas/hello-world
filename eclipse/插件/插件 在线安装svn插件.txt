@@ -1,0 +1,3 @@
+help-->Install New Software...-->在work with中填入：http://subclipse.tigris.org/update_1.6.x-->Add-->在Name中起个别名OK-->
+选中Name中的三个选项-->Next
+

@@ -1,0 +1,78 @@
+package cn.com.leadfar.struts2.freemarker;
+
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+
+public class Test {
+	public static void main(String[] args) throws Exception {
+		// 通过freemarker的configuration读取相应的ftl
+		Configuration cfg = new Configuration();
+		// 设置加载模板文件的目录
+		cfg.setClassForTemplateLoading(Test.class, "/ftl");
+		// 加载模板,找到名为aaa.ftl的文件
+		Template template = cfg.getTemplate("abc.ftl");
+		// 创建数据模型
+		Map<String, Object> root = new HashMap<String, Object>();
+		
+		Writer out = new PrintWriter(System.out);
+		template.process(root, out);
+		out.flush();
+		out.close();
+	}
+}
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+		<title>hello</title>
+	</head>
+	<body>
+		<#include "/inc/inc1.ftl"/>
+		<@ajaxQueryTable>
+			
+			<@innerOfQueryTable>
+			    <div align="left">
+				  <a class="btn-primary add-marketing" href="/channels/detail.htm">新增渠道</a>
+				</div>
+			</@innerOfQueryTable>
+		
+		</@ajaxQueryTable>
+	</body>
+</html>
+
+<#macro ajaxQueryTable>
+	<#nested />
+	hello
+	<#if ajaxQueryTable_inner?has_content>
+	    ${ajaxQueryTable_inner}
+	</#if>
+</#macro>
+
+<#macro innerOfQueryTable >
+	<#assign ajaxQueryTable_inner>
+	<#nested />ff
+	</#assign>
+</#macro>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2 @@
+File -> Settings -> Appearance -> Theme：选择 Alloy.Default Theme -> 勾选Override default fonts by(not recommended) ->
+Name：选择 Dialog.plain -> Size：选择 14 -> OK

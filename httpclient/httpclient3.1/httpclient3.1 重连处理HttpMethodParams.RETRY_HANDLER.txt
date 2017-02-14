@@ -1,0 +1,50 @@
+package com.ccbsh;
+
+import java.io.IOException;
+
+import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.methods.*;
+import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.apache.commons.httpclient.params.HttpMethodParams;
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		HttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager(); // http连接管理器
+		HttpConnectionManagerParams param = new HttpConnectionManagerParams(); // http连接管理器参数
+		param.setConnectionTimeout(5000); // 设置连接超时时间
+		param.setSoTimeout(1000); // 设置请求超时时间
+		param.setStaleCheckingEnabled(true);
+		param.setTcpNoDelay(true);
+		param.setDefaultMaxConnectionsPerHost(100);
+		param.setMaxTotalConnections(100);
+		param.setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(3, true)); // 请求失败不重新请求
+		connectionManager.setParams(param); // http连接管理器设置参数
+		HttpClient httpclient = new HttpClient(connectionManager); // HttpClient最好初始化一次，HttpClient设置连接管理器
+		/* 上面设置的超时时间可以如下方式
+		HttpClient httpclient = new HttpClient();
+		httpclient.getHttpConnectionManager().getParams().setConnectionTimeout(10000); // 设置连接超时时间
+		httpclient.getHttpConnectionManager().getParams().setSoTimeout(10000); // 设置请求超时时间
+		 */
+		PostMethod method = new PostMethod("http://test.com");
+		NameValuePair[] params = {new NameValuePair("ip","172.16.56.48"),new NameValuePair("port","9134"),new NameValuePair("message","data")};
+		method.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8"); // 设置报文头
+		method.setRequestBody(params); // 设置报文体
+		//method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER, new DefaultHttpMethodRetryHandler(0, false)); // 如果没有这句话会重发三次
+		int retCode = httpclient.executeMethod(method); // 执行post请求,返回响应码(200),也可如下得到返回码,HttpStatus.SC_OK
+		// StatusLine sl = method.getStatusLine();或者method.getStatusCode();或者method.getStatusText();
+		System.out.println("响应码为:"+retCode);
+		String retMessage = method.getResponseBodyAsString(); // 作为字符串返回报文体数据,也可如下操作流接受
+		/*
+		byte[] resp = method.getResponseBody(); // 以流的形式返回数据
+		if (HttpStatus.SC_OK == retCode) {
+			System.out.println("响应正常");
+			String respStr = new String(resp);
+			System.out.println("返回的数据为：" + respStr);
+		} else {
+			System.out.println("响应错误");
+		}
+		*/
+		method.releaseConnection(); // 释放连接
+		System.out.println("返回的数据为：" + retMessage);
+	}
+}

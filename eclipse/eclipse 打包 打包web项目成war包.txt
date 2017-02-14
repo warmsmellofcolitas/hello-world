@@ -1,0 +1,1 @@
+右键项目->Export->Web->WAR file->Next->Destination选择存放的路径->Finish

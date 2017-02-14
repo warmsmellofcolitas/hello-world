@@ -1,0 +1,1 @@
+File -> Settings -> 直接将lombok-plugin-0.5-11.1.3-dist.zip装入 ->OK

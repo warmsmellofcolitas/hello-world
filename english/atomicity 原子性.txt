@@ -1,0 +1,3 @@
+Atomicity guarantees that all the steps in a transaction are completed successfully as a group.
+原子性确保事务中的所有步骤都作为一个组,成功地完成.
+

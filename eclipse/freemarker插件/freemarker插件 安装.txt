@@ -1,0 +1,38 @@
+Freemarker eclipse 安装
+eclipse插件
+http://download.jboss.org/jbosstools/updates/stable/juno/
+development -> Freemarker IDE
+-----------------------------------------
+eclipse 环境下 FreeMarker 编辑器插件
+
+freemarkereclipsemyeclipsejbossidetools
+每次重装 MyEclipse或者 eclipse 都需要找半天。现在贴出来以备后用。
+支持语法高亮,语法校验,代码提示的工具 freemark IDE(JBoss):
+http://download.jboss.org/jbosstools/updates/development/
+或者
+http://download.jboss.org/jbosstools/updates/stable/helios/
+
+安装方法:eclipse --> Help --> Install New Software --> Add --> Location
+输入 http://download.jboss.org/jbosstools/updates/stable/helios/
+
+如果只是需要freemarker编辑器,安装时只要勾选其中freemarker一个选项就行。
+或者打开 http://www.jboss.org/tools/download下载压缩包，或者更新站点。
+ 
+JBoss Tools - Core里面可以选择安装 freemark IDE
+ 
+也可以下载免费的独立程序 jEdit http://www.jedit.org/
+ 
+网上盛传的 http://www.freemarker.org/eclipse/update 更新地址是已经无法使用了，新的地址是：http://www.freemarker.org/eclipse/freemarker/,但目前还没有正式版本
+-----------------------------------------
+eclipse安装freemarker插件
+
+最近安装了eclipse，需要安装freemarker插件，用之前链接http://www.freemarker.org/eclipse/update是不可用的。后几经周折再jboss的网站找到相关的方法
+第一种在http://www.jboss.org/tools/download/stable/3_0_GA.html网页上下载需要的插件，通过解压，把features和plugins的东东加到elispe的features和plugins下，重启eclispe
+第二种方式
+Help -> Software updates -> Find and install.... 
+Choose "Search for new features to install". 
+Click Add Update Site..., and type "jboss" for Name and " http://download.jboss.org/jbosstools/updates/JBossTools-3.0.3.GA" for URL. 
+Check the box of the "FreeMarker" feature. 
+"Next"-s until it is installed... 
+
+具体参考http://www.jboss.org/tools/download/stable/3_0_GA.html页面

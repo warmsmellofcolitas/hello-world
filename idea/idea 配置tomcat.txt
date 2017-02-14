@@ -1,0 +1,1 @@
+Run ->Edit Configurations->点击最上面一排的绿色加号->Tomcat Server->Local->填入：name->Configure选择tomcat目录->OK

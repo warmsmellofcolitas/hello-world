@@ -1,0 +1,4 @@
+<set name="students" table="teacher_student"> students是类中多对多的属性名，teacher_student表示中间表名
+	<key column="teacher_id"/> 表示此对象对应中间表的哪列，根据这列查找
+	<many-to-many class="com.mipo.vo.Student" column="student_id"/> 根据中间表的student_id查询学生的完整信息 
+</set>

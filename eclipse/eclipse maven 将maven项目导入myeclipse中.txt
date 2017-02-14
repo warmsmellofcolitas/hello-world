@@ -1,0 +1,1 @@
+在mvn的项目中pom.xml文件所在目录，运行mvn eclipse:clean eclipse:eclipse,会自动将mvn工程转成eclipse工程,然后导入在eclipse中

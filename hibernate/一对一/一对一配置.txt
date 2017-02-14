@@ -1,0 +1,5 @@
+<generator class="foreign">
+	<param name="property">employee</param> 表示取员工的主键值作为帐号的主键值，这里的employee要和<one-to-one>的name属性值一致
+</generator>
+
+<one-to-one name="employee" class="vo.Employee"/>

@@ -1,0 +1,17 @@
+1.数据库表设计
+一对一关联采用主键关联，则数据库表的主键设计需要注意，其中Employee表的主键oid是自增的，User_info表的主键id就不能自增，其值只能来自对应Employee的主键值
+2.设计对应的实体Bean
+Employee实体Bean增加一个UseInfo类型的userinfo属性来关联对应的用户帐号
+UserInfo实体Bean增加一个Employee类型的emp属性来关联对应的员工
+3.设计xml配置文件
+主   <one-to-one name="userinfo" class="com.mipo.vo.UserInfo"/>(<one-to-one>标记用于配置一对一关系映射，其中name属性的值是Employee类中存放帐号对象的属性名，class指定userinfo的类对象)
+附   说明：在数据库表设计中User_Info表中主键不能自增，则对应的映射中主键产生方式应为foreign，且来自其关联的属性对象emp
+<generator class="foreign">采用外键方式生成主键值
+	<param name="property">emp</param>表示取员工的主键值作为帐号的主键值，这里的emp要跟下面的<one-to-one>的name属性值一致
+</generator>
+<one-to-one name="emp" class="com.mipo.vo.Employee"/> 
+
+
+
+
+

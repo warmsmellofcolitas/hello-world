@@ -1,0 +1,18 @@
+在eclipse里用eclipse的maven插件创建maven项目：
+New -> Others -> Marven -> Marven Project -> Next -> marven-archetype-webapp -> Next -> 
+填入：	Group Id： maventest
+	ArtifactId：maventest
+->Finish
+
+创建项目后,在项目的web.xml中加入如下
+代码
+<welcome-file-list>
+     <welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
+
+点击Run As中的Marven Package。将项目生成war文件，然后将该文件拷贝到tomcat的webapps文件下，在tomcat的bin目录下点击startup.bat文件启动tomcat,
+然后在浏览器上输入http://localhost:8080/项目名/，然后页面会显示Hello Word!
+
+
+
+

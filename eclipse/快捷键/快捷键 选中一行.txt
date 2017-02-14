@@ -1,0 +1,2 @@
+Home   或者   end   跳到行头或行尾 
+然后Shift+End   或者   Shift+Home   选中一行

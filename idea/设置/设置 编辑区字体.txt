@@ -1,0 +1,2 @@
+file-->setting-->editors-->colors&fonts--->font. 
+首先save as 一个自己的设置，然后添加字体，修改字体大小即可

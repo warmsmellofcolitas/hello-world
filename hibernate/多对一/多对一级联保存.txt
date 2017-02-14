@@ -1,0 +1,8 @@
+<many-to-one name="dept" colum="dept_id" /> (表示员工类中的dept属性是根据员工表中的外键dept_id的值，然后在部门表中对应的主键查出来的部门信息)默认的是对应主键,如果没设置colum则默认的为name的值depart即跟属性名一样
+<many-to-one name="dept" column="dept_id" property-ref="name"/> 则指定对应的列，即指定外键是哪个，即引用的不是主键
+<many-to-one name="dept" column="dept_id" cascade="all"/> 当保存员工时顺带保存部门，（不需要另外保存部门，hibernate会自动帮我们保存部门，我们只要关联部门一下然后保存员工即可，否则必须都要保存）
+emp.setDept(dept); 多对一关联
+
+<many-to-one name="dept" column="detp_id" not-null="true"> 表示该外键不能为空，确保每个员工必须有部门，确保不出现员工没有部门的情况
+
+当employee对象没有主键或department没有主键时则更新时默认是保存一条新的员工或部门，如果有则会修改对应主键的员工和部门的信息

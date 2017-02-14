@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="css/ext/ext-all.css">
+<script type="text/javascript" src="js/ext/ext-all.js"></script>
+<script type="text/javascript">
+	Ext.application({
+		name : "HelloExt",
+		launch : function() {
+			Ext.create('Ext.panel.Panel', {
+				title : 'Column Layout - 按比例',
+				width : 350,
+				height : 250,
+				x : 20,
+				y : 100,
+				layout : 'column',
+				items : 
+				[ 
+					{
+						title : 'Column 1',
+						columnWidth : .25
+					}, 
+					{
+						title : 'Column 2',
+						columnWidth : .55
+					}, 
+					{
+						title : 'Column 3',
+						columnWidth : .20
+					} 
+				],
+				renderTo : Ext.getBody()
+			});
+		}
+	});
+</script>
+</head>
+<body>
+<input type="button" value="提交" id="aaa">
+</body>
+</html>
+-------------------
+Column布局一般被称为列布局，这种布局的目的是为了创建一个多列的格式。其中每列的宽度，可以为其指定一个百分比或者是一个固定的宽度。
+
+Column布局一般被称为列布局，这种布局的目的是为了创建一个多列的格式。其中每列的宽度，可以为其指定一个百分比或者是一个固定的宽度。  Column布局没有直接的配置选项（继承的除外），但Column布局支持一个columnWidth属性，在布局过程中，使用columnWidth指定每个面板的宽度。  注意：使用Column布局布局时，其子面板的所有columnWidth值加起来必须介于0~1之间或者是所占百分比。他们的总和应该是1。  另外，如果任何子面板没有指定columnWidth值，那么它将占满剩余的空间。
+
+
+
+
+
+

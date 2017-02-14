@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "sql-map-2.dtd">
+<sqlMap namespace="user">
+	<typeAlias alias="User" type="com.neusoft.gazelle.core.entity.account.User"/>
+	<resultMap id="user_result" class="User">
+		<result property="id" column="c_user_id"/>
+		<result property="loginName" column="c_login_name"/>
+		<result property="password" column="c_pwd"/>
+		<result property="name" column="c_name"/>
+	</resultMap>
+	<select id="getMap" parameterClass="java.util.Map" resultMap="user_result">
+		select * FROM t_gz_user 
+        <dynamic prepend="WHERE">
+               <isParameterPresent>//如果参数类不为NULL则查询条件有效
+                     c_user_id=#a#
+               </isParameterPresent>
+        </dynamic>
+	</select>
+</sqlMap>
+--------------------
+package com.service.tree;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.neusoft.gazelle.core.entity.account.User;
+import com.neusoft.gazelle.core.service.BaseService;
+@Transactional
+@Service
+public class TreService extends BaseService{
+	public void add(){
+		Map map=new  HashMap();    
+		map.put("a",new Integer(222));
+		List<User> result=(List<User>)this.getDao().queryForList("user.getMap",map);
+		System.out.println(result.get(0).getName());
+	}
+}
+
+ibatis动态查询条件
+
+下面这个配置基本上包含了最复杂的功能:分页\搜索\排序\缓存\传值Hash表\返回hash表\动态sql
+<statement id="XinxiTable_SelectAll" listClass="ArrayList" resultMap="SimpleXinxi" parameterClass="Hashtable" cacheModel="xinxi-cache" >
+    SELECT
+    <dynamic prepend="top">
+          <isNotEqual prepend="top" property="TopNum" compareValue = "0">
+            $TopNum$
+          </isNotEqual>
+    </dynamic>
+      *
+      FROM
+      (select a.[iXinxiID],a.[sXinxiTitle],a.[iXinxiClassId],b.[sClassName],
+      a.[dXinxiDate],a.[dXinxiYxq],a.[iXinxiHits],a.[sXinxiUser],a.[sRedirectUrl],
+      ROW_NUMBER() OVER(
+    <dynamic prepend="order by">
+      <isEqual prepend="order by" property="Sort" compareValue = "0">
+        a.iXinxiID desc
+      </isEqual>
+      <isEqual prepend="order by" property="Sort" compareValue = "1">
+        a.iXinxiID asc
+      </isEqual>
+      <isEqual prepend="order by" property="Sort" compareValue = "2">
+        a.iXinxiHits desc
+      </isEqual>
+      <isEqual prepend="order by" property="Sort" compareValue = "3">
+        a.iXinxiHits asc
+      </isEqual>
+    </dynamic>
+      ) as row
+      FROM
+      [dbo].[XinxiTable] as a,[dbo].[XinxiClass] as b
+      <dynamic prepend="where">
+        <isParameterPresent>
+          <isNotEmpty prepend="and" property="XinxiType" >
+            a.[iXinxiState]= $XinxiType$
+          </isNotEmpty>
+          <isNotEqual prepend="and" property="XinxiClass" compareValue = "0">
+            a.[iXinxiClassID]= $XinxiClass$
+          </isNotEqual>
+          <isEqual prepend="and" property="SearchType" compareValue = "1">
+            a.[sXinxiTitle] LIKE '%$Keyword$%'
+          </isEqual>
+          <isEqual prepend="and" property="SearchType" compareValue = "2">
+            (a.[sXinxiTitle] LIKE '%$Keyword$%' or a.[sXinxiContent] LIKE '%$Keyword$%')
+          </isEqual>
+        </isParameterPresent>
+      </dynamic>
+      and a.iXinxiClassId=b.iClassId
+      )a
+    <dynamic prepend="where">
+        <isParameterPresent>
+          <isEqual prepend="and" property="IsPage" compareValue = "1">
+            row between $PageLower$ and $PageUpper$
+          </isEqual>
+        </isParameterPresent>
+    </dynamic>
+</statement>
+
+ibatis动态查询条件:
+<select id="SelectEemployee" parameterClass="string" resultMap = "employee-result">
+  select * from employee
+  //动态SQL语句
+  <dynamic prepend="WHERE">
+    <isParameterPresent>
+      emp_id = #value#
+    </isParameterPresent>
+  </dynamic>
+</select>
+</statements>
+</sqlMap>     
+
+动态SQL的写法：
+<dynamic> 条件成立时前面要加的字符串 prepend ="字符串">
+  <属性关键字>
+    prepend="字符串"
+    判断条件的对象属性名 property="字符串"
+    如果是属性关键字是比较条件时,字符串存放要比较的值compareValue="字符串">
+    要显示的条件名
+  </属性关键字>
+</dynamic>
+
+/*动态SQL的参数有
+
+属性关键字
+
+含义
+
+<isEqual>
+
+如果参数相等于值则查询条件有效。
+
+<isNotEqual>
+
+如果参数不等于值则查询条件有效。
+
+<isGreaterThan>
+
+如果参数大于值则查询条件有效。
+
+<isGreaterEqual>
+
+如果参数等于值则查询条件有效。
+
+<isLessEqual>
+
+如果参数小于值则查询条件有效。如下所示：
+
+<isLessEqual prepend = ”AND” property = ”age” compareValue = ”18” >
+
+ADOLESCENT = ‘TRUE’
+
+</isLessEqual>
+
+<isPropertyAvailable>
+
+如果参数有使用则查询条件有效。
+
+<isNotPropertyAvailable>
+
+如果参数没有使用则查询条件有效。
+
+<isNull>
+
+如果参数为NULL则查询条件有效。
+
+<isNotNull>
+
+如果参数不为NULL则查询条件有效。
+
+<isEmpty>
+
+如果参数为空则查询条件有效。
+
+<isNotEmpty>
+
+如果参数不为空则查询条件有效。参数的数据类型为Collection、String 时参数不为NULL或“”。如下所示：
+
+<isNotEmpty prepend=”AND” property=”firstName” >
+
+    FIRST_NAME=#firstName#
+
+</isNotEmpty>
+
+<isParameterPresent>
+
+如果参数类不为NULL则查询条件有效。
+
+<isNotParameterPresent>
+
+Checks to see if the parameter object is not present (null). Example Usage:
+
+<isNotParameterPresent prepend=”AND”>
+
+    EMPLOYEE_TYPE = ‘DEFAULT’
+
+</isNotParameterPresent>
